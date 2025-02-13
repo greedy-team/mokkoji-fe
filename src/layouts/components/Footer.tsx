@@ -13,21 +13,24 @@ const FooterContainer = styled.div`
 
 const FooterContents = styled.div`
   width: 90%;
+  padding-top: 5px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 5px;
 `;
 
-const FooterP = styled.p`
-  font-style: normal;
+const FooterP = styled.p<{ size?: string }>`
+  font-size: ${(props) => props.size || "small"};
   font-weight: bold;
+  color: #6b7280;
 `;
 
 function Footer() {
   return (
     <FooterContainer>
       <FooterContents>
-        <FooterP>공지사항</FooterP>
+        <FooterP size="x-small">© 2024 모꼬지. All rights reserved.</FooterP>
       </FooterContents>
     </FooterContainer>
   );

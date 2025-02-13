@@ -22,6 +22,7 @@ const MainContentsSection = styled.div`
   min-height: 78vh;
   width: 100%;
   box-sizing: border-box;
+  background-color: #f9fafb;
 `;
 
 function CommonLayout() {
