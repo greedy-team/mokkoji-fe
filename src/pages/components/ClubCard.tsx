@@ -54,16 +54,23 @@ interface ClubProp {
     club: Club;
 }
 
+// 상태값을 상수로 정의
+const STATUS = {
+    CLOSED: { text: "모집마감", backColor: "#D1D5DB", fontColor: "#9CA3AF" },
+    URGENT: { text: "마감임박", backColor: "#FEE2E2", fontColor: "#DC2626" },
+    OPEN: { text: "모집중", backColor: "#DCFCE7", fontColor: "#16A34A" },
+};
+
 function ClubCard({ club }: ClubProp) {
     // 모집 상태 반환 함수
-    const getStatus = (): { text: string; backColor: string; fontColor: string} => {
-      const endDate = new Date(club.recruit_end_date);
-      const today = new Date();
-      const due = (endDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
-  
-      if (due <= 0) return { text: "모집마감", backColor: "#D1D5DB", fontColor: "#9CA3AF" };
-      else if (due <= 3) return { text: "마감임박", backColor: "#FEE2E2", fontColor: "#DC2626" };     // 현재 임박 기간 = 3일
-      else return { text: "모집중", backColor: "#DCFCE7", fontColor: "#16A34A" };
+    const getStatus = () => {
+        const endDate = new Date(club.recruit_end_date);
+        const today = new Date();
+        const due = (endDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
+    
+        if (due <= 0) return STATUS.CLOSED;
+        else if (due <= 3) return STATUS.URGENT;  // 현재 임박 기간 = 3일
+        else return STATUS.OPEN;
     };
   
     const { text, backColor, fontColor } = getStatus();
