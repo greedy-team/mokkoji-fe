@@ -6,20 +6,21 @@ import SideBar from "./sidebar/SideBar";
 
 const Background = styled.div`
   width: 100%;
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
 `;
 
 const MainContents = styled.div`
   padding: 1%;
-  width: 80%;
+  width: auto;
 `;
 
 const MainContentsSection = styled.div`
   display: flex;
   flex-direction: row;
-  height: 75%;
+  min-height: 78vh;
+  width: 100%;
   box-sizing: border-box;
 `;
 

@@ -2,21 +2,19 @@ import styled from "styled-components";
 import DummyLogo from "@/assets/react.svg?react";
 
 const HeaderContainer = styled.div`
-  height: 80px;
+  height: 60px;
   width: 100%;
   background-color: white;
   display: flex;
   justify-content: center;
-  padding-left: 10%;
-  padding-right: 10%;
-  padding-top: 1%;
-  padding-bottom: 1%;
+
+  padding: 5px 10px 5px;
   box-sizing: border-box;
   border-bottom: 1px solid #e5e7eb;
 `;
 
 const HeaderContents = styled.div`
-  width: 80%;
+  width: 90%;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -25,8 +23,8 @@ const HeaderContents = styled.div`
 
 // TODO: dummy 수정 예정
 const DummyProfile = styled.img`
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   border-radius: 20px;
   border: 1px solid gray;
 `;
@@ -35,7 +33,7 @@ function Footer() {
   return (
     <HeaderContainer>
       <HeaderContents>
-        <DummyLogo />
+        <DummyLogo width={25} height={25} />
         <DummyProfile src="" />
       </HeaderContents>
     </HeaderContainer>
