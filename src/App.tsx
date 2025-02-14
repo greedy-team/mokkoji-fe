@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import { Suspense } from "react";
 import { Loading } from "./pages/Loading";
 import Login from "./pages/Login";
+import ClubList from "./pages/club/ClubList";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "tmp",
         element: <Tmp />,
+      },
+      {
+        path: "clubs", //UI 확인을 위해서
+        element: <ClubList />,
       },
     ],
   },
