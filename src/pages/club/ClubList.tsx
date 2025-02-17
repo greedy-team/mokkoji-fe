@@ -34,15 +34,23 @@ const Container = styled.div`
   height: 100%;
 `;
 
+const SortContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; 
+  margin-bottom: 70px; 
+`;
+
 const ClubGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 45%);
+  grid-template-columns: repeat(3, 30%);
   grid-template-rows: repeat(3, 30%);
-  width: 160%;
+  width: 110%;
   height: 70%;
   justify-content: space-evenly;
   align-content: space-evenly;
-  row-gap: 20px;
+  row-gap: 10px;
+  column-gap: 15px;
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(1, 1fr); 
@@ -60,7 +68,7 @@ function ClubList() {
     setSliceClub(clubs.slice(cur, cur + ITEMS_PER_PAGE));
   }, [currentPage, clubs]);
 
-  // 정렬 상태 변경
+  //정렬 상태 변경
   function handleSortChange(value: string) {
     setButtonState(value);
   }
@@ -71,13 +79,16 @@ function ClubList() {
 
   return (
     <Container>
-      <SortOption buttonState={buttonState} onSortChange={handleSortChange} />
+        <SortContainer>
+          <SortOption buttonState={buttonState} onSortChange={handleSortChange} />
+        </SortContainer>
+
       <ClubGrid>
         {sliceClub.map((club) => (
           <ClubBoxComponent key={club.id} club={club} />
         ))}
       </ClubGrid>
-      <div style={{ marginTop: "130px" }}> </div>
+      <div style={{ marginTop: "50px" }}> </div>
       <PaginationComponent
         clubsLength={clubs.length}
         ITEMS_PER_PAGE={ITEMS_PER_PAGE}
