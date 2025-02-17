@@ -8,6 +8,8 @@ import Home from "./pages/Home";
 import { Suspense } from "react";
 import { Loading } from "./pages/Loading";
 import Login from "./pages/Login";
+import ClubList from "./pages/club/ClubList";
+import ClubDetail from "./pages/club/ClubDetail";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: "tmp",
         element: <Tmp />,
+      },
+      {
+        path: "clubs", //UI 확인을 위해서
+        element: <ClubList />,
+      },
+      { 
+        path: "clubs/:id", 
+        element: <ClubDetail /> 
       },
     ],
   },
