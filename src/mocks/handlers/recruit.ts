@@ -1,7 +1,7 @@
 import { http, HttpResponse } from "msw";
 import { Club } from "../../types/Club";
 
-export const clubDummyData: Club[] = [
+export const recruitDummyData: Club[] = [
   {
     id: 1,
     name: "그리디",
@@ -55,6 +55,6 @@ export const clubDummyData: Club[] = [
 
 export const recruitHandlers = [
   http.get("http://localhost:3000/recruit", () => {
-    return HttpResponse.json(clubDummyData);
+    return HttpResponse.json(recruitDummyData);
   }),
 ];
