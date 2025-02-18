@@ -10,6 +10,7 @@ import { Loading } from "./pages/Loading";
 import Login from "./pages/Login";
 import ClubList from "./pages/club/ClubList";
 import ClubDetail from "./pages/club/ClubDetail";
+import Recruitment from "./pages/recruitment/Recruitment";
 
 const router = createBrowserRouter([
   {
@@ -30,9 +31,13 @@ const router = createBrowserRouter([
         path: "clubs", //UI 확인을 위해서
         element: <ClubList />,
       },
-      { 
-        path: "clubs/:id", 
-        element: <ClubDetail /> 
+      {
+        path: "clubs/:id",
+        element: <ClubDetail />,
+      },
+      {
+        path: "recruit",
+        element: <Recruitment />,
       },
     ],
   },

@@ -1,3 +1,3 @@
-import { postHandlers } from "./post";
+import { recruitHandlers } from "./recruit";
 
-export const handlers = [...postHandlers];
+export const handlers = [...recruitHandlers];
