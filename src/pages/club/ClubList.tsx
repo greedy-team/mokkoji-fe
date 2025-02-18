@@ -19,14 +19,70 @@ const ITEMS_PER_PAGE = 8;
 
 //더미 데이터 (UI 테스트용)
 const dummyClubs: ClubBox[] = [
-  { id: 1, name: "댄스 동아리 STEP", category: "댄스 / 방송댄스", description: "K-pop, 방송댄스를 배우는 동아리입니다.", affiliation: "예술대학", image: "/images/dance.jpg" },
-  { id: 2, name: "밴드 동아리 SOUND", category: "밴드 / 대중음악", description: "밴드 공연을 준비하고 연습하는 동아리입니다.", affiliation: "음악대학", image: "/images/band.jpg" },
-  { id: 3, name: "축구 동아리 GOAL", category: "스포츠 / 축구", description: "축구를 즐기며 실력을 키우는 동아리입니다.", affiliation: "체육대학", image: "/images/soccer.jpg" },
-  { id: 4, name: "독서 동아리 BOOK", category: "독서 / 토론", description: "다양한 책을 읽고 토론하는 동아리입니다.", affiliation: "인문대학", image: "/images/book.jpg" },
-  { id: 5, name: "사진 동아리 SNAP", category: "사진 / 영상", description: "사진 촬영 및 편집을 배우는 동아리입니다.", affiliation: "디자인대학", image: "/images/photo.jpg" },
-  { id: 6, name: "사진 동아리 SNAP", category: "사진 / 영상", description: "사진 촬영 및 편집을 배우는 동아리입니다.", affiliation: "디자인대학", image: "/images/photo.jpg" },
-  { id: 7, name: "사진 동아리 SNAP", category: "사진 / 영상", description: "사진 촬영 및 편집을 배우는 동아리입니다.", affiliation: "디자인대학", image: "/images/photo.jpg" },
-  { id: 8, name: "사진 동아리 SNAP", category: "사진 / 영상", description: "사진 촬영 및 편집을 배우는 동아리입니다.", affiliation: "디자인대학", image: "/images/photo.jpg" },
+  {
+    id: 1,
+    name: "댄스 동아리 STEP",
+    category: "댄스 / 방송댄스",
+    description: "K-pop, 방송댄스를 배우는 동아리입니다.",
+    affiliation: "예술대학",
+    image: "/images/dance.jpg",
+  },
+  {
+    id: 2,
+    name: "밴드 동아리 SOUND",
+    category: "밴드 / 대중음악",
+    description: "밴드 공연을 준비하고 연습하는 동아리입니다.",
+    affiliation: "음악대학",
+    image: "/images/band.jpg",
+  },
+  {
+    id: 3,
+    name: "축구 동아리 GOAL",
+    category: "스포츠 / 축구",
+    description: "축구를 즐기며 실력을 키우는 동아리입니다.",
+    affiliation: "체육대학",
+    image: "/images/soccer.jpg",
+  },
+  {
+    id: 4,
+    name: "독서 동아리 BOOK",
+    category: "독서 / 토론",
+    description: "다양한 책을 읽고 토론하는 동아리입니다.",
+    affiliation: "인문대학",
+    image: "/images/book.jpg",
+  },
+  {
+    id: 5,
+    name: "사진 동아리 SNAP",
+    category: "사진 / 영상",
+    description: "사진 촬영 및 편집을 배우는 동아리입니다.",
+    affiliation: "디자인대학",
+    image: "/images/photo.jpg",
+  },
+  {
+    id: 6,
+    name: "사진 동아리 SNAP",
+    category: "사진 / 영상",
+    description: "사진 촬영 및 편집을 배우는 동아리입니다.",
+    affiliation: "디자인대학",
+    image: "/images/photo.jpg",
+  },
+  {
+    id: 7,
+    name: "사진 동아리 SNAP",
+    category: "사진 / 영상",
+    description: "사진 촬영 및 편집을 배우는 동아리입니다.",
+    affiliation: "디자인대학",
+    image: "/images/photo.jpg",
+  },
+  {
+    id: 8,
+    name: "사진 동아리 SNAP",
+    category: "사진 / 영상",
+    description: "사진 촬영 및 편집을 배우는 동아리입니다.",
+    affiliation: "디자인대학",
+    image: "/images/photo.jpg",
+  },
 ];
 
 const Container = styled.div`
@@ -37,8 +93,8 @@ const Container = styled.div`
 const SortContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-end; 
-  margin-bottom: 70px; 
+  justify-content: flex-end;
+  margin-bottom: 70px;
 `;
 
 const ClubGrid = styled.div`
@@ -53,12 +109,12 @@ const ClubGrid = styled.div`
   column-gap: 15px;
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(1, 1fr); 
+    grid-template-columns: repeat(1, 1fr);
   }
 `;
 
 function ClubList() {
-  const [clubs, setClubs] = useState<ClubBox[]>(dummyClubs);
+  const [clubs] = useState<ClubBox[]>(dummyClubs);
   const [buttonState, setButtonState] = useState<string>("최신순");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [sliceClub, setSliceClub] = useState<ClubBox[]>([]);
@@ -79,9 +135,9 @@ function ClubList() {
 
   return (
     <Container>
-        <SortContainer>
-          <SortOption buttonState={buttonState} onSortChange={handleSortChange} />
-        </SortContainer>
+      <SortContainer>
+        <SortOption buttonState={buttonState} onSortChange={handleSortChange} />
+      </SortContainer>
 
       <ClubGrid>
         {sliceClub.map((club) => (
