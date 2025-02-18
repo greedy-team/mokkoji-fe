@@ -1,3 +1,5 @@
-import { authHandlers } from "./auth";
 
-export const handlers = [...authHandlers];
+import { recruitHandlers } from "./recruit";
+
+export const handlers = [...recruitHandlers];
+

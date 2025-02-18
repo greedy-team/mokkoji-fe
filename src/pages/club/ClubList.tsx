@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import ClubBoxComponent from "../../pages/club/ClubBox";
 import styled from "styled-components";
 import SortOption from "../../pages/club/ClubSortOption";
-import PaginationComponent from "../components/Pagination";
+import PaginationComponent from "../recruitment/components/Pagination";
+import { Club } from "../../types/Club";
 
 interface ClubBox {
   id: number;
@@ -11,21 +12,21 @@ interface ClubBox {
   category: string;
   description: string;
   affiliation: string;
-  image?: string;
+  imageUrl?: string;
   onClick?: () => void;
 }
 
 const ITEMS_PER_PAGE = 8;
 
 //더미 데이터 (UI 테스트용)
-const dummyClubs: ClubBox[] = [
+const dummyClubs: Club[] = [
   {
     id: 1,
     name: "댄스 동아리 STEP",
     category: "댄스 / 방송댄스",
     description: "K-pop, 방송댄스를 배우는 동아리입니다.",
     affiliation: "예술대학",
-    image: "/images/dance.jpg",
+    imageUrl: "/images/dance.jpg",
   },
   {
     id: 2,
@@ -33,7 +34,7 @@ const dummyClubs: ClubBox[] = [
     category: "밴드 / 대중음악",
     description: "밴드 공연을 준비하고 연습하는 동아리입니다.",
     affiliation: "음악대학",
-    image: "/images/band.jpg",
+    imageUrl: "/images/band.jpg",
   },
   {
     id: 3,
@@ -41,7 +42,7 @@ const dummyClubs: ClubBox[] = [
     category: "스포츠 / 축구",
     description: "축구를 즐기며 실력을 키우는 동아리입니다.",
     affiliation: "체육대학",
-    image: "/images/soccer.jpg",
+    imageUrl: "/images/soccer.jpg",
   },
   {
     id: 4,
@@ -49,7 +50,7 @@ const dummyClubs: ClubBox[] = [
     category: "독서 / 토론",
     description: "다양한 책을 읽고 토론하는 동아리입니다.",
     affiliation: "인문대학",
-    image: "/images/book.jpg",
+    imageUrl: "/images/book.jpg",
   },
   {
     id: 5,
@@ -57,7 +58,7 @@ const dummyClubs: ClubBox[] = [
     category: "사진 / 영상",
     description: "사진 촬영 및 편집을 배우는 동아리입니다.",
     affiliation: "디자인대학",
-    image: "/images/photo.jpg",
+    imageUrl: "/images/photo.jpg",
   },
   {
     id: 6,
@@ -65,7 +66,7 @@ const dummyClubs: ClubBox[] = [
     category: "사진 / 영상",
     description: "사진 촬영 및 편집을 배우는 동아리입니다.",
     affiliation: "디자인대학",
-    image: "/images/photo.jpg",
+    imageUrl: "/images/photo.jpg",
   },
   {
     id: 7,
@@ -73,7 +74,7 @@ const dummyClubs: ClubBox[] = [
     category: "사진 / 영상",
     description: "사진 촬영 및 편집을 배우는 동아리입니다.",
     affiliation: "디자인대학",
-    image: "/images/photo.jpg",
+    imageUrl: "/images/photo.jpg",
   },
   {
     id: 8,
@@ -81,17 +82,12 @@ const dummyClubs: ClubBox[] = [
     category: "사진 / 영상",
     description: "사진 촬영 및 편집을 배우는 동아리입니다.",
     affiliation: "디자인대학",
-    image: "/images/photo.jpg",
+    imageUrl: "/images/photo.jpg",
   },
 ];
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
 const SortContainer = styled.div`
-  width: 100%;
+  width: 78vw;
   display: flex;
   justify-content: flex-end;
   margin-bottom: 70px;
@@ -99,14 +95,12 @@ const SortContainer = styled.div`
 
 const ClubGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 30%);
-  grid-template-rows: repeat(3, 30%);
-  width: 110%;
-  height: 70%;
+  grid-template-columns: repeat(3, 28%);
+  grid-template-rows: repeat(3, 28%);
   justify-content: space-evenly;
   align-content: space-evenly;
-  row-gap: 10px;
-  column-gap: 15px;
+  row-gap: 15px;
+  column-gap: 5px;
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(1, 1fr);
@@ -134,7 +128,7 @@ function ClubList() {
   };
 
   return (
-    <Container>
+    <>
       <SortContainer>
         <SortOption buttonState={buttonState} onSortChange={handleSortChange} />
       </SortContainer>
@@ -151,7 +145,7 @@ function ClubList() {
         currentPage={currentPage}
         onPageChange={handlePageChange}
       />
-    </Container>
+    </>
   );
 }
 
