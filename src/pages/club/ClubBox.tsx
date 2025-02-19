@@ -1,25 +1,19 @@
-//동아리 개별 박스스
 import styled from "styled-components";
 import DefaultImage from "@/assets/react.svg?react";
-
-interface ClubBox {
-  id: number;
-  name: string;
-  category: string;
-  description: string;
-  affiliation: string;
-  image?: string;
-  onClick?: () => void;
-}
+import { ClubType } from "../../types/clubType";
+import StartLogo from "@/assets/starLogo.svg?react";
+import StartEmptyLogo from "@/assets/starEmptyLogo.svg?react";
 
 interface ClubBoxProp {
-  club: ClubBox;
+  club: ClubType;
+  onClick: () => void;
 }
 
 const Box = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
-  padding: 16px;
+  padding: 2%;
   border: 1px solid #ddd;
   border-radius: 10px;
   background-color: #fff;
@@ -38,15 +32,15 @@ const Image = styled.img`
   width: 140px;
   height: 120px;
   border-radius: 10px;
-  object-fit: contain; 
-  background-color: #f0f0f0; 
-  flex-shrink: 0; 
+  object-fit: contain;
+  background-color: #f0f0f0;
+  flex-shrink: 0;
 `;
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 2;
+  height: 90%;
 `;
 
 const Title = styled.h3`
@@ -54,47 +48,59 @@ const Title = styled.h3`
   font-weight: 750;
 `;
 
+const TitleSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 15px;
+`;
+
 const Description = styled.p`
-  font-size: 13px;
+  font-size: 0.8rem;
   color: #777;
-    margin-top: 2.5%;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: hidden;
 `;
 
 const InfoWrapper = styled.div`
-  display: flex; 
+  display: flex;
   align-items: center;
-  gap: 10px; 
-  margin-top: 1.5%;
+  gap: 10px;
+  position: absolute;
+  bottom: 10%;
 `;
 
 const Category = styled.p`
-  font-size: 13px;
+  font-size: 0.7rem;
   color: #555;
 `;
 
 const Affiliation = styled.p`
-  font-size: 13px;
+  font-size: 0.7rem;
   color: #777;
   font-weight: 550;
 `;
 
-//아직은 기본 이미지로..
-function ClubBoxComponent({ club }: ClubBoxProp) {
+function ClubBox({ club, onClick }: ClubBoxProp) {
   return (
-    <Box onClick={club.onClick}>
-      <Image src={club.image || DefaultImage.toString()} alt={club.name} /> 
+    <Box onClick={onClick}>
+      <Image src={club.imageUrl || DefaultImage.toString()} alt={club.name} />
       <Content>
-        <Title>{club.name}</Title>
+        <TitleSection>
+          <Title>{club.name}</Title>
+          {club.favorite ? <StartLogo /> : <StartEmptyLogo />}
+        </TitleSection>
         <Description>{club.description}</Description>
-            <InfoWrapper>
-                <span style={{ color: "#777", margin: "0 3px" }}>•</span>
-                <Category>{club.category}</Category>
-                <span style={{ color: "#777", margin: "0 3px" }}>•</span>
-                <Affiliation>{club.affiliation}</Affiliation>
-            </InfoWrapper>
+        <InfoWrapper>
+          <span style={{ color: "#777", margin: "0 3px" }}>•</span>
+          <Category>{club.category}</Category>
+          <span style={{ color: "#777", margin: "0 3px" }}>•</span>
+          <Affiliation>{club.affiliation}</Affiliation>
+        </InfoWrapper>
       </Content>
     </Box>
   );
 }
 
-export default ClubBoxComponent;
+export default ClubBox;

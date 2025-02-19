@@ -3,7 +3,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { saveAuthTokens } from "../api/auth.api";
-import { userInterface } from "../types/userInfo";
+import { userInterface } from "../types/userInfoType";
 
 const ModalWrapper = styled.div<{ open: boolean }>`
   display: ${({ open }) => (open ? "flex" : "none")};
@@ -15,6 +15,7 @@ const ModalWrapper = styled.div<{ open: boolean }>`
   background-color: rgba(0, 0, 0, 0.5);
   align-items: center;
   justify-content: center;
+  z-index: 200000;
 `;
 
 const ModalContainer = styled.div`
@@ -108,7 +109,7 @@ const LoginSection = ({
   );
 };
 
-const LoginModal = () => {
+const Login = () => {
   const { isOpen, closeModal } = useLoginModalStore();
   const [loginData, setLoginData] = useState<userInterface>({
     student_id: "",
@@ -141,16 +142,20 @@ const LoginModal = () => {
   if (!modalRoot) return null;
 
   return createPortal(
-    <ModalWrapper open={isOpen}>
-      <ModalContainer>
+    <ModalWrapper open={isOpen} onClick={closeModal}>
+      <ModalContainer onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={closeModal}>×</CloseButton>
         <Title>모꼬지에 오신 것을 환영합니다</Title>
         <SubTitle>세종대 동아리와 함께하는 즐거운 대학 생활</SubTitle>
-        <LoginSection loginData={loginData} onChange={onChange} onClick={onClick} />
+        <LoginSection
+          loginData={loginData}
+          onChange={onChange}
+          onClick={onClick}
+        />
       </ModalContainer>
     </ModalWrapper>,
     modalRoot
   );
 };
 
-export default LoginModal;
+export default Login;

@@ -1,14 +1,11 @@
 import styled from "styled-components";
 import { generatePageNumbers } from "../utils/paginationUtil";
 
-const Pagination = styled.div`
-  width: 100%;
-  height: 8%;
+const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
-  margin-bottom: 30px;
 `;
 
 const PageButton = styled.button<{ active: boolean }>`
@@ -29,7 +26,7 @@ interface PaginationProps {
 }
 
 // 페이지네이션 표시
-const PaginationComponent = ({
+const Pagination = ({
   clubsLength,
   ITEMS_PER_PAGE,
   currentPage,
@@ -41,7 +38,7 @@ const PaginationComponent = ({
   const pageNumbers = generatePageNumbers(totalPages, currentPage);
 
   return (
-    <Pagination>
+    <PaginationContainer>
       {pageNumbers.map((page) => (
         <PageButton
           key={page}
@@ -51,8 +48,8 @@ const PaginationComponent = ({
           {page}
         </PageButton>
       ))}
-    </Pagination>
+    </PaginationContainer>
   );
 };
 
-export default PaginationComponent;
+export default Pagination;

@@ -1,7 +1,7 @@
 import { http, HttpResponse } from "msw";
-import { Club } from "../../types/Club";
+import { ClubType } from "../../types/clubType";
 
-export const recruitDummyData: Club[] = [
+export const recruitDummyData: ClubType[] = [
   {
     id: 1,
     name: "그리디",

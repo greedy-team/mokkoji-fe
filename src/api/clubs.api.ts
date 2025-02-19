@@ -1,10 +1,14 @@
 import api from ".";
-import { ClubResponse, CluParameter } from "../types/Club";
+import { ClubDetailResponseType, ClubResponseType } from "../types/clubType";
 
-export const getClubs = async ({
-  name,
-}: CluParameter): Promise<ClubResponse> => {
-  console.log(name);
-  const { data } = await api.get(`/clubs`);
+export const getClubItems = async (): Promise<ClubResponseType> => {
+  const { data } = await api.get("/clubs");
+  return data;
+};
+
+export const getClubItemsDetail = async (
+  id: string
+): Promise<ClubDetailResponseType> => {
+  const { data } = await api.get(`/clubs/${id}`);
   return data;
 };
