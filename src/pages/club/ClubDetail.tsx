@@ -1,40 +1,10 @@
 //동아리 상세 페이지
-import { useParams } from "react-router-dom";
 import styled from "styled-components";
-
-interface ClubDetailProps {
-  id: number;
-  name: string;
-  category: string;
-  affiliation: string;
-  description: string; //간단 설명
-  recruitment_post: string; //모집 글
-  recruit_period: string; // 모집 기간
-  recruit_number: string; // 모집 인원
-  club_room: string; // 동아리 방 위치
-  image?: string;
-}
-
-//더미 데이터(API 연결 전 UI 테스트용)
-//테스트 URL: http://localhost:5173/clubs/1
-const dummyClubDetails: ClubDetailProps[] = [
-  {
-    id: 1,
-    name: "댄스 동아리 STEP",
-    category: "체육",
-    affiliation: "중앙동아리",
-    description: "열정적인 댄스 동아리입니다.",
-    recruitment_post: "2025년 신입부원 모집! 열정 가득한 여러분을 기다립니다.",
-    recruit_period: "0000-00-00 ~ 0000-00-00",
-    recruit_number: "00 명",
-    club_room: "000 호",
-    image: "/images/dance.jpg",
-  },
-];
+import { useGetClubsDetail } from "../../hooks/queries/clubs.query";
+import useCustomParams from "../../hooks/useCustomParams";
 
 //전체 레이아웃
 const Container = styled.div`
-  width: 240%;
   height: 100%;
   margin: 0 auto;
   background-color: white;
@@ -51,12 +21,12 @@ const InfoContainer = styled.div`
   justify-content: space-between;
 `;
 
-//동아리 대표 이미지 
+//동아리 대표 이미지
 const ClubImage = styled.div<{ image?: string }>`
-  width: 40%;
+  width: 200px;
   height: 200px;
-background-color: #ddd;
-  background-image: ${({ image }) => (image ? `url(${image})` : "none")}; 
+  background-color: #ddd;
+  background-image: ${({ image }) => (image ? `url(${image})` : "none")};
   background-size: cover;
   background-position: center;
   display: flex;
@@ -131,38 +101,36 @@ const RecruitmentText = styled.p`
 `;
 
 function ClubDetail() {
-  const { id } = useParams<{ id: string }>();
-  console.log("useParams 값:", id); 
+  const id = useCustomParams();
 
-  const club = dummyClubDetails.find((c) => c.id === Number(id));
+  const { data } = useGetClubsDetail(id);
 
-  if (!club) {
-    return <Container>존재하지 않는 동아리입니다.</Container>;
-  }
+  const clubDetail = data.data.club;
 
   return (
     <Container>
       <InfoContainer>
-
         <ClubInfo>
-            <ClubTitle>{club.name}</ClubTitle>
-            <TagContainer>
-              <Tag>{club.affiliation}</Tag>
-              <Tag>{club.category}</Tag>
-            </TagContainer>
+          <ClubTitle>{clubDetail.name}</ClubTitle>
+          <TagContainer>
+            <Tag>{clubDetail.affiliation}</Tag>
+            <Tag>{clubDetail.category}</Tag>
+          </TagContainer>
 
-          <Description>{club.description}</Description>
+          <Description>{clubDetail.description}</Description>
 
-          <RecruitmentInfo>모집기간: {club.recruit_period}</RecruitmentInfo>
-          <RecruitmentInfo>모집인원: {club.recruit_number}</RecruitmentInfo>
-          <RecruitmentInfo>동아리방: {club.club_room}</RecruitmentInfo>
+          <RecruitmentInfo>
+            모집기간: {clubDetail.recruitStartDate}~{clubDetail.recruitEndDate}
+          </RecruitmentInfo>
         </ClubInfo>
 
-        <ClubImage image={club.image}>{!club.image && "Image"}</ClubImage>
+        <ClubImage image={clubDetail.imageUrl}>
+          {!clubDetail.imageUrl && "Image"}
+        </ClubImage>
       </InfoContainer>
 
       <Divider />
-      <RecruitmentText>{club.recruitment_post}</RecruitmentText>
+      <RecruitmentText>{clubDetail.recruitPost}</RecruitmentText>
     </Container>
   );
 }

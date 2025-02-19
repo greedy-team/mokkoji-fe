@@ -1,9 +1,10 @@
 import ClubBox from "../../pages/club/ClubBox";
 import styled from "styled-components";
 import Pagination from "../recruitment/components/Pagination";
-import { Club } from "../../types/clubType";
+import { ClubType } from "../../types/clubType";
 import { useGetClubs } from "../../hooks/queries/clubs.query";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -30,10 +31,11 @@ const PaginateSection = styled.div`
 
 function ClubList() {
   const { data } = useGetClubs();
-  const clubs = data?.data.clubs ?? [];
-  const pagination = data?.data.pagination;
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const clubs = data.data.clubs;
+  const pagination = data.data.pagination;
 
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const navigate = useNavigate();
   const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
   const sliceClub = clubs.slice(startIdx, startIdx + ITEMS_PER_PAGE);
 
@@ -41,8 +43,8 @@ function ClubList() {
     setCurrentPage(page);
   };
 
-  function onClick(club: Club) {
-    console.log("클럽 클릭:", club);
+  function onClick(club: ClubType) {
+    navigate(`${club.id}`);
   }
 
   return (

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Club } from "../../../types/clubType";
+import { ClubType } from "../../../types/clubType";
 
 const Card = styled.div`
   width: 100%;
@@ -43,7 +43,7 @@ const Category = styled.div`
 `;
 
 interface ClubProp {
-  club: Club;
+  club: ClubType;
 }
 
 // 상태값을 상수로 정의

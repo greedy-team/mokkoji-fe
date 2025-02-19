@@ -1,10 +1,17 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { getClubItems } from "../../api/clubs.api";
-import { ClubResponse } from "../../types/clubType";
+import { getClubItems, getClubItemsDetail } from "../../api/clubs.api";
+import { ClubDetailResponseType, ClubResponseType } from "../../types/clubType";
 
 export const useGetClubs = () => {
-  return useSuspenseQuery<ClubResponse>({
+  return useSuspenseQuery<ClubResponseType>({
     queryKey: ["clubs"],
     queryFn: getClubItems,
+  });
+};
+
+export const useGetClubsDetail = (id: string) => {
+  return useSuspenseQuery<ClubDetailResponseType>({
+    queryKey: ["clubs", id],
+    queryFn: () => getClubItemsDetail(id),
   });
 };

@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import DefaultImage from "@/assets/react.svg?react";
-import { Club } from "../../types/clubType";
+import { ClubType } from "../../types/clubType";
 import StartLogo from "@/assets/starLogo.svg?react";
 import StartEmptyLogo from "@/assets/starEmptyLogo.svg?react";
 
 interface ClubBoxProp {
-  club: Club;
+  club: ClubType;
   onClick: () => void;
 }
 
@@ -58,7 +58,7 @@ const TitleSection = styled.div`
 const Description = styled.p`
   font-size: 0.8rem;
   color: #777;
-  -webkit-line-clamp: 1; 
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   text-overflow: hidden;
 `;
