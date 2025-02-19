@@ -1,12 +1,7 @@
-import {
-  QueryClientProvider,
-  QueryErrorResetBoundary,
-  useQueryErrorResetBoundary,
-} from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { queryClient } from "./services/TanstackQueryStore";
 import CommonLayout from "./layouts/CommonLayout";
-import { ErrorBoundary } from "react-error-boundary";
 import NotFound from "./pages/NotFound";
 import Tmp from "./pages/Tmp";
 import Home from "./pages/Home";
@@ -39,7 +34,9 @@ const router = createBrowserRouter([
       },
       {
         path: "clubs/:id",
-        element: <ClubDetail />,
+        element: (
+            <ClubDetail />
+        ),
       },
       {
         path: "recruit",
@@ -54,9 +51,9 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const { reset } = useQueryErrorResetBoundary();
   return (
     <QueryClientProvider client={queryClient}>
+
       <QueryErrorResetBoundary>
         <ErrorBoundary
           onReset={reset}
