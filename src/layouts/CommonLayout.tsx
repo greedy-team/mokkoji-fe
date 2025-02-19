@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import SideBar from "./sidebar/SideBar";
+import QueryErrorBoundary from "@/services/QueryErrorBoundary";
 
 const Background = styled.div`
   width: 100%;
@@ -12,15 +13,14 @@ const Background = styled.div`
 `;
 
 const MainContents = styled.div`
-  padding-top: 1%;
-  width: 88%;
-  position: relative;
+  padding: 1%;
+  width: auto;
 `;
 
 const MainContentsSection = styled.div`
   display: flex;
   flex-direction: row;
-  min-height: 85vh;
+  min-height: 84vh;
   width: 100%;
   box-sizing: border-box;
   background-color: #f9fafb;
@@ -33,7 +33,9 @@ function CommonLayout() {
       <MainContentsSection>
         <SideBar />
         <MainContents>
-          <Outlet />
+          <QueryErrorBoundary>
+            <Outlet />
+          </QueryErrorBoundary>
         </MainContents>
       </MainContentsSection>
       <Footer />

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import DefaultImage from "@/assets/react.svg?react";
-import { ClubType } from "../../types/clubType";
+import { ClubType } from "@/types/clubType";
 import StartLogo from "@/assets/starLogo.svg?react";
 import StartEmptyLogo from "@/assets/starEmptyLogo.svg?react";
 
