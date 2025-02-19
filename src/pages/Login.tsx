@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { saveAuthTokens } from "../api/auth.api";
-import { userInterface } from "../types/userInfo";
+import { userInterface } from "../types/userInfoType";
 
 const Wrapper = styled.div`
   display: flex;
@@ -128,10 +128,7 @@ function Login() {
       return;
     }
 
-    console.log(
-      "API URL:",
-      import.meta.env.VITE_API_URL
-    );
+    console.log("API URL:", import.meta.env.VITE_API_URL);
     await saveAuthTokens({ ...loginData });
 
     navigate("/");

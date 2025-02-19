@@ -3,7 +3,6 @@ import { generatePageNumbers } from "../utils/paginationUtil";
 
 const Pagination = styled.div`
   width: 100%;
-  height: 8%;
   display: flex;
   justify-content: center;
   align-items: center;
