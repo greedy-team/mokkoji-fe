@@ -1,45 +1,55 @@
+import { useLoginModalStore } from "../stores/useLoginModalStore";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { saveAuthTokens } from "../api/auth.api";
 import { userInterface } from "../types/userInfoType";
 
-const Wrapper = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
+const ModalWrapper = styled.div<{ open: boolean }>`
+  display: ${({ open }) => (open ? "flex" : "none")};
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
   align-items: center;
   justify-content: center;
 `;
 
-const Container = styled.div`
+const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
   width: 35%;
-  height: fit-content;
-  gap: 15px;
+  padding: 20px;
+  height: 50%;
+  background: white;
+  border-radius: 10px;
   align-items: center;
   justify-content: center;
 `;
 
-const Logo = styled.button`
-  width: fit-content;
-  height: fit-content;
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
   border: none;
-  background-color: transparent;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
 `;
 
 const Title = styled.div`
   font-size: 25px;
   font-weight: 550;
-  letter-spacing: -1px;
+  margin-bottom: 10px;
 `;
 
 const SubTitle = styled.div`
   font-size: 12px;
   font-weight: 550;
   color: #4b5563;
-  letter-spacing: -1px;
 `;
 
 const Section = styled.div`
@@ -56,10 +66,11 @@ const LoginContainer = styled.input`
   text-indent: 8px;
   border-radius: 5px;
   border: 1px solid #9ca3af;
+  margin-top: 10px;
 `;
 
 const LoginButton = styled.button`
-  margin-top: 50px;
+  margin-top: 30px;
   width: 100%;
   height: 40px;
   border: none;
@@ -68,8 +79,7 @@ const LoginButton = styled.button`
   border-radius: 5px;
 `;
 
-// 로그인 섹션 컴포넌트
-function LoginSection({
+const LoginSection = ({
   loginData,
   onChange,
   onClick,
@@ -77,7 +87,7 @@ function LoginSection({
   loginData: userInterface;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick: () => void;
-}) {
+}) => {
   return (
     <Section>
       <LoginContainer
@@ -96,59 +106,51 @@ function LoginSection({
       <LoginButton onClick={onClick}>로그인</LoginButton>
     </Section>
   );
-}
+};
 
-function Login() {
+const LoginModal = () => {
+  const { isOpen, closeModal } = useLoginModalStore();
   const [loginData, setLoginData] = useState<userInterface>({
     student_id: "",
     password: "",
   });
-  const navigate = useNavigate();
 
-  // 입력값 해당 필드에 업데이트
-  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLoginData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-  }
+  };
 
-  // login api로 요청 전송
-  async function onClick() {
-    // 아이디 or 비밀번호 입력값이 존재하지 않을 경우 경고문 반환
-
+  const onClick = async () => {
     if (!loginData.student_id) {
       alert("아이디를 입력해주세요!");
       return;
     }
-
     if (!loginData.password) {
       alert("비밀번호를 입력해주세요!");
       return;
     }
 
-    console.log("API URL:", import.meta.env.VITE_API_URL);
     await saveAuthTokens({ ...loginData });
+    closeModal();
+  };
 
-    navigate("/");
-  }
+  const modalRoot = document.getElementById("modal");
+  if (!modalRoot) return null;
 
-  // TODO: 로그인 상태 유지, 메인 페이지 리디렉션
-  return (
-    <Wrapper>
-      <Container>
-        <Logo>LOGO</Logo>
+  return createPortal(
+    <ModalWrapper open={isOpen}>
+      <ModalContainer>
+        <CloseButton onClick={closeModal}>×</CloseButton>
         <Title>모꼬지에 오신 것을 환영합니다</Title>
         <SubTitle>세종대 동아리와 함께하는 즐거운 대학 생활</SubTitle>
-        <LoginSection
-          loginData={loginData}
-          onChange={onChange}
-          onClick={onClick}
-        />
-      </Container>
-    </Wrapper>
+        <LoginSection loginData={loginData} onChange={onChange} onClick={onClick} />
+      </ModalContainer>
+    </ModalWrapper>,
+    modalRoot
   );
-}
+};
 
-export default Login;
+export default LoginModal;

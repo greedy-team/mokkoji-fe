@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import DummyLogo from "@/assets/react.svg?react";
+import { useLoginModalStore } from "../../stores/useLoginModalStore";
 
 const HeaderContainer = styled.div`
   height: 60px;
@@ -29,12 +30,17 @@ const DummyProfile = styled.img`
   border: 1px solid gray;
 `;
 
+const ProfileLoginArea = styled.div``;
+
 function Footer() {
+  const openModal = useLoginModalStore((state) => state.openModal);
   return (
     <HeaderContainer>
       <HeaderContents>
         <DummyLogo width={25} height={25} />
-        <DummyProfile src="" />
+        <ProfileLoginArea onClick={openModal}>
+          <DummyProfile src="" />
+        </ProfileLoginArea>
       </HeaderContents>
     </HeaderContainer>
   );

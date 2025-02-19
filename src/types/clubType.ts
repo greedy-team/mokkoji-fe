@@ -10,7 +10,6 @@ export interface Club {
   favorite?: boolean;
 }
 
-
 export interface Pagination {
   page: number;
   size: number;
@@ -23,4 +22,13 @@ export interface ClubResponse {
     clubs: Club[];
     pagination: Pagination;
   };
+}
+
+export interface CluParameter {
+  name?: string;
+  category?: string;
+  affliction?: string;
+  status?: string;
+  page?: number;
+  size?: number;
 }
