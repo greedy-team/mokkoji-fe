@@ -1,5 +1,5 @@
 import { http, HttpResponse } from "msw";
-import { ClubType } from "../../types/clubType";
+import { ClubType } from "@/types/clubType";
 
 export const recruitDummyData: ClubType[] = [
   {

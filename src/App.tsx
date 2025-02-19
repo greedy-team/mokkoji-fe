@@ -12,7 +12,6 @@ import ClubDetail from "./pages/club/ClubDetail";
 import Recruitment from "./pages/recruitment/Recruitment";
 import Favorite from "./pages/Favorite";
 import Login from "./pages/Login";
-import QueryErrorBoundary from "./services/QueryErrorBoundary";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +33,9 @@ const router = createBrowserRouter([
       },
       {
         path: "clubs/:id",
-        element: <ClubDetail />,
+        element: (
+            <ClubDetail />
+        ),
       },
       {
         path: "recruit",
@@ -51,12 +52,10 @@ const router = createBrowserRouter([
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <QueryErrorBoundary>
-        <Suspense fallback={<Loading />}>
-          <Login />
-          <RouterProvider router={router} />
-        </Suspense>
-      </QueryErrorBoundary>
+      <Suspense fallback={<Loading />}>
+        <Login />
+        <RouterProvider router={router} />
+      </Suspense>
     </QueryClientProvider>
   );
 }

@@ -19,7 +19,8 @@
       "@store/*": ["src/store/*"],
       "@utils/*": ["src/utils/*"],
       "@types/*": ["src/types/*"],
-      "@api/*": ["src/api/*"]
+      "@api/*": ["src/api/*"],
+      "@const/*": ["src/const*"]
     }
   }
 }
