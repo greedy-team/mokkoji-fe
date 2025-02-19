@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import DummyLogo from "@/assets/react.svg?react";
 import { useLoginModalStore } from "../../stores/useLoginModalStore";
+import { useUserInfoModalStore } from "../../stores/useUserInfoModalStore";
 
 const HeaderContainer = styled.div`
   height: 60px;
@@ -30,16 +31,36 @@ const DummyProfile = styled.img`
   border: 1px solid gray;
 `;
 
+//네모 박스 버튼 (사용자 정보 모달용) 
+//로그인 모달과 사용자 정보 모달 확인을 같이 하고 싶어서 이렇게 했어용
+const UserInfoButton = styled.button`
+  margin-left: 10px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  font-size: 12px;
+  &:hover {
+    background-color: #f3f4f6;
+  }
+`;
+
 const ProfileLoginArea = styled.div``;
 
 function Header() {
-  const openModal = useLoginModalStore((state) => state.openModal);
+  const openLoginModal = useLoginModalStore((state) => state.openModal);
+  const openUserInfoModal = useUserInfoModalStore((state) => state.openModal);
+
   return (
     <HeaderContainer>
       <HeaderContents>
         <DummyLogo width={25} height={25} />
-        <ProfileLoginArea onClick={openModal}>
-          <DummyProfile src="" />
+
+        <ProfileLoginArea >
+          <DummyProfile onClick={openLoginModal} />
+
+          <UserInfoButton onClick={openUserInfoModal}>유저 정보</UserInfoButton>
         </ProfileLoginArea>
       </HeaderContents>
     </HeaderContainer>

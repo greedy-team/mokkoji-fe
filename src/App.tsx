@@ -17,6 +17,7 @@ import ClubDetail from "./pages/club/ClubDetail";
 import Recruitment from "./pages/recruitment/Recruitment";
 import Favorite from "./pages/Favorite";
 import Login from "./pages/Login";
+import UserInfo from "./pages/UserInfo";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,7 @@ function App() {
         >
           <Suspense fallback={<Loading />}>
             <Login />
+            <UserInfo />
             <RouterProvider router={router} />
           </Suspense>
         </ErrorBoundary>
