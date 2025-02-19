@@ -32,7 +32,7 @@ const DummyProfile = styled.img`
 
 const ProfileLoginArea = styled.div``;
 
-function Footer() {
+function Header() {
   const openModal = useLoginModalStore((state) => state.openModal);
   return (
     <HeaderContainer>
@@ -46,4 +46,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default Header;
