@@ -12,14 +12,15 @@ const Background = styled.div`
 `;
 
 const MainContents = styled.div`
-  padding: 1%;
-  width: auto;
+  padding-top: 1%;
+  width: 88%;
+  position: relative;
 `;
 
 const MainContentsSection = styled.div`
   display: flex;
   flex-direction: row;
-  min-height: 84vh;
+  min-height: 85vh;
   width: 100%;
   box-sizing: border-box;
   background-color: #f9fafb;

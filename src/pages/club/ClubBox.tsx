@@ -58,10 +58,9 @@ const TitleSection = styled.div`
 const Description = styled.p`
   font-size: 0.8rem;
   color: #777;
-  -webkit-line-clamp: 1; /* 표시할 최대 줄 수 */
+  -webkit-line-clamp: 1; 
   -webkit-box-orient: vertical;
   text-overflow: hidden;
-  width: 95%;
 `;
 
 const InfoWrapper = styled.div`

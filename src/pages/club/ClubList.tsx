@@ -1,29 +1,31 @@
 import ClubBox from "../../pages/club/ClubBox";
 import styled from "styled-components";
-import PaginationComponent from "../recruitment/components/Pagination";
+import Pagination from "../recruitment/components/Pagination";
 import { Club } from "../../types/clubType";
 import { useGetClubs } from "../../hooks/queries/clubs.query";
 import { useState } from "react";
 
 const ITEMS_PER_PAGE = 9;
 
-const Container = styled.div`
-  height: 90vh;
-  width: 80vw;
-`;
 const ClubGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 29%);
+  grid-template-columns: repeat(3, 30%);
   grid-template-rows: repeat(3, 28%);
   justify-content: space-evenly;
   height: auto;
 
-  row-gap: 15px;
-  column-gap: 5px;
+  row-gap: 20px;
+  column-gap: 10px;
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(1, 1fr);
   }
+`;
+
+const PaginateSection = styled.div`
+  position: absolute;
+  bottom: 7%;
+  width: 100%;
 `;
 
 function ClubList() {
@@ -44,22 +46,23 @@ function ClubList() {
   }
 
   return (
-    <Container>
+    <>
       <ClubGrid>
         {sliceClub.map((club) => (
           <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
         ))}
       </ClubGrid>
-      <div style={{ marginTop: "50px" }}></div>
-      {pagination && (
-        <PaginationComponent
-          clubsLength={clubs.length}
-          ITEMS_PER_PAGE={ITEMS_PER_PAGE}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-        />
-      )}
-    </Container>
+      <PaginateSection>
+        {pagination && (
+          <Pagination
+            clubsLength={clubs.length}
+            ITEMS_PER_PAGE={ITEMS_PER_PAGE}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        )}
+      </PaginateSection>
+    </>
   );
 }
 
