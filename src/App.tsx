@@ -15,9 +15,9 @@ import { Loading } from "./pages/Loading";
 import ClubList from "./pages/club/ClubList";
 import ClubDetail from "./pages/club/ClubDetail";
 import Recruitment from "./pages/recruitment/Recruitment";
-import Favorite from "./pages/Favorite";
 import Login from "./pages/Login";
 import UserInfo from "./pages/UserInfo";
+import Favorite from "./pages/favorite/Favorite";
 
 const router = createBrowserRouter([
   {
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
       {
         path: "favorite",
         element: <Favorite />,
-      },
+      }
     ],
   },
 ]);
