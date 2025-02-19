@@ -7,18 +7,18 @@ import Tmp from "./pages/Tmp";
 import Home from "./pages/Home";
 import { Suspense } from "react";
 import { Loading } from "./pages/Loading";
-import Login from "./pages/Login";
 import ClubList from "./pages/club/ClubList";
 import ClubDetail from "./pages/club/ClubDetail";
 import Recruitment from "./pages/recruitment/Recruitment";
 import Favorite from "./pages/Favorite";
+
+
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <CommonLayout />,
     errorElement: <NotFound />,
-    //loader: tokenLoader,
     children: [
       {
         index: true,
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         element: <Tmp />,
       },
       {
-        path: "clubs", //UI 확인을 위해서
+        path: "clubs",
         element: <ClubList />,
       },
       {
@@ -46,7 +46,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  { path: "/login", element: <Login /> },
 ]);
 
 function App() {
@@ -54,6 +53,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Suspense fallback={<Loading />}>
         <RouterProvider router={router} />
+        <LoginModal />
       </Suspense>
     </QueryClientProvider>
   );
