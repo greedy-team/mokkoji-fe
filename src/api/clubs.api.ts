@@ -10,5 +10,5 @@ export const getClubItemsDetail = async (
   id: string
 ): Promise<ClubDetailResponseType> => {
   const { data } = await api.get(`/clubs/${id}`);
-  return data;
+  throw new Error("!!");
 };

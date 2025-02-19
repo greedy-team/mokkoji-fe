@@ -1,12 +1,7 @@
-import {
-  QueryClientProvider,
-  QueryErrorResetBoundary,
-  useQueryErrorResetBoundary,
-} from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { queryClient } from "./services/TanstackQueryStore";
 import CommonLayout from "./layouts/CommonLayout";
-import { ErrorBoundary } from "react-error-boundary";
 import NotFound from "./pages/NotFound";
 import Tmp from "./pages/Tmp";
 import Home from "./pages/Home";
@@ -17,6 +12,7 @@ import ClubDetail from "./pages/club/ClubDetail";
 import Recruitment from "./pages/recruitment/Recruitment";
 import Favorite from "./pages/Favorite";
 import Login from "./pages/Login";
+import QueryErrorBoundary from "./services/QueryErrorBoundary";
 
 const router = createBrowserRouter([
   {
@@ -53,25 +49,14 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const { reset } = useQueryErrorResetBoundary();
   return (
     <QueryClientProvider client={queryClient}>
-      <QueryErrorResetBoundary>
-        <ErrorBoundary
-          onReset={reset}
-          fallbackRender={({ resetErrorBoundary }) => (
-            <div>
-              There was an error!
-              <button onClick={() => resetErrorBoundary()}>Try again</button>
-            </div>
-          )}
-        >
-          <Suspense fallback={<Loading />}>
-            <Login />
-            <RouterProvider router={router} />
-          </Suspense>
-        </ErrorBoundary>
-      </QueryErrorResetBoundary>
+      <QueryErrorBoundary>
+        <Suspense fallback={<Loading />}>
+          <Login />
+          <RouterProvider router={router} />
+        </Suspense>
+      </QueryErrorBoundary>
     </QueryClientProvider>
   );
 }
