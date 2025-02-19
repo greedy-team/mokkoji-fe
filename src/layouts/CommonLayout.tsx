@@ -19,7 +19,7 @@ const MainContents = styled.div`
 const MainContentsSection = styled.div`
   display: flex;
   flex-direction: row;
-  min-height: 78vh;
+  min-height: 84vh;
   width: 100%;
   box-sizing: border-box;
   background-color: #f9fafb;

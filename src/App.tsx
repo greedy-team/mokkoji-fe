@@ -10,7 +10,9 @@ import { Loading } from "./pages/Loading";
 import ClubList from "./pages/club/ClubList";
 import ClubDetail from "./pages/club/ClubDetail";
 import Recruitment from "./pages/recruitment/Recruitment";
-import LoginModal from "./pages/Login";
+import Favorite from "./pages/Favorite";
+
+
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "recruit",
         element: <Recruitment />,
+      },
+      {
+        path: "favorite",
+        element: <Favorite />,
       },
     ],
   },
