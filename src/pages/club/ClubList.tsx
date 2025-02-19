@@ -1,8 +1,8 @@
-import ClubBox from "../../pages/club/ClubBox";
+import ClubBox from "@/pages/club/ClubBox";
 import styled from "styled-components";
 import Pagination from "../recruitment/components/Pagination";
-import { ClubType } from "../../types/clubType";
-import { useGetClubs } from "../../hooks/queries/clubs.query";
+import { ClubType } from "@/types/clubType";
+import { useGetClubs } from "@/hooks/queries/clubs.query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

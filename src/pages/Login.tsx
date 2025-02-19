@@ -1,9 +1,9 @@
-import { useLoginModalStore } from "../stores/useLoginModalStore";
+import { useLoginModalStore } from "@/stores/useLoginModalStore";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import { saveAuthTokens } from "../api/auth.api";
-import { userInterface } from "../types/userInfoType";
+import { saveAuthTokens } from "@/api/auth.api";
+import { userInterface } from "@/types/userInfoType";
 
 const ModalWrapper = styled.div<{ open: boolean }>`
   display: ${({ open }) => (open ? "flex" : "none")};

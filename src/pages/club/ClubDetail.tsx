@@ -1,7 +1,7 @@
 //동아리 상세 페이지
 import styled from "styled-components";
-import { useGetClubsDetail } from "../../hooks/queries/clubs.query";
-import useCustomParams from "../../hooks/useCustomParams";
+import { useGetClubsDetail } from "@/hooks/queries/clubs.query";
+import useCustomParams from "@/hooks/useCustomParams";
 
 //전체 레이아웃
 const Container = styled.div`

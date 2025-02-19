@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ClubType } from "../../../types/clubType";
+import { ClubType } from "@/types/clubType";
 
 const Card = styled.div`
   width: 100%;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import DummyLogo from "@/assets/react.svg?react";
-import { useLoginModalStore } from "../../stores/useLoginModalStore";
+import { useLoginModalStore } from "@/stores/useLoginModalStore";
 
 const HeaderContainer = styled.div`
   height: 60px;

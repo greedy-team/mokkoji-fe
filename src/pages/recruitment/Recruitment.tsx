@@ -3,7 +3,7 @@ import ClubCard from "./components/ClubCard";
 import styled from "styled-components";
 import SortOption from "./components/SortOption";
 import PaginationComponent from "./components/Pagination";
-import { ClubType } from "../../types/clubType";
+import { ClubType } from "@/types/clubType";
 
 const ITEMS_PER_PAGE = 9; // 페이지당 게시물 수
 

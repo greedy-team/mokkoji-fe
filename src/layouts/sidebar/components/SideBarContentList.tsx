@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { clubItems } from "../const/pathLinks";
-import Spacing from "../../../components/Spacing";
+import Spacing from "@/components/Spacing";
 
 const SectionTitle = styled(Link)`
   width: 90%;
