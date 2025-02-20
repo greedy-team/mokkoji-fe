@@ -7,23 +7,24 @@ import QueryErrorBoundary from "@/services/QueryErrorBoundary";
 
 const Background = styled.div`
   width: 100%;
-  height: auto;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 `;
 
 const MainContents = styled.div`
   padding: 1%;
-  width: auto;
+  width: 100%;
 `;
 
 const MainContentsSection = styled.div`
   display: flex;
   flex-direction: row;
-  min-height: 84vh;
+  flex: 1; 
   width: 100%;
   box-sizing: border-box;
   background-color: #f9fafb;
+  align-items: stretch; 
 `;
 
 function CommonLayout() {

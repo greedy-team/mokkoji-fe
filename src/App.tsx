@@ -34,9 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: "clubs/:id",
-        element: (
-            <ClubDetail />
-        ),
+        element: <ClubDetail />,
       },
       {
         path: "recruit",
@@ -53,24 +51,11 @@ const router = createBrowserRouter([
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-
-      <QueryErrorResetBoundary>
-        <ErrorBoundary
-          onReset={reset}
-          fallbackRender={({ resetErrorBoundary }) => (
-            <div>
-              There was an error!
-              <button onClick={() => resetErrorBoundary()}>Try again</button>
-            </div>
-          )}
-        >
-          <Suspense fallback={<Loading />}>
-            <Login />
-            <UserInfo />
-            <RouterProvider router={router} />
-          </Suspense>
-        </ErrorBoundary>
-      </QueryErrorResetBoundary>
+      <Suspense fallback={<Loading />}>
+        <Login />
+        <UserInfo />
+        <RouterProvider router={router} />
+      </Suspense>
     </QueryClientProvider>
   );
 }
