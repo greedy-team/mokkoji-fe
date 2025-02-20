@@ -1,32 +1,10 @@
 import { useState, useEffect } from "react";
-import { createPortal } from "react-dom";
 import styled from "styled-components";
-import { useUserInfoModalStore } from "../stores/useUserInfoModalStore";
 import { getUserInfo, updateUserEmail } from "../api/user.api";
 import { EditableUserInfoType } from "../types/userInfoType";
-
-const ModalWrapper = styled.div<{ open: boolean }>`
-  display: ${({ open }) => (open ? "flex" : "none")};
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-`;
-
-const ModalContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
-  position: relative;
-`;
+import ModalSection from "@/components/ModalSection";
+import { useModalStore } from "@/stores/useModalStore";
+import { expireAuthTokens } from "@/api/auth.api";
 
 const CloseButton = styled.button`
   position: absolute;
@@ -94,8 +72,18 @@ const CancelButton = styled.button`
   cursor: pointer;
 `;
 
-const UserInfoModal = () => {
-  const { isOpen, closeModal } = useUserInfoModalStore();
+const LogoutButton = styled.button`
+  flex: 1;
+  height: 40px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+`;
+
+function UserInfo() {
+  const { closeModal } = useModalStore();
   const [userInfo, setUserInfo] = useState<EditableUserInfoType | null>(null);
   const [email, setEmail] = useState("");
 
@@ -108,6 +96,11 @@ const UserInfoModal = () => {
     fetchUserInfo();
   }, []);
 
+  const logOutClick = () => {
+    expireAuthTokens();
+    closeModal();
+  };
+
   const handleSave = async () => {
     if (!email) {
       alert("이메일을 입력하세요.");
@@ -119,54 +112,51 @@ const UserInfoModal = () => {
       setUserInfo(updatedUser.userInfo);
       alert("이메일이 성공적으로 업데이트되었습니다.");
       closeModal();
-    } catch (error) {
+    } catch {
       alert("이메일 업데이트 중 오류가 발생했습니다.");
     }
   };
 
-  return createPortal(
-    <ModalWrapper open={isOpen}>
-      <ModalContainer>
-        <CloseButton onClick={closeModal}>×</CloseButton>
-        <Title>학생 정보</Title>
+  return (
+    <ModalSection>
+      <CloseButton onClick={closeModal}>×</CloseButton>
+      <Title>학생 정보</Title>
+      <LogoutButton onClick={logOutClick}>로그 아웃</LogoutButton>
+      <Section>
+        <Label>학번</Label>
+        <Input value={userInfo?.studentId || ""} disabled />
+      </Section>
 
-        <Section>
-          <Label>학번</Label>
-          <Input value={userInfo?.studentId || ""} disabled />
-        </Section>
+      <Section>
+        <Label>이름</Label>
+        <Input value={userInfo?.name || ""} disabled />
+      </Section>
 
-        <Section>
-          <Label>이름</Label>
-          <Input value={userInfo?.name || ""} disabled />
-        </Section>
+      <Section>
+        <Label>학과</Label>
+        <Input value={userInfo?.department || ""} disabled />
+      </Section>
 
-        <Section>
-          <Label>학과</Label>
-          <Input value={userInfo?.department || ""} disabled />
-        </Section>
+      <Section>
+        <Label>학년</Label>
+        <Input value={userInfo?.grade || ""} disabled />
+      </Section>
 
-        <Section>
-          <Label>학년</Label>
-          <Input value={userInfo?.grade || ""} disabled />
-        </Section>
+      <Section>
+        <Label>이메일</Label>
+        <Input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </Section>
 
-        <Section>
-          <Label>이메일</Label>
-          <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Section>
-
-        <ButtonContainer>
-          <CancelButton onClick={closeModal}>취소</CancelButton>
-          <SaveButton onClick={handleSave}>저장</SaveButton>
-        </ButtonContainer>
-      </ModalContainer>
-    </ModalWrapper>,
-    document.getElementById("modal")!
+      <ButtonContainer>
+        <CancelButton onClick={closeModal}>취소</CancelButton>
+        <SaveButton onClick={handleSave}>저장</SaveButton>
+      </ButtonContainer>
+    </ModalSection>
   );
-};
+}
 
-export default UserInfoModal;
+export default UserInfo;

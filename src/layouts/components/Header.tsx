@@ -1,9 +1,6 @@
 import styled from "styled-components";
 import DummyLogo from "@/assets/react.svg?react";
-
-import { useLoginModalStore } from "@/stores/useLoginModalStore";
-import { useUserInfoModalStore } from "@/stores/useUserInfoModalStore";
-
+import { useModalStore } from "@/stores/useModalStore";
 
 const HeaderContainer = styled.div`
   height: 60px;
@@ -33,36 +30,15 @@ const DummyProfile = styled.img`
   border: 1px solid gray;
 `;
 
-const UserInfoButton = styled.button`
-  margin-left: 10px;
-  padding: 8px 12px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  background-color: white;
-  cursor: pointer;
-  font-size: 12px;
-  &:hover {
-    background-color: #f3f4f6;
-  }
-`;
-
-const ProfileLoginArea = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 function Header() {
-  const openLoginModal = useLoginModalStore((state) => state.openModal);
-  const openUserInfoModal = useUserInfoModalStore((state) => state.openModal);
+  const openModal = useModalStore((state) => state.openModal);
 
   return (
     <HeaderContainer>
       <HeaderContents>
         <DummyLogo width={25} height={25} />
-        <ProfileLoginArea>
-          <DummyProfile onClick={openLoginModal} />
-          <UserInfoButton onClick={openUserInfoModal}>유저 정보</UserInfoButton>
-        </ProfileLoginArea>
+
+        <DummyProfile onClick={openModal} />
       </HeaderContents>
     </HeaderContainer>
   );

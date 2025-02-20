@@ -13,6 +13,7 @@ import Recruitment from "./pages/recruitment/Recruitment";
 import Favorite from "./pages/Favorite";
 import Login from "./pages/Login";
 import UserInfo from "./pages/UserInfo";
+import { useAuthStore } from "./stores/useAuthStore";
 
 const router = createBrowserRouter([
   {
@@ -49,11 +50,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const accessToken = useAuthStore((state) => state.accessToken);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Suspense fallback={<Loading />}>
-        <Login />
-        <UserInfo />
+        {accessToken ? <UserInfo /> : <Login />}
         <RouterProvider router={router} />
       </Suspense>
     </QueryClientProvider>
