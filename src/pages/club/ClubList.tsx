@@ -11,22 +11,24 @@ const ITEMS_PER_PAGE = 9;
 const ClubGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 30%);
-  grid-template-rows: repeat(3, 28%);
-  justify-content: space-evenly;
-  height: auto;
-
-  row-gap: 20px;
-  column-gap: 10px;
+  grid-template-rows: repeat(3, auto);
+  justify-items: center;
+  row-gap: 2%;
+  column-gap: 2%;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
   }
 `;
 
 const PaginateSection = styled.div`
-  position: absolute;
-  bottom: 7%;
+  margin-top: 50px;
   width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 function ClubList() {
