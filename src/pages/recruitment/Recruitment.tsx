@@ -4,6 +4,9 @@ import styled from "styled-components";
 import SortOption from "./components/SortOption";
 import PaginationComponent from "./components/Pagination";
 import { ClubType } from "@/types/clubType";
+import { sortClubs } from "./utils/sortClubs";
+import { useGetRecruits } from "@/hooks/queries/recruit.query";
+import { useNavigate } from "react-router-dom";
 
 const ITEMS_PER_PAGE = 9; // 페이지당 게시물 수
 
@@ -32,40 +35,23 @@ const ClubCardWrapper = styled.div`
 `;
 
 function Recruitment() {
-  const [clubs, setClubs] = useState<ClubType[]>([]);
-  const [buttonState, setButtonState] = useState<string>("최신순"); // 정렬 옵션 상태
+  const navigate = useNavigate();
+  const { data } = useGetRecruits();
+  const clubs = data.data.clubs;
+  const [sortedClubs, setSortedClubs] = useState<ClubType[]>([]); // 정렬된 동아리 목록
+  const [buttonState, setButtonState] = useState<string>("마감일순"); // 정렬 옵션 상태
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
-  const [sliceClub, setSliceClub] = useState<ClubType[]>([]); // 현재 페이지 게시물 객체
 
-  // 동아리 데이터 패칭
+  const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+  const sliceClub = sortedClubs.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+
+  // 정렬 상태 반영
   useEffect(() => {
-    const fetchClubsData = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/recruit"); // 테스트용 서버, 엔드포인트 변경 필요
+    const sorted = sortClubs(clubs, buttonState);
+    setSortedClubs(sorted);
+  }, [buttonState]);
 
-        if (!response.ok) {
-          throw new Error("Cannot fetch clubs");
-        }
-
-        const data: ClubType[] = await response.json();
-        setClubs(data);
-        setSliceClub(data.slice(0, ITEMS_PER_PAGE)); // 첫 페이지 초기화
-      } catch (error) {
-        console.error("Error fetching clubs:", error);
-      }
-    };
-
-    fetchClubsData();
-  }, []);
-
-  // 현재 페이지 동아리 게시물 객체
-  useEffect(() => {
-    const cur = (currentPage - 1) * ITEMS_PER_PAGE;
-    const currentClub = clubs.slice(cur, cur + ITEMS_PER_PAGE);
-    setSliceClub(currentClub);
-  }, [currentPage, clubs]);
-
-  // 정렬 상태 변경경
+  // 정렬 상태 변경
   function handleSortChange(value: string) {
     setButtonState(value);
   }
@@ -75,12 +61,16 @@ function Recruitment() {
     setCurrentPage(page);
   }
 
+  function onClick(club: ClubType) {
+    navigate(`/clubs/${club.id}`);
+  }
+
   return (
     <Container>
       <SortOption buttonState={buttonState} onSortChange={handleSortChange} />
       <ClubList>
         {sliceClub.map((club) => (
-          <ClubCardWrapper key={club.id}>
+          <ClubCardWrapper key={club.id} onClick={() => onClick(club)}>
             <ClubCard club={club} />
           </ClubCardWrapper>
         ))}

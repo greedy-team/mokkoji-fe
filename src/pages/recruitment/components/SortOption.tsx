@@ -12,6 +12,7 @@ interface SortOptionsProps {
 }
 
 const SortOptionsContainer = styled.div`
+    margin-right: 1%;
     height: 10%;
     display: flex;
     align-items: center;
