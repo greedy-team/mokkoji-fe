@@ -1,9 +1,8 @@
-//동아리 상세 페이지
 import styled from "styled-components";
 import { useGetClubsDetail } from "@/hooks/queries/clubs.query";
 import useCustomParams from "@/hooks/useCustomParams";
 
-//전체 레이아웃
+
 const Container = styled.div`
   height: 100%;
   margin: 0 auto;
@@ -13,7 +12,7 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
-// 동아리 정보와 이미지를 가로 정렬
+
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -21,7 +20,7 @@ const InfoContainer = styled.div`
   justify-content: space-between;
 `;
 
-//동아리 대표 이미지
+
 const ClubImage = styled.div<{ image?: string }>`
   width: 200px;
   height: 200px;
@@ -39,20 +38,20 @@ const ClubImage = styled.div<{ image?: string }>`
   margin-right: 120px;
 `;
 
-//동아리 상세 정보
+
 const ClubInfo = styled.div`
   margin-top: 30px;
   margin-left: 180px;
 `;
 
-//동아리명
+
 const ClubTitle = styled.h1`
   font-size: 22px;
   font-weight: bold;
   text-align: center;
 `;
 
-//카테고리 및 소속
+
 const TagContainer = styled.div`
   display: flex;
   gap: 10px;
@@ -69,7 +68,7 @@ const Tag = styled.div`
   color: #555;
 `;
 
-//간단 설명 텍스트
+
 const Description = styled.p`
   font-size: 14px;
   color: #666;
@@ -77,7 +76,7 @@ const Description = styled.p`
   text-align: center;
 `;
 
-// 모집 관련 정보
+
 const RecruitmentInfo = styled.p`
   font-size: 14px;
   color: #444;
@@ -85,7 +84,7 @@ const RecruitmentInfo = styled.p`
   text-align: center;
 `;
 
-//모집 공고 섹션
+
 const Divider = styled.hr`
   margin: 20px 0;
   border: none;
