@@ -4,6 +4,7 @@ import styled from "styled-components";
 import SortOption from "./components/SortOption";
 import PaginationComponent from "./components/Pagination";
 import { ClubType } from "@/types/clubType";
+import { sortClubs } from "./utils/sortClubs";
 
 const ITEMS_PER_PAGE = 9; // 페이지당 게시물 수
 
@@ -33,9 +34,10 @@ const ClubCardWrapper = styled.div`
 
 function Recruitment() {
   const [clubs, setClubs] = useState<ClubType[]>([]);
-  const [buttonState, setButtonState] = useState<string>("최신순"); // 정렬 옵션 상태
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
+  const [sortedClubs, setSortedClubs] = useState<ClubType[]>([]); // 정렬된 동아리 목록
   const [sliceClub, setSliceClub] = useState<ClubType[]>([]); // 현재 페이지 게시물 객체
+  const [buttonState, setButtonState] = useState<string>("마감일순"); // 정렬 옵션 상태
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
 
   // 동아리 데이터 패칭
   useEffect(() => {
@@ -57,15 +59,21 @@ function Recruitment() {
 
     fetchClubsData();
   }, []);
+  
+  // 정렬 상태 반영
+  useEffect(() => {
+    const sorted = sortClubs(clubs, buttonState);
+    setSortedClubs(sorted);
+  }, [clubs, buttonState]);
 
   // 현재 페이지 동아리 게시물 객체
   useEffect(() => {
     const cur = (currentPage - 1) * ITEMS_PER_PAGE;
-    const currentClub = clubs.slice(cur, cur + ITEMS_PER_PAGE);
+    const currentClub = sortedClubs.slice(cur, cur + ITEMS_PER_PAGE);
     setSliceClub(currentClub);
-  }, [currentPage, clubs]);
+  }, [currentPage, sortedClubs]);
 
-  // 정렬 상태 변경경
+  // 정렬 상태 변경
   function handleSortChange(value: string) {
     setButtonState(value);
   }
