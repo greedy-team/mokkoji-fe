@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import SearchLogo from "@/assets/searchLogo.svg?react";
 import FilterLogo from "@/assets/filterLogo.svg?react";
-
 import { useState } from "react";
 
 const SearchSection = styled.div`

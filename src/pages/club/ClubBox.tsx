@@ -4,11 +4,6 @@ import { ClubType } from "@/types/clubType";
 import StartLogo from "@/assets/starLogo.svg?react";
 import StartEmptyLogo from "@/assets/starEmptyLogo.svg?react";
 
-interface ClubBoxProp {
-  club: ClubType;
-  onClick: () => void;
-}
-
 const Box = styled.div`
   position: relative;
   display: flex;
@@ -81,6 +76,11 @@ const Affiliation = styled.p`
   color: #777;
   font-weight: 550;
 `;
+
+interface ClubBoxProp {
+  club: ClubType;
+  onClick: () => void;
+}
 
 function ClubBox({ club, onClick }: ClubBoxProp) {
   return (

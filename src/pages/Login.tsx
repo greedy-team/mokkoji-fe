@@ -1,45 +1,9 @@
-import { useLoginModalStore } from "@/stores/useLoginModalStore";
+import { useModalStore } from "@/stores/useModalStore";
 import { useState } from "react";
-import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { saveAuthTokens } from "@/api/auth.api";
 import { userInterface } from "@/types/userInfoType";
-
-const ModalWrapper = styled.div<{ open: boolean }>`
-  display: ${({ open }) => (open ? "flex" : "none")};
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  align-items: center;
-  justify-content: center;
-  z-index: 200000;
-`;
-
-const ModalContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 35%;
-  padding: 20px;
-  height: 50%;
-  background: white;
-  border-radius: 10px;
-  align-items: center;
-  justify-content: center;
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  border: none;
-  background: none;
-  font-size: 20px;
-  cursor: pointer;
-`;
+import ModalSection from "@/components/ModalSection";
 
 const Title = styled.div`
   font-size: 25px;
@@ -110,7 +74,7 @@ const LoginSection = ({
 };
 
 const Login = () => {
-  const { isOpen, closeModal } = useLoginModalStore();
+  const { closeModal } = useModalStore();
   const [loginData, setLoginData] = useState<userInterface>({
     student_id: "",
     password: "",
@@ -138,23 +102,16 @@ const Login = () => {
     closeModal();
   };
 
-  const modalRoot = document.getElementById("modal");
-  if (!modalRoot) return null;
-
-  return createPortal(
-    <ModalWrapper open={isOpen} onClick={closeModal}>
-      <ModalContainer onClick={(e) => e.stopPropagation()}>
-        <CloseButton onClick={closeModal}>×</CloseButton>
-        <Title>모꼬지에 오신 것을 환영합니다</Title>
-        <SubTitle>세종대 동아리와 함께하는 즐거운 대학 생활</SubTitle>
-        <LoginSection
-          loginData={loginData}
-          onChange={onChange}
-          onClick={onClick}
-        />
-      </ModalContainer>
-    </ModalWrapper>,
-    modalRoot
+  return (
+    <ModalSection>
+      <Title>모꼬지에 오신 것을 환영합니다</Title>
+      <SubTitle>세종대 동아리와 함께하는 즐거운 대학 생활</SubTitle>
+      <LoginSection
+        loginData={loginData}
+        onChange={onChange}
+        onClick={onClick}
+      />
+    </ModalSection>
   );
 };
 
