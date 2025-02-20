@@ -37,8 +37,9 @@ function Header() {
     <HeaderContainer>
       <HeaderContents>
         <DummyLogo width={25} height={25} />
-
+        
         <DummyProfile onClick={openModal} />
+
       </HeaderContents>
     </HeaderContainer>
   );
