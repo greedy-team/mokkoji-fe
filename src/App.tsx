@@ -12,6 +12,7 @@ import ClubDetail from "./pages/club/ClubDetail";
 import Recruitment from "./pages/recruitment/Recruitment";
 import Favorite from "./pages/Favorite";
 import Login from "./pages/Login";
+import UserInfo from "./pages/UserInfo";
 
 const router = createBrowserRouter([
   {
@@ -52,10 +53,24 @@ const router = createBrowserRouter([
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Suspense fallback={<Loading />}>
-        <Login />
-        <RouterProvider router={router} />
-      </Suspense>
+
+      <QueryErrorResetBoundary>
+        <ErrorBoundary
+          onReset={reset}
+          fallbackRender={({ resetErrorBoundary }) => (
+            <div>
+              There was an error!
+              <button onClick={() => resetErrorBoundary()}>Try again</button>
+            </div>
+          )}
+        >
+          <Suspense fallback={<Loading />}>
+            <Login />
+            <UserInfo />
+            <RouterProvider router={router} />
+          </Suspense>
+        </ErrorBoundary>
+      </QueryErrorResetBoundary>
     </QueryClientProvider>
   );
 }
