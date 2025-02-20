@@ -10,14 +10,12 @@ const ITEMS_PER_PAGE = 9;
 
 const ClubGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 30%);
-  grid-template-rows: repeat(3, auto);
-  justify-items: center;
-  row-gap: 2%;
-  column-gap: 2%;
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
+  grid-template-columns: repeat(3, 28%);
+  grid-template-rows: repeat(3, 28%);
+  justify-content: space-evenly;
+  align-content: space-evenly;
+  row-gap: 15px;
+  column-gap: 5px;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
