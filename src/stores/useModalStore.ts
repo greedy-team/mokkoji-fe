@@ -1,13 +1,13 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface LoginModalState {
+interface ModalState {
   isOpen: boolean;
   openModal: () => void;
   closeModal: () => void;
 }
 
-export const useLoginModalStore = create<LoginModalState>()(
+export const useModalStore = create<ModalState>()(
   persist(
     (set) => ({
       isOpen: true,

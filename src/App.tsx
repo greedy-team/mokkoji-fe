@@ -18,6 +18,7 @@ import Recruitment from "./pages/recruitment/Recruitment";
 import Login from "./pages/Login";
 import UserInfo from "./pages/UserInfo";
 import Favorite from "./pages/favorite/Favorite";
+import { useAuthStore } from "./stores/useAuthStore";
 
 const router = createBrowserRouter([
   {
@@ -54,26 +55,16 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const { reset } = useQueryErrorResetBoundary();
+
+  const accessToken = useAuthStore((state) => state.accessToken);
+
   return (
     <QueryClientProvider client={queryClient}>
-      <QueryErrorResetBoundary>
-        <ErrorBoundary
-          onReset={reset}
-          fallbackRender={({ resetErrorBoundary }) => (
-            <div>
-              There was an error!
-              <button onClick={() => resetErrorBoundary()}>Try again</button>
-            </div>
-          )}
-        >
-          <Suspense fallback={<Loading />}>
-            <Login />
-            <UserInfo />
-            <RouterProvider router={router} />
-          </Suspense>
-        </ErrorBoundary>
-      </QueryErrorResetBoundary>
+      <Suspense fallback={<Loading />}>
+        {accessToken ? <UserInfo /> : <Login />}
+        <RouterProvider router={router} />
+      </Suspense>
+
     </QueryClientProvider>
   );
 }
