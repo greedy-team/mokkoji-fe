@@ -2,7 +2,7 @@ import { useModalStore } from "@/stores/useModalStore";
 import { useState } from "react";
 import styled from "styled-components";
 import { saveAuthTokens } from "@/api/auth.api";
-import { UserLoginType } from "@/types/userInfoType";
+import { userInterface } from "@/types/userInfoType";
 import ModalSection from "@/components/ModalSection";
 
 const Title = styled.div`
@@ -49,7 +49,7 @@ const LoginSection = ({
   onChange,
   onClick,
 }: {
-  loginData: UserLoginType;
+  loginData: userInterface;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick: () => void;
 }) => {
@@ -57,8 +57,8 @@ const LoginSection = ({
     <Section>
       <LoginContainer
         placeholder="학번"
-        name="studentId"
-        value={loginData.studentId}
+        name="student_id"
+        value={loginData.student_id}
         onChange={onChange}
       />
       <LoginContainer
@@ -75,8 +75,8 @@ const LoginSection = ({
 
 const Login = () => {
   const { closeModal } = useModalStore();
-  const [loginData, setLoginData] = useState<UserLoginType>({
-    studentId: "",
+  const [loginData, setLoginData] = useState<userInterface>({
+    student_id: "",
     password: "",
   });
 
@@ -89,7 +89,7 @@ const Login = () => {
   };
 
   const onClick = async () => {
-    if (!loginData.studentId) {
+    if (!loginData.student_id) {
       alert("아이디를 입력해주세요!");
       return;
     }

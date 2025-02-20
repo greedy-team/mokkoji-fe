@@ -13,7 +13,7 @@ let userInfo = { ...initialUserInfo };
 
 export const userHandlers = [
   //유저 정보 가져오기기
-  http.get(`http://${import.meta.env.VITE_API_URL}/users`, () => {
+  http.get(`http://${import.meta.env.VITE_API_URL}/user`, () => {
     return HttpResponse.json({
       data: {
         user: userInfo,
@@ -22,7 +22,7 @@ export const userHandlers = [
   }),
 
   //이메일 수정 핸들러
-  http.put(`http://${import.meta.env.VITE_API_URL}/users/email`, async ({ request }) => {
+  http.put(`http://${import.meta.env.VITE_API_URL}/user/email`, async ({ request }) => {
     const { email = "" } = await request.json() as { email?: string };
 
     if (!email) {

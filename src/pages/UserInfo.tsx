@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { getUserInfo, updateUserEmail } from "../api/user.api";
+import { EditableUserInfoType } from "../types/userInfoType";
 import ModalSection from "@/components/ModalSection";
 import { useModalStore } from "@/stores/useModalStore";
 import { expireAuthTokens } from "@/api/auth.api";
-import { useGetUser, useUserInfoEdit } from "@/hooks/queries/user.query";
 
 const CloseButton = styled.button`
   position: absolute;
@@ -83,11 +84,18 @@ const LogoutButton = styled.button`
 
 function UserInfo() {
   const { closeModal } = useModalStore();
-  const { data } = useGetUser();
-  const userInfo = data.data.user;
+  const [userInfo, setUserInfo] = useState<EditableUserInfoType | null>(null);
+  const [email, setEmail] = useState("");
 
-  const [email, setEmail] = useState(userInfo.email);
-  const { mutate } = useUserInfoEdit(email);
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const response = await getUserInfo();
+      setUserInfo(response.data.user);
+      setEmail(response.data.user.email);
+    };
+    fetchUserInfo();
+  }, []);
+
   const logOutClick = () => {
     expireAuthTokens();
     closeModal();
@@ -98,7 +106,15 @@ function UserInfo() {
       alert("이메일을 입력하세요.");
       return;
     }
-    mutate();
+
+    try {
+      const updatedUser = await updateUserEmail(email);
+      setUserInfo(updatedUser.userInfo);
+      alert("이메일이 성공적으로 업데이트되었습니다.");
+      closeModal();
+    } catch {
+      alert("이메일 업데이트 중 오류가 발생했습니다.");
+    }
   };
 
   return (
@@ -108,22 +124,22 @@ function UserInfo() {
       <LogoutButton onClick={logOutClick}>로그 아웃</LogoutButton>
       <Section>
         <Label>학번</Label>
-        <Input value={userInfo.studentId || ""} disabled />
+        <Input value={userInfo?.studentId || ""} disabled />
       </Section>
 
       <Section>
         <Label>이름</Label>
-        <Input value={userInfo.name || ""} disabled />
+        <Input value={userInfo?.name || ""} disabled />
       </Section>
 
       <Section>
         <Label>학과</Label>
-        <Input value={userInfo.department || ""} disabled />
+        <Input value={userInfo?.department || ""} disabled />
       </Section>
 
       <Section>
         <Label>학년</Label>
-        <Input value={userInfo.grade || ""} disabled />
+        <Input value={userInfo?.grade || ""} disabled />
       </Section>
 
       <Section>
