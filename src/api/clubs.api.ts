@@ -12,3 +12,5 @@ export const getClubItemsDetail = async (
   const { data } = await api.get(`/clubs/${id}`);
   return data;
 };
+
+

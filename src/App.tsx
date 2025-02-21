@@ -1,14 +1,11 @@
 import {
   QueryClientProvider,
-  QueryErrorResetBoundary,
-  useQueryErrorResetBoundary,
 } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { queryClient } from "./services/TanstackQueryStore";
 import CommonLayout from "./layouts/CommonLayout";
-import { ErrorBoundary } from "react-error-boundary";
+
 import NotFound from "./pages/NotFound";
-import Tmp from "./pages/Tmp";
 import Home from "./pages/Home";
 import { Suspense } from "react";
 import { Loading } from "./pages/Loading";
@@ -29,10 +26,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-      },
-      {
-        path: "tmp",
-        element: <Tmp />,
       },
       {
         path: "clubs",
