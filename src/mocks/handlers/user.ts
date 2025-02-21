@@ -13,7 +13,7 @@ let userInfo = { ...initialUserInfo };
 
 export const userHandlers = [
   //유저 정보 가져오기기
-  http.get(`http://${import.meta.env.VITE_API_URL}/user`, () => {
+  http.get(`http://${import.meta.env.VITE_API_URL}/users`, () => {
     return HttpResponse.json({
       data: {
         user: userInfo,
@@ -22,18 +22,24 @@ export const userHandlers = [
   }),
 
   //이메일 수정 핸들러
-  http.put(`http://${import.meta.env.VITE_API_URL}/user/email`, async ({ request }) => {
-    const { email = "" } = await request.json() as { email?: string };
+  http.put(
+    `http://${import.meta.env.VITE_API_URL}/users`,
+    async ({ request }) => {
+      const { email = "" } = (await request.json()) as { email?: string };
 
-    if (!email) {
-      return HttpResponse.json(
-        { message: "이메일을 입력하세요." },
-        { status: 400 }
-      );
+      if (!email) {
+        return HttpResponse.json(
+          { message: "이메일을 입력하세요." },
+          { status: 400 }
+        );
+      }
+
+      userInfo = { ...userInfo, email };
+
+      return HttpResponse.json({
+        message: "이메일이 업데이트되었습니다.",
+        userInfo,
+      });
     }
-
-    userInfo = { ...userInfo, email };
-
-    return HttpResponse.json({ message: "이메일이 업데이트되었습니다.", userInfo });
-  }),
+  ),
 ];

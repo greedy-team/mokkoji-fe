@@ -3,6 +3,7 @@ import DefaultImage from "@/assets/react.svg?react";
 import { ClubType } from "@/types/clubType";
 import StartLogo from "@/assets/starLogo.svg?react";
 import StartEmptyLogo from "@/assets/starEmptyLogo.svg?react";
+import { useFavoriteUpdate } from "@/hooks/queries/favorites.query";
 
 const Box = styled.div`
   position: relative;
@@ -77,19 +78,37 @@ const Affiliation = styled.p`
   font-weight: 550;
 `;
 
+const FavoriteButton = styled.button`
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  :focus {
+    border: none;
+  }
+`;
+
 interface ClubBoxProp {
   club: ClubType;
   onClick: () => void;
 }
 
 function ClubBox({ club, onClick }: ClubBoxProp) {
+  const { mutate } = useFavoriteUpdate();
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // ✅ 부모 클릭 방지
+    mutate(String(club.id)); // ✅ 클릭 시 id 전달
+  };
+
   return (
     <Box onClick={onClick}>
       <Image src={club.imageUrl || DefaultImage.toString()} alt={club.name} />
       <Content>
         <TitleSection>
           <Title>{club.name}</Title>
-          {club.favorite ? <StartLogo /> : <StartEmptyLogo />}
+          <FavoriteButton onClick={handleFavoriteClick}>
+            {club.favorite ? <StartLogo /> : <StartEmptyLogo />}
+          </FavoriteButton>
         </TitleSection>
         <Description>{club.description}</Description>
         <InfoWrapper>

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { userInterface } from "@/types/userInfoType";
+import { UserLoginType } from "@/types/userInfoType";
 import { useAuthStore } from "@/stores/useAuthStore";
 
 interface AuthResponse {
@@ -8,7 +8,7 @@ interface AuthResponse {
 }
 
 export const saveAuthTokens = async (
-  credentials: userInterface
+  credentials: UserLoginType
 ): Promise<void> => {
   try {
     const response: AxiosResponse<AuthResponse> = await axios.post(

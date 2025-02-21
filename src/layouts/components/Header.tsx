@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import DummyLogo from "@/assets/react.svg?react";
+import DummyLogo from "@/assets/Mokkoji.svg?react";
 import { useModalStore } from "@/stores/useModalStore";
 
 const HeaderContainer = styled.div`
@@ -36,7 +36,7 @@ function Header() {
   return (
     <HeaderContainer>
       <HeaderContents>
-        <DummyLogo width={25} height={25} />
+        <DummyLogo width={100} height={100} />
         
         <DummyProfile onClick={openModal} />
 
