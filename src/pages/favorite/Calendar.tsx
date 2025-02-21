@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useMemo, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useGetClubs } from "@/hooks/queries/clubs.query";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -25,21 +25,26 @@ const CustomCalendar = styled(Calendar)`
     border-radius: 5px;
     color: black !important;
   }
-
+  
   .react-calendar__tile--now {
-    background: none !important;
+    background: none !important; 
   }
-
+   
   .highlight::after {
     content: "";
     display: block;
     width: 100%;
-    height: 6px;
-    background-color: rgba(59, 130, 246, 0.7);
+    height: 6px; 
+    background-color: rgba(59, 130, 246, 0.7); 
     border-radius: 3px;
     position: absolute;
     bottom: 5px;
     left: 0;
+  }
+
+    .react-calendar__month-view__days__day--neighboringMonth {
+    color: gray !important;
+    opacity: 0.5;
   }
 `;
 
@@ -54,13 +59,13 @@ const CalendarComponent = () => {
 
   const highlightedDates = useMemo(() => {
     if (!data) return [];
-
+    
     return data.data.clubs
       .filter((club) => club.favorite)
       .flatMap((club) => {
         const start = club.recruitStartDate ? new Date(club.recruitStartDate) : new Date();
         const end = club.recruitEndDate ? new Date(club.recruitEndDate) : new Date();
-
+          
         let dateList = [];
         let currentDate = new Date(start);
 
@@ -70,7 +75,7 @@ const CalendarComponent = () => {
         }
         return dateList;
       });
-  }, [data]); 
+  }, [data]);
 
   return (
     <CalendarWrapper>
