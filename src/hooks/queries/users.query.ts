@@ -13,6 +13,16 @@ export const useGetUser = () => {
   });
 };
 
+// export const useUserInfoUpdate = () => {
+//   return useOptimisticMutation<Pick<UserInfoType, "email">, string>(
+//     ["users"],
+//     (email) => updateUserEmail(email),
+//     (oldData, newEmail) => ({
+//       email: newEmail ?? oldData.email,
+//     })
+//   );
+// };
+
 export const useUserInfoEdit = (email: string) => {
   const queryClient = useQueryClient();
 

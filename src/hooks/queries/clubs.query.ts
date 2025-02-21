@@ -2,6 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { getClubItems, getClubItemsDetail } from "@/api/clubs.api";
 import { ClubDetailResponseType, ClubResponseType } from "@/types/clubType";
 
+
 export const useGetClubs = () => {
   return useSuspenseQuery<ClubResponseType>({
     queryKey: ["clubs"],
@@ -15,3 +16,4 @@ export const useGetClubsDetail = (id: string) => {
     queryFn: () => getClubItemsDetail(id),
   });
 };
+

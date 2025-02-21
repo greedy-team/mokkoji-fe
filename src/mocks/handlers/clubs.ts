@@ -84,4 +84,12 @@ export const clubsHandlers = [
   http.get(`http://${import.meta.env.VITE_API_URL}/clubs/4`, () => {
     return HttpResponse.json(clubDetailDummyDataList[3]);
   }),
+
+  http.post(`http://${import.meta.env.VITE_API_URL}/favorites/1`, (req) => {
+    const requestBody = req;
+    return HttpResponse.json({
+      ...requestBody,
+      message: 'User favorite submitted successfully',
+    });
+  }),
 ];

@@ -9,6 +9,6 @@ export const getUserInfo = async (): Promise<UserResponseType> => {
 export const updateUserEmail = async (
   email: string
 ): Promise<Pick<UserInfoType, "email">> => {
-  const { data } = await api.put("/users/email", { email });
+  const { data } = await api.put("/users", { email });
   return data;
 };

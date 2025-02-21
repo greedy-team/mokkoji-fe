@@ -23,7 +23,7 @@ export const userHandlers = [
 
   //이메일 수정 핸들러
   http.put(
-    `http://${import.meta.env.VITE_API_URL}/users/email`,
+    `http://${import.meta.env.VITE_API_URL}/users`,
     async ({ request }) => {
       const { email = "" } = (await request.json()) as { email?: string };
 
