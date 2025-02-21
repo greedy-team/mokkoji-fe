@@ -1,16 +1,19 @@
-export interface userInterface {
-  student_id: string;
+export interface UserLoginType {
+  studentId: string;
   password: string;
 }
 
-export interface UserInfoType {
-  studentId: string;    
-  department: string;  
-  name: string;         
-  grade: string;   
-  email: string; 
+export interface UserInfoType extends Pick<UserLoginType, "studentId"> {
+  department: string;
+  name: string;
+  grade: string;
+  email: string;
 }
 
 export interface EditableUserInfoType extends Omit<UserInfoType, "email"> {
-  email?: string;  
+  email?: string;
+}
+
+export interface UserResponseType {
+  data: { user: UserInfoType };
 }

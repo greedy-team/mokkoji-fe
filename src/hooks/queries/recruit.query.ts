@@ -4,7 +4,7 @@ import { ClubResponseType } from "@/types/clubType";
 
 export const useGetRecruits = () => {
   return useSuspenseQuery<ClubResponseType>({
-    queryKey: ["recruitments"],
+    queryKey: ["recruitment"],
     queryFn: getRecruitItems,
   });
 };
