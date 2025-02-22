@@ -23,7 +23,7 @@ const MainContentsSection = styled.div`
   flex: 1; 
   width: 100%;
   box-sizing: border-box;
-  background-color: #f9fafb;
+  background-color:rgb(255, 255, 255);
   align-items: stretch; 
 `;
 
