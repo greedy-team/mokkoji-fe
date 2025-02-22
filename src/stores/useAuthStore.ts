@@ -10,6 +10,7 @@ interface AuthState {
     refreshToken: string,
     expiresInMinutes: number
   ) => void;
+  setAccessToken: (accessToken: string, expiresInMinutes: number) => void;
   clearToken: () => void;
 }
 
@@ -22,6 +23,14 @@ export const useAuthStore = create<AuthState>()(
       setToken: (accessToken, refreshToken, expiresInMinutes) => {
         const expiresAt = Date.now() + expiresInMinutes * 60 * 1000;
         set({ accessToken, refreshToken, expiresAt });
+      },
+      setAccessToken: (accessToken, expiresInMinutes) => {
+        const expiresAt = Date.now() + expiresInMinutes * 60 * 1000;
+        set((prev) => ({
+          ...prev,
+          accessToken,
+          expiresAt,
+        }));
       },
       clearToken: () =>
         set({ accessToken: null, refreshToken: null, expiresAt: null }),

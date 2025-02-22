@@ -1,23 +1,13 @@
 import styled from "styled-components";
-import { useEffect, useState, useMemo } from "react";
+import { useMemo } from "react";
 import { useGetClubs } from "@/hooks/queries/clubs.query";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-
-const CalendarWrapper = styled.div`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 10px;
-  padding: 2rem;
-`;
 
 const CustomCalendar = styled(Calendar)`
   width: 100%;
   border: none !important;
   font-size: 1rem;
-  max-width: 1200px;
 
   .react-calendar__tile {
     position: relative;
@@ -25,24 +15,24 @@ const CustomCalendar = styled(Calendar)`
     border-radius: 5px;
     color: black !important;
   }
-  
+
   .react-calendar__tile--now {
-    background: none !important; 
+    background: none !important;
   }
-   
+
   .highlight::after {
     content: "";
     display: block;
     width: 100%;
-    height: 6px; 
-    background-color: rgba(59, 130, 246, 0.7); 
+    height: 6px;
+    background-color: rgba(59, 130, 246, 0.7);
     border-radius: 3px;
     position: absolute;
     bottom: 5px;
     left: 0;
   }
 
-    .react-calendar__month-view__days__day--neighboringMonth {
+  .react-calendar__month-view__days__day--neighboringMonth {
     color: gray !important;
     opacity: 0.5;
   }
@@ -59,15 +49,19 @@ const CalendarComponent = () => {
 
   const highlightedDates = useMemo(() => {
     if (!data) return [];
-    
+
     return data.data.clubs
       .filter((club) => club.favorite)
       .flatMap((club) => {
-        const start = club.recruitStartDate ? new Date(club.recruitStartDate) : new Date();
-        const end = club.recruitEndDate ? new Date(club.recruitEndDate) : new Date();
-          
-        let dateList = [];
-        let currentDate = new Date(start);
+        const start = club.recruitStartDate
+          ? new Date(club.recruitStartDate)
+          : new Date();
+        const end = club.recruitEndDate
+          ? new Date(club.recruitEndDate)
+          : new Date();
+
+        const dateList = [];
+        const currentDate = new Date(start);
 
         while (currentDate <= end) {
           dateList.push(new Date(currentDate));
@@ -78,7 +72,7 @@ const CalendarComponent = () => {
   }, [data]);
 
   return (
-    <CalendarWrapper>
+    <>
       <Title>일정</Title>
       <CustomCalendar
         tileClassName={({ date }) =>
@@ -89,7 +83,7 @@ const CalendarComponent = () => {
             : ""
         }
       />
-    </CalendarWrapper>
+    </>
   );
 };
 

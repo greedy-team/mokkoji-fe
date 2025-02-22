@@ -1,16 +1,6 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-import { ClubType } from "@/types/clubType";
 import { useGetClubs } from "@/hooks/queries/clubs.query";
-
-const FavoriteSection = styled.div`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  background: white;
-  border-radius: 10px;
-`;
+import { useNavigate } from "react-router-dom";
 
 const Title = styled.h2`
   font-size: 1.5rem;
@@ -20,16 +10,16 @@ const Title = styled.h2`
 
 const ClubGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(28%, 1fr));
   gap: 1rem;
   justify-content: center;
-  width: 100%;
 `;
 
-const ClubCard = styled.div`
+const ClubCard = styled.button`
   display: flex;
-  align-items: center; 
+  align-items: center;
   padding: 1rem;
+  border: none;
   background: white;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -49,47 +39,47 @@ const ClubImage = styled.img`
   margin-right: 1rem;
 `;
 
-const ClubInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+const ClubInfo = styled.div``;
 
-const ClubName = styled.div`
-  font-size: 1.2rem;
-  font-weight: bold;
-`;
-
-const ClubRecruitPeriod = styled.div`
+const ClubName = styled.p`
   font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 3%;
+`;
+
+const ClubRecruitPeriod = styled.p`
+  font-size: 0.7rem;
   color: #6b7280;
 `;
 
 const FavoriteClubList = () => {
   const { data } = useGetClubs();
-  const [favoriteClubs, setFavoriteClubs] = useState<ClubType[]>([]);
+  const favoriteClubs = data.data.clubs.filter((club) => club.favorite);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (data) {
-      const filtered = data.data.clubs.filter((club) => club.favorite);
-      setFavoriteClubs(filtered);
-    }
-  }, [data]);
-
+  const onClick = (id: number) => {
+    navigate(`/clubs/${id}`);
+  };
   return (
-    <FavoriteSection>
+    <>
       <Title>즐겨찾기한 동아리</Title>
       <ClubGrid>
         {favoriteClubs.map((club) => (
-          <ClubCard key={club.id}>
-            <ClubImage src={club.imageUrl || "/default-image.png"} alt={club.name} />
+          <ClubCard key={club.id} onClick={() => onClick(club.id)}>
+            <ClubImage
+              src={club.imageUrl || "/default-image.png"}
+              alt={club.name}
+            />
             <ClubInfo>
               <ClubName>{club.name}</ClubName>
-              <ClubRecruitPeriod>모집 기간: {club.recruitStartDate} ~ {club.recruitEndDate}</ClubRecruitPeriod>
+              <ClubRecruitPeriod>
+                모집 기간: {club.recruitStartDate} ~ {club.recruitEndDate}
+              </ClubRecruitPeriod>
             </ClubInfo>
           </ClubCard>
         ))}
       </ClubGrid>
-    </FavoriteSection>
+    </>
   );
 };
 
