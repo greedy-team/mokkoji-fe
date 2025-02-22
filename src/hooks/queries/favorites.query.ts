@@ -1,4 +1,4 @@
-import { updateFavorite } from "@/api/favorites.api";
+import { deleteFavorite, updateFavorite } from "@/api/favorites.api";
 import { useOptimisticMutation } from "../useOptimisticMutation";
 import { ClubDetailType } from "@/types/clubType";
 
@@ -12,3 +12,15 @@ export const useFavoriteUpdate = () => {
     })
   );
 };
+
+export const useFavoriteDelete = ()=>{
+  return useOptimisticMutation<ClubDetailType, string>(
+    ["clubs"],
+    (id) => deleteFavorite(id),
+    (oldData) => ({
+      ...oldData,
+      favorite: !oldData.isFavorite,
+    })
+  );
+
+}

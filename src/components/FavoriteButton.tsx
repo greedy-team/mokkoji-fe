@@ -1,4 +1,7 @@
-import { useFavoriteUpdate } from "@/hooks/queries/favorites.query";
+import {
+  useFavoriteDelete,
+  useFavoriteUpdate,
+} from "@/hooks/queries/favorites.query";
 import { ClubType } from "@/types/clubType";
 import styled from "styled-components";
 import StarLogo from "@/assets/starLogo.svg?react";
@@ -18,16 +21,21 @@ interface FavoriteButtonProps {
 }
 
 function FavoriteButton({ club }: FavoriteButtonProps) {
-  const { mutate } = useFavoriteUpdate();
+  const { mutate: favoriteUpdate } = useFavoriteUpdate();
+  const { mutate: favoriteDelete } = useFavoriteDelete();
 
-  const handleFavoriteClick = (e: React.MouseEvent, id: number) => {
+  const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    mutate(String(id));
+    if (club.favorite) {
+      favoriteDelete(String(club.id));
+    } else {
+      favoriteUpdate(String(club.id));
+    }
   };
 
   return (
     <FavoriteButtonContainer
-      onClick={(e: React.MouseEvent) => handleFavoriteClick(e, club.id)}
+      onClick={(e: React.MouseEvent) => handleFavoriteClick(e)}
     >
       {club.favorite ? <StarLogo /> : <StarEmptyLogo />}
     </FavoriteButtonContainer>
