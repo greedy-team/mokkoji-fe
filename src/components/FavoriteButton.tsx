@@ -24,18 +24,18 @@ function FavoriteButton({ club }: FavoriteButtonProps) {
   const { mutate: favoriteUpdate } = useFavoriteUpdate();
   const { mutate: favoriteDelete } = useFavoriteDelete();
 
-  const handleFavoriteClick = (e: React.MouseEvent, id: number) => {
+  const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (club.favorite) {
-      favoriteDelete(String(id));
+      favoriteDelete(String(club.id));
     } else {
-      favoriteUpdate(String(id));
+      favoriteUpdate(String(club.id));
     }
   };
 
   return (
     <FavoriteButtonContainer
-      onClick={(e: React.MouseEvent) => handleFavoriteClick(e, club.id)}
+      onClick={(e: React.MouseEvent) => handleFavoriteClick(e)}
     >
       {club.favorite ? <StarLogo /> : <StarEmptyLogo />}
     </FavoriteButtonContainer>
