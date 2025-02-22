@@ -36,20 +36,18 @@ const ClubCardWrapper = styled.div`
 
 function Recruitment() {
   const navigate = useNavigate();
-  const { data } = useGetRecruits();
-  const clubs = data.data.clubs;
   const [sortedClubs, setSortedClubs] = useState<ClubType[]>([]); // 정렬된 동아리 목록
   const [buttonState, setButtonState] = useState<string>("마감일순"); // 정렬 옵션 상태
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
 
-  const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
-  const sliceClub = sortedClubs.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+  const { data } = useGetRecruits(currentPage, ITEMS_PER_PAGE);
+  const { clubs, pagination } = data.data;
 
   // 정렬 상태 반영
   useEffect(() => {
     const sorted = sortClubs(clubs, buttonState);
     setSortedClubs(sorted);
-  }, [buttonState]);
+  }, [buttonState, clubs]);
 
   // 정렬 상태 변경
   function handleSortChange(value: string) {
@@ -69,15 +67,14 @@ function Recruitment() {
     <Container>
       <SortOption buttonState={buttonState} onSortChange={handleSortChange} />
       <ClubList>
-        {sliceClub.map((club) => (
+        {sortedClubs.map((club) => (
           <ClubCardWrapper key={club.id} onClick={() => onClick(club)}>
             <ClubCard club={club} />
           </ClubCardWrapper>
         ))}
       </ClubList>
       <PaginationComponent
-        clubsLength={clubs.length}
-        ITEMS_PER_PAGE={ITEMS_PER_PAGE}
+        totalPages={pagination.totalPages}
         currentPage={currentPage}
         onPageChange={handlePageChange}
       />

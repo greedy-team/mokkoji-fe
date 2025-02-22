@@ -19,21 +19,17 @@ const PageButton = styled.button<{ active: boolean }>`
 `;
 
 interface PaginationProps {
-  clubsLength: number;
-  ITEMS_PER_PAGE: number;
-  currentPage: number;
+  totalPages: number; // 총 페이지 수
+  currentPage: number; // 현재 페이지
   onPageChange: (page: number) => void;
 }
 
 // 페이지네이션 표시
 const Pagination = ({
-  clubsLength,
-  ITEMS_PER_PAGE,
+  totalPages,
   currentPage,
   onPageChange,
 }: PaginationProps) => {
-  // 총 페이지 수 계산
-  const totalPages = Math.ceil(clubsLength / ITEMS_PER_PAGE);
   // 페이지 넘버 가져오기
   const pageNumbers = generatePageNumbers(totalPages, currentPage);
 
