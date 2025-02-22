@@ -5,6 +5,7 @@ import { ClubType } from "@/types/clubType";
 import { useGetClubs } from "@/hooks/queries/clubs.query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SideBarSearch from "@/layouts/sidebar/components/SideBarSearch";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -34,11 +35,21 @@ function ClubList() {
   const { data } = useGetClubs();
   const clubs = data.data.clubs;
   const pagination = data.data.pagination;
-
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const navigate = useNavigate();
+
+  const [searchText, setSearchText] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
   const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
-  const sliceClub = clubs.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+
+  const filteredClubs = clubs.filter(
+    (club) =>
+      club.name.includes(searchText) &&
+      (selectedCategory ? club.category === selectedCategory : true)
+  );
+
+  const sliceClub = filteredClubs.slice(startIdx, startIdx + ITEMS_PER_PAGE);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -55,10 +66,11 @@ function ClubList() {
           <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
         ))}
       </ClubGrid>
+
       <PaginateSection>
         {pagination && (
           <Pagination
-            clubsLength={clubs.length}
+            clubsLength={filteredClubs.length}
             ITEMS_PER_PAGE={ITEMS_PER_PAGE}
             currentPage={currentPage}
             onPageChange={handlePageChange}

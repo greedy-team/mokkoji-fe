@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import SearchLogo from "@/assets/searchLogo.svg?react";
-import FilterLogo from "@/assets/filterLogo.svg?react";
+import SideBarSearchFilter from "./SideBarSearchFilter";
 import { useState } from "react";
 
 const SearchSection = styled.div`
@@ -36,28 +36,34 @@ const SearchButton = styled.button`
   cursor: pointer;
 `;
 
-const SearchFilter = styled.button`
-  width: 90%;
-  height: 30px;
-  border: 1px solid #9ca3af;
-  border-radius: 5px;
-  background-color: white;
-  padding: 0.2%;
-  text-align: center;
-  color: #4b5563;
-  margin-bottom: 20px;
-  font-size: small;
-`;
+//setSearchText -> 검색어를 Clublist에 전달
+//setSelectedCategory -> 선택된 카테고리를 Clublist에 전달
+//localSearchText -> 사이드바 내부에서만 검색어
+//localSelectedCategory -> 사이드바 내부에서만 카테고리
 
-function SideBarSearch() {
-  const [searchText, setSearchText] = useState<string>("");
+interface SideBarSearchProps {
+  setSearchText: (text: string) => void; 
+  setSelectedCategory: (category: string) => void; 
+}
 
-  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setSearchText(e.target.value);
+function SideBarSearch({ setSearchText, setSelectedCategory }: SideBarSearchProps) {
+  const [localSearchText, setLocalSearchText] = useState("");
+  const [localSelectedCategory, setLocalSelectedCategory] = useState("");
+
+  function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const searchValue = e.target.value;
+    setLocalSearchText(searchValue);
+    setSearchText(searchValue);
   }
 
-  function onClick() {
-    setSearchText("");
+  function handleSearchClear() {
+    setLocalSearchText("");
+    setSearchText?.("");
+  }
+
+  function handleCategoryChange(category: string) {
+    setLocalSelectedCategory(category);
+    setSelectedCategory(category);
   }
 
   return (
@@ -65,17 +71,18 @@ function SideBarSearch() {
       <SearchSection>
         <SearchContainer
           placeholder="동아리 검색"
-          value={searchText}
-          onChange={onChange}
-        ></SearchContainer>
-        <SearchButton onClick={onClick}>
+          value={localSearchText}
+          onChange={handleSearchChange}
+        />
+        <SearchButton onClick={handleSearchClear}>
           <SearchLogo />
         </SearchButton>
       </SearchSection>
-      <SearchFilter>
-        <FilterLogo width={12} height={12} style={{ marginRight: 5 }} />
-        상세 필터
-      </SearchFilter>
+
+      <SideBarSearchFilter
+        selectedCategory={localSelectedCategory}
+        setSelectedCategory={handleCategoryChange}
+      />
     </>
   );
 }
