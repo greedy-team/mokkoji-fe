@@ -25,17 +25,6 @@ const clubs = Array.from({ length: 20 }, (_, index) => {
   };
 });
 
-const clubDummyData = {
-  data: {
-    clubs,
-    pagination: {
-      page: 1,
-      size: 10,
-      totalPages: 5,
-      totalElements: 50,
-    },
-  },
-};
 const clubDetailDummyDataList = Array.from({ length: 20 }, (_, index) => {
   const id = index + 1;
   return {
@@ -68,8 +57,27 @@ const clubDetailDummyDataList = Array.from({ length: 20 }, (_, index) => {
 });
 
 export const clubsHandlers = [
-  http.get(`http://${import.meta.env.VITE_API_URL}/clubs`, () => {
-    return HttpResponse.json(clubDummyData);
+  http.get(`http://${import.meta.env.VITE_API_URL}/clubs`, ({ request }) => {
+    const url = new URL(request.url);
+    const page = Number(url.searchParams.get("page")) || 1;
+    const size = Number(url.searchParams.get("size")) || 9;
+
+    const totalElements = clubs.length;
+    const totalPages = Math.ceil(totalElements / size);
+    const startIdx = (page - 1) * size;
+    const paginatedClubs = clubs.slice(startIdx, startIdx + size);
+
+    return HttpResponse.json({
+      data: {
+        clubs: paginatedClubs,
+        pagination: {
+          page,
+          size,
+          totalPages,
+          totalElements,
+        },
+      },
+    });
   }),
 
   http.get(`http://${import.meta.env.VITE_API_URL}/clubs/1`, () => {

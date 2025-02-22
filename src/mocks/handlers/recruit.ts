@@ -253,7 +253,7 @@ export const recruitDummyData: ClubType[] = [
 ];
 
 export const recruitHandlers = [
-  http.get("http://localhost:3000/recruit", ({ request }) => {
+  http.get(`http://${import.meta.env.VITE_API_URL}/recruit`, ({ request }) => {
     const url = new URL(request.url);
     const page = Number(url.searchParams.get("page")) || 1;
     const size = Number(url.searchParams.get("size")) || 9;

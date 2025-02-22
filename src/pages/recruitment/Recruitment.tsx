@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ClubCard from "./components/ClubCard";
 import styled from "styled-components";
 import SortOption from "./components/SortOption";
-import PaginationComponent from "./components/Pagination";
+import PaginationComponent from "../../components/Pagination";
 import { ClubType } from "@/types/clubType";
 import { sortClubs } from "./utils/sortClubs";
 import { useGetRecruits } from "@/hooks/queries/recruit.query";
