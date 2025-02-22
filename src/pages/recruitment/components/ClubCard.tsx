@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ClubType } from "@/types/clubType";
+import FavoriteButton from "@/components/FavoriteButton";
 
 const Card = styled.div`
   width: 100%;
@@ -26,20 +27,26 @@ const Status = styled.div<{ backColor: string; fontColor: string }>`
 `;
 
 const RecruitPeriod = styled.div`
-  font-size: 13px;
+  font-size: 0.7rem;
   color: gray;
 `;
 
 const ClubName = styled.div`
-  font-size: 17px;
+  font-size: 1rem;
   font-weight: 600;
 `;
 
 const Category = styled.div`
   margin-top: 3%;
-  font-size: 13px;
+  font-size: 0.8rem;
   color: gray;
   font-weight: 550;
+`;
+
+const TitleSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 interface ClubProp {
@@ -75,7 +82,10 @@ function ClubCard({ club }: ClubProp) {
         </Status>
         <RecruitPeriod>마감일: {club.recruitEndDate}</RecruitPeriod>
       </TopRow>
-      <ClubName>{club.name}</ClubName>
+      <TitleSection>
+        <ClubName>{club.name}</ClubName>
+        <FavoriteButton club={club} />
+      </TitleSection>
       <Category>
         {club.category} | {club.affiliation}
       </Category>

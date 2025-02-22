@@ -92,4 +92,18 @@ export const clubsHandlers = [
       message: 'User favorite submitted successfully',
     });
   }),
+  http.post(`http://${import.meta.env.VITE_API_URL}/favorites/2`, (req) => {
+    const requestBody = req;
+    return HttpResponse.json({
+      ...requestBody,
+      message: 'User favorite submitted successfully',
+    });
+  }),
+  http.post(`http://${import.meta.env.VITE_API_URL}/favorites/3`, (req) => {
+    const requestBody = req;
+    return HttpResponse.json({
+      ...requestBody,
+      message: 'User favorite submitted successfully',
+    });
+  }),
 ];
