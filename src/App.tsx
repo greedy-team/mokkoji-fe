@@ -6,7 +6,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import { Suspense } from "react";
-import { Loading } from "./pages/Loading";
+import Loading from "./pages/Loading";
 import ClubList from "./pages/club/ClubList";
 import ClubDetail from "./pages/club/ClubDetail";
 import Recruitment from "./pages/recruitment/Recruitment";
@@ -40,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "favorite",
         element: <Favorite />,
+      },
+      {
+        path: "loading",
+        element: <Loading />,
       },
     ],
   },
