@@ -253,15 +253,24 @@ export const recruitDummyData: ClubType[] = [
 ];
 
 export const recruitHandlers = [
-  http.get("http://localhost:3000/recruit", () => {
+  http.get(`http://${import.meta.env.VITE_API_URL}/recruit`, ({ request }) => {
+    const url = new URL(request.url);
+    const page = Number(url.searchParams.get("page")) || 1;
+    const size = Number(url.searchParams.get("size")) || 9;
+
+    const totalElements = recruitDummyData.length;
+    const totalPages = Math.ceil(totalElements / size);
+    const startIdx = (page - 1) * size;
+    const paginatedClubs = recruitDummyData.slice(startIdx, startIdx + size);
+
     return HttpResponse.json({
       data: {
-        clubs: recruitDummyData,
+        clubs: paginatedClubs,
         pagination: {
-          page: 1,
-          size: 10,
-          totalPages: 5,
-          totalElements: 50,
+          page,
+          size,
+          totalPages,
+          totalElements,
         },
       },
     });

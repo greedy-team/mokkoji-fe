@@ -3,10 +3,10 @@ import { getClubItems, getClubItemsDetail } from "@/api/clubs.api";
 import { ClubDetailResponseType, ClubResponseType } from "@/types/clubType";
 
 
-export const useGetClubs = () => {
+export const useGetClubs = (page: number, size: number) => {
   return useSuspenseQuery<ClubResponseType>({
-    queryKey: ["clubs"],
-    queryFn: getClubItems,
+    queryKey: ["clubs", page, size],
+    queryFn: () => getClubItems(page, size),
   });
 };
 

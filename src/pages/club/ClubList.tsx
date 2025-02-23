@@ -1,6 +1,6 @@
 import ClubBox from "@/pages/club/ClubBox";
 import styled from "styled-components";
-import Pagination from "../recruitment/components/Pagination";
+import Pagination from "../../components/Pagination";
 import { ClubType } from "@/types/clubType";
 import { useGetClubs } from "@/hooks/queries/clubs.query";
 import { useState } from "react";
@@ -31,14 +31,11 @@ const PaginateSection = styled.div`
 `;
 
 function ClubList() {
-  const { data } = useGetClubs();
-  const clubs = data.data.clubs;
-  const pagination = data.data.pagination;
-
   const [currentPage, setCurrentPage] = useState<number>(1);
   const navigate = useNavigate();
-  const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
-  const sliceClub = clubs.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+
+  const { data } = useGetClubs(currentPage, ITEMS_PER_PAGE);
+  const { clubs, pagination } = data.data;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -51,15 +48,14 @@ function ClubList() {
   return (
     <>
       <ClubGrid>
-        {sliceClub.map((club) => (
+        {clubs.map((club) => (
           <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
         ))}
       </ClubGrid>
       <PaginateSection>
         {pagination && (
           <Pagination
-            clubsLength={clubs.length}
-            ITEMS_PER_PAGE={ITEMS_PER_PAGE}
+            totalPages={pagination.totalPages}
             currentPage={currentPage}
             onPageChange={handlePageChange}
           />
