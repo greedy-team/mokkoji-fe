@@ -1,9 +1,9 @@
 import ClubBox from "@/pages/club/ClubBox";
 import styled from "styled-components";
-import Pagination from "../recruitment/components/Pagination";
+import Pagination from "../../components/Pagination";
 import { ClubType } from "@/types/clubType";
 import { useGetClubs } from "@/hooks/queries/clubs.query";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SideBarSearch from "@/layouts/sidebar/components/SideBarSearch";
 
@@ -32,24 +32,36 @@ const PaginateSection = styled.div`
 `;
 
 function ClubList() {
-  const { data } = useGetClubs();
-  const clubs = data.data.clubs;
-  const pagination = data.data.pagination;
-  const navigate = useNavigate();
-
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const navigate = useNavigate();
+
+  const { data } = useGetClubs(currentPage, ITEMS_PER_PAGE);
+  const { clubs, pagination } = data.data;
+
+  const filteredClubs =
+    searchText || selectedCategory 
+      ? clubs.filter(
+          (club) =>
+            club.name.includes(searchText) &&
+            (selectedCategory ? club.category === selectedCategory : true)
+        )
+      : clubs;
 
   const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedClubs = filteredClubs.slice(startIdx, startIdx + ITEMS_PER_PAGE);
 
-  const filteredClubs = clubs.filter(
-    (club) =>
-      club.name.includes(searchText) &&
-      (selectedCategory ? club.category === selectedCategory : true)
-  );
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchText, selectedCategory]);
 
-  const sliceClub = filteredClubs.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+  //현재 페이지 존재 안할 때
+  useEffect(() => {
+    if (currentPage > Math.ceil(filteredClubs.length / ITEMS_PER_PAGE)) {
+      setCurrentPage(1);
+    }
+  }, [filteredClubs.length, currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -62,7 +74,7 @@ function ClubList() {
   return (
     <>
       <ClubGrid>
-        {sliceClub.map((club) => (
+        {paginatedClubs.map((club) => (
           <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
         ))}
       </ClubGrid>
@@ -70,8 +82,7 @@ function ClubList() {
       <PaginateSection>
         {pagination && (
           <Pagination
-            clubsLength={filteredClubs.length}
-            ITEMS_PER_PAGE={ITEMS_PER_PAGE}
+            totalPages={Math.ceil(filteredClubs.length / ITEMS_PER_PAGE)}
             currentPage={currentPage}
             onPageChange={handlePageChange}
           />
