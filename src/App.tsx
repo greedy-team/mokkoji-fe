@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import UserInfo from "./pages/UserInfo";
 import Favorite from "./pages/favorite/Favorite";
 import { useAuthStore } from "./stores/useAuthStore";
+import SystemMaintenance from "./pages/SystemMaintenance"; 
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "loading",
         element: <Loading />,
+      },
+      { 
+        path: "maintenance", 
+        element: <SystemMaintenance /> 
       },
     ],
   },
