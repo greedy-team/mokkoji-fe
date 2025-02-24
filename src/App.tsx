@@ -4,7 +4,7 @@ import { queryClient } from "./services/TanstackQueryStore";
 import CommonLayout from "./layouts/CommonLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import NotFound from "./pages/NotFound";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import { Suspense } from "react";
 import Loading from "./pages/Loading";
 import ClubList from "./pages/club/ClubList";
