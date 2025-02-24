@@ -61,13 +61,6 @@ function ClubList({ searchText, selectedCategory }: ClubListProps) {
     setCurrentPage(1);
   }, [searchText, selectedCategory]);
 
-  //현재 페이지 존재하지 않을 때
-  useEffect(() => {
-    if (currentPage > Math.ceil(filteredClubs.length / ITEMS_PER_PAGE)) {
-      setCurrentPage(1);
-    }
-  }, [filteredClubs.length, currentPage]);
-
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
