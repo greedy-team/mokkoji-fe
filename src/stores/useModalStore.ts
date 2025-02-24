@@ -11,7 +11,10 @@ export const useModalStore = create<ModalState>()(
   persist(
     (set) => ({
       isOpen: true,
-      openModal: () => set({ isOpen: true }),
+      openModal: () => {
+        set({ isOpen: true });
+        console.log("open!");
+      },
       closeModal: () => set({ isOpen: false }),
     }),
     { name: "login-modal" }

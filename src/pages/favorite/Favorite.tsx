@@ -3,6 +3,7 @@ import CalendarComponent from "./Calendar";
 import FavoriteClubList from "./FavoriteClubList";
 import { isLoginChecking } from "@/stores/useAuthStore";
 import { redirect } from "react-router-dom";
+import { useModalStore } from "@/stores/useModalStore";
 
 const FavoritePageWrapper = styled.div`
   display: flex;
@@ -23,25 +24,26 @@ const SectionWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Favorite = () => {
+export const Loader = () => {
+  //const { openModal } = useModalStore();
+  if (isLoginChecking()) {
+    //openModal();
+    throw redirect("/");
+  }
+  return null;
+};
+
+function Favorite() {
   return (
     <FavoritePageWrapper>
       <SectionWrapper>
         <FavoriteClubList />
       </SectionWrapper>
-
       <SectionWrapper>
         <CalendarComponent />
       </SectionWrapper>
     </FavoritePageWrapper>
   );
-};
-
-export const Loader = () => {
-  if (isLoginChecking()) {
-    throw redirect("/");
-  }
-  return null;
-};
+}
 
 export default Favorite;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useGetClubs } from "@/hooks/queries/clubs.query";
 import { useNavigate } from "react-router-dom";
+import { useGetFavorite } from "@/hooks/queries/favorites.query";
 
 const Title = styled.h2`
   font-size: 1.5rem;
@@ -52,8 +52,8 @@ const ClubRecruitPeriod = styled.p`
   color: #6b7280;
 `;
 
-const FavoriteClubList = () => {
-  const { data } = useGetClubs();
+function FavoriteClubList() {
+  const { data } = useGetFavorite();
   const favoriteClubs = data.data.clubs.filter((club) => club.favorite);
   const navigate = useNavigate();
 
@@ -81,6 +81,6 @@ const FavoriteClubList = () => {
       </ClubGrid>
     </>
   );
-};
+}
 
 export default FavoriteClubList;
