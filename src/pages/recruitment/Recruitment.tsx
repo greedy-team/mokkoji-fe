@@ -5,7 +5,10 @@ import SortOption from "./components/SortOption";
 import PaginationComponent from "../../components/Pagination";
 import { ClubType } from "@/types/clubType";
 import { sortClubs } from "./utils/sortClubs";
-import { useGetRecruits } from "@/hooks/queries/recruit.query";
+import {
+  prefetchGetRecruits,
+  useGetRecruits,
+} from "@/hooks/queries/recruit.query";
 import { useNavigate } from "react-router-dom";
 
 const ITEMS_PER_PAGE = 9; // 페이지당 게시물 수
@@ -48,6 +51,12 @@ function Recruitment() {
     const sorted = sortClubs(clubs, buttonState);
     setSortedClubs(sorted);
   }, [buttonState, clubs]);
+
+  useEffect(() => {
+    const nextPage = currentPage + 1;
+    if (nextPage <= pagination.totalPages)
+      prefetchGetRecruits(nextPage, ITEMS_PER_PAGE);
+  }, [currentPage, pagination]);
 
   // 정렬 상태 변경
   function handleSortChange(value: string) {
