@@ -16,12 +16,12 @@ const TopRow = styled.div`
   margin-bottom: 10px;
 `;
 
-const Status = styled.div<{ backColor: string; fontColor: string }>`
+const Status = styled.div<{ $backColor: string; $fontColor: string }>`
   width: fit-content;
   border-radius: 20px;
   padding: 3px 7px;
-  background-color: ${({ backColor }) => backColor};
-  color: ${({ fontColor }) => fontColor};
+  background-color: ${({ $backColor }) => $backColor};
+  color: ${({ $fontColor }) => $fontColor};
   font-size: 13px;
   font-weight: 550;
 `;
@@ -77,7 +77,7 @@ function ClubCard({ club }: ClubProp) {
   return (
     <Card>
       <TopRow>
-        <Status backColor={backColor} fontColor={fontColor}>
+        <Status $backColor={backColor} $fontColor={fontColor}>
           {text}
         </Status>
         <RecruitPeriod>마감일: {club.recruitEndDate}</RecruitPeriod>

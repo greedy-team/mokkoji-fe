@@ -42,11 +42,14 @@ const SearchButton = styled.button`
 //localSelectedCategory -> 사이드바 내부에서만 카테고리
 
 interface SideBarSearchProps {
-  setSearchText: (text: string) => void; 
-  setSelectedCategory: (category: string) => void; 
+  setSearchText: (text: string) => void;
+  setSelectedCategory: (category: string) => void;
 }
 
-function SideBarSearch({ setSearchText, setSelectedCategory }: SideBarSearchProps) {
+function SideBarSearch({
+  setSearchText,
+  setSelectedCategory,
+}: SideBarSearchProps) {
   const [localSearchText, setLocalSearchText] = useState("");
   const [localSelectedCategory, setLocalSelectedCategory] = useState("");
 

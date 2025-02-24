@@ -8,3 +8,4 @@ export const useGetRecruits = (page: number, size: number) => {
     queryFn: () => getRecruitItems(page, size),
   });
 };
+
