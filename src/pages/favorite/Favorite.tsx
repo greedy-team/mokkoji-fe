@@ -2,7 +2,8 @@ import styled from "styled-components";
 import CalendarComponent from "./Calendar";
 import FavoriteClubList from "./FavoriteClubList";
 import { isLoginChecking } from "@/stores/useAuthStore";
-import { redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { ReactNode } from "react";
 import { useModalStore } from "@/stores/useModalStore";
 
 const FavoritePageWrapper = styled.div`
@@ -24,13 +25,17 @@ const SectionWrapper = styled.div`
   justify-content: space-between;
 `;
 
-export const Loader = () => {
-  //const { openModal } = useModalStore();
+interface ProtectedProps {
+  children: ReactNode;
+}
+
+export const ProtectedRoute = ({ children }: ProtectedProps) => {
+  const { openModal } = useModalStore();
   if (isLoginChecking()) {
-    //openModal();
-    throw redirect("/");
+    openModal();
+    return <Navigate to="/" replace />;
   }
-  return null;
+  return children;
 };
 
 function Favorite() {

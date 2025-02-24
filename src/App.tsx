@@ -15,7 +15,7 @@ import UserInfo from "./pages/UserInfo";
 import Favorite from "./pages/favorite/Favorite";
 import { useAuthStore } from "./stores/useAuthStore";
 import SystemMaintenance from "./pages/SystemMaintenance";
-import { Loader as FavoriteLoader } from "./pages/favorite/Favorite";
+import { ProtectedRoute } from "./pages/favorite/Favorite";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,12 +40,11 @@ const router = createBrowserRouter([
       },
       {
         path: "favorites",
-        element: <Favorite />,
-        loader: FavoriteLoader,
-      },
-      {
-        path: "loading",
-        element: <Loading />,
+        element: (
+          <ProtectedRoute>
+            <Favorite />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "maintenance",
