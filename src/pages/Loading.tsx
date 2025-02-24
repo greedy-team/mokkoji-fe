@@ -1,7 +1,13 @@
-import { useEffect } from "react";
-import { useModalStore } from "@/stores/useModalStore";
-import ModalSection from "@/components/ModalSection";
 import styled from "styled-components";
+
+const LoadingContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const LoadingSpinner = styled.div`
   width: 40px;
@@ -13,8 +19,12 @@ const LoadingSpinner = styled.div`
   margin: 10px auto;
 
   @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;
 
@@ -34,21 +44,12 @@ const SubText = styled.p`
 `;
 
 function Loading() {
-  const { openModal, closeModal } = useModalStore();
-
-  useEffect(() => {
-    openModal("loading");
-    setTimeout(() => {
-      closeModal();
-    }, 3000); 
-  }, [openModal, closeModal]);
-
   return (
-    <ModalSection>
+    <LoadingContainer>
       <LoadingSpinner />
       <LoadingText>데이터를 불러오는 중</LoadingText>
       <SubText>잠시만 기다려주세요...</SubText>
-    </ModalSection>
+    </LoadingContainer>
   );
 }
 

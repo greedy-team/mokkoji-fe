@@ -2,7 +2,7 @@ import ClubBox from "@/pages/club/ClubBox";
 import styled from "styled-components";
 import Pagination from "../../components/Pagination";
 import { ClubType } from "@/types/clubType";
-import { useGetClubs } from "@/hooks/queries/clubs.query";
+import { prefetchGetClubs, useGetClubs } from "@/hooks/queries/clubs.query";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SideBarSearch from "@/layouts/sidebar/components/SideBarSearch";
@@ -17,7 +17,6 @@ const ClubGrid = styled.div`
   height: 80%;
   justify-content: space-evenly;
   align-content: space-evenly;
-
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -41,7 +40,7 @@ function ClubList() {
   const { clubs, pagination } = data.data;
 
   const filteredClubs =
-    searchText || selectedCategory 
+    searchText || selectedCategory
       ? clubs.filter(
           (club) =>
             club.name.includes(searchText) &&
@@ -50,7 +49,16 @@ function ClubList() {
       : clubs;
 
   const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
-  const paginatedClubs = filteredClubs.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+  const paginatedClubs = filteredClubs.slice(
+    startIdx,
+    startIdx + ITEMS_PER_PAGE
+  );
+
+  useEffect(() => {
+    const nextPage = currentPage + 1;
+    if (nextPage <= pagination.totalPages)
+      prefetchGetClubs(nextPage, ITEMS_PER_PAGE);
+  }, [currentPage, pagination]);
 
   useEffect(() => {
     setCurrentPage(1);
