@@ -6,6 +6,9 @@ import { ClubType } from "@/types/clubType";
 import styled from "styled-components";
 import StarLogo from "@/assets/starLogo.svg?react";
 import StarEmptyLogo from "@/assets/starEmptyLogo.svg?react";
+import {
+  isLoginChecking,
+} from "@/stores/useAuthStore";
 
 const FavoriteButtonContainer = styled.button`
   background: transparent;
@@ -26,6 +29,10 @@ function FavoriteButton({ club }: FavoriteButtonProps) {
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (isLoginChecking()) {
+      alert("로그인을 해야 이용할 수 있습니다!");
+      return;
+    }
     if (club.favorite) {
       favoriteDelete(String(club.id));
     } else {

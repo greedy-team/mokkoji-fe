@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import CalendarComponent from "./Calendar";
 import FavoriteClubList from "./FavoriteClubList";
+import { isLoginChecking } from "@/stores/useAuthStore";
+import { redirect } from "react-router-dom";
 
 const FavoritePageWrapper = styled.div`
   display: flex;
@@ -33,6 +35,13 @@ const Favorite = () => {
       </SectionWrapper>
     </FavoritePageWrapper>
   );
+};
+
+export const Loader = () => {
+  if (isLoginChecking()) {
+    throw redirect("/");
+  }
+  return null;
 };
 
 export default Favorite;
