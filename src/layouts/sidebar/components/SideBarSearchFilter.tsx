@@ -41,7 +41,7 @@ const DropdownItem = styled.div`
   }
 `;
 
-const categories = ["종교", "학술/교양", "봉사", "체육", "문화/예술", "기타"];
+const categories = ["문화/예술","학술/교양", "봉사/사회", "체육", "친목", "종교", "기타"];
 
 function SideBarSearchFilter({
   selectedCategory,
