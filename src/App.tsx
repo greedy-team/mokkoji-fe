@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <Recruitment />,
       },
       {
-        path: "favorite",
+        path: "favorites",
         element: <Favorite />,
         loader: FavoriteLoader,
       },
