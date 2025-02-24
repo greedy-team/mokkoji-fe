@@ -4,17 +4,17 @@ import { ClubDetailResponseType, ClubResponseType } from "@/types/clubType";
 import { queryClient } from "@/services/TanstackQueryStore";
 
 
-export const useGetClubs = (page: number, size: number) => {
+export const useGetClubs = (page: number, size: number, category?: string) => {
   return useSuspenseQuery<ClubResponseType>({
-    queryKey: ["clubs", page, size],
-    queryFn: () => getClubItems(page, size),
+    queryKey: ["clubs", page, size, category],
+    queryFn: () => getClubItems(page, size, category),
   });
 };
 
-export const prefetchGetClubs = async (page: number, size: number) => {
+export const prefetchGetClubs = async (page: number, size: number, category?: string) => {
   await queryClient.prefetchQuery<ClubResponseType>({
-    queryKey: ["clubs", page, size],
-    queryFn: () => getClubItems(page, size),
+    queryKey: ["clubs", page, size, category],
+    queryFn: () => getClubItems(page, size, category),
   });
 };
 

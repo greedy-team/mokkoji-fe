@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import SearchLogo from "@/assets/searchLogo.svg?react";
 import SideBarSearchFilter from "./SideBarSearchFilter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const SearchSection = styled.div`
   width: 90%;
@@ -36,11 +36,6 @@ const SearchButton = styled.button`
   cursor: pointer;
 `;
 
-//setSearchText -> 검색어를 Clublist에 전달
-//setSelectedCategory -> 선택된 카테고리를 Clublist에 전달
-//localSearchText -> 사이드바 내부에서만 검색어
-//localSelectedCategory -> 사이드바 내부에서만 카테고리
-
 interface SideBarSearchProps {
   setSearchText: (text: string) => void;
   setSelectedCategory: (category: string) => void;
@@ -53,20 +48,27 @@ function SideBarSearch({
   const [localSearchText, setLocalSearchText] = useState("");
   const [localSelectedCategory, setLocalSelectedCategory] = useState("");
 
+  //디바운싱을 적용하여 불필요한 API 요청을 방지
+  useEffect(() => {
+    const debounce = setTimeout(() => {
+      setSearchText(localSearchText);
+    }, 300); 
+    
+    return () => clearTimeout(debounce);
+  }, [localSearchText, setSearchText]);
+
   function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const searchValue = e.target.value;
-    setLocalSearchText(searchValue);
-    setSearchText(searchValue);
+    setLocalSearchText(e.target.value);
   }
 
   function handleSearchClear() {
     setLocalSearchText("");
-    setSearchText?.("");
+    setSearchText(""); 
   }
 
   function handleCategoryChange(category: string) {
     setLocalSelectedCategory(category);
-    setSelectedCategory(category);
+    setSelectedCategory(category); 
   }
 
   return (

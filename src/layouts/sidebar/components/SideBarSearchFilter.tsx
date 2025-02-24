@@ -41,7 +41,7 @@ const DropdownItem = styled.div`
   }
 `;
 
-const categories = ["종교", "학술/교양", "봉사", "체육", "문화", "공연"];
+const categories = ["종교", "학술/교양", "봉사", "체육", "문화/예술", "기타"];
 
 function SideBarSearchFilter({
   selectedCategory,
@@ -54,7 +54,11 @@ function SideBarSearchFilter({
   }
 
   function selectCategory(category: string) {
-    setSelectedCategory(category);
+    if (selectedCategory === category) {
+      setSelectedCategory("");
+    } else {
+      setSelectedCategory(category);
+    }
     setFilterOpen(false);
   }
 

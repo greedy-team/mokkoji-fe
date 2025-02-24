@@ -5,7 +5,6 @@ import { ClubType } from "@/types/clubType";
 import { prefetchGetClubs, useGetClubs } from "@/hooks/queries/clubs.query";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import SideBarSearch from "@/layouts/sidebar/components/SideBarSearch";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -30,41 +29,39 @@ const PaginateSection = styled.div`
   justify-content: center;
 `;
 
-function ClubList() {
+interface ClubListProps {
+  searchText: string;
+  selectedCategory: string;
+}
+
+function ClubList({ searchText, selectedCategory }: ClubListProps) {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [searchText, setSearchText] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
   const navigate = useNavigate();
 
-  const { data } = useGetClubs(currentPage, ITEMS_PER_PAGE);
+  const { data } = useGetClubs(currentPage, ITEMS_PER_PAGE, selectedCategory || undefined);
   const { clubs, pagination } = data.data;
 
-  const filteredClubs =
-    searchText || selectedCategory
-      ? clubs.filter(
-          (club) =>
-            club.name.includes(searchText) &&
-            (selectedCategory ? club.category === selectedCategory : true)
-        )
-      : clubs;
-
-  const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
-  const paginatedClubs = filteredClubs.slice(
-    startIdx,
-    startIdx + ITEMS_PER_PAGE
-  );
+  const filteredClubs = searchText
+    ? clubs.filter((club) =>
+        club.name.toLowerCase().includes(searchText.toLowerCase())
+      )
+    : clubs;
 
   useEffect(() => {
     const nextPage = currentPage + 1;
     if (nextPage <= pagination.totalPages)
-      prefetchGetClubs(nextPage, ITEMS_PER_PAGE);
-  }, [currentPage, pagination]);
+      prefetchGetClubs(
+        nextPage, 
+        ITEMS_PER_PAGE, 
+        selectedCategory || undefined
+      );
+  }, [currentPage, pagination.totalPages, selectedCategory]);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [searchText, selectedCategory]);
 
-  //현재 페이지 존재 안할 때
+  //현재 페이지 존재하지 않을 때
   useEffect(() => {
     if (currentPage > Math.ceil(filteredClubs.length / ITEMS_PER_PAGE)) {
       setCurrentPage(1);
@@ -82,15 +79,19 @@ function ClubList() {
   return (
     <>
       <ClubGrid>
-        {paginatedClubs.map((club) => (
-          <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
-        ))}
+        {filteredClubs.length > 0 ? (
+          filteredClubs.map((club) => (
+            <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
+          ))
+        ) : (
+          <p>검색 결과가 없습니다.</p>
+        )}
       </ClubGrid>
 
       <PaginateSection>
         {pagination && (
           <Pagination
-            totalPages={Math.ceil(filteredClubs.length / ITEMS_PER_PAGE)}
+            totalPages={pagination.totalPages}
             currentPage={currentPage}
             onPageChange={handlePageChange}
           />
