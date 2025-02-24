@@ -27,6 +27,6 @@ const favoriteDummyClubs = Array.from({ length: 20 }, (_, index) => {
 
 export const favoriteHandlers = [
   http.get(`http://${import.meta.env.VITE_API_URL}/favorites`, () => {
-    return HttpResponse.json(favoriteDummyClubs);
+    return HttpResponse.json({ data: { clubs: favoriteDummyClubs } });
   }),
 ];

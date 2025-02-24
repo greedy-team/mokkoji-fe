@@ -11,6 +11,6 @@ export const deleteFavorite = async (id: string) => {
 };
 
 export const getFavorite = async () => {
-  const { data } = await api.get(`/favorites`);
+  const { data } = await api.get("/favorites");
   return data;
 };
