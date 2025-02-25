@@ -6,7 +6,8 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "types": ["vite/client"],
+    "esModuleInterop": true,
+    "types": ["vite/client", "jest", "node"],
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],

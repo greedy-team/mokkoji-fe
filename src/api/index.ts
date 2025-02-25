@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useAuthStore, isTokenExpired } from "@/stores/useAuthStore";
 
+// JEST 환경에서 import.meta.env가 제대로 인식되지 않음
+const API_URL = process.env.VITE_API_URL;
+
 const api = axios.create({
-  baseURL: `http://${import.meta.env.VITE_API_URL}`,
+  baseURL: `http://${API_URL}`,
 });
 
 api.interceptors.request.use(
@@ -31,7 +34,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const { data } = await axios.post(
-          `https://${import.meta.env.VITE_API_URL}/auth/refresh`,
+          `https://${API_URL}/auth/refresh`,
           { refreshToken }
         );
 
