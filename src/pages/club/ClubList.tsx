@@ -5,6 +5,7 @@ import { ClubType } from "@/types/clubType";
 import { prefetchGetClubs, useGetClubs } from "@/hooks/queries/clubs.query";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFilterStore } from "@/stores/useFilterStore";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -29,42 +30,30 @@ const PaginateSection = styled.div`
   justify-content: center;
 `;
 
-interface ClubListProps {
-  searchText: string;
-  selectedCategory: string;
-}
-
-function ClubList({ searchText, selectedCategory }: ClubListProps) {
+function ClubList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const navigate = useNavigate();
-
-  const { data } = useGetClubs(currentPage, ITEMS_PER_PAGE, selectedCategory || undefined);
-  const { clubs, pagination } = data.data;
-
-  const filteredClubs = searchText
-    ? clubs.filter((club) =>
-        club.name.toLowerCase().includes(searchText.toLowerCase())
-      )
-    : clubs;
-
-  useEffect(() => {
-    const nextPage = currentPage + 1;
-    if (nextPage <= pagination.totalPages)
-      prefetchGetClubs(
-        nextPage, 
-        ITEMS_PER_PAGE, 
-        selectedCategory || undefined
-      );
-  }, [currentPage, pagination.totalPages, selectedCategory]);
+  const { selectedCategory, searchText  } = useFilterStore(); 
 
   useEffect(() => {
     setCurrentPage(1);
   }, [searchText, selectedCategory]);
 
+  useEffect(() => {
+    console.log("Fetching clubs with:", { searchText, selectedCategory, currentPage });
+  
+    prefetchGetClubs(searchText, selectedCategory, currentPage, ITEMS_PER_PAGE);
+  }, [currentPage, selectedCategory, searchText]);
+
+  const { data } = useGetClubs(searchText,selectedCategory, currentPage, ITEMS_PER_PAGE);
+
+  console.log("Fetched Data:", data);
+  
+  const { clubs, pagination } = data.data;
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-
   function onClick(club: ClubType) {
     navigate(`${club.id}`);
   }
@@ -72,13 +61,9 @@ function ClubList({ searchText, selectedCategory }: ClubListProps) {
   return (
     <>
       <ClubGrid>
-        {filteredClubs.length > 0 ? (
-          filteredClubs.map((club) => (
+        {clubs.map((club) => (
             <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
-          ))
-        ) : (
-          <p>검색 결과가 없습니다.</p>
-        )}
+          ))}
       </ClubGrid>
 
       <PaginateSection>

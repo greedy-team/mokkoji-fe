@@ -2,11 +2,12 @@ import api from ".";
 import { ClubDetailResponseType, ClubResponseType } from "@/types/clubType";
 
 export const getClubItems = async (
+  keyword: string | null,
+  category: string | null,
   page: number, 
-  size: number, 
-  category?: string
+  size: number
 ): Promise<ClubResponseType> => {
-  const { data } = await api.get(`/clubs?page=${page}&size=${size}&category=${category}`);
+  const { data } = await api.get(`/clubs?keyword=${keyword || ""}&category=${category || ""}&page=${page}&size=${size}`);
   return data;
 };
 

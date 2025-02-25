@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import SearchLogo from "@/assets/searchLogo.svg?react";
-import SideBarSearchFilter from "./SideBarSearchFilter";
 import { useState, useEffect } from "react";
+import { useFilterStore } from "@/stores/useFilterStore";
+import SideBarFilter from "@/layouts/sidebar/components/SideBarFilter";
 
 const SearchSection = styled.div`
   width: 90%;
@@ -36,24 +37,16 @@ const SearchButton = styled.button`
   cursor: pointer;
 `;
 
-interface SideBarSearchProps {
-  setSearchText: (text: string) => void;
-  setSelectedCategory: (category: string) => void;
-}
+function SideBarSearch() {
+  const { searchText, setSearchText } = useFilterStore(); //검색어 상태 가져오기
+  const [localSearchText, setLocalSearchText] = useState(searchText); //로컬 상태 관리
 
-function SideBarSearch({
-  setSearchText,
-  setSelectedCategory,
-}: SideBarSearchProps) {
-  const [localSearchText, setLocalSearchText] = useState("");
-  const [localSelectedCategory, setLocalSelectedCategory] = useState("");
-
-  //디바운싱을 적용하여 불필요한 API 요청을 방지
+  //디바운싱 적용하여 검색어 변경 시 불필요한 요청 방지
   useEffect(() => {
     const debounce = setTimeout(() => {
       setSearchText(localSearchText);
-    }, 300); 
-    
+    }, 300);
+
     return () => clearTimeout(debounce);
   }, [localSearchText, setSearchText]);
 
@@ -63,31 +56,22 @@ function SideBarSearch({
 
   function handleSearchClear() {
     setLocalSearchText("");
-    setSearchText(""); 
-  }
-
-  function handleCategoryChange(category: string) {
-    setLocalSelectedCategory(category);
-    setSelectedCategory(category); 
+    setSearchText(""); //검색어 초기화
   }
 
   return (
     <>
-      <SearchSection>
-        <SearchContainer
-          placeholder="동아리 검색"
-          value={localSearchText}
-          onChange={handleSearchChange}
-        />
-        <SearchButton onClick={handleSearchClear}>
-          <SearchLogo />
-        </SearchButton>
-      </SearchSection>
-
-      <SideBarSearchFilter
-        selectedCategory={localSelectedCategory}
-        setSelectedCategory={handleCategoryChange}
+    <SearchSection>
+      <SearchContainer
+        placeholder="동아리 검색"
+        value={localSearchText}
+        onChange={handleSearchChange}
       />
+      <SearchButton onClick={handleSearchClear}>
+        <SearchLogo />
+      </SearchButton>
+    </SearchSection>
+    <SideBarFilter/>
     </>
   );
 }

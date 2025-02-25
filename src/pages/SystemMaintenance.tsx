@@ -1,7 +1,5 @@
 import ModalSection from "@/components/ModalSection";
 import styled from "styled-components";
-import { useEffect } from "react";
-import { useModalStore } from "@/stores/useModalStore";
 import Wrench from "@/assets/wrench.svg?react";
 
 const MaintenanceContainer = styled.div`
@@ -36,19 +34,15 @@ const Background = styled.div`
 `;
 
 function SystemMaintenance() {
-  const { openModal, closeModal } = useModalStore();
-
-  useEffect(() => {
-    openModal("maintenance");
-  }, [openModal]);
-
   return (
     <Background>
       <ModalSection>
         <MaintenanceContainer>
           <Wrench width={50} height={50} />
           <MaintenanceText>시스템 점검 중입니다</MaintenanceText>
-          <SubText>더 나은 서비스를 위해 시스템 점검을 진행하고 있습니다.</SubText>
+          <SubText>
+            더 나은 서비스를 위해 시스템 점검을 진행하고 있습니다.
+          </SubText>
         </MaintenanceContainer>
       </ModalSection>
     </Background>

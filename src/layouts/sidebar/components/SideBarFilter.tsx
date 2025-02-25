@@ -1,11 +1,7 @@
 import styled from "styled-components";
 import FilterLogo from "@/assets/filterLogo.svg?react";
 import { useState } from "react";
-
-interface SideBarSearchFilterProps {
-  selectedCategory: string;
-  setSelectedCategory: (category: string) => void;
-}
+import { useFilterStore } from "@/stores/useFilterStore"; 
 
 const SearchFilter = styled.button`
   width: 90%;
@@ -41,25 +37,12 @@ const DropdownItem = styled.div`
   }
 `;
 
-const categories = ["문화/예술","학술/교양", "봉사/사회", "체육", "친목", "종교", "기타"];
-
-function SideBarSearchFilter({
-  selectedCategory,
-  setSelectedCategory,
-}: SideBarSearchFilterProps) {
+function SideBarFilter() {
+  const { selectedCategory, setSelectedCategory, categories } = useFilterStore();
   const [filterOpen, setFilterOpen] = useState(false);
 
   function toggleFilter() {
     setFilterOpen(!filterOpen);
-  }
-
-  function selectCategory(category: string) {
-    if (selectedCategory === category) {
-      setSelectedCategory("");
-    } else {
-      setSelectedCategory(category);
-    }
-    setFilterOpen(false);
   }
 
   return (
@@ -68,12 +51,16 @@ function SideBarSearchFilter({
         <FilterLogo width={12} height={12} style={{ marginRight: 5 }} />
         {selectedCategory || "상세 필터"}
       </SearchFilter>
+
       {filterOpen && (
         <Dropdown>
           {categories.map((category) => (
             <DropdownItem
               key={category}
-              onClick={() => selectCategory(category)}
+              onClick={() => {
+                setSelectedCategory(category === selectedCategory ? "" : category);
+                setFilterOpen(false);
+              }}
             >
               {category}
             </DropdownItem>
@@ -84,4 +71,4 @@ function SideBarSearchFilter({
   );
 }
 
-export default SideBarSearchFilter;
+export default SideBarFilter;
