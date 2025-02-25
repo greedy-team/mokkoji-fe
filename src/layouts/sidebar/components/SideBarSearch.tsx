@@ -42,12 +42,12 @@ function SideBarSearch() {
   const [localSearchText, setLocalSearchText] = useState(searchText); //로컬 상태 관리
   const inputRef = useRef<HTMLInputElement | null>(null); //검색창 포커스 유지
 
-  // 🔹 검색 실행 함수 (버튼 클릭 또는 엔터 입력 시 실행)
+  //검색 실행 함수 (버튼 클릭 또는 엔터 입력 시 실행)
   const handleSearchSubmit = () => {
     setSearchText(localSearchText);
   };
 
-  // 🔹 엔터 키 입력 시 검색 실행
+  //엔터 키 입력 시 검색 실행
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleSearchSubmit();
