@@ -64,24 +64,17 @@ export const clubsHandlers = [
     const selectedCategory = url.searchParams.get("category") ?? "";
     const keyword = url.searchParams.get("keyword")?.trim().toLowerCase() ?? "";
 
-// ✅ 빈 값일 경우 전체 데이터를 유지하도록 설정
-const categoryFilteredClubs = selectedCategory !== ""
-  ? clubs.filter((club) => club.category === selectedCategory)
-  : clubs;
+  //빈 값일 경우 전체 데이터를 유지하도록 설정
+    const categoryFilteredClubs = selectedCategory !== ""
+    ? clubs.filter((club) => club.category === selectedCategory)
+    : clubs;
 
-// ✅ 검색어가 없을 경우 전체 데이터를 유지
-const finalFilteredClubs = keyword !== ""
-  ? categoryFilteredClubs.filter((club) =>
+  //검색어가 없을 경우 전체 데이터를 유지
+    const finalFilteredClubs = keyword !== ""
+    ? categoryFilteredClubs.filter((club) =>
       club.name.toLowerCase().includes(keyword)
-    )
-  : categoryFilteredClubs;
-
-// 디버깅 로그 추가
-console.log("Incoming request:", url.searchParams.toString());
-console.log("Selected Category:", selectedCategory);
-console.log("Keyword:", keyword);
-console.log("Before filtering:", clubs.map(c => ({ id: c.id, name: c.name, category: c.category })));
-console.log("Filtered Clubs:", finalFilteredClubs);
+      )
+    : categoryFilteredClubs;
 
     const totalElements = finalFilteredClubs.length;
     const totalPages = Math.ceil(totalElements / size);
