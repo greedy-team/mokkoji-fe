@@ -10,7 +10,7 @@ interface ModalState {
 export const useModalStore = create<ModalState>()(
   persist(
     (set) => ({
-      isOpen: true,
+      isOpen: false,
       openModal: () => set({ isOpen: true }),
       closeModal: () => set({ isOpen: false }),
     }),

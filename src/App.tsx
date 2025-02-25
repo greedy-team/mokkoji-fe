@@ -4,9 +4,9 @@ import { queryClient } from "./services/TanstackQueryStore";
 import CommonLayout from "./layouts/CommonLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import NotFound from "./pages/NotFound";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import { Suspense } from "react";
-import { Loading } from "./pages/Loading";
+import Loading from "./pages/Loading";
 import ClubList from "./pages/club/ClubList";
 import ClubDetail from "./pages/club/ClubDetail";
 import Recruitment from "./pages/recruitment/Recruitment";
@@ -14,7 +14,8 @@ import Login from "./pages/Login";
 import UserInfo from "./pages/UserInfo";
 import Favorite from "./pages/favorite/Favorite";
 import { useAuthStore } from "./stores/useAuthStore";
-
+import SystemMaintenance from "./pages/SystemMaintenance";
+import { ProtectedRoute } from "./pages/favorite/Favorite";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,8 +39,16 @@ const router = createBrowserRouter([
         element: <Recruitment />,
       },
       {
-        path: "favorite",
-        element: <Favorite />,
+        path: "favorites",
+        element: (
+          <ProtectedRoute>
+            <Favorite />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "maintenance",
+        element: <SystemMaintenance />,
       },
     ],
   },

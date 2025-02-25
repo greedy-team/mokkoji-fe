@@ -43,3 +43,7 @@ export const isTokenExpired = (): boolean => {
   const { expiresAt } = useAuthStore.getState();
   return !expiresAt || Date.now() > expiresAt;
 };
+
+export const isLoginChecking = (): boolean => {
+  return isTokenExpired() || useAuthStore.getState().accessToken === null;
+};

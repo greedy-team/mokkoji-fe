@@ -43,7 +43,7 @@ function SideBarContentList() {
       <Spacing direction="vertical" size={1.2} />
       <SectionTitle to="/recruit">모집 공고</SectionTitle>
 
-      <SectionTitle to="/favorite">즐겨찾기</SectionTitle>
+      <SectionTitle to="/favorites">즐겨찾기</SectionTitle>
     </>
   );
 }

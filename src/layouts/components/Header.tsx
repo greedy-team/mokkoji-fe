@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import DummyLogo from "@/assets/Mokkoji.svg?react";
 import { useModalStore } from "@/stores/useModalStore";
+import { Link } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   height: 60px;
@@ -36,10 +37,11 @@ function Header() {
   return (
     <HeaderContainer>
       <HeaderContents>
-        <DummyLogo width={100} height={100} />
-        
-        <DummyProfile onClick={openModal} />
+        <Link to="/">
+          <DummyLogo width={100} height={100} />
+        </Link>
 
+        <DummyProfile onClick={openModal} />
       </HeaderContents>
     </HeaderContainer>
   );

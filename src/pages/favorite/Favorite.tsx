@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import CalendarComponent from "./Calendar";
 import FavoriteClubList from "./FavoriteClubList";
+import { isLoginChecking } from "@/stores/useAuthStore";
+import { Navigate } from "react-router-dom";
+import { ReactNode } from "react";
+import { useModalStore } from "@/stores/useModalStore";
 
 const FavoritePageWrapper = styled.div`
   display: flex;
@@ -21,18 +25,30 @@ const SectionWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Favorite = () => {
+interface ProtectedProps {
+  children: ReactNode;
+}
+
+export const ProtectedRoute = ({ children }: ProtectedProps) => {
+  const { openModal } = useModalStore();
+  if (isLoginChecking()) {
+    openModal();
+    return <Navigate to="/" replace />;
+  }
+  return children;
+};
+
+function Favorite() {
   return (
     <FavoritePageWrapper>
       <SectionWrapper>
         <FavoriteClubList />
       </SectionWrapper>
-
       <SectionWrapper>
         <CalendarComponent />
       </SectionWrapper>
     </FavoritePageWrapper>
   );
-};
+}
 
 export default Favorite;
