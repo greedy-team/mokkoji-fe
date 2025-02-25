@@ -60,7 +60,7 @@ function SideBarFilter() {
             <DropdownItem
               key={category}
               onClick={() => {
-                setSelectedCategory(category === selectedCategory ? null : category);
+                setSelectedCategory(category);
                 setFilterOpen(false);
               }}
             >
