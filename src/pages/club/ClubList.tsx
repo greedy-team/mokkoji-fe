@@ -5,7 +5,7 @@ import { ClubType } from "@/types/clubType";
 import { prefetchGetClubs, useGetClubs } from "@/hooks/queries/clubs.query";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import SideBarSearch from "@/layouts/sidebar/components/SideBarSearch";
+import { useFilterStore } from "@/stores/useFilterStore";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -32,49 +32,23 @@ const PaginateSection = styled.div`
 
 function ClubList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [searchText, setSearchText] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
   const navigate = useNavigate();
-
-  const { data } = useGetClubs(currentPage, ITEMS_PER_PAGE);
-  const { clubs, pagination } = data.data;
-
-  const filteredClubs =
-    searchText || selectedCategory
-      ? clubs.filter(
-          (club) =>
-            club.name.includes(searchText) &&
-            (selectedCategory ? club.category === selectedCategory : true)
-        )
-      : clubs;
-
-  const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
-  const paginatedClubs = filteredClubs.slice(
-    startIdx,
-    startIdx + ITEMS_PER_PAGE
-  );
-
-  useEffect(() => {
-    const nextPage = currentPage + 1;
-    if (nextPage <= pagination.totalPages)
-      prefetchGetClubs(nextPage, ITEMS_PER_PAGE);
-  }, [currentPage, pagination]);
+  const { selectedCategory, searchText  } = useFilterStore(); 
 
   useEffect(() => {
     setCurrentPage(1);
   }, [searchText, selectedCategory]);
 
-  //현재 페이지 존재 안할 때
   useEffect(() => {
-    if (currentPage > Math.ceil(filteredClubs.length / ITEMS_PER_PAGE)) {
-      setCurrentPage(1);
-    }
-  }, [filteredClubs.length, currentPage]);
+    prefetchGetClubs(searchText, selectedCategory, currentPage, ITEMS_PER_PAGE);
+  }, [currentPage, selectedCategory, searchText]);
+
+  const { data } = useGetClubs(searchText,selectedCategory, currentPage, ITEMS_PER_PAGE);
+  const { clubs, pagination } = data.data;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-
   function onClick(club: ClubType) {
     navigate(`${club.id}`);
   }
@@ -82,15 +56,15 @@ function ClubList() {
   return (
     <>
       <ClubGrid>
-        {paginatedClubs.map((club) => (
-          <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
-        ))}
+        {clubs.map((club) => (
+            <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
+          ))}
       </ClubGrid>
 
       <PaginateSection>
         {pagination && (
           <Pagination
-            totalPages={Math.ceil(filteredClubs.length / ITEMS_PER_PAGE)}
+            totalPages={pagination.totalPages}
             currentPage={currentPage}
             onPageChange={handlePageChange}
           />
