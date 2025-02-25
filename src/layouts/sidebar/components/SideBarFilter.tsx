@@ -2,6 +2,8 @@ import styled from "styled-components";
 import FilterLogo from "@/assets/filterLogo.svg?react";
 import { useState } from "react";
 import { useFilterStore } from "@/stores/useFilterStore"; 
+import { ClubCategory } from "@/types/clubType"; 
+import { ClubCategoryKorean } from "@/components/utils/clubCategoryMapping";
 
 const SearchFilter = styled.button`
   width: 90%;
@@ -49,7 +51,7 @@ function SideBarFilter() {
     <>
       <SearchFilter onClick={toggleFilter}>
         <FilterLogo width={12} height={12} style={{ marginRight: 5 }} />
-        {selectedCategory || "상세 필터"}
+        {selectedCategory ? ClubCategoryKorean[selectedCategory] : "상세 필터"}
       </SearchFilter>
 
       {filterOpen && (
@@ -58,11 +60,11 @@ function SideBarFilter() {
             <DropdownItem
               key={category}
               onClick={() => {
-                setSelectedCategory(category === selectedCategory ? "" : category);
+                setSelectedCategory(category === selectedCategory ? null : category);
                 setFilterOpen(false);
               }}
             >
-              {category}
+              {ClubCategoryKorean[category]}
             </DropdownItem>
           ))}
         </Dropdown>
