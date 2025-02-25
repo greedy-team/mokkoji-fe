@@ -1,8 +1,23 @@
+export enum ClubCategory {
+  CULTURAL_ART = "CULTURAL_ART",
+  ACADEMIC_CULTURAL = "ACADEMIC_CULTURAL",
+  VOLUNTEER_SOCIAL = "VOLUNTEER_SOCIAL",
+  SOCIAL = "SOCIAL",
+  SPORTS = "SPORTS",
+  RELIGIOUS = "RELIGIOUS",
+  OTHER = "OTHER"
+}
+
+export enum ClubAffiliation {
+  CENTRAL_CLUB = "CENTRAL_CLUB", // 중앙동아리
+  DEPARTMENT_CLUB = "DEPARTMENT_CLUB" // 가인준동아리
+}
+
 export interface ClubType {
   id: number;
   name: string;
-  category: string;
-  affiliation: string;
+  category: ClubCategory;
+  affiliation: ClubAffiliation;
   description: string;
   recruitStartDate?: string;
   recruitEndDate?: string;
@@ -47,8 +62,8 @@ export interface ClubDetailResponseType {
 
 export interface CluParameterType {
   name?: string;
-  category?: string;
-  affliction?: string;
+  category?: ClubCategory;
+  affliction?: ClubAffiliation;
   status?: string;
   page?: number;
   size?: number;

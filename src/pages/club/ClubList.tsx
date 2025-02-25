@@ -40,8 +40,8 @@ function ClubList() {
   }, [searchText, selectedCategory]);
 
   useEffect(() => {
-    prefetchGetClubs(searchText, selectedCategory, currentPage, ITEMS_PER_PAGE);
-  }, [currentPage, selectedCategory, searchText]);
+    prefetchGetClubs(searchText, selectedCategory || null, currentPage, ITEMS_PER_PAGE);
+  }, [currentPage, selectedCategory|| null, searchText]);
 
   const { data } = useGetClubs(searchText,selectedCategory, currentPage, ITEMS_PER_PAGE);
   const { clubs, pagination } = data.data;

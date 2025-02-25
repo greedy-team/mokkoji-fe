@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import DefaultImage from "@/assets/react.svg?react";
-import { ClubType } from "@/types/clubType";
-
+import { ClubType, ClubCategory } from "@/types/clubType";
+import { ClubCategoryKorean } from "@/components/utils/clubCategoryMapping";
 import FavoriteButton from "@/components/FavoriteButton";
 
 const Box = styled.div`
@@ -95,7 +95,7 @@ function ClubBox({ club, onClick }: ClubBoxProp) {
         <Description>{club.description}</Description>
         <InfoWrapper>
           <span style={{ color: "#777", margin: "0 3px" }}>•</span>
-          <Category>{club.category}</Category>
+          <Category>{ClubCategoryKorean[club.category as ClubCategory] || club.category}</Category>
           <span style={{ color: "#777", margin: "0 3px" }}>•</span>
           <Affiliation>{club.affiliation}</Affiliation>
         </InfoWrapper>

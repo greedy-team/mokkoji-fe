@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import SearchLogo from "@/assets/searchLogo.svg?react";
-import { useState, useEffect } from "react";
+import { useState, useRef  } from "react";
 import { useFilterStore } from "@/stores/useFilterStore";
 import SideBarFilter from "@/layouts/sidebar/components/SideBarFilter";
 
@@ -40,34 +40,31 @@ const SearchButton = styled.button`
 function SideBarSearch() {
   const { searchText, setSearchText } = useFilterStore(); //검색어 상태 가져오기
   const [localSearchText, setLocalSearchText] = useState(searchText); //로컬 상태 관리
+  const inputRef = useRef<HTMLInputElement | null>(null); //검색창 포커스 유지
 
-  //디바운싱 적용하여 검색어 변경 시 불필요한 요청 방지
-  useEffect(() => {
-    const debounce = setTimeout(() => {
-      setSearchText(localSearchText);
-    }, 300);
+  //검색 실행 함수 (버튼 클릭 또는 엔터 입력 시 실행)
+  const handleSearchSubmit = () => {
+    setSearchText(localSearchText);
+  };
 
-    return () => clearTimeout(debounce);
-  }, [localSearchText, setSearchText]);
-
-  function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setLocalSearchText(e.target.value);
-  }
-
-  function handleSearchClear() {
-    setLocalSearchText("");
-    setSearchText(""); //검색어 초기화
-  }
+  //엔터 키 입력 시 검색 실행
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearchSubmit();
+    }
+  };
 
   return (
     <>
     <SearchSection>
       <SearchContainer
+        ref={inputRef}
         placeholder="동아리 검색"
         value={localSearchText}
-        onChange={handleSearchChange}
+        onChange={(e) => setLocalSearchText(e.target.value)}
+        onKeyDown={handleKeyDown} //엔터 키 이벤트 등록
       />
-      <SearchButton onClick={handleSearchClear}>
+      <SearchButton onClick={handleSearchSubmit}>
         <SearchLogo />
       </SearchButton>
     </SearchSection>

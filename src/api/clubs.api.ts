@@ -1,9 +1,9 @@
 import api from ".";
-import { ClubDetailResponseType, ClubResponseType } from "@/types/clubType";
+import { ClubDetailResponseType, ClubResponseType, ClubCategory } from "@/types/clubType";
 
 export const getClubItems = async (
   keyword: string | null,
-  category: string | null,
+  category: ClubCategory  | null,
   page: number, 
   size: number
 ): Promise<ClubResponseType> => {

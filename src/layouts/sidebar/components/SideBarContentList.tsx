@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { clubItems } from "../const/pathLinks";
 import Spacing from "@/components/Spacing";
+import { useFilterStore } from "@/stores/useFilterStore";
 
 const SectionTitle = styled(Link)`
   width: 90%;
@@ -32,9 +33,12 @@ const SectionLink = styled(Link)`
 `;
 
 function SideBarContentList() {
+  const { setSelectedCategory } = useFilterStore();
   return (
     <>
-      <SectionTitle to="/clubs">동아리</SectionTitle>
+      <SectionTitle to="/clubs" onClick={() => setSelectedCategory(null)}>
+        동아리
+      </SectionTitle>
       {clubItems.map((item) => (
         <SectionLink key={item.name} to={item.path}>
           {item.name}
