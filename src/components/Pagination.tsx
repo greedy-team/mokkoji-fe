@@ -8,13 +8,13 @@ const PaginationContainer = styled.div`
   gap: 5px;
 `;
 
-const PageButton = styled.button<{ active: boolean }>`
+const PageButton = styled.button<{ $active: boolean }>`
   width: 25px;
   height: 25px;
   border: 2px solid #e5e7eb;
   border-radius: 5px;
-  background-color: ${({ active }) => (active ? "#D1D5DB" : "transparent")};
-  color: ${({ active }) => (active ? "black" : "gray")};
+  background-color: ${({ $active }) => ($active ? "#D1D5DB" : "transparent")};
+  color: ${({ $active }) => ($active ? "black" : "gray")};
   cursor: pointer;
 `;
 
@@ -39,7 +39,7 @@ const Pagination = ({
         <PageButton
           key={page}
           onClick={() => onPageChange(page)}
-          active={currentPage === page}
+          $active={currentPage === page}
         >
           {page}
         </PageButton>

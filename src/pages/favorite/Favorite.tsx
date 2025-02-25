@@ -3,7 +3,7 @@ import CalendarComponent from "./Calendar";
 import FavoriteClubList from "./FavoriteClubList";
 import { isLoginChecking } from "@/stores/useAuthStore";
 import { Navigate } from "react-router-dom";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { useModalStore } from "@/stores/useModalStore";
 
 const FavoritePageWrapper = styled.div`
@@ -31,10 +31,18 @@ interface ProtectedProps {
 
 export const ProtectedRoute = ({ children }: ProtectedProps) => {
   const { openModal } = useModalStore();
-  if (isLoginChecking()) {
-    openModal();
+  const loginChecking = isLoginChecking();
+
+  useEffect(() => {
+    if (loginChecking) {
+      openModal(); 
+    }
+  }, [loginChecking, openModal]);
+
+  if (loginChecking) {
     return <Navigate to="/" replace />;
   }
+
   return children;
 };
 
