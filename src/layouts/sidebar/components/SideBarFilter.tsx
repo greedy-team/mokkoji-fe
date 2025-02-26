@@ -2,7 +2,6 @@ import styled from "styled-components";
 import FilterLogo from "@/assets/filterLogo.svg?react";
 import { useState } from "react";
 import { useFilterStore } from "@/stores/useFilterStore"; 
-import { ClubCategory } from "@/types/clubType"; 
 import { ClubCategoryKorean } from "@/components/utils/clubCategoryMapping";
 
 const SearchFilter = styled.button`
@@ -61,7 +60,6 @@ function SideBarFilter() {
               key={category}
               onClick={() => {
                 setSelectedCategory(category);
-                setFilterOpen(false);
               }}
             >
               {ClubCategoryKorean[category]}

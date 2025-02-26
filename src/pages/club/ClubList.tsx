@@ -2,10 +2,11 @@ import ClubBox from "@/pages/club/ClubBox";
 import styled from "styled-components";
 import Pagination from "../../components/Pagination";
 import { ClubType } from "@/types/clubType";
-import { prefetchGetClubs, useGetClubs } from "@/hooks/queries/clubs.query";
-import { useState, useEffect } from "react";
+import { useGetClubs } from "@/hooks/queries/clubs.query";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFilterStore } from "@/stores/useFilterStore";
+import { usePrefetchClubs } from "@/hooks/usePrefetchClubs";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -34,6 +35,7 @@ function ClubList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const navigate = useNavigate();
   const { selectedCategory, searchText } = useFilterStore();
+
   const { data } = useGetClubs(
     currentPage,
     ITEMS_PER_PAGE,
@@ -41,12 +43,14 @@ function ClubList() {
     selectedCategory
   );
   const { clubs, pagination } = data.data;
-  useEffect(() => {
-    const nextPage = currentPage + 1;
-    if (nextPage <= pagination.totalPages) {
-      prefetchGetClubs(nextPage, ITEMS_PER_PAGE, searchText, selectedCategory);
-    }
-  }, [currentPage, pagination, searchText, selectedCategory]);
+
+  usePrefetchClubs(
+    currentPage,
+    pagination,
+    ITEMS_PER_PAGE,
+    searchText,
+    selectedCategory
+  );
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
