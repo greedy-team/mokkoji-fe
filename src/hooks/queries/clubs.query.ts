@@ -3,29 +3,21 @@ import { getClubItems, getClubItemsDetail } from "@/api/clubs.api";
 import { ClubDetailResponseType, ClubResponseType } from "@/types/clubType";
 import { queryClient } from "@/services/TanstackQueryStore";
 
-export const useGetClubs = (
-  page: number,
-  size: number,
-  keyword?: string,
-  category?: string
-) => {
+
+export const useGetClubs = (keyword: string | null, category: string | null, page: number, size: number) => {
   return useSuspenseQuery<ClubResponseType>({
-    queryKey: ["clubs", keyword || "", category || "", page, size],
-    queryFn: () => getClubItems(keyword || null, category || null, page, size),
+    queryKey: ["clubs", keyword || null, category || null, page, size],
+    queryFn: () => getClubItems(keyword === "" ? null : keyword, category || null, page, size ),
   });
 };
 
-export const prefetchGetClubs = async (
-  page: number,
-  size: number,
-  keyword?: string,
-  category?: string
-) => {
+export const prefetchGetClubs = async (keyword: string | null, category: string | null, page: number, size: number) => {
   await queryClient.prefetchQuery<ClubResponseType>({
-    queryKey: ["clubs", keyword || "", category || "", page, size],
-    queryFn: () => getClubItems(keyword || null, category || null, page, size),
+    queryKey: ["clubs", keyword || null, category || null, page, size],
+    queryFn: () => getClubItems(keyword === "" ? null : keyword, category || null, page, size),
   });
 };
+
 
 export const useGetClubsDetail = (id: string) => {
   return useSuspenseQuery<ClubDetailResponseType>({
@@ -33,3 +25,4 @@ export const useGetClubsDetail = (id: string) => {
     queryFn: () => getClubItemsDetail(id),
   });
 };
+

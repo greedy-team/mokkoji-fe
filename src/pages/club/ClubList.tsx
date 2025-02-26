@@ -33,18 +33,17 @@ const PaginateSection = styled.div`
 function ClubList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const navigate = useNavigate();
-  const { selectedCategory, searchText } = useFilterStore();
+  const { selectedCategory, searchText  } = useFilterStore(); 
 
   useEffect(() => {
-    prefetchGetClubs(currentPage, ITEMS_PER_PAGE, searchText, selectedCategory);
+    setCurrentPage(1);
+  }, [searchText, selectedCategory]);
+
+  useEffect(() => {
+    prefetchGetClubs(searchText, selectedCategory, currentPage, ITEMS_PER_PAGE);
   }, [currentPage, selectedCategory, searchText]);
 
-  const { data } = useGetClubs(
-    currentPage,
-    ITEMS_PER_PAGE,
-    searchText,
-    selectedCategory
-  );
+  const { data } = useGetClubs(searchText,selectedCategory, currentPage, ITEMS_PER_PAGE);
   const { clubs, pagination } = data.data;
 
   const handlePageChange = (page: number) => {
@@ -58,8 +57,8 @@ function ClubList() {
     <>
       <ClubGrid>
         {clubs.map((club) => (
-          <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
-        ))}
+            <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
+          ))}
       </ClubGrid>
 
       <PaginateSection>

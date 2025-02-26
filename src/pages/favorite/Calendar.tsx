@@ -45,7 +45,7 @@ const Title = styled.h2`
 `;
 
 const CalendarComponent = () => {
-  const { data } = useGetClubs(1, 5);
+  const { data } = useGetClubs();
 
   const highlightedDates = useMemo(() => {
     if (!data) return [];
