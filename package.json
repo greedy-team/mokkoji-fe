@@ -16,7 +16,7 @@
     "@tanstack/react-query-devtools": "^5.66.8",
     "axios": "^1.7.9",
     "motion": "^12.4.2",
-    "msw": "^2.7.0",
+    "msw": "^2.7.3",
     "react": "^19.0.0",
     "react-calendar": "^5.1.0",
     "react-dom": "^19.0.0",

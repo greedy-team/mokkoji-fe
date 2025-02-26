@@ -42,6 +42,7 @@ function FavoriteButton({ club }: FavoriteButtonProps) {
 
   return (
     <FavoriteButtonContainer
+      aria-label="favoriteButton"
       onClick={(e: React.MouseEvent) => handleFavoriteClick(e)}
     >
       {club.favorite ? <StarLogo /> : <StarEmptyLogo />}
