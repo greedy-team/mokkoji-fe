@@ -1,23 +1,35 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { getClubItems, getClubItemsDetail } from "@/api/clubs.api";
-import { ClubDetailResponseType, ClubResponseType, ClubCategory } from "@/types/clubType";
+import {
+  ClubDetailResponseType,
+  ClubResponseType,
+  ClubCategory,
+} from "@/types/clubType";
 import { queryClient } from "@/services/TanstackQueryStore";
 
-
-export const useGetClubs = (keyword: string | null, category: ClubCategory | null, page: number, size: number) => {
+export const useGetClubs = (
+  page: number,
+  size: number,
+  keyword?: string,
+  category?: ClubCategory
+) => {
   return useSuspenseQuery<ClubResponseType>({
-    queryKey: ["clubs", keyword || null, category || null, page, size],
-    queryFn: () => getClubItems(keyword === "" ? null : keyword, category || null, page, size ),
+    queryKey: ["clubs", keyword || "", category || "", page, size],
+    queryFn: () => getClubItems(keyword || null, category || null, page, size),
   });
 };
 
-export const prefetchGetClubs = async (keyword: string | null, category: ClubCategory | null, page: number, size: number) => {
+export const prefetchGetClubs = async (
+  page: number,
+  size: number,
+  keyword?: string,
+  category?: ClubCategory
+) => {
   await queryClient.prefetchQuery<ClubResponseType>({
-    queryKey: ["clubs", keyword || null, category || null, page, size],
-    queryFn: () => getClubItems(keyword === "" ? null : keyword, category || null, page, size),
+    queryKey: ["clubs", keyword || "", category || "", page, size],
+    queryFn: () => getClubItems(keyword || null, category || null, page, size),
   });
 };
-
 
 export const useGetClubsDetail = (id: string) => {
   return useSuspenseQuery<ClubDetailResponseType>({
@@ -25,4 +37,3 @@ export const useGetClubsDetail = (id: string) => {
     queryFn: () => getClubItemsDetail(id),
   });
 };
-

@@ -2,10 +2,11 @@ import ClubBox from "@/pages/club/ClubBox";
 import styled from "styled-components";
 import Pagination from "../../components/Pagination";
 import { ClubType } from "@/types/clubType";
-import { prefetchGetClubs, useGetClubs } from "@/hooks/queries/clubs.query";
-import { useState, useEffect } from "react";
+import { useGetClubs } from "@/hooks/queries/clubs.query";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFilterStore } from "@/stores/useFilterStore";
+import { usePrefetchClubs } from "@/hooks/usePrefetchClubs";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -33,18 +34,23 @@ const PaginateSection = styled.div`
 function ClubList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const navigate = useNavigate();
-  const { selectedCategory, searchText  } = useFilterStore(); 
+  const { selectedCategory, searchText } = useFilterStore();
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchText, selectedCategory]);
-
-  useEffect(() => {
-    prefetchGetClubs(searchText, selectedCategory || null, currentPage, ITEMS_PER_PAGE);
-  }, [currentPage, selectedCategory|| null, searchText]);
-
-  const { data } = useGetClubs(searchText,selectedCategory, currentPage, ITEMS_PER_PAGE);
+  const { data } = useGetClubs(
+    currentPage,
+    ITEMS_PER_PAGE,
+    searchText,
+    selectedCategory
+  );
   const { clubs, pagination } = data.data;
+
+  usePrefetchClubs(
+    currentPage,
+    pagination,
+    ITEMS_PER_PAGE,
+    searchText,
+    selectedCategory
+  );
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -57,8 +63,8 @@ function ClubList() {
     <>
       <ClubGrid>
         {clubs.map((club) => (
-            <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
-          ))}
+          <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
+        ))}
       </ClubGrid>
 
       <PaginateSection>
