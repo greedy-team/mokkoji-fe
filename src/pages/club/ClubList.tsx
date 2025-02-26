@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Pagination from "../../components/Pagination";
 import { ClubType } from "@/types/clubType";
 import { useGetClubs } from "@/hooks/queries/clubs.query";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { usePrefetchClubs } from "@/hooks/usePrefetchClubs";
@@ -34,7 +34,7 @@ const PaginateSection = styled.div`
 function ClubList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const navigate = useNavigate();
-  const { selectedCategory, searchText } = useFilterStore();
+  const { selectedCategory, setSelectedCategory ,searchText } = useFilterStore();
 
   const { data } = useGetClubs(
     currentPage,
@@ -51,6 +51,11 @@ function ClubList() {
     searchText,
     selectedCategory
   );
+
+  useEffect(() => {
+    return () => {
+    };
+  }, []); //메인화면에서 카데고리 선택시 해당 동아리 리스트만 보여주기 위함함
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
