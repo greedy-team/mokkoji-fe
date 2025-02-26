@@ -1,16 +1,17 @@
 import { create } from "zustand";
+import { ClubCategory } from "@/types/clubType";
 
 type FilterStore = {
-  selectedCategory: string; //카테고리리
-  categories: string[];
-  setSelectedCategory: (category: string) => void;
-  searchText: string; //검색어어
+  selectedCategory: ClubCategory | null; //카테고리
+  categories: ClubCategory[];
+  setSelectedCategory: (category: ClubCategory | null) => void;
+  searchText: string; //검색어
   setSearchText: (text: string) => void;
 };
 
 export const useFilterStore = create<FilterStore>((set) => ({
-  selectedCategory: "",
-  categories: ["문화/예술", "학술/교양", "봉사/사회", "체육", "친목", "종교", "기타"],
+  selectedCategory: null,
+  categories: Object.values(ClubCategory),
   setSelectedCategory: (category) => set({ selectedCategory: category }),
   searchText: "",
   setSearchText: (text) => set({ searchText: text })
