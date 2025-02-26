@@ -11,11 +11,13 @@ export const useGetClubs = (
   page: number,
   size: number,
   keyword?: string,
-  category?: ClubCategory
+  category?: ClubCategory,
+  affiliation?: string,
+  recruitStatus?: string
 ) => {
   return useSuspenseQuery<ClubResponseType>({
-    queryKey: ["clubs", keyword || "", category || "", page, size],
-    queryFn: () => getClubItems(keyword || null, category || null, page, size),
+    queryKey: ["clubs", page, size, keyword, category, affiliation, recruitStatus],
+    queryFn: () => getClubItems(page, size, keyword, category, affiliation, recruitStatus),
   });
 };
 
@@ -23,11 +25,13 @@ export const prefetchGetClubs = async (
   page: number,
   size: number,
   keyword?: string,
-  category?: ClubCategory
+  category?: ClubCategory,
+  affiliation?: string,
+  recruitStatus?: string
 ) => {
   await queryClient.prefetchQuery<ClubResponseType>({
-    queryKey: ["clubs", keyword || "", category || "", page, size],
-    queryFn: () => getClubItems(keyword || null, category || null, page, size),
+    queryKey: ["clubs", page, size, keyword, category, affiliation, recruitStatus],
+    queryFn: () => getClubItems(page, size, keyword, category, affiliation, recruitStatus),
   });
 };
 

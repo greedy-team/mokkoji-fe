@@ -2,7 +2,7 @@ import axios from "axios";
 import { useAuthStore, isTokenExpired } from "@/stores/useAuthStore";
 
 const api = axios.create({
-  baseURL: `http://${import.meta.env.VITE_API_URL}`,
+  baseURL: `http://${import.meta.env.VITE_API_URL}/api/dev`,
 });
 
 api.interceptors.request.use(

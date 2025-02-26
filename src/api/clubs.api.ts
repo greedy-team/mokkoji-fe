@@ -2,12 +2,23 @@ import api from ".";
 import { ClubDetailResponseType, ClubResponseType, ClubCategory } from "@/types/clubType";
 
 export const getClubItems = async (
-  keyword: string | null,
-  category: ClubCategory  | null,
   page: number, 
-  size: number
+  size: number,
+  keyword?: string,
+  category?: ClubCategory,
+  affiliation?: string,
+  recruitStatus?: string,
 ): Promise<ClubResponseType> => {
-  const { data } = await api.get(`/clubs?keyword=${keyword || ""}&category=${category || ""}&page=${page}&size=${size}`);
+  const { data } = await api.get(`/clubs`, {
+    params: {
+      keyword,
+      category,
+      affiliation,
+      page,
+      size,
+      recruitStatus
+    }
+  });
   return data;
 };
 
