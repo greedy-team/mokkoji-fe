@@ -34,11 +34,6 @@ function ClubList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const navigate = useNavigate();
   const { selectedCategory, searchText } = useFilterStore();
-
-  useEffect(() => {
-    prefetchGetClubs(currentPage, ITEMS_PER_PAGE, searchText, selectedCategory);
-  }, [currentPage, searchText, selectedCategory]);
-
   const { data } = useGetClubs(
     currentPage,
     ITEMS_PER_PAGE,
@@ -46,6 +41,12 @@ function ClubList() {
     selectedCategory
   );
   const { clubs, pagination } = data.data;
+  useEffect(() => {
+    const nextPage = currentPage + 1;
+    if (nextPage <= pagination.totalPages) {
+      prefetchGetClubs(nextPage, ITEMS_PER_PAGE, searchText, selectedCategory);
+    }
+  }, [currentPage, pagination, searchText, selectedCategory]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

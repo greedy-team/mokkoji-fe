@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import DefaultImage from "@/assets/react.svg?react";
 import { ClubType, ClubCategory } from "@/types/clubType";
 import { ClubCategoryKorean } from "@/components/utils/clubCategoryMapping";
 import FavoriteButton from "@/components/FavoriteButton";
@@ -86,7 +85,7 @@ interface ClubBoxProp {
 function ClubBox({ club, onClick }: ClubBoxProp) {
   return (
     <Box onClick={onClick}>
-      <Image src={club.imageUrl || DefaultImage.toString()} alt={club.name} />
+      <Image src={club.imageUrl || ""} alt={club.name} />
       <Content>
         <TitleSection>
           <Title>{club.name}</Title>
