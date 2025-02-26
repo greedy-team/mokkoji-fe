@@ -31,5 +31,11 @@ export const usePrefetchClubs = (
         );
       }
     }
-  }, [ITEMS_PER_PAGE, currentPage, pagination, searchText, selectedCategory]);
+  }, [
+    ITEMS_PER_PAGE,
+    currentPage,
+    pagination.totalPages,
+    searchText,
+    selectedCategory,
+  ]);
 };
