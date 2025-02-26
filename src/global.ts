@@ -1,19 +1,21 @@
 import { createGlobalStyle } from "styled-components";
-import IBMPlexBold from "@/fonts/IBM_Plex_Sans_KR/IBMPlexSansKR-Bold.ttf";
-import IBMPlexRegular from "@/fonts/IBM_Plex_Sans_KR/IBMPlexSansKR-Regular.ttf";
-
 
 export const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-family: "IBMPlexBold";
-    src: local('IBMPlexBold'), local('IBMPlexBold');
+    font-family: "NanumGothicBold";
+    src: url("/Nanum_Gothic/NanumGothic-Bold.ttf") format("truetype");
+    font-weight: bold;
     font-style: normal;
-    src: url(${IBMPlexBold}) format('truetype');
   }
+
   @font-face {
-    font-family: "IBMPlexRegular";
-    src: local('IBMPlexRegular'), local('IBMPlexRegular');
+    font-family: "NanumGothicRegular";
+    src: url("/Nanum_Gothic/NanumGothic-Regular.ttf") format("truetype");
+    font-weight: normal;
     font-style: normal;
-    src: url(${IBMPlexRegular}) format('truetype');
+  }
+
+  * {
+    font-family: "NanumGothicRegular", sans-serif !important;
   }
 `;
