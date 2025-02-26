@@ -8,6 +8,7 @@ import Sports from "@/assets/category/Sports.svg";
 import Volunteer from "@/assets/category/Volunteer.svg";
 import styled from "styled-components";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 const HomeContainer = styled.div`
   justify-content: center;
@@ -17,7 +18,8 @@ const HomeContainer = styled.div`
 
 const BackgroundImage = styled.img`
   width: 100%;
-  height: auto;
+  height: 55vh;
+  max-height: 500px;
   object-fit: fill;
   filter: brightness(85%); 
 `;
@@ -51,21 +53,39 @@ const HomeTitle = styled.p`
 const HomeDescription = styled.p`
   font-size: 1.5rem;
   color: white;
+  margin-top: 15px;
+`;
+
+const ExploreButton = styled(Link)`
+  background-color: black;
+  color: white;
+  font-size: 1rem;
+  font-weight: regular;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-decoration: none; 
+  margin-top: 20px;
+  &:hover {
+    background-color: #333;
+  }
 `;
 
 const CategoryTitle = styled.p`
   font-size: 1.5rem;
   color: black;
   font-weight: bold;
-  margin-top: 60px;
-  margin-left: 15%;
+  margin-top: 20px;
+  margin-left: 5%;
 `;
 
 const CategoryWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 const CategorySection = styled.div`
@@ -74,14 +94,14 @@ const CategorySection = styled.div`
   scroll-behavior: smooth;
   gap: 15px;
   padding: 10px;
-  width: 70%;
+  width: 100%;
   &::-webkit-scrollbar {
     display: none;
   }
 `;
 
 const CategoryButton = styled.button`
-  flex: 0 0 calc((100% - 30px) / 3); /* 3개씩 보이도록 설정 (gap 포함) */
+  flex: 0 0 calc((100% - 30px) / 3);
   height: 150px;
   background-color:rgb(244, 243, 238);
   border-radius: 8px;
@@ -129,7 +149,7 @@ function Home() {
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const scrollAmount = direction === "left" ? -300 : 300; // 한 버튼 크기만큼 스크롤
+      const scrollAmount = direction === "left" ? -425 : 425; // 한 버튼 크기만큼 스크롤
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
@@ -138,10 +158,11 @@ function Home() {
     <>
       <HomeContainer>
         <BackgroundImage src={sejong} alt="세종 이미지" />
-        <Overlay /> {/* 어두운 오버레이 추가 */}
+        <Overlay />
         <HomeLogoSection>
           <HomeTitle>세종 대학교 동아리</HomeTitle>
           <HomeDescription>당신의 열정을 펼칠 수 있는 곳</HomeDescription>
+          <ExploreButton to="/clubs"> 동아리 찾아보기</ExploreButton>
         </HomeLogoSection>
       </HomeContainer>
 
