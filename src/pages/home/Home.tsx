@@ -9,6 +9,9 @@ import Volunteer from "@/assets/category/Volunteer.svg";
 import styled from "styled-components";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useFilterStore } from "@/stores/useFilterStore";
+import { ClubCategory } from "@/types/clubType";
 
 const HomeContainer = styled.div`
   justify-content: center;
@@ -136,15 +139,19 @@ const ScrollButton = styled.button`
 `;
 
 function Home() {
+  const navigate = useNavigate();
+  const { setSelectedCategory } = useFilterStore();
+
   const categories = [
-    { name: "학술/교양", img: Academic },
-    { name: "문화/예술", img: Cultural },
-    { name: "봉사/사회", img: Volunteer },
-    { name: "체육", img: Sports },
-    { name: "종교", img: Religious },
-    { name: "친목", img: Group },
-    { name: "기타", img: Other }
+    { name: "학술/교양", img: Academic, filter: ClubCategory.ACADEMIC_CULTURAL },
+    { name: "문화/예술", img: Cultural, filter: ClubCategory.CULTURAL_ART },
+    { name: "봉사/사회", img: Volunteer, filter: ClubCategory.VOLUNTEER_SOCIAL },
+    { name: "체육", img: Sports, filter: ClubCategory.SPORTS },
+    { name: "종교", img: Religious, filter: ClubCategory.RELIGIOUS },
+    { name: "친목", img: Group, filter: ClubCategory.SOCIAL },
+    { name: "기타", img: Other, filter: ClubCategory.OTHER },
   ];
+  
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
@@ -152,6 +159,12 @@ function Home() {
       const scrollAmount = direction === "left" ? -425 : 425; // 한 버튼 크기만큼 스크롤
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
+  };
+
+  const handleCategoryClick = (category: ClubCategory) => {
+    console.log("카테고리 선택됨:", category); // 디버깅용 콘솔 로그 추가
+    setSelectedCategory(category);
+    navigate("/clubs");
   };
 
   return (
@@ -171,11 +184,14 @@ function Home() {
         <ScrollButton onClick={() => scroll("left")}>{"<"}</ScrollButton>
         <CategorySection ref={scrollRef}>
         {categories.map((category) => (
-            <CategoryButton key={category.name}>
-              <CategoryImage src={category.img} alt={category.name} />
-              {category.name}
-            </CategoryButton>
-          ))}
+          <CategoryButton
+            key={category.name}
+            onClick={() => handleCategoryClick(category.filter)}
+          >
+            <CategoryImage src={category.img} alt={category.name} />
+            {category.name}
+          </CategoryButton>
+        ))}
         </CategorySection>
         <ScrollButton onClick={() => scroll("right")}>{">"}</ScrollButton>
       </CategoryWrapper>
