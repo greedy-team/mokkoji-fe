@@ -21,8 +21,8 @@ export interface ClubType {
   description: string;
   recruitStartDate?: string;
   recruitEndDate?: string;
-  imageUrl: string;
-  favorite?: boolean;
+  imageURL: string;
+  isFavorite?: boolean;
 }
 
 export interface PaginationType {

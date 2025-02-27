@@ -6,12 +6,12 @@ import {
 } from "@/types/clubType";
 
 export const getClubItems = async (
-  page: number, 
+  page: number,
   size: number,
   keyword?: string,
   category?: ClubCategory,
   affiliation?: string,
-  recruitStatus?: string,
+  recruitStatus?: string
 ): Promise<ClubResponseType> => {
   const { data } = await api.get(`/clubs`, {
     params: {
@@ -20,9 +20,11 @@ export const getClubItems = async (
       affiliation,
       page,
       size,
-      recruitStatus
-    }
+      recruitStatus,
+    },
   });
+  console.log("clubData!", data);
+
   return data;
 };
 
