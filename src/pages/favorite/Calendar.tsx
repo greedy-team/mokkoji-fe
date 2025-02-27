@@ -51,7 +51,7 @@ const CalendarComponent = () => {
     if (!data) return [];
 
     return data.data.clubs
-      .filter((club) => club.favorite)
+      .filter((club) => club.isFavorite)
       .flatMap((club) => {
         const start = club.recruitStartDate
           ? new Date(club.recruitStartDate)

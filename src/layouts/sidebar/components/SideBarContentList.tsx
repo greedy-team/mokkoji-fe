@@ -37,6 +37,7 @@ function SideBarContentList() {
   return (
     <>
       <SectionTitle to="/clubs" onClick={() => setSelectedCategory(undefined)}>
+
         동아리
       </SectionTitle>
       {clubItems.map((item) => (

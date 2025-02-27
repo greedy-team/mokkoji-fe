@@ -90,7 +90,7 @@ interface ClubBoxProp {
 function ClubBox({ club, onClick }: ClubBoxProp) {
   return (
     <Box onClick={onClick}>
-      <Image src={club.imageUrl || ""} alt={club.name} />
+      <Image src={club.imageURL || ""} alt={club.name} />
       <Content>
         <TitleSection>
           <Title>{club.name}</Title>

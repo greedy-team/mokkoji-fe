@@ -7,14 +7,11 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const { accessToken, clearToken } = useAuthStore.getState();
+    const { accessToken } = useAuthStore.getState();
 
     if (accessToken && !isTokenExpired()) {
       config.headers.Authorization = `Bearer ${accessToken}`;
-    } else {
-      console.log("토큰 만료!");
-      clearToken(); // 만료 시 토큰 제거
-    }
+    } 
 
     return config;
   },
@@ -30,10 +27,11 @@ api.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        const { data } = await axios.post(
-          `${import.meta.env.VITE_API_URL}/auth/refresh`,
-          { refreshToken }
-        );
+        const { data } = await axios.post("/users/auth/refresh", {
+          refreshToken,
+        });
+
+        console.log("리프레시 토큰 발급!", refreshToken);
 
         setAccessToken(data.accessToken, 30);
         originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
