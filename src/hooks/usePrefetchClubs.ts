@@ -9,16 +9,17 @@ export const usePrefetchClubs = (
   pagination: PaginationType,
   ITEMS_PER_PAGE: number,
   searchText?: string,
-  selectedCategory?: ClubCategory
+  selectedCategory?: ClubCategory,
+  affiliation?: string
 ) => {
   useEffect(() => {
     const nextPage = currentPage + 1;
     const prevPage = currentPage - 1;
     if (nextPage <= pagination.totalPages) {
-      prefetchGetClubs(nextPage, ITEMS_PER_PAGE, searchText, selectedCategory);
+      prefetchGetClubs(nextPage, ITEMS_PER_PAGE, searchText, selectedCategory, affiliation);
     }
     if (prevPage >= 1) {
-      prefetchGetClubs(prevPage, ITEMS_PER_PAGE, searchText, selectedCategory);
+      prefetchGetClubs(prevPage, ITEMS_PER_PAGE, searchText, selectedCategory, affiliation);
     }
 
     if (selectedCategory) {
@@ -32,7 +33,8 @@ export const usePrefetchClubs = (
           currentPage,
           ITEMS_PER_PAGE,
           searchText,
-          categoryPreFetchingArr[nextIdx]
+          categoryPreFetchingArr[nextIdx],
+          affiliation
         );
       }
       if (prevIdx >= 0) {
@@ -40,7 +42,8 @@ export const usePrefetchClubs = (
           currentPage,
           ITEMS_PER_PAGE,
           searchText,
-          categoryPreFetchingArr[prevIdx]
+          categoryPreFetchingArr[prevIdx],
+          affiliation
         );
       }
     }
