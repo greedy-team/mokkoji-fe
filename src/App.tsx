@@ -16,6 +16,7 @@ import { useAuthStore } from "./stores/useAuthStore";
 import SystemMaintenance from "./pages/SystemMaintenance";
 import { ProtectedRoute } from "./pages/favorite/Favorite";
 import QueryErrorBoundary from "./services/QueryErrorBoundary";
+import UserInfo from "./pages/UserInfo";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
         element: <ClubList />,
       },
       {
-        path: "clubs/:affiliation",
+        path: "clubs/group/:affiliation",
         element: <ClubList />,
       },
       {
