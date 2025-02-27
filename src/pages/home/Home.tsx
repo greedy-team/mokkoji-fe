@@ -1,4 +1,7 @@
 import sejong from "@/assets/sejong.png";
+import sejong1 from "@/assets/sejong1.jpg";
+import sejong2 from "@/assets/sejong2.jpg";
+import Mokkoji from "@/assets/MokkojiW.svg?react";
 import Academic from "@/assets/category/Academic.svg";
 import Cultural from "@/assets/category/Cultural.svg";
 import Group from "@/assets/category/Group.svg";
@@ -7,7 +10,7 @@ import Religious from "@/assets/category/Religious.svg";
 import Sports from "@/assets/category/Sports.svg";
 import Volunteer from "@/assets/category/Volunteer.svg";
 import styled from "styled-components";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useFilterStore } from "@/stores/useFilterStore";
@@ -17,14 +20,18 @@ const HomeContainer = styled.div`
   justify-content: center;
   display: flex;
   position: relative;
+  min-height: 55vh;
 `;
 
 const BackgroundImage = styled.img`
+  position: absolute;
   width: 100%;
   height: 55vh;
   max-height: 500px;
   object-fit: fill;
   filter: brightness(85%); 
+  transition: opacity 1s ease-in-out; /* 부드러운 전환 효과 */
+  
 `;
 
 const Overlay = styled.div`
@@ -38,7 +45,7 @@ const Overlay = styled.div`
 
 const HomeLogoSection = styled.div`
   position: absolute;
-  top: 40%;
+  top: 15%;
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -51,12 +58,14 @@ const HomeTitle = styled.p`
   font-size: 2rem;
   font-weight: bold;
   color: white;
+  text-align: center;
 `;
 
 const HomeDescription = styled.p`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: white;
-  margin-top: 15px;
+  margin-top: -30px;
+  text-align: center;
 `;
 
 const ExploreButton = styled(Link)`
@@ -106,21 +115,21 @@ const CategorySection = styled.div`
 const CategoryButton = styled.button`
   flex: 0 0 calc((100% - 30px) / 3);
   height: 150px;
-  background-color:rgb(244, 243, 238);
+  background-color:rgb(249, 249, 249);
   border-radius: 8px;
-  border: none;
+  border: 1px solid #ccc;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   white-space: nowrap;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
   &:hover {
-    background-color:rgb(237, 244, 235);
+    background-color:rgb(217, 217, 217);
   }
 `;
 
@@ -154,6 +163,18 @@ function Home() {
   
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const backgroundImages = [sejong1, sejong, sejong2];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
+    }, 5000); // 5초마다 변경
+
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 해제
+  }, []);
+
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const scrollAmount = direction === "left" ? -425 : 425; // 한 버튼 크기만큼 스크롤
@@ -170,11 +191,22 @@ function Home() {
   return (
     <>
       <HomeContainer>
-        <BackgroundImage src={sejong} alt="세종 이미지" />
-        <Overlay />
+      {backgroundImages.map((image, index) => (
+          <BackgroundImage
+            key={index}
+            src={image}
+            alt={`배경 이미지 ${index + 1}`}
+            style={{ opacity: index === currentImageIndex ? 1 : 0 }}
+          />
+        ))}
+        <Overlay /> 
         <HomeLogoSection>
-          <HomeTitle>세종 대학교 동아리</HomeTitle>
-          <HomeDescription>당신의 열정을 펼칠 수 있는 곳</HomeDescription>
+          <HomeTitle> <Mokkoji width={150} height={150} /> </HomeTitle>
+          <HomeDescription>
+            세종대의 다양한 동아리를 한곳에서 만나보세요. <br/> 
+            관심 있는 동아리를 찾고, 새로운 사람들과 함께하세요! <br/>
+            🔍 지금 동아리 리스트를 확인해보세요!
+            </HomeDescription>
           <ExploreButton to="/clubs"> 동아리 찾아보기</ExploreButton>
         </HomeLogoSection>
       </HomeContainer>
