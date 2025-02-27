@@ -54,7 +54,7 @@ const ClubRecruitPeriod = styled.p`
 
 function FavoriteClubList() {
   const { data } = useGetFavorite();
-  const favoriteClubs = data.data.clubs.filter((club) => club.favorite);
+  const favoriteClubs = data.data.clubs.filter((club) => club.isFavorite);
   const navigate = useNavigate();
 
   const onClick = (id: number) => {
@@ -67,7 +67,7 @@ function FavoriteClubList() {
         {favoriteClubs.map((club) => (
           <ClubCard key={club.id} onClick={() => onClick(club.id)}>
             <ClubImage
-              src={club.imageUrl || "/default-image.png"}
+              src={club.imageURL || "/default-image.png"}
               alt={club.name}
             />
             <ClubInfo>

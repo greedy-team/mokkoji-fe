@@ -14,11 +14,10 @@ const SideBarContainer = styled.div`
 function SideBar() {
   return (
     <SideBarContainer>
-      <SideBarSearch/>
+      <SideBarSearch />
       <SideBarContentList />
     </SideBarContainer>
   );
 }
-
 
 export default SideBar;
