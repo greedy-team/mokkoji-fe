@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
-import { worker } from "./mocks/browsers.ts";
+//import { worker } from "./mocks/browsers.ts";
 import { GlobalStyle } from "./global.ts";
 
 async function enableMocking() {
@@ -9,8 +9,8 @@ async function enableMocking() {
     console.log("!")
     return;
   }
-
-  return worker.start();
+  return;
+  //return worker.start();
 }
 
 enableMocking().then(() => {
