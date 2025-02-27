@@ -7,6 +7,10 @@ const Card = styled.div`
   height: 100%;
   box-sizing: border-box;
   padding: 4%;
+  
+  &:hover {
+    background-color: #f9f9f9;
+  }
 `;
 
 const TopRow = styled.div`
@@ -37,13 +41,14 @@ const ClubName = styled.div`
 `;
 
 const Category = styled.div`
-  margin-top: 3%;
+  margin-top: 5%;
   font-size: 0.8rem;
   color: gray;
   font-weight: 550;
 `;
 
 const TitleSection = styled.div`
+  margin-top: 5%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
