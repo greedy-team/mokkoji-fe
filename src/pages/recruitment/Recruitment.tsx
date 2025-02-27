@@ -8,12 +8,14 @@ import { sortClubs } from "./utils/sortClubs";
 import { prefetchGetClubs, useGetClubs } from "@/hooks/queries/clubs.query";
 import { useNavigate } from "react-router-dom";
 import { useFilterStore } from "@/stores/useFilterStore"; 
+import NoResults from "@/pages/NoResults";
 
 const ITEMS_PER_PAGE = 9; // 페이지당 게시물 수
 
 const Container = styled.div`
   width: 78vw;
   height: 100%;
+  position: relative;
 `;
 
 const ClubList = styled.div`
@@ -75,18 +77,26 @@ function Recruitment() {
   return (
     <Container>
       <SortOption buttonState={buttonState} onSortChange={handleSortChange} />
-      <ClubList>
-        {sortedClubs.map((club) => (
-          <ClubCardWrapper key={club.id} onClick={() => onClick(club)}>
-            <ClubCard club={club} />
-          </ClubCardWrapper>
-        ))}
-      </ClubList>
-      <PaginationComponent
-        totalPages={pagination.totalPages}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
+
+      {sortedClubs.length === 0 ? (
+        <NoResults />
+      ) : (
+        <>
+          <ClubList>
+            {sortedClubs.map((club) => (
+              <ClubCardWrapper key={club.id} onClick={() => onClick(club)}>
+                <ClubCard club={club} />
+              </ClubCardWrapper>
+            ))}
+          </ClubList>
+          <PaginationComponent
+            totalPages={pagination.totalPages}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        </>
+      )}
+      
     </Container>
   );
 }

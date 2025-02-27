@@ -39,7 +39,7 @@ function SystemMaintenance() {
       <ModalSection>
         <MaintenanceContainer>
           <Wrench width={50} height={50} />
-          <MaintenanceText>시스템 점검 중입니다</MaintenanceText>
+          <MaintenanceText>🛠️시스템 점검 중입니다🛠️</MaintenanceText>
           <SubText>
             더 나은 서비스를 위해 시스템 점검을 진행하고 있습니다.
           </SubText>

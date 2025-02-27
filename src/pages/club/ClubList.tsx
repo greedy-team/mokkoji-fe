@@ -6,6 +6,7 @@ import { useGetClubs } from "@/hooks/queries/clubs.query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { usePrefetchClubs } from "@/hooks/usePrefetchClubs";
+import NoResults from "@/pages/NoResults";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -62,21 +63,27 @@ function ClubList() {
 
   return (
     <>
-      <ClubGrid>
-        {clubs.map((club) => (
-          <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
-        ))}
-      </ClubGrid>
+      {clubs.length === 0 ? (
+        <NoResults />
+      ) : (
+        <>
+          <ClubGrid>
+            {clubs.map((club) => (
+              <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
+            ))}
+          </ClubGrid>
 
-      <PaginateSection>
-        {pagination && (
-          <Pagination
-            totalPages={pagination.totalPages}
-            currentPage={currentPage}
-            onPageChange={handlePageChange}
-          />
-        )}
-      </PaginateSection>
+          <PaginateSection>
+            {pagination && (
+              <Pagination
+                totalPages={pagination.totalPages}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+              />
+            )}
+          </PaginateSection>
+        </>
+      )}
     </>
   );
 }

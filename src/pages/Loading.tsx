@@ -48,7 +48,7 @@ function Loading() {
     <LoadingContainer>
       <LoadingSpinner />
       <LoadingText>데이터를 불러오는 중</LoadingText>
-      <SubText>잠시만 기다려주세요...</SubText>
+      <SubText><br/>잠시만 기다려주세요... <br/> <br/>열심히 불러오고 있습니다  🚀  </SubText>
     </LoadingContainer>
   );
 }
