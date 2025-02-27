@@ -3,8 +3,10 @@ import { UserLoginType } from "@/types/userInfoType";
 import { useAuthStore } from "@/stores/useAuthStore";
 
 interface AuthResponse {
-  accessToken: string;
-  refreshToken: string;
+  data: {
+    accessToken: string;
+    refreshToken: string;
+  };
 }
 
 export const saveAuthTokens = async (
@@ -15,12 +17,9 @@ export const saveAuthTokens = async (
       `api/users/auth/login`,
       credentials
     );
-
-    const { accessToken, refreshToken } = response.data;
+    const { accessToken, refreshToken } = response.data.data;
     console.log("토큰 받아와요!", accessToken, refreshToken);
     useAuthStore.getState().setToken(accessToken, refreshToken, 30); // ✅ 이렇게 직접 접근
-
-    console.log("토큰 저장 완료");
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error("Axios Error:", error.response?.data || error.message);
@@ -36,7 +35,7 @@ export const saveAuthTokens = async (
 export const expireAuthTokens = async () => {
   try {
     const response: AxiosResponse<AuthResponse> = await axios.post(
-      `users/api/auth/logout`
+      `api/users/auth/logout`
     );
     useAuthStore.getState().clearToken();
     return response;

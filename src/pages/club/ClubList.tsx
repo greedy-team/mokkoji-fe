@@ -34,8 +34,8 @@ const PaginateSection = styled.div`
 function ClubList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const navigate = useNavigate();
-  const { selectedCategory, setSelectedCategory ,searchText } = useFilterStore();
-
+  const { selectedCategory, searchText } = useFilterStore();
+ 
   const { data } = useGetClubs(
     currentPage,
     ITEMS_PER_PAGE,
@@ -53,8 +53,7 @@ function ClubList() {
   );
 
   useEffect(() => {
-    return () => {
-    };
+    return () => {};
   }, []); //메인화면에서 카데고리 선택시 해당 동아리 리스트만 보여주기 위함함
 
   const handlePageChange = (page: number) => {
