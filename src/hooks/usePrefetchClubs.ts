@@ -13,8 +13,12 @@ export const usePrefetchClubs = (
 ) => {
   useEffect(() => {
     const nextPage = currentPage + 1;
+    const prevPage = currentPage - 1;
     if (nextPage <= pagination.totalPages) {
       prefetchGetClubs(nextPage, ITEMS_PER_PAGE, searchText, selectedCategory);
+    }
+    if (prevPage >= 1) {
+      prefetchGetClubs(prevPage, ITEMS_PER_PAGE, searchText, selectedCategory);
     }
 
     if (selectedCategory) {
@@ -22,12 +26,21 @@ export const usePrefetchClubs = (
         (category) => category === selectedCategory
       );
       const nextIdx = idx + 1;
+      const prevIdx = idx - 1;
       if (nextIdx <= categoryPreFetchingArr.length - 1) {
         prefetchGetClubs(
           currentPage,
           ITEMS_PER_PAGE,
           searchText,
           categoryPreFetchingArr[nextIdx]
+        );
+      }
+      if (prevIdx >= 0) {
+        prefetchGetClubs(
+          currentPage,
+          ITEMS_PER_PAGE,
+          searchText,
+          categoryPreFetchingArr[prevIdx]
         );
       }
     }

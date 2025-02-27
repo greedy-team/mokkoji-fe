@@ -5,10 +5,7 @@ import SortOption from "./components/SortOption";
 import PaginationComponent from "../../components/Pagination";
 import { ClubType } from "@/types/clubType";
 import { sortClubs } from "./utils/sortClubs";
-import {
-  prefetchGetClubs,
-  useGetClubs,
-} from "@/hooks/queries/clubs.query";
+import { prefetchGetClubs, useGetClubs } from "@/hooks/queries/clubs.query";
 import { useNavigate } from "react-router-dom";
 
 const ITEMS_PER_PAGE = 9; // 페이지당 게시물 수
@@ -54,8 +51,10 @@ function Recruitment() {
 
   useEffect(() => {
     const nextPage = currentPage + 1;
+    const prevPage = currentPage - 1;
     if (nextPage <= pagination.totalPages)
       prefetchGetClubs(nextPage, ITEMS_PER_PAGE);
+    if (prevPage >= 1) prefetchGetClubs(prevPage, ITEMS_PER_PAGE);
   }, [currentPage, pagination]);
 
   // 정렬 상태 변경

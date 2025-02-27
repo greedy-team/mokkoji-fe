@@ -19,7 +19,7 @@ export const saveAuthTokens = async (
     );
     const { accessToken, refreshToken } = response.data.data;
     console.log("토큰 받아와요!", accessToken, refreshToken);
-    useAuthStore.getState().setToken(accessToken, refreshToken, 1); // ✅ 이렇게 직접 접근
+    useAuthStore.getState().setToken(accessToken, refreshToken, 30); // ✅ 이렇게 직접 접근
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error("Axios Error:", error.response?.data || error.message);
