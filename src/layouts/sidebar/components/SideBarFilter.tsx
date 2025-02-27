@@ -64,6 +64,12 @@ function SideBarFilter() {
               onClick={() => {
                 setSelectedCategory(category);
 
+                if (selectedCategory === category) {
+                  setSelectedCategory(null);
+                } else {
+                  setSelectedCategory(category);
+                }
+
                 if (location.pathname === "/") {
                   navigate("/clubs");
                 }

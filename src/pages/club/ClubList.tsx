@@ -32,10 +32,9 @@ const PaginateSection = styled.div`
 `;
 
 function ClubList() {
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const { affiliation } = useParams<{ affiliation: string }>();
   const navigate = useNavigate();
-  const { selectedCategory, searchText } = useFilterStore();
+  const { selectedCategory, searchText, currentPage, setCurrentPage } = useFilterStore();
  
   const { data } = useGetClubs(
     currentPage,
@@ -44,7 +43,7 @@ function ClubList() {
     selectedCategory,
     affiliation
   );
-  const { clubs, pagination } = data?.data;
+  const { clubs, pagination } = data.data;
 
   usePrefetchClubs(
     currentPage,
@@ -55,15 +54,11 @@ function ClubList() {
     affiliation
   );
 
-  useEffect(() => {
-    setCurrentPage(1); 
-  }, [selectedCategory, searchText]);
-
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
   function onClick(club: ClubType) {
-    navigate(`/clubs/${club.id}`);
+    navigate(`${club.id}`);
   }
 
   return (
