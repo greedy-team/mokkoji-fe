@@ -64,7 +64,7 @@ const HomeTitle = styled.p`
 const HomeDescription = styled.p`
   font-size: 1.3rem;
   color: white;
-  margin-top: -30px;
+  margin-top: -40px;
   text-align: center;
 `;
 
@@ -201,11 +201,11 @@ function Home() {
         ))}
         <Overlay /> 
         <HomeLogoSection>
-          <HomeTitle> <Mokkoji width={150} height={150} /> </HomeTitle>
+          <HomeTitle> <Mokkoji width={180} height={150} /> </HomeTitle>
           <HomeDescription>
             세종대의 다양한 동아리를 한곳에서 만나보세요. <br/> 
             관심 있는 동아리를 찾고, 새로운 사람들과 함께하세요! <br/>
-            🔍 지금 동아리 리스트를 확인해보세요!
+            지금 동아리 리스트를 확인해보세요 🔍
             </HomeDescription>
           <ExploreButton to="/clubs"> 동아리 찾아보기</ExploreButton>
         </HomeLogoSection>
