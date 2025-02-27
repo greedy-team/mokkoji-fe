@@ -8,6 +8,7 @@ import { useMutation, useQueryClient, QueryKey } from "@tanstack/react-query";
  */
 export const useOptimisticMutation = <TData, TVariables = void>(
   queryKey: QueryKey,
+  queryKey2: QueryKey,
   mutationFn: (variables: TVariables) => Promise<TData>,
   updater: (oldData: TData, variables?: TVariables) => TData
 ) => {
@@ -44,6 +45,7 @@ export const useOptimisticMutation = <TData, TVariables = void>(
         alert("✅ 성공 - 캐시 동기화");
       }
       queryClient.invalidateQueries({ queryKey });
+      queryClient.invalidateQueries({ queryKey: queryKey2 });
     },
   });
 };
