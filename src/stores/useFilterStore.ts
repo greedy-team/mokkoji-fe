@@ -6,7 +6,7 @@ type FilterStore = {
   selectedCategory?: ClubCategory; //카테고리
   categories: ClubCategory[];
   setSelectedCategory: (category?: ClubCategory) => void;
-  searchText: string; //검색어
+  searchText: string | undefined; //검색어
   setSearchText: (text: string) => void;
 };
 
@@ -16,7 +16,7 @@ export const useFilterStore = create<FilterStore>()(
       selectedCategory: undefined,
       categories: Object.values(ClubCategory),
       setSelectedCategory: (category) => set({ selectedCategory: category }),
-      searchText: "",
+      searchText: undefined,
       setSearchText: (text) => set({ searchText: text }),
     }),
     {
