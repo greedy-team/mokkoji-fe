@@ -5,12 +5,12 @@ export enum ClubCategory {
   SOCIAL = "SOCIAL",
   SPORTS = "SPORTS",
   RELIGIOUS = "RELIGIOUS",
-  OTHER = "OTHER"
+  OTHER = "OTHER",
 }
 
 export enum ClubAffiliation {
   CENTRAL_CLUB = "CENTRAL_CLUB", // 중앙동아리
-  DEPARTMENT_CLUB = "DEPARTMENT_CLUB" // 가인준동아리
+  DEPARTMENT_CLUB = "DEPARTMENT_CLUB", // 가인준동아리
 }
 
 export interface ClubType {
@@ -47,18 +47,15 @@ export interface ClubDetailType {
   description: string;
   recruitStartDate: string;
   recruitEndDate: string;
-  imageUrl: string;
+  imageURL: string;
   isFavorite: boolean;
   instagramLink: string;
   recruitPost: string;
 }
 
 export interface ClubDetailResponseType {
-  data: {
-    club: ClubDetailType;
-  };
+  data: ClubDetailType;
 }
-
 
 export interface CluParameterType {
   name?: string;

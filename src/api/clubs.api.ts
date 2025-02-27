@@ -1,5 +1,9 @@
 import api from ".";
-import { ClubDetailResponseType, ClubResponseType, ClubCategory } from "@/types/clubType";
+import {
+  ClubDetailResponseType,
+  ClubResponseType,
+  ClubCategory,
+} from "@/types/clubType";
 
 export const getClubItems = async (
   page: number, 
@@ -26,7 +30,7 @@ export const getClubItemsDetail = async (
   id: string
 ): Promise<ClubDetailResponseType> => {
   const { data } = await api.get(`/clubs/${id}`);
+
+  console.log("clubDetailData:", data);
   return data;
 };
-
-

@@ -6,6 +6,7 @@ import { GlobalStyle } from "./global.ts";
 
 async function enableMocking() {
   if (import.meta.env.VITE_NODE_ENV !== "development") {
+    console.log("!")
     return;
   }
 

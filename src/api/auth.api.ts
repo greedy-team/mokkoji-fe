@@ -12,11 +12,12 @@ export const saveAuthTokens = async (
 ): Promise<void> => {
   try {
     const response: AxiosResponse<AuthResponse> = await axios.post(
-      `http://${import.meta.env.VITE_API_URL}/auth/login`,
+      `api/users/auth/login`,
       credentials
     );
 
     const { accessToken, refreshToken } = response.data;
+    console.log("토큰 받아와요!", accessToken, refreshToken);
     useAuthStore.getState().setToken(accessToken, refreshToken, 30); // ✅ 이렇게 직접 접근
 
     console.log("토큰 저장 완료");
@@ -35,7 +36,7 @@ export const saveAuthTokens = async (
 export const expireAuthTokens = async () => {
   try {
     const response: AxiosResponse<AuthResponse> = await axios.post(
-      `http://${import.meta.env.VITE_API_URL}/auth/logout`
+      `users/api/auth/logout`
     );
     useAuthStore.getState().clearToken();
     return response;
