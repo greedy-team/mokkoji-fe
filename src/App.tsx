@@ -16,6 +16,7 @@ import Favorite from "./pages/favorite/Favorite";
 import { useAuthStore } from "./stores/useAuthStore";
 import SystemMaintenance from "./pages/SystemMaintenance";
 import { ProtectedRoute } from "./pages/favorite/Favorite";
+import QueryErrorBoundary from "./services/QueryErrorBoundary";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -61,7 +62,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Suspense fallback={<Loading />}>
         <ReactQueryDevtools initialIsOpen={false} />
-        {accessToken ? <UserInfo /> : <Login />}
+        <QueryErrorBoundary>
+          {accessToken ? <UserInfo /> : <Login />}
+        </QueryErrorBoundary>
         <RouterProvider router={router} />
       </Suspense>
     </QueryClientProvider>
