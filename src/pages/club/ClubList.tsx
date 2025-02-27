@@ -44,7 +44,7 @@ function ClubList() {
     selectedCategory,
     affiliation
   );
-  const { clubs, pagination } = data.data;
+  const { clubs, pagination } = data?.data;
 
   usePrefetchClubs(
     currentPage,
@@ -63,7 +63,7 @@ function ClubList() {
     setCurrentPage(page);
   };
   function onClick(club: ClubType) {
-    navigate(`${club.id}`);
+    navigate(`/clubs/${club.id}`);
   }
 
   return (
