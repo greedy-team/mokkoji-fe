@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Pagination from "../../components/Pagination";
 import { ClubType } from "@/types/clubType";
 import { useGetClubs } from "@/hooks/queries/clubs.query";
-import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { usePrefetchClubs } from "@/hooks/usePrefetchClubs";
@@ -58,7 +57,7 @@ function ClubList() {
     setCurrentPage(page);
   };
   function onClick(club: ClubType) {
-    navigate(`${club.id}`);
+    navigate(`/clubs/${club.id}`);
   }
 
   return (

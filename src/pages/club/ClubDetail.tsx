@@ -29,7 +29,6 @@ const ClubImage = styled.div<{ image?: string }>`
   align-items: center;
   justify-content: center;
   color: #aaa;
-  font-size: 20px;
   border-radius: 10px;
   margin-top: 15px;
   margin-right: 120px;
@@ -37,43 +36,50 @@ const ClubImage = styled.div<{ image?: string }>`
 
 const ClubInfo = styled.div`
   margin-top: 30px;
-  margin-left: 180px;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ClubTitle = styled.h1`
-  font-size: 22px;
-  font-weight: bold;
-  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bolder;
 `;
 
 const TagContainer = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 20px;
-  margin-left: 180px;
 `;
 
 const Tag = styled.div`
-  font-size: 12px;
+  font-size: 0.7rem;
   background: #f0f0f0;
   padding: 5px 10px;
   border-radius: 12px;
-  font-weight: 500;
-  color: #555;
+  font-weight: bold;
+  color: black;
 `;
 
 const Description = styled.p`
-  font-size: 14px;
-  color: #666;
+  font-size: 0.8rem;
+  color: black;
   margin-top: 20px;
-  text-align: center;
+  white-space: pre-wrap;
+  width: 50%;
+  line-height: 1.4;
 `;
 
 const RecruitmentInfo = styled.p`
-  font-size: 14px;
-  color: #444;
-  margin-top: 10px;
-  text-align: center;
+  font-size: 0.75rem;
+  color: black;
+  margin-top: 20px;
+`;
+
+const RecruitmentDate = styled.span`
+  font-size: 0.75rem;
+  color: black;
+  text-decoration: underline;
 `;
 
 const Divider = styled.hr`
@@ -83,12 +89,25 @@ const Divider = styled.hr`
 `;
 
 const RecruitmentText = styled.p`
-  font-size: 14px;
-  color: #444;
-  margin-top: 10px;
+  font-size: 0.8rem;
+  color: black;
   margin-left: 20px;
-  width: 100%;
+  width: 95%;
+  white-space: pre-wrap;
+  margin-bottom: 20px;
+  line-height: 1.4;
+  a {
+    color: blue;
+    text-decoration: underline;
+  }
 `;
+const convertLinks = (text: string) => {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return text.replace(
+    urlRegex,
+    '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'
+  );
+};
 
 function ClubDetail() {
   const id = useCustomParams();
@@ -96,6 +115,7 @@ function ClubDetail() {
   const { data } = useGetClubsDetail(id);
 
   const clubDetail = data.data;
+  const formattedText = convertLinks(clubDetail.recruitPost);
 
   return (
     <Container>
@@ -110,7 +130,10 @@ function ClubDetail() {
           <Description>{clubDetail.description}</Description>
 
           <RecruitmentInfo>
-            모집기간: {clubDetail.recruitStartDate}~{clubDetail.recruitEndDate}
+            모집기간:{" "}
+            <RecruitmentDate>
+              {clubDetail.recruitStartDate}~{clubDetail.recruitEndDate}
+            </RecruitmentDate>
           </RecruitmentInfo>
         </ClubInfo>
 
@@ -120,7 +143,9 @@ function ClubDetail() {
       </InfoContainer>
 
       <Divider />
-      <RecruitmentText>{clubDetail.recruitPost}</RecruitmentText>
+      <RecruitmentText
+        dangerouslySetInnerHTML={{ __html: formattedText }}
+      ></RecruitmentText>
     </Container>
   );
 }

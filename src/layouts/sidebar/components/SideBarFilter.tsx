@@ -65,7 +65,7 @@ function SideBarFilter() {
                 setSelectedCategory(category);
 
                 if (selectedCategory === category) {
-                  setSelectedCategory(null);
+                  setSelectedCategory(undefined);
                 } else {
                   setSelectedCategory(category);
                 }
