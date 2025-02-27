@@ -51,7 +51,8 @@ function ClubList() {
     pagination,
     ITEMS_PER_PAGE,
     searchText,
-    selectedCategory
+    selectedCategory,
+    affiliation
   );
 
   useEffect(() => {
