@@ -36,7 +36,8 @@ function SideBarContentList() {
   const { setSelectedCategory } = useFilterStore();
   return (
     <>
-      <SectionTitle to="/clubs" onClick={() => setSelectedCategory()}>
+      <SectionTitle to="/clubs" onClick={() => setSelectedCategory(undefined)}>
+
         동아리
       </SectionTitle>
       {clubItems.map((item) => (

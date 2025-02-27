@@ -4,7 +4,7 @@ import Pagination from "../../components/Pagination";
 import { ClubType } from "@/types/clubType";
 import { useGetClubs } from "@/hooks/queries/clubs.query";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { usePrefetchClubs } from "@/hooks/usePrefetchClubs";
 
@@ -33,6 +33,7 @@ const PaginateSection = styled.div`
 
 function ClubList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const { affiliation } = useParams<{ affiliation: string }>();
   const navigate = useNavigate();
   const { selectedCategory, searchText } = useFilterStore();
  
@@ -40,7 +41,8 @@ function ClubList() {
     currentPage,
     ITEMS_PER_PAGE,
     searchText,
-    selectedCategory
+    selectedCategory,
+    affiliation
   );
   const { clubs, pagination } = data.data;
 
