@@ -47,15 +47,20 @@ const TitleSection = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 `;
 
 const Description = styled.p`
   font-size: 0.8rem;
   color: #777;
-  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  text-overflow: hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 1.4em;
+  height: fit-content;
+  width: 90%;
 `;
 
 const InfoWrapper = styled.div`
@@ -63,7 +68,7 @@ const InfoWrapper = styled.div`
   align-items: center;
   gap: 10px;
   position: absolute;
-  bottom: 10%;
+  bottom: 18%;
 `;
 
 const Category = styled.p`
@@ -93,9 +98,9 @@ function ClubBox({ club, onClick }: ClubBoxProp) {
         </TitleSection>
         <Description>{club.description}</Description>
         <InfoWrapper>
-          <span style={{ color: "#777", margin: "0 3px" }}>•</span>
+          <span style={{ color: "#777" }}>•</span>
           <Category>{ClubCategoryKorean[club.category as ClubCategory] || club.category}</Category>
-          <span style={{ color: "#777", margin: "0 3px" }}>•</span>
+          <span style={{ color: "#777" }}>•</span>
           <Affiliation>{club.affiliation}</Affiliation>
         </InfoWrapper>
       </Content>
