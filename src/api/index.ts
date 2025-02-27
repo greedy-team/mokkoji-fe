@@ -2,7 +2,7 @@ import axios from "axios";
 import { useAuthStore, isTokenExpired } from "@/stores/useAuthStore";
 
 const api = axios.create({
-  baseURL: `http://${import.meta.env.VITE_API_URL}`,
+  baseURL: "/api",
 });
 
 api.interceptors.request.use(
@@ -31,14 +31,14 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const { data } = await axios.post(
-          `https://${import.meta.env.VITE_API_URL}/auth/refresh`,
+          `${import.meta.env.VITE_API_URL}/auth/refresh`,
           { refreshToken }
         );
 
         setAccessToken(data.accessToken, 30);
         originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
 
-        return api(originalRequest); 
+        return api(originalRequest);
       } catch {
         console.error("Refresh token expired, logging out...");
         clearToken();

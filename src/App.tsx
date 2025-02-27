@@ -61,7 +61,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Suspense fallback={<Loading />}>
         <ReactQueryDevtools initialIsOpen={false} />
-        {accessToken ? <UserInfo /> : <Login />}
+        {/* {accessToken ? <UserInfo /> : <Login />} */}
+        <Login />
         <RouterProvider router={router} />
       </Suspense>
     </QueryClientProvider>
