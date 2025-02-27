@@ -10,6 +10,7 @@ const Box = styled.div`
   padding: 2%;
   border: 1px solid #ddd;
   border-radius: 10px;
+  margin-bottom: 20px;
   background-color: #fff;
   cursor: pointer;
   transition: 0.3s;
@@ -25,9 +26,9 @@ const Box = styled.div`
 const Image = styled.img`
   width: 40%;
   height: 90%;
-  border-radius: 10px;
+  border-radius: 15px;
   object-fit: contain;
-  background-color: #f0f0f0;
+
   flex-shrink: 0;
 `;
 
@@ -51,14 +52,14 @@ const TitleSection = styled.div`
 `;
 
 const Description = styled.p`
-  font-size: 0.8rem;
-  color: #777;
+  font-size: 0.7rem;
+  color: black;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   overflow: hidden;
-  line-height: 1.4em;
+  line-height: 1.3em;
   height: fit-content;
   width: 90%;
 `;
@@ -72,13 +73,13 @@ const InfoWrapper = styled.div`
 `;
 
 const Category = styled.p`
-  font-size: 0.7rem;
-  color: #555;
+  font-size: 0.6rem;
+  color: gray;
 `;
 
 const Affiliation = styled.p`
-  font-size: 0.7rem;
-  color: #777;
+  font-size: 0.6rem;
+  color: gray;
   font-weight: 550;
 `;
 
@@ -99,7 +100,9 @@ function ClubBox({ club, onClick }: ClubBoxProp) {
         <Description>{club.description}</Description>
         <InfoWrapper>
           <span style={{ color: "#777" }}>•</span>
-          <Category>{ClubCategoryKorean[club.category as ClubCategory] || club.category}</Category>
+          <Category>
+            {ClubCategoryKorean[club.category as ClubCategory] || club.category}
+          </Category>
           <span style={{ color: "#777" }}>•</span>
           <Affiliation>{club.affiliation}</Affiliation>
         </InfoWrapper>

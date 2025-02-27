@@ -7,7 +7,7 @@ const Card = styled.div`
   height: 100%;
   box-sizing: border-box;
   padding: 4%;
-  
+  margin-bottom: 20px;
   &:hover {
     background-color: #f9f9f9;
   }
