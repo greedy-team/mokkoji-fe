@@ -11,7 +11,6 @@ import ClubList from "./pages/club/ClubList";
 import ClubDetail from "./pages/club/ClubDetail";
 import Recruitment from "./pages/recruitment/Recruitment";
 import Login from "./pages/Login";
-import UserInfo from "./pages/UserInfo";
 import Favorite from "./pages/favorite/Favorite";
 import { useAuthStore } from "./stores/useAuthStore";
 import SystemMaintenance from "./pages/SystemMaintenance";
@@ -28,6 +27,10 @@ const router = createBrowserRouter([
       },
       {
         path: "clubs",
+        element: <ClubList />,
+      },
+      {
+        path: "clubs/:affiliation",
         element: <ClubList />,
       },
       {

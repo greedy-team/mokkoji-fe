@@ -1,6 +1,6 @@
 export const clubItems = [
-  { name: "중앙 동아리", path: "/club/central" },
-  { name: "가인준 동아리", path: "/club/ga-injun" },
+  { name: "중앙 동아리", path: "/clubs/CENTRAL_CLUB" },
+  { name: "가인준 동아리", path: "/clubs/DEPARTMENT_CLUB" },
 ];
 
 export const recruitItems = [
