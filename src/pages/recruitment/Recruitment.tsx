@@ -7,6 +7,7 @@ import { ClubType } from "@/types/clubType";
 import { sortClubs } from "./utils/sortClubs";
 import { prefetchGetClubs, useGetClubs } from "@/hooks/queries/clubs.query";
 import { useNavigate } from "react-router-dom";
+import { useFilterStore } from "@/stores/useFilterStore"; 
 
 const ITEMS_PER_PAGE = 9; // 페이지당 게시물 수
 
@@ -38,9 +39,9 @@ function Recruitment() {
   const navigate = useNavigate();
   const [sortedClubs, setSortedClubs] = useState<ClubType[]>([]); // 정렬된 동아리 목록
   const [buttonState, setButtonState] = useState<string>("마감일순"); // 정렬 옵션 상태
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
+  const { selectedCategory, searchText, currentPage, setCurrentPage } = useFilterStore();
 
-  const { data } = useGetClubs(currentPage, ITEMS_PER_PAGE);
+  const { data } = useGetClubs(currentPage, ITEMS_PER_PAGE, searchText, selectedCategory);
   const { clubs, pagination } = data.data;
 
   // 정렬 상태 반영
