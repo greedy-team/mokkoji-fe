@@ -105,7 +105,7 @@ function UserInfo() {
     <ModalSection>
       <CloseButton onClick={closeModal}>×</CloseButton>
       <Title>학생 정보</Title>
-      <LogoutButton onClick={logOutClick}>로그 아웃</LogoutButton>
+      <LogoutButton onClick={logOutClick}>로그아웃</LogoutButton>
       <Section>
         <Label>학번</Label>
         <Input value={userInfo.studentId || ""} disabled />

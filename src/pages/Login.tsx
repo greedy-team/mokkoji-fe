@@ -104,8 +104,8 @@ const Login = () => {
 
   return (
     <ModalSection>
-      <Title>모꼬지에 오신 것을 환영합니다</Title>
-      <SubTitle>세종대 동아리와 함께하는 즐거운 대학 생활</SubTitle>
+      <Title> 모꼬지에 오신 것을 환영합니다! 🎉</Title>
+      <SubTitle>모꼬지와 함께 세종대 동아리에서 학우들들과 멋진 경험을 만나보세요.</SubTitle>
       <LoginSection
         loginData={loginData}
         onChange={onChange}
