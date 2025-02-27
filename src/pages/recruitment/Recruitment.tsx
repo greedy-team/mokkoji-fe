@@ -6,9 +6,9 @@ import PaginationComponent from "../../components/Pagination";
 import { ClubType } from "@/types/clubType";
 import { sortClubs } from "./utils/sortClubs";
 import {
-  prefetchGetRecruits,
-  useGetRecruits,
-} from "@/hooks/queries/recruit.query";
+  prefetchGetClubs,
+  useGetClubs,
+} from "@/hooks/queries/clubs.query";
 import { useNavigate } from "react-router-dom";
 
 const ITEMS_PER_PAGE = 9; // 페이지당 게시물 수
@@ -43,7 +43,7 @@ function Recruitment() {
   const [buttonState, setButtonState] = useState<string>("마감일순"); // 정렬 옵션 상태
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
 
-  const { data } = useGetRecruits(currentPage, ITEMS_PER_PAGE);
+  const { data } = useGetClubs(currentPage, ITEMS_PER_PAGE);
   const { clubs, pagination } = data.data;
 
   // 정렬 상태 반영
@@ -55,7 +55,7 @@ function Recruitment() {
   useEffect(() => {
     const nextPage = currentPage + 1;
     if (nextPage <= pagination.totalPages)
-      prefetchGetRecruits(nextPage, ITEMS_PER_PAGE);
+      prefetchGetClubs(nextPage, ITEMS_PER_PAGE);
   }, [currentPage, pagination]);
 
   // 정렬 상태 변경
