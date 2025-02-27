@@ -56,8 +56,8 @@ function ClubList() {
   );
 
   useEffect(() => {
-    return () => {};
-  }, []); //메인화면에서 카데고리 선택시 해당 동아리 리스트만 보여주기 위함함
+    setCurrentPage(1); 
+  }, [selectedCategory, searchText]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

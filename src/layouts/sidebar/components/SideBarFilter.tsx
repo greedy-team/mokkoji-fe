@@ -3,6 +3,7 @@ import FilterLogo from "@/assets/filterLogo.svg?react";
 import { useState } from "react";
 import { useFilterStore } from "@/stores/useFilterStore"; 
 import { ClubCategoryKorean } from "@/components/utils/clubCategoryMapping";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SearchFilter = styled.button`
   width: 90%;
@@ -41,6 +42,8 @@ const DropdownItem = styled.div`
 function SideBarFilter() {
   const { selectedCategory, setSelectedCategory, categories } = useFilterStore();
   const [filterOpen, setFilterOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   function toggleFilter() {
     setFilterOpen(!filterOpen);
@@ -60,6 +63,10 @@ function SideBarFilter() {
               key={category}
               onClick={() => {
                 setSelectedCategory(category);
+
+                if (location.pathname === "/") {
+                  navigate("/clubs");
+                }
               }}
             >
               {ClubCategoryKorean[category]}
