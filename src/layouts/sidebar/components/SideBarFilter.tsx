@@ -14,7 +14,7 @@ const SearchFilter = styled.button`
   padding: 0.2%;
   text-align: center;
   color: #4b5563;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
   font-size: small;
   cursor: pointer;
 `;
