@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { UserLoginType } from "@/types/userInfoType";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { getTokenExpiration } from "@/utils/getTokenExpiration";
 
 interface AuthResponse {
   data: {
@@ -19,7 +20,11 @@ export const saveAuthTokens = async (
     );
     const { accessToken, refreshToken } = response.data.data;
     console.log("토큰 받아와요!", accessToken, refreshToken);
-    useAuthStore.getState().setToken(accessToken, refreshToken, 30); // ✅ 이렇게 직접 접근
+    const expiredTime = getTokenExpiration(accessToken);
+    console.log("만료시간", expiredTime);
+    useAuthStore
+      .getState()
+      .setToken(accessToken, refreshToken, expiredTime || 60); // ✅ 이렇게 직접 접근
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error("Axios Error:", error.response?.data || error.message);
@@ -33,9 +38,15 @@ export const saveAuthTokens = async (
 };
 
 export const expireAuthTokens = async () => {
+  const accessToken = useAuthStore.getState().accessToken;
   try {
     const response: AxiosResponse<AuthResponse> = await axios.post(
-      `api/users/auth/logout`
+      `api/users/auth/logout`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
     );
     useAuthStore.getState().clearToken();
     return response;

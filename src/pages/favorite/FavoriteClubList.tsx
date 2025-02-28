@@ -54,7 +54,7 @@ const ClubRecruitPeriod = styled.p`
 
 function FavoriteClubList() {
   const { data } = useGetFavorite();
-  const favoriteClubs = data.data.clubs.filter((club) => club.isFavorite);
+  const favoriteClubs = data.data.filter((club) => club.isFavorite);
   const navigate = useNavigate();
 
   const onClick = (id: number) => {
