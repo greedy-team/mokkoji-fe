@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useGetClubsDetail } from "@/hooks/queries/clubs.query";
 import useCustomParams from "@/hooks/useCustomParams";
+import DummyLogo from "@/assets/instagram.svg?react";
 
 const Container = styled.div`
   height: 100%;
@@ -39,6 +40,11 @@ const ClubInfo = styled.div`
   margin-left: 50px;
   display: flex;
   flex-direction: column;
+`;
+
+const TitleWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const ClubTitle = styled.h1`
@@ -121,7 +127,14 @@ function ClubDetail() {
     <Container>
       <InfoContainer>
         <ClubInfo>
-          <ClubTitle>{clubDetail.name}</ClubTitle>
+          <TitleWrap>
+            <ClubTitle>{clubDetail.name}</ClubTitle>
+            <DummyLogo 
+              onClick={() => window.open(clubDetail.instagramLink, "_blank")} 
+              width={40} height={40}
+              cursor={"pointer"}
+            />
+          </TitleWrap>
           <TagContainer>
             <Tag>{clubDetail.affiliation}</Tag>
             <Tag>{clubDetail.category}</Tag>
