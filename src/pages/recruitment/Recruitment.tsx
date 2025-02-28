@@ -10,22 +10,30 @@ import { useNavigate } from "react-router-dom";
 import { useFilterStore } from "@/stores/useFilterStore"; 
 import NoResults from "@/pages/NoResults";
 
-const ITEMS_PER_PAGE = 9; // 페이지당 게시물 수
+const ITEMS_PER_PAGE = 12; // 페이지당 게시물 수
 
 const Container = styled.div`
-  width: 78vw;
-  height: 100%;
+  width: 100%;
+  height: fit-content;
   position: relative;
+
+  @media (max-width: 770px) {
+    margin-top: 60px;
+  }
 `;
 
 const ClubList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 32%);
-  grid-template-rows: repeat(3, 30%);
   width: 100%;
-  height: 80%;
+  height: fit-content;
   justify-content: space-evenly;
   align-content: space-evenly;
+  margin-bottom: 2%;
+
+  @media (max-width: 770px) {
+    grid-template-columns: repeat(2, 48%);
+  }
 `;
 
 const ClubCardWrapper = styled.div`
@@ -35,6 +43,7 @@ const ClubCardWrapper = styled.div`
   border-radius: 10px;
   background-color: white;
   cursor: pointer;
+  margin: 5px 0;
 `;
 
 function Recruitment() {
@@ -76,7 +85,8 @@ function Recruitment() {
 
   return (
     <Container>
-      <SortOption buttonState={buttonState} onSortChange={handleSortChange} />
+      {/* 기능추가 전까지 주석처리 */}
+      {/*<SortOption buttonState={buttonState} onSortChange={handleSortChange} />*/}
 
       {sortedClubs.length === 0 ? (
         <NoResults />

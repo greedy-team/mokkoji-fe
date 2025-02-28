@@ -27,6 +27,10 @@ const ModalContainer = styled.div`
   border-radius: 10px;
   align-items: center;
   justify-content: center;
+  
+  @media (max-width: 770px) {
+    width: 70%;
+  }
 `;
 
 const CloseButton = styled.button`

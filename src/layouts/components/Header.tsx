@@ -14,6 +14,11 @@ const HeaderContainer = styled.div`
   padding: 5px 10px 5px;
   box-sizing: border-box;
   border-bottom: 1px solid #e5e7eb;
+
+  @media (max-width: 770px) {
+    position: fixed;
+    z-index: 3;
+  }
 `;
 
 const HeaderContents = styled.div`
