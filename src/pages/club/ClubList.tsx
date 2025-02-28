@@ -8,19 +8,24 @@ import { useFilterStore } from "@/stores/useFilterStore";
 import { usePrefetchClubs } from "@/hooks/usePrefetchClubs";
 import NoResults from "@/pages/NoResults";
 
-const ITEMS_PER_PAGE = 9;
+const ITEMS_PER_PAGE = 12;
+
+const ClubWrapper = styled.div`
+  @media (max-width: 770px) {
+    margin-top: 60px;
+  }
+`;
 
 const ClubGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 30%);
-  grid-template-rows: repeat(3, 30%);
   width: 100%;
   height: 80%;
   justify-content: space-evenly;
   align-content: space-evenly;
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+  @media (max-width: 770px) {
+    grid-template-columns: repeat(1, 90%);
   }
 `;
 
@@ -66,7 +71,7 @@ function ClubList() {
       {clubs.length === 0 ? (
         <NoResults />
       ) : (
-        <>
+        <ClubWrapper>
           <ClubGrid>
             {clubs.map((club) => (
               <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
@@ -82,7 +87,7 @@ function ClubList() {
               />
             )}
           </PaginateSection>
-        </>
+        </ClubWrapper>
       )}
     </>
   );
