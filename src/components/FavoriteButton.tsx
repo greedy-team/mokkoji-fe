@@ -18,7 +18,7 @@ const FavoriteButtonContainer = styled.button`
 `;
 
 interface FavoriteButtonProps {
-  club: ClubType;
+  club: Pick<ClubType, "isFavorite" | "id">;
 }
 
 function FavoriteButton({ club }: FavoriteButtonProps) {
