@@ -27,7 +27,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const { data } = await axios.post(
-          "/api/users/auth/refresh",
+          `${import.meta.env.VITE_API_URL}/api/users/auth/refresh`,
           {},
           {
             headers: {
