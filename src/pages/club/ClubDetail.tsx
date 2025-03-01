@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useGetClubsDetail } from "@/hooks/queries/clubs.query";
 import useCustomParams from "@/hooks/useCustomParams";
 import DummyLogo from "@/assets/instagram.svg?react";
+import FavoriteButton from "@/components/FavoriteButton";
 
 const Container = styled.div`
   height: 100%;
@@ -44,7 +45,8 @@ const ClubInfo = styled.div`
 
 const TitleWrap = styled.div`
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 3%;
 `;
 
 const ClubTitle = styled.h1`
@@ -129,10 +131,14 @@ function ClubDetail() {
         <ClubInfo>
           <TitleWrap>
             <ClubTitle>{clubDetail.name}</ClubTitle>
-            <DummyLogo 
-              onClick={() => window.open(clubDetail.instagramLink, "_blank")} 
-              width={40} height={40}
+            <DummyLogo
+              onClick={() => window.open(clubDetail.instagramLink, "_blank")}
+              width={25}
+              height={25}
               cursor={"pointer"}
+            />
+            <FavoriteButton
+              club={{ id: clubDetail.id, isFavorite: clubDetail.isFavorite }}
             />
           </TitleWrap>
           <TagContainer>
