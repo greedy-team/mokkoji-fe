@@ -3,7 +3,7 @@ import { useAuthStore, isTokenExpired } from "@/stores/useAuthStore";
 import { getTokenExpiration } from "@/utils/getTokenExpiration";
 
 const api = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL}/api`,
+  baseURL: `${import.meta.env.VITE_API_URL}/api/dev`,
 });
 
 api.interceptors.request.use(
@@ -27,7 +27,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const { data } = await axios.post(
-          `${import.meta.env.VITE_API_URL}/api/users/auth/refresh`,
+          `${import.meta.env.VITE_API_URL}/api/dev/users/auth/refresh`,
           {},
           {
             headers: {

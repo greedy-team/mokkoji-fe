@@ -11,7 +11,7 @@ interface AuthResponse {
 }
 
 const apiUsers = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL}/api/users`,
+  baseURL: `${import.meta.env.VITE_API_URL}/api/dev/users`,
 });
 
 export const saveAuthTokens = async (
