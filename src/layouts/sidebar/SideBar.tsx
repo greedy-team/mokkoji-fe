@@ -3,7 +3,7 @@ import SideBarSearch from "./components/SideBarSearch";
 import SideBarContentList from "./components/SideBarContentList";
 import { useState } from "react";
 
-const SideBarContainer = styled.div<{ isOpen: boolean }>`
+const SideBarContainer = styled.div<{ $isOpen: boolean }>`
   padding: 1%;
   width: 22%;
   background-color: #f9fafb;
@@ -18,14 +18,15 @@ const SideBarContainer = styled.div<{ isOpen: boolean }>`
     width: 40%;
     height: calc(100% - 60px);
     margin-top: 60px;
-    transform: ${({ isOpen }) => (isOpen ? "translateX(0)" : "translateX(-100%)")};
+    transform: ${({ $isOpen }) =>
+      $isOpen ? "translateX(0)" : "translateX(-100%)"};
   }
 `;
 
-const ToggleButton = styled.button<{ isOpen: boolean }>`
+const ToggleButton = styled.button<{ $isOpen: boolean }>`
   position: fixed;
   top: 50%;
-  left: ${({ isOpen }) => (isOpen ? "40%" : "0%")};
+  left: ${({ $isOpen }) => ($isOpen ? "40%" : "0%")};
   z-index: 9999;
   background: none;
   border: none;
@@ -49,10 +50,10 @@ function SideBar() {
 
   return (
     <>
-      <ToggleButton onClick={() => setIsOpen(!isOpen)} isOpen={isOpen}>
+      <ToggleButton onClick={() => setIsOpen(!isOpen)} $isOpen={isOpen}>
         {isOpen ? "<" : ">"}
       </ToggleButton>
-      <SideBarContainer isOpen={isOpen}>
+      <SideBarContainer $isOpen={isOpen}>
         <SideBarSearch />
         <SideBarContentList />
       </SideBarContainer>

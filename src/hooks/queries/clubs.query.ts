@@ -54,7 +54,7 @@ export const prefetchGetClubs = async (
 };
 
 export const useGetClubsDetail = (id: string) => {
-  console.log(id);
+
   return useSuspenseQuery<ClubDetailResponseType>({
     queryKey: ["clubs", id],
     queryFn: () => getClubItemsDetail(id),

@@ -17,7 +17,7 @@ export const useOptimisticMutation = <TData, TVariables = void>(
   return useMutation({
     mutationKey: queryKey,
     mutationFn,
-    retry: 1, // ✅ 네트워크 오류 시 최대 1번 재시도
+    retry: 1, 
 
     onMutate: async (variables) => {
       await queryClient.cancelQueries({ queryKey });
@@ -31,7 +31,6 @@ export const useOptimisticMutation = <TData, TVariables = void>(
     },
 
     onError: (err, _variables, context) => {
-      alert("❌ Mutation 실패:");
       console.error("❌ Mutation 실패:", err);
       if (context?.oldData) {
         queryClient.setQueryData(queryKey, context.oldData); // 안전 롤백
@@ -40,9 +39,7 @@ export const useOptimisticMutation = <TData, TVariables = void>(
 
     onSettled: (_data, error) => {
       if (error) {
-        alert("⚠️ 에러 발생 - 캐시 무효화");
-      } else {
-        alert("✅ 성공 - 캐시 동기화");
+        throw new Error("실패...");
       }
       queryClient.invalidateQueries({ queryKey });
       queryClient.invalidateQueries({ queryKey: queryKey2 });

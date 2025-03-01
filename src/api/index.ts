@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useAuthStore, isTokenExpired } from "@/stores/useAuthStore";
+import { getTokenExpiration } from "@/utils/getTokenExpiration";
 
 const api = axios.create({
   baseURL: "/api",
@@ -11,13 +12,11 @@ api.interceptors.request.use(
 
     if (accessToken && !isTokenExpired()) {
       config.headers.Authorization = `Bearer ${accessToken}`;
-    } 
-
+    }
     return config;
   },
   (error) => Promise.reject(error)
 );
-
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -27,19 +26,25 @@ api.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        const { data } = await axios.post("/users/auth/refresh", {
-          refreshToken,
-        });
+        const { data } = await axios.post(
+          "/api/users/auth/refresh",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${refreshToken}`,
+            },
+          }
+        );
 
-        console.log("리프레시 토큰 발급!", refreshToken);
+        const newToken = data.data.accessToken;
+        const expiredTime = getTokenExpiration(newToken);
+        setAccessToken(newToken, expiredTime || 59);
+        error.config.headers.Authorization = `Bearer ${newToken}`;
 
-        setAccessToken(data.accessToken, 30);
-        originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
-
-        return api(originalRequest);
+        return api(error.config);
       } catch {
-        console.error("Refresh token expired, logging out...");
         clearToken();
+        throw new Error("Refresh token expired, logging out...");
       }
     }
     return Promise.reject(error);

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import ClubCard from "./components/ClubCard";
 import styled from "styled-components";
-import SortOption from "./components/SortOption";
 import PaginationComponent from "../../components/Pagination";
 import { ClubType } from "@/types/clubType";
 import { sortClubs } from "./utils/sortClubs";
 import { prefetchGetClubs, useGetClubs } from "@/hooks/queries/clubs.query";
 import { useNavigate } from "react-router-dom";
-import { useFilterStore } from "@/stores/useFilterStore"; 
+import { useFilterStore } from "@/stores/useFilterStore";
 import NoResults from "@/pages/NoResults";
 
 const ITEMS_PER_PAGE = 12; // 페이지당 게시물 수
@@ -49,10 +48,16 @@ const ClubCardWrapper = styled.div`
 function Recruitment() {
   const navigate = useNavigate();
   const [sortedClubs, setSortedClubs] = useState<ClubType[]>([]); // 정렬된 동아리 목록
-  const [buttonState, setButtonState] = useState<string>("마감일순"); // 정렬 옵션 상태
-  const { selectedCategory, searchText, currentPage, setCurrentPage } = useFilterStore();
+  const [buttonState] = useState<string>("마감일순"); // 정렬 옵션 상태
+  const { selectedCategory, searchText, currentPage, setCurrentPage } =
+    useFilterStore();
 
-  const { data } = useGetClubs(currentPage, ITEMS_PER_PAGE, searchText, selectedCategory);
+  const { data } = useGetClubs(
+    currentPage,
+    ITEMS_PER_PAGE,
+    searchText,
+    selectedCategory
+  );
   const { clubs, pagination } = data.data;
 
   // 정렬 상태 반영
@@ -70,9 +75,9 @@ function Recruitment() {
   }, [currentPage, pagination]);
 
   // 정렬 상태 변경
-  function handleSortChange(value: string) {
-    setButtonState(value);
-  }
+  // function handleSortChange(value: string) {
+  //   setButtonState(value);
+  // }
 
   // 현재 페이지 번호 상태 변경
   function handlePageChange(page: number) {
@@ -106,7 +111,6 @@ function Recruitment() {
           />
         </>
       )}
-      
     </Container>
   );
 }

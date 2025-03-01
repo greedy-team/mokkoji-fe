@@ -10,47 +10,57 @@ interface AuthResponse {
   };
 }
 
+const apiUsers = axios.create({
+  baseURL: "/api/users",
+});
+
 export const saveAuthTokens = async (
   credentials: UserLoginType
 ): Promise<void> => {
   try {
-    const response: AxiosResponse<AuthResponse> = await axios.post(
-      `api/users/auth/login`,
+    const response: AxiosResponse<AuthResponse> = await apiUsers.post(
+      `/auth/login`,
       credentials
     );
     const { accessToken, refreshToken } = response.data.data;
-    console.log("토큰 받아와요!", accessToken, refreshToken);
+
     const expiredTime = getTokenExpiration(accessToken);
-    console.log("만료시간", expiredTime);
+
     useAuthStore
       .getState()
-      .setToken(accessToken, refreshToken, expiredTime || 60); // ✅ 이렇게 직접 접근
+      .setToken(accessToken, refreshToken, expiredTime || 59); // ✅ 이렇게 직접 접근
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.error("Axios Error:", error.response?.data || error.message);
+
       alert("로그인 실패!");
       throw new Error("로그인 실패");
     }
-    console.error("Unexpected Error:", error);
+
     alert("unknown Error!");
     throw new Error("알 수 없는 오류 발생");
   }
 };
 
-export const expireAuthTokens = async () => {
+export const expireAuthTokens = async (): Promise<void> => {
   const accessToken = useAuthStore.getState().accessToken;
+  if (!accessToken) {
+    alert("토큰 미존재!");
+    return;
+  }
   try {
-    const response: AxiosResponse<AuthResponse> = await axios.post(
-      `api/users/auth/logout`,
+    await apiUsers.post(
+      `/auth/logout`,
+      {},
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       }
     );
+
     useAuthStore.getState().clearToken();
-    return response;
-  } catch {
+  } catch (error) {
+    console.error("로그아웃 실패:", error);
     alert("로그아웃 실패!");
     throw new Error("로그아웃 에러");
   }

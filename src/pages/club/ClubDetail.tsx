@@ -20,11 +20,11 @@ const InfoContainer = styled.div`
   justify-content: space-between;
 `;
 
-const ClubImage = styled.div<{ image?: string }>`
+const ClubImage = styled.div<{ $image?: string }>`
   width: 200px;
   height: 200px;
   background-color: #ddd;
-  background-image: ${({ image }) => (image ? `url(${image})` : "none")};
+  background-image: ${({ $image }) => ($image ? `url(${$image})` : "none")};
   background-size: cover;
   background-position: center;
   display: flex;
@@ -156,7 +156,7 @@ function ClubDetail() {
           </RecruitmentInfo>
         </ClubInfo>
 
-        <ClubImage image={clubDetail.imageURL}>
+        <ClubImage $image={clubDetail.imageURL}>
           {!clubDetail.imageURL && "Image"}
         </ClubImage>
       </InfoContainer>

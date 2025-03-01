@@ -40,7 +40,7 @@ export const useAuthStore = create<AuthState>()(
 );
 
 export const isTokenExpired = (): boolean => {
-  const { expiresAt } = useAuthStore.getState();
+  const expiresAt = useAuthStore.getState().expiresAt;
   return !expiresAt || Date.now() > expiresAt;
 };
 
