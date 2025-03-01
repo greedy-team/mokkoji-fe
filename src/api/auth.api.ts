@@ -19,7 +19,7 @@ export const saveAuthTokens = async (
 ): Promise<void> => {
   try {
     const response: AxiosResponse<AuthResponse> = await apiUsers.post(
-      `/auth/login`,
+      `auth/login`,
       credentials
     );
     const { accessToken, refreshToken } = response.data.data;
@@ -48,7 +48,7 @@ export const expireAuthTokens = async (): Promise<void> => {
   }
   try {
     await apiUsers.post(
-      `/auth/logout`,
+      `auth/logout`,
       {},
       {
         headers: {
