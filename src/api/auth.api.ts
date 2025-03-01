@@ -11,7 +11,7 @@ interface AuthResponse {
 }
 
 const apiUsers = axios.create({
-  baseURL: "/api/users",
+  baseURL: `${import.meta.env.VITE_API_URL}/api/users`,
 });
 
 export const saveAuthTokens = async (
@@ -31,7 +31,6 @@ export const saveAuthTokens = async (
       .setToken(accessToken, refreshToken, expiredTime || 59); // ✅ 이렇게 직접 접근
   } catch (error) {
     if (axios.isAxiosError(error)) {
-
       alert("로그인 실패!");
       throw new Error("로그인 실패");
     }
