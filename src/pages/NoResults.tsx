@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import NoResult from "@/assets/noResults.svg?react";
+import NoResult from "@/assets/NoResults.svg?react";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; 
+  justify-content: flex-start;
   margin-top: 10%;
   align-items: center;
   text-align: center;
@@ -29,7 +29,10 @@ function NoResults() {
   return (
     <Container>
       <NoResult width={150} height={150} />
-      <Message><br/>검색 결과를 찾을 수 없습니다</Message>
+      <Message>
+        <br />
+        검색 결과를 찾을 수 없습니다
+      </Message>
       <SubMessage>
         입력하신 검색어에 대한 검색 결과가 없습니다 👀 <br />
         다른 검색어를 입력해 주세요!
