@@ -23,7 +23,6 @@ export const getClubItems = async (
       recruitStatus,
     },
   });
-  console.log("clubData!", data);
 
   return data;
 };
@@ -33,6 +32,6 @@ export const getClubItemsDetail = async (
 ): Promise<ClubDetailResponseType> => {
   const { data } = await api.get(`/clubs/${id}`);
 
-  console.log("clubDetailData:", data);
+
   return data;
 };

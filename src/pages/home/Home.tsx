@@ -29,9 +29,8 @@ const BackgroundImage = styled.img`
   height: 55vh;
   max-height: 500px;
   object-fit: fill;
-  filter: brightness(85%); 
+  filter: brightness(85%);
   transition: opacity 1s ease-in-out; /* 부드러운 전환 효과 */
-  
 `;
 
 const Overlay = styled.div`
@@ -40,7 +39,7 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(70, 69, 69, 0.4); 
+  background: rgba(70, 69, 69, 0.4);
 `;
 
 const HomeLogoSection = styled.div`
@@ -83,7 +82,7 @@ const ExploreButton = styled(Link)`
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  text-decoration: none; 
+  text-decoration: none;
   margin-top: 20px;
   &:hover {
     background-color: #333;
@@ -120,7 +119,7 @@ const CategorySection = styled.div`
 const CategoryButton = styled.button`
   flex: 0 0 calc((100% - 30px) / 3);
   height: 150px;
-  background-color:rgb(249, 249, 249);
+  background-color: rgb(249, 249, 249);
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 1rem;
@@ -134,7 +133,7 @@ const CategoryButton = styled.button`
   justify-content: center;
   gap: 10px;
   &:hover {
-    background-color:rgb(217, 217, 217);
+    background-color: rgb(217, 217, 217);
   }
 `;
 
@@ -157,15 +156,23 @@ function Home() {
   const { setSelectedCategory } = useFilterStore();
 
   const categories = [
-    { name: "학술/교양", img: Academic, filter: ClubCategory.ACADEMIC_CULTURAL },
+    {
+      name: "학술/교양",
+      img: Academic,
+      filter: ClubCategory.ACADEMIC_CULTURAL,
+    },
     { name: "문화/예술", img: Cultural, filter: ClubCategory.CULTURAL_ART },
-    { name: "봉사/사회", img: Volunteer, filter: ClubCategory.VOLUNTEER_SOCIAL },
+    {
+      name: "봉사/사회",
+      img: Volunteer,
+      filter: ClubCategory.VOLUNTEER_SOCIAL,
+    },
     { name: "체육", img: Sports, filter: ClubCategory.SPORTS },
     { name: "종교", img: Religious, filter: ClubCategory.RELIGIOUS },
     { name: "친목", img: Group, filter: ClubCategory.SOCIAL },
     { name: "기타", img: Other, filter: ClubCategory.OTHER },
   ];
-  
+
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -174,11 +181,13 @@ function Home() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
+      setCurrentImageIndex(
+        (prevIndex) => (prevIndex + 1) % backgroundImages.length
+      );
     }, 5000); // 5초마다 변경
 
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 해제
-  }, []);
+  }, [backgroundImages.length]);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -196,7 +205,7 @@ function Home() {
   return (
     <>
       <HomeContainer>
-      {backgroundImages.map((image, index) => (
+        {backgroundImages.map((image, index) => (
           <BackgroundImage
             key={index}
             src={image}
@@ -204,9 +213,12 @@ function Home() {
             style={{ opacity: index === currentImageIndex ? 1 : 0 }}
           />
         ))}
-        <Overlay /> 
+        <Overlay />
         <HomeLogoSection>
-          <HomeTitle> <Mokkoji width={180} height={150} /> </HomeTitle>
+          <HomeTitle>
+            {" "}
+            <Mokkoji width={180} height={150} />{" "}
+          </HomeTitle>
           <HomeDescription>
             세종대의 다양한 동아리를 한곳에서 만나보세요. <br />
             관심 있는 동아리를 찾고, 새로운 사람들과 함께하세요! <br />
@@ -220,15 +232,15 @@ function Home() {
       <CategoryWrapper>
         <ScrollButton onClick={() => scroll("left")}>{"<"}</ScrollButton>
         <CategorySection ref={scrollRef}>
-        {categories.map((category) => (
-          <CategoryButton
-            key={category.name}
-            onClick={() => handleCategoryClick(category.filter)}
-          >
-            <CategoryImage src={category.img} alt={category.name} />
-            {category.name}
-          </CategoryButton>
-        ))}
+          {categories.map((category) => (
+            <CategoryButton
+              key={category.name}
+              onClick={() => handleCategoryClick(category.filter)}
+            >
+              <CategoryImage src={category.img} alt={category.name} />
+              {category.name}
+            </CategoryButton>
+          ))}
         </CategorySection>
         <ScrollButton onClick={() => scroll("right")}>{">"}</ScrollButton>
       </CategoryWrapper>
