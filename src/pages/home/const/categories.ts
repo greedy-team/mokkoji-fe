@@ -1,6 +1,5 @@
 import Academic from "@/assets/category/Academic.svg";
 import Cultural from "@/assets/category/Cultural.svg";
-import Group from "@/assets/category/Group.svg";
 import Other from "@/assets/category/Other.svg";
 import Religious from "@/assets/category/Religious.svg";
 import Sports from "@/assets/category/Sports.svg";
@@ -22,6 +21,5 @@ export const categories = [
   },
   { name: "체육", img: Sports, filter: ClubCategory.SPORTS },
   { name: "종교", img: Religious, filter: ClubCategory.RELIGIOUS },
-  { name: "친목", img: Group, filter: ClubCategory.SOCIAL },
   { name: "기타", img: Other, filter: ClubCategory.OTHER },
 ];
