@@ -4,24 +4,20 @@ import { useState } from "react";
 import { useFilterStore } from "@/stores/useFilterStore"; 
 import { ClubCategoryKorean } from "@/components/utils/clubCategoryMapping";
 import { useNavigate, useLocation } from "react-router-dom";
+import { ClubCategory } from "@/types/clubType";
 
-interface SearchFilterProps {
-  selected: boolean;
-}
-
-const SearchFilter = styled.button<SearchFilterProps>`
+const SearchFilter = styled.button`
   width: 90%;
   height: 30px;
-  border: 1px solid ${({ selected }) => (selected ? "#D3D3D3" : "#9ca3af")};
+  border: 1px solid #9ca3af;
   border-radius: 5px;
-  background-color: ${({ selected }) => (selected ? "#D3D3D3" : "white")};
+  background-color: white;
   padding: 0.2%;
   text-align: center;
-  color: ${({ selected }) => (selected ? "4b5563" : "#4b5563")};
+  color: #4b5563;
   margin-bottom: 20px;
   font-size: small;
   cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 `;
 
 const Dropdown = styled.div`
@@ -39,6 +35,7 @@ const Dropdown = styled.div`
 const DropdownItem = styled.div`
   padding: 5px;
   cursor: pointer;
+  text-align: center;
   &:hover {
     background-color: #f3f4f6;
   }
@@ -56,16 +53,22 @@ function SideBarFilter() {
 
   return (
     <>
-      <SearchFilter
-        onClick={toggleFilter}
-        selected={!!selectedCategory}
-      >
+      <SearchFilter onClick={toggleFilter}>
         <FilterLogo width={12} height={12} style={{ marginRight: 5 }} />
         {selectedCategory ? ClubCategoryKorean[selectedCategory] : "상세 필터"}
       </SearchFilter>
 
       {filterOpen && (
         <Dropdown>
+          <DropdownItem
+            key="ALL"
+            onClick={() => {
+            setSelectedCategory(ClubCategory.ALL); 
+            navigate("/clubs");
+            }}
+          >
+          전체
+          </DropdownItem>
           {categories.map((category) => (
             <DropdownItem
               key={category}
