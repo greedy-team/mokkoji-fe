@@ -35,7 +35,6 @@ const Dropdown = styled.div`
 const DropdownItem = styled.div`
   padding: 5px;
   cursor: pointer;
-  text-align: center;
   &:hover {
     background-color: #f3f4f6;
   }
