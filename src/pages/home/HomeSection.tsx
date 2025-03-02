@@ -86,11 +86,11 @@ interface HomeSectionProps {
 function HomeSection({ currentImageIndex }: HomeSectionProps) {
   const backgroundImages = [sejong1, sejong, sejong2];
 
+  const lazyImages = backgroundImages.map((image) => useLazyImg({ src: image }));
+
   return (
     <HomeContainer>
-    {backgroundImages.map((image, index) => {
-      const { imgSrc, imgRef } = useLazyImg({ src: image });
-      return (
+      {lazyImages.map(({ imgSrc, imgRef }, index) => (
         <BackgroundImage
           key={index}
           ref={imgRef}
@@ -98,9 +98,7 @@ function HomeSection({ currentImageIndex }: HomeSectionProps) {
           alt={`배경 이미지 ${index + 1}`}
           style={{ opacity: index === currentImageIndex ? 1 : 0 }}
         />
-      )
-    })}
-
+      ))}
       <Overlay />
       <HomeLogoSection>
         <HomeTitle>
