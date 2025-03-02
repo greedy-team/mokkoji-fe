@@ -8,6 +8,7 @@ import { prefetchGetClubs, useGetClubs } from "@/hooks/queries/clubs.query";
 import { useNavigate } from "react-router-dom";
 import { useFilterStore } from "@/stores/useFilterStore";
 import NoResults from "@/pages/NoResults";
+import Loading from "@/pages/Loading";
 
 const ITEMS_PER_PAGE = 12; // 페이지당 게시물 수
 
@@ -49,16 +50,23 @@ function Recruitment() {
   const navigate = useNavigate();
   const [sortedClubs, setSortedClubs] = useState<ClubType[]>([]); // 정렬된 동아리 목록
   const [buttonState] = useState<string>("마감일순"); // 정렬 옵션 상태
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
   const { selectedCategory, searchText, currentPage, setCurrentPage } =
     useFilterStore();
 
-  const { data } = useGetClubs(
+  const { data, isLoading  } = useGetClubs(
     currentPage,
     ITEMS_PER_PAGE,
     searchText,
     selectedCategory
   );
   const { clubs, pagination } = data.data;
+
+  useEffect(() => {
+    if (!isLoading) {
+      setIsInitialLoading(false); // 로딩이 끝나면 초기 로딩 상태를 해제
+    }
+  }, [isLoading]);
 
   // 정렬 상태 반영
   useEffect(() => {
@@ -88,14 +96,18 @@ function Recruitment() {
     navigate(`/clubs/${club.id}`);
   }
 
+  if (isInitialLoading) {
+    return <Loading />;
+  }
+
   return (
     <Container>
       {/* 기능추가 전까지 주석처리 */}
       {/*<SortOption buttonState={buttonState} onSortChange={handleSortChange} />*/}
 
-      {sortedClubs.length === 0 ? (
-        <NoResults />
-      ) : (
+        {sortedClubs.length === 0 ? (
+          <NoResults />
+        ) : (
         <>
           <ClubList>
             {sortedClubs.map((club) => (
