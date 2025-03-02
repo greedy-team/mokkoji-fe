@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ClubType } from "@/types/clubType";
 import FavoriteButton from "@/components/FavoriteButton";
+import { STATUS } from "../const/STATUS";
 
 const Card = styled.div`
   width: 100%;
@@ -57,13 +58,6 @@ const TitleSection = styled.div`
 interface ClubProp {
   club: ClubType;
 }
-
-// 상태값을 상수로 정의
-const STATUS = {
-  CLOSED: { text: "모집마감", backColor: "#D1D5DB", fontColor: "#9CA3AF" },
-  URGENT: { text: "마감임박", backColor: "#FEE2E2", fontColor: "#DC2626" },
-  OPEN: { text: "모집중", backColor: "#DCFCE7", fontColor: "#16A34A" },
-};
 
 function ClubCard({ club }: ClubProp) {
   // 모집 상태 반환 함수
