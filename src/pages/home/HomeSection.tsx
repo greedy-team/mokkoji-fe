@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import sejong from "@/assets/sejong.png";
 import sejong1 from "@/assets/sejong1.jpg";
 import sejong2 from "@/assets/sejong2.jpg";
+import { useLazyImg } from "@/hooks/useLazyImg";
 
 const HomeContainer = styled.div`
   justify-content: center;
@@ -87,14 +88,19 @@ function HomeSection({ currentImageIndex }: HomeSectionProps) {
 
   return (
     <HomeContainer>
-      {backgroundImages.map((image, index) => (
+    {backgroundImages.map((image, index) => {
+      const { imgSrc, imgRef } = useLazyImg({ src: image });
+      return (
         <BackgroundImage
           key={index}
-          src={image}
+          ref={imgRef}
+          src={imgSrc || ""}
           alt={`배경 이미지 ${index + 1}`}
           style={{ opacity: index === currentImageIndex ? 1 : 0 }}
         />
-      ))}
+      )
+    })}
+
       <Overlay />
       <HomeLogoSection>
         <HomeTitle>
