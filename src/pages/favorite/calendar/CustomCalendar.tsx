@@ -29,7 +29,7 @@ export const CustomCalendar = styled(Calendar)`
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     white-space: nowrap;
   }
 
@@ -44,7 +44,7 @@ export const CustomCalendar = styled(Calendar)`
     opacity: 0.5;
   }
   .react-calendar__tile--active {
-    background-color: #e0e0e0 !important; 
+    background-color: #e0e0e0 !important;
     color: black !important;
     border-radius: 8px;
   }
