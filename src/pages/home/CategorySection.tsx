@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { categories } from "./const/categories";
+import { useLazyImg } from "@/hooks/useLazyImg";
 
 const CategoryTitle = styled.p`
   font-size: 1.5rem;
@@ -85,21 +86,29 @@ function CategorySection() {
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
+  
   return (
     <>
       <CategoryTitle>동아리 카테고리</CategoryTitle>
       <CategoryWrapper>
         <ScrollButton onClick={() => scroll("left")}>{"<"}</ScrollButton>
         <CategoryContainer ref={scrollRef}>
-          {categories.map((category) => (
-            <CategoryButton
-              key={category.name}
-              onClick={() => handleCategoryClick(category.filter)}
-            >
-              <CategoryImage src={category.img} alt={category.name} />
-              {category.name}
-            </CategoryButton>
-          ))}
+          {categories.map((category) => {
+            const { imgSrc, imgRef } = useLazyImg({ src: category.img });
+            return (
+              <CategoryButton
+                key={category.name}
+                onClick={() => handleCategoryClick(category.filter)}
+              >
+                <CategoryImage
+                  ref={imgRef}
+                  src={imgSrc || ""}
+                  alt={category.name}
+                />
+                {category.name}
+              </CategoryButton>
+            );
+          })}
         </CategoryContainer>
         <ScrollButton onClick={() => scroll("right")}>{">"}</ScrollButton>
       </CategoryWrapper>
