@@ -83,11 +83,18 @@ const LogoutButton = styled.button`
 
 function UserInfo() {
   const { closeModal } = useModalStore();
-  const { data } = useGetUser();
+  const { data, error, isError } = useGetUser();
+
   const userInfo = data.data.user;
 
   const [email, setEmail] = useState(userInfo.email);
   const { mutate } = useUserInfoEdit(email);
+
+  if (isError) {
+    console.log(error?.message);
+    throw new Error(error?.message);
+  }
+
   const logOutClick = () => {
     expireAuthTokens();
     closeModal();
