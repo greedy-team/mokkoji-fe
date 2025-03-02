@@ -5,33 +5,30 @@ interface UseLazyImgProps {
 }
 
 export function useLazyImg({ src }: UseLazyImgProps) {
-    const [imgSrc, setImgSrc] = useState<string | null>(null);
+    const [imgSrc, setImgSrc] = useState<string | undefined>(undefined);
     const imgRef = useRef<HTMLImageElement | null>(null);
 
     useEffect(() => {
         let observer: IntersectionObserver | null = null;
 
-        if (imgRef.current && !imgSrc) {
-            observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        setImgSrc(src);
-                        observer?.unobserve(imgRef.current!);
-                    }
-                }, { threshold: [0.25] }
-            );
+        observer = new IntersectionObserver(
+            async ([entry], observer) => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                setImgSrc(src);
+                observer.unobserve(entry.target);
+            }, { threshold: [0.1] }
+        );
 
-            if(imgRef.current) {
-                observer.observe(imgRef.current);
-            }
-        }
+        observer.observe(imgRef.current!);
 
         return () => {
             if (observer && imgRef.current) {
               observer.disconnect();
             }
-          };
-    }, [imgRef, imgSrc, src]);
+        };
+    }, [src]);
 
     return { imgSrc, imgRef };
 }

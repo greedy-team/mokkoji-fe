@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import Mokkoji from "@/assets/MokkojiW.svg?react";
 import { Link } from "react-router-dom";
-import sejong from "@/assets/sejong.png";
-import sejong1 from "@/assets/sejong1.jpg";
+import sejong from "@/assets/sejong.webp";
+import sejong1 from "@/assets/sejong1.webp";
 import sejong2 from "@/assets/sejong2.jpg";
 import { useLazyImg } from "@/hooks/useLazyImg";
+import { useEffect, useState } from "react";
 
 const HomeContainer = styled.div`
   justify-content: center;
@@ -19,8 +20,7 @@ const BackgroundImage = styled.img`
   height: 55vh;
   max-height: 500px;
   object-fit: fill;
-  filter: brightness(85%);
-  transition: opacity 1s ease-in-out;
+  filter: brightness(70%);
 `;
 
 const Overlay = styled.div`
@@ -63,7 +63,6 @@ const HomeDescription = styled.p`
 `;
 
 const ExploreButton = styled(Link)`
-  background-color: black;
   color: white;
   font-size: 1rem;
   font-weight: regular;
@@ -79,26 +78,25 @@ const ExploreButton = styled(Link)`
   }
 `;
 
-interface HomeSectionProps {
-  currentImageIndex: number;
-}
-
-function HomeSection({ currentImageIndex }: HomeSectionProps) {
+function HomeSection() {
   const backgroundImages = [sejong1, sejong, sejong2];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const lazyImages = backgroundImages.map((image) => useLazyImg({ src: image }));
+  const {imgSrc, imgRef} = useLazyImg({ src: backgroundImages[currentImageIndex] });
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex(
+        (prevIndex) => (prevIndex + 1) % backgroundImages.length
+      );
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [backgroundImages.length]);
+  
   return (
     <HomeContainer>
-      {lazyImages.map(({ imgSrc, imgRef }, index) => (
-        <BackgroundImage
-          key={index}
-          ref={imgRef}
-          src={imgSrc || ""}
-          alt={`배경 이미지 ${index + 1}`}
-          style={{ opacity: index === currentImageIndex ? 1 : 0 }}
-        />
-      ))}
+      <BackgroundImage ref={imgRef} src={imgSrc} alt={`배경 이미지`} />
       <Overlay />
       <HomeLogoSection>
         <HomeTitle>

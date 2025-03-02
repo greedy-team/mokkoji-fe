@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { categories } from "./const/categories";
-import { useLazyImg } from "@/hooks/useLazyImg";
 
 const CategoryTitle = styled.p`
   font-size: 1.5rem;
@@ -73,8 +72,6 @@ function CategorySection() {
 
   const { setSelectedCategory } = useFilterStore();
 
-  const lazyImages = categories.map((category) => useLazyImg({ src: category.img }));
-
   const handleCategoryClick = (category: ClubCategory) => {
     setSelectedCategory(category);
     navigate("/clubs");
@@ -88,28 +85,22 @@ function CategorySection() {
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
-  
+
   return (
     <>
       <CategoryTitle>동아리 카테고리</CategoryTitle>
       <CategoryWrapper>
         <ScrollButton onClick={() => scroll("left")}>{"<"}</ScrollButton>
         <CategoryContainer ref={scrollRef}>
-          {categories.map((category, index) => {
-            return (
-              <CategoryButton
-                key={category.name}
-                onClick={() => handleCategoryClick(category.filter)}
-              >
-                <CategoryImage
-                  ref={lazyImages[index].imgRef}
-                  src={lazyImages[index].imgSrc || ""}
-                  alt={category.name}
-                />
-                {category.name}
-              </CategoryButton>
-            );
-          })}
+          {categories.map((category) => (
+            <CategoryButton
+              key={category.name}
+              onClick={() => handleCategoryClick(category.filter)}
+            >
+              <CategoryImage src={category.img} alt={category.name} />
+              {category.name}
+            </CategoryButton>
+          ))}
         </CategoryContainer>
         <ScrollButton onClick={() => scroll("right")}>{">"}</ScrollButton>
       </CategoryWrapper>
