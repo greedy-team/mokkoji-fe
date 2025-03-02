@@ -10,7 +10,7 @@ import Loading from "./pages/Loading";
 import ClubList from "./pages/club/ClubList";
 import ClubDetail from "./pages/club/ClubDetail";
 import Recruitment from "./pages/recruitment/Recruitment";
-import Login from "./pages/Login";
+import Login from "./pages/login/Login";
 import Favorite from "./pages/favorite/Favorite";
 import NoResults from "./pages/NoResults";
 import { useAuthStore } from "./stores/useAuthStore";
