@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { ClubCategory } from "@/types/clubType";
+import { useLazyImg } from "@/hooks/useLazyImg";
 
 const HomeContainer = styled.div`
   justify-content: center;
@@ -205,14 +206,18 @@ function Home() {
   return (
     <>
       <HomeContainer>
-        {backgroundImages.map((image, index) => (
-          <BackgroundImage
-            key={index}
-            src={image}
-            alt={`배경 이미지 ${index + 1}`}
-            style={{ opacity: index === currentImageIndex ? 1 : 0 }}
-          />
-        ))}
+        {backgroundImages.map((image, index) => {
+          const { imgSrc, imgRef } = useLazyImg({ src: image });
+          return (
+            <BackgroundImage
+              key={index}
+              ref={imgRef}
+              src={imgSrc || ""}
+              alt={`배경 이미지 ${index + 1}`}
+              style={{ opacity: index === currentImageIndex ? 1 : 0 }}
+            />
+          )
+        })}
         <Overlay />
         <HomeLogoSection>
           <HomeTitle>
@@ -232,15 +237,22 @@ function Home() {
       <CategoryWrapper>
         <ScrollButton onClick={() => scroll("left")}>{"<"}</ScrollButton>
         <CategorySection ref={scrollRef}>
-          {categories.map((category) => (
-            <CategoryButton
-              key={category.name}
-              onClick={() => handleCategoryClick(category.filter)}
-            >
-              <CategoryImage src={category.img} alt={category.name} />
-              {category.name}
-            </CategoryButton>
-          ))}
+          {categories.map((category) => {
+            const { imgSrc, imgRef } = useLazyImg({ src: category.img });
+            return (
+              <CategoryButton
+                key={category.name}
+                onClick={() => handleCategoryClick(category.filter)}
+              >
+                <CategoryImage
+                  ref={imgRef}
+                  src={imgSrc || ""}
+                  alt={category.name}
+                />
+                {category.name}
+              </CategoryButton>
+            );
+          })}
         </CategorySection>
         <ScrollButton onClick={() => scroll("right")}>{">"}</ScrollButton>
       </CategoryWrapper>
