@@ -6,6 +6,7 @@ export const queryClient = new QueryClient({
       staleTime: 5 * 1000 * 60,
       gcTime: 30 * 1000 * 60,
       throwOnError: true,
+      notifyOnChangeProps: ["data"],
     },
   },
 });
