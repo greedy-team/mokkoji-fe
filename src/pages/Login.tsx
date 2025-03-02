@@ -129,7 +129,7 @@ const Login = () => {
         onClick={onClick}
       />
       <Description>
-        학번과 비밀번호는 학사정보시스템의 학생 정보와 동일합니다.
+        학번과 비밀번호는 세종대 학사정보시스템의 학생 로그인 정보와 동일합니다.
       </Description>
     </ModalSection>
   );
