@@ -73,6 +73,8 @@ function CategorySection() {
 
   const { setSelectedCategory } = useFilterStore();
 
+  const lazyImages = categories.map((category) => useLazyImg({ src: category.img }));
+
   const handleCategoryClick = (category: ClubCategory) => {
     setSelectedCategory(category);
     navigate("/clubs");
@@ -93,16 +95,15 @@ function CategorySection() {
       <CategoryWrapper>
         <ScrollButton onClick={() => scroll("left")}>{"<"}</ScrollButton>
         <CategoryContainer ref={scrollRef}>
-          {categories.map((category) => {
-            const { imgSrc, imgRef } = useLazyImg({ src: category.img });
+          {categories.map((category, index) => {
             return (
               <CategoryButton
                 key={category.name}
                 onClick={() => handleCategoryClick(category.filter)}
               >
                 <CategoryImage
-                  ref={imgRef}
-                  src={imgSrc || ""}
+                  ref={lazyImages[index].imgRef}
+                  src={lazyImages[index].imgSrc || ""}
                   alt={category.name}
                 />
                 {category.name}

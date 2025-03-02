@@ -8,7 +8,7 @@ import Home from "./pages/home/Home";
 import { Suspense } from "react";
 import Loading from "./pages/Loading";
 import ClubList from "./pages/club/ClubList";
-import ClubDetail from "./pages/club/ClubDetail";
+import ClubDetail from "./pages/club/detail/ClubDetail";
 import Recruitment from "./pages/recruitment/Recruitment";
 import Login from "./pages/login/Login";
 import Favorite from "./pages/favorite/Favorite";
