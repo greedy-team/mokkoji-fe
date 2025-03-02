@@ -90,11 +90,11 @@ interface ClubBoxProp {
 }
 
 function ClubBox({ club, onClick }: ClubBoxProp) {
-  const { imgSrc, imgRef } = useLazyImg({ src: club.imageURL || "" });
+  const { imgSrc, imgRef } = useLazyImg({ src: club.imageURL || undefined });
 
   return (
     <Box onClick={onClick}>
-      <Image ref={imgRef} src={imgSrc || ""} alt={club.name} />
+      <Image ref={imgRef} src={imgSrc || undefined} alt={club.name} />
       <Content>
         <TitleSection>
           <Title>{club.name}</Title>
