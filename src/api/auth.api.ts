@@ -23,7 +23,6 @@ export const saveAuthTokens = async (
       `/auth/login`,
       credentials
     );
-    alert("로그인 성공😊");
     const { accessToken, refreshToken } = response.data.data;
 
     const expiredTime = getTokenExpiration(accessToken);
@@ -59,7 +58,6 @@ export const expireAuthTokens = async (): Promise<void> => {
         },
       }
     );
-    alert("로그아웃 성공😊");
     useAuthStore.getState().clearToken();
   } catch (error) {
     console.error("로그아웃 실패:", error);
