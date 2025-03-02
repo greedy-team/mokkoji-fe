@@ -4,6 +4,7 @@ import { getTokenExpiration } from "@/utils/getTokenExpiration";
 
 const api = axios.create({
   baseURL: `${import.meta.env.VITE_API_URL}/api/dev`,
+  withCredentials: true,
 });
 
 api.interceptors.request.use(
