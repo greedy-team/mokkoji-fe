@@ -58,7 +58,6 @@ export const expireAuthTokens = async (): Promise<void> => {
         },
       }
     );
-
     useAuthStore.getState().clearToken();
   } catch (error) {
     console.error("로그아웃 실패:", error);
