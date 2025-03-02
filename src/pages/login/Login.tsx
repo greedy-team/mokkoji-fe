@@ -6,12 +6,14 @@ const Title = styled.div`
   font-size: 25px;
   font-weight: 550;
   margin-bottom: 10px;
+  text-align: center;
 `;
 
 const SubTitle = styled.div`
   font-size: 12px;
   font-weight: 550;
   color: #4b5563;
+  text-align: center;
 `;
 
 const Description = styled.div`
@@ -19,6 +21,7 @@ const Description = styled.div`
   color: #6b7280;
   margin-top: 15px;
   line-height: 1.2;
+  text-align: center;
 `;
 
 function Login() {
