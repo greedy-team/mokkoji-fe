@@ -7,7 +7,7 @@ import React, { Suspense } from "react";
 import { useAuthStore } from "./stores/useAuthStore";
 import { ProtectedRoute } from "./pages/favorite/Favorite";
 import QueryErrorBoundary from "./services/QueryErrorBoundary";
-
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Loading from "./pages/Loading";
 const Home = React.lazy(() => import("./pages/home/Home"));
 const ClubList = React.lazy(() => import("./pages/club/ClubList"));
@@ -80,6 +80,7 @@ function App() {
         </QueryErrorBoundary>
         <RouterProvider router={router} />
       </Suspense>
+      <SpeedInsights />
     </QueryClientProvider>
   );
 }
