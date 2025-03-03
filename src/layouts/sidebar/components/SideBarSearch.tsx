@@ -67,7 +67,7 @@ function SideBarSearch() {
           placeholder="동아리 검색"
           value={localSearchText}
           onChange={(e) => setLocalSearchText(e.target.value)}
-          onKeyDown={handleKeyDown} //엔터 키 이벤트 등록
+          onKeyDown={handleKeyDown} 
         />
         <SearchButton onClick={handleSearchSubmit}>
           <SearchLogo />

@@ -1,6 +1,6 @@
 import { useFilterStore } from "@/stores/useFilterStore";
 import { ClubCategory } from "@/types/clubType";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { categories } from "./const/categories";
@@ -58,26 +58,35 @@ const CategoryImage = styled.img`
   height: 40px;
 `;
 
-const ScrollButton = styled.button`
+const ScrollButton = styled.button<{ hidden: boolean }>`
   font-size: 1.5rem;
   background: none;
   border: none;
   cursor: pointer;
   padding: 10px;
   user-select: none;
+  visibility: ${({ hidden }) => (hidden ? "hidden" : "visible")};
 `;
 
 function CategorySection() {
   const navigate = useNavigate();
-
   const { setSelectedCategory } = useFilterStore();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [showLeft, setShowLeft] = useState(false);
+  const [showRight, setShowRight] = useState(true);
 
   const handleCategoryClick = (category: ClubCategory) => {
     setSelectedCategory(category);
     navigate("/clubs");
   };
 
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const updateScrollButtons = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setShowLeft(scrollLeft > 0);
+      setShowRight(scrollLeft + clientWidth < scrollWidth - 50); // 오차 보정
+    }
+  };
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -86,11 +95,25 @@ function CategorySection() {
     }
   };
 
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.addEventListener("scroll", updateScrollButtons);
+      updateScrollButtons();
+    }
+    return () => {
+      if (scrollRef.current) {
+        scrollRef.current.removeEventListener("scroll", updateScrollButtons);
+      }
+    };
+  }, []);
+
   return (
     <>
       <CategoryTitle>동아리 카테고리</CategoryTitle>
       <CategoryWrapper>
-        <ScrollButton onClick={() => scroll("left")}>{"<"}</ScrollButton>
+        <ScrollButton hidden={!showLeft} onClick={() => scroll("left")}>
+          {"<"}
+        </ScrollButton>
         <CategoryContainer ref={scrollRef}>
           {categories.map((category) => (
             <CategoryButton
@@ -102,9 +125,12 @@ function CategorySection() {
             </CategoryButton>
           ))}
         </CategoryContainer>
-        <ScrollButton onClick={() => scroll("right")}>{">"}</ScrollButton>
+        <ScrollButton hidden={!showRight} onClick={() => scroll("right")}>
+          {">"}
+        </ScrollButton>
       </CategoryWrapper>
     </>
   );
 }
+
 export default CategorySection;

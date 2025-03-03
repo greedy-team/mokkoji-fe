@@ -24,7 +24,7 @@ const ClubCard = styled.button`
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
-
+  cursor: pointer;
   &:hover {
     transform: scale(1.02);
   }
@@ -54,17 +54,18 @@ const ClubRecruitPeriod = styled.p`
 
 function FavoriteClubList() {
   const { data } = useGetFavorite();
-  const favoriteClubs = data.data.filter((club) => club.isFavorite);
   const navigate = useNavigate();
 
   const onClick = (id: number) => {
     navigate(`/clubs/${id}`);
   };
+  console.log(data.data[0].imageURL);
+
   return (
     <>
       <Title>즐겨찾기한 동아리</Title>
       <ClubGrid>
-        {favoriteClubs.map((club) => (
+        {data.data.map((club) => (
           <ClubCard key={club.id} onClick={() => onClick(club.id)}>
             <ClubImage
               src={club.imageURL || "/default-image.png"}

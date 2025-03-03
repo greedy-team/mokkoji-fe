@@ -14,6 +14,8 @@ const FavoritePageWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   gap: 1rem;
+  margin-top: 1%;
+  margin-bottom: 1%;
 `;
 
 const SectionWrapper = styled.div`

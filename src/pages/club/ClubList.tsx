@@ -18,6 +18,7 @@ const ClubWrapper = styled.div`
 `;
 
 const ClubGrid = styled.div`
+  margin-top: 1%;
   display: grid;
   grid-template-columns: repeat(3, 30%);
   width: 100%;
@@ -31,17 +32,19 @@ const ClubGrid = styled.div`
 `;
 
 const PaginateSection = styled.div`
-  margin-top: 50px;
+  margin-top: 15px;
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 `;
 
 function ClubList() {
   const { affiliation } = useParams<{ affiliation: string }>();
   const navigate = useNavigate();
-  const { selectedCategory, searchText, currentPage, setCurrentPage } = useFilterStore();
- 
+  const { selectedCategory, searchText, currentPage, setCurrentPage } =
+    useFilterStore();
+
   const { data } = useGetClubs(
     currentPage,
     ITEMS_PER_PAGE,
@@ -76,7 +79,11 @@ function ClubList() {
         <ClubWrapper>
           <ClubGrid>
             {clubs.map((club) => (
-              <ClubBox key={club.id} club={club} onClick={() => onClick(club)} />
+              <ClubBox
+                key={club.id}
+                club={club}
+                onClick={() => onClick(club)}
+              />
             ))}
           </ClubGrid>
 
