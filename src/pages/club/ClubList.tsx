@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { usePrefetchClubs } from "@/hooks/usePrefetchClubs";
 import NoResults from "@/pages/NoResults";
+import { ClubCategory } from "@/types/clubType";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -45,9 +46,10 @@ function ClubList() {
     currentPage,
     ITEMS_PER_PAGE,
     searchText,
-    selectedCategory,
+    selectedCategory === ClubCategory.ALL ? undefined : selectedCategory,
     affiliation
   );
+
   const { clubs, pagination } = data.data;
 
   usePrefetchClubs(
@@ -55,7 +57,7 @@ function ClubList() {
     pagination,
     ITEMS_PER_PAGE,
     searchText,
-    selectedCategory,
+    selectedCategory === ClubCategory.ALL ? undefined : selectedCategory,
     affiliation
   );
 

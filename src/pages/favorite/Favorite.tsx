@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CalendarComponent from "./Calendar";
+import Calendar from "./calendar/Calendar";
 import FavoriteClubList from "./FavoriteClubList";
 import { isLoginChecking } from "@/stores/useAuthStore";
 import { Navigate } from "react-router-dom";
@@ -35,7 +35,7 @@ export const ProtectedRoute = ({ children }: ProtectedProps) => {
 
   useEffect(() => {
     if (loginChecking) {
-      openModal(); 
+      openModal();
     }
   }, [loginChecking, openModal]);
 
@@ -53,7 +53,7 @@ function Favorite() {
         <FavoriteClubList />
       </SectionWrapper>
       <SectionWrapper>
-        <CalendarComponent />
+        <Calendar />
       </SectionWrapper>
     </FavoritePageWrapper>
   );

@@ -3,21 +3,23 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { queryClient } from "./services/TanstackQueryStore";
 import CommonLayout from "./layouts/CommonLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import NotFound from "./pages/NotFound";
-import Home from "./pages/home/Home";
-import { Suspense } from "react";
-import Loading from "./pages/Loading";
-import ClubList from "./pages/club/ClubList";
-import ClubDetail from "./pages/club/ClubDetail";
-import Recruitment from "./pages/recruitment/Recruitment";
-import Login from "./pages/Login";
-import Favorite from "./pages/favorite/Favorite";
-import NoResults from "./pages/NoResults";
+import React, { Suspense } from "react";
 import { useAuthStore } from "./stores/useAuthStore";
-import SystemMaintenance from "./pages/SystemMaintenance";
 import { ProtectedRoute } from "./pages/favorite/Favorite";
 import QueryErrorBoundary from "./services/QueryErrorBoundary";
-import UserInfo from "./pages/UserInfo";
+
+import Loading from "./pages/Loading";
+const Home = React.lazy(() => import("./pages/home/Home"));
+const ClubList = React.lazy(() => import("./pages/club/ClubList"));
+const ClubDetail = React.lazy(() => import("./pages/club/detail/ClubDetail"));
+const Recruitment = React.lazy(() => import("./pages/recruitment/Recruitment"));
+const Login = React.lazy(() => import("./pages/login/Login"));
+const Favorite = React.lazy(() => import("./pages/favorite/Favorite"));
+const NoResults = React.lazy(() => import("./pages/NoResults"));
+const SystemMaintenance = React.lazy(() => import("./pages/SystemMaintenance"));
+const UserInfo = React.lazy(() => import("./pages/UserInfo"));
+const NotFound = React.lazy(() => import("./pages/NotFound"));
+
 const router = createBrowserRouter([
   {
     path: "/",

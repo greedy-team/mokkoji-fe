@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { clubItems } from "../const/pathLinks";
 import Spacing from "@/components/Spacing";
-import { useState } from "react";
+import { useFilterStore } from "@/stores/useFilterStore";
+import { useState } from "react"
 
 const SectionTitle = styled(Link)<{ $active: boolean }>`
   width: 90%;
@@ -18,10 +19,10 @@ const SectionTitle = styled(Link)<{ $active: boolean }>`
   margin-bottom: 20px;
   text-align: left;
   text-decoration: none;
-  color: ${({ $active }) => ($active ? "#6161d0" : "black")};
-  border-left: 5px solid ${({ $active }) => ($active ? "#6161d0" : "none")};
+  color: ${({ $active }) => ($active ? "#93939A" : "black")};
+  border-left: 5px solid ${({ $active }) => ($active ? "#93939A" : "transparent")} !important;
   &:hover {
-    color: #6161d0;
+    color:rgb(147, 147, 154);
   }
 `;
 
@@ -35,20 +36,23 @@ const SectionLink = styled(Link)<{ $active: boolean }>`
   width: 90%;
   text-decoration: none;
   margin-bottom: 10px;
-  color: ${({ $active }) => ($active ? "#6161d0" : "black")};
-  border-left: 3px solid ${({ $active }) => ($active ? "#6161d0" : "none")};
+  color: ${({ $active }) => ($active ? "#93939A" : "black")}; 
+  border-left: 3px solid ${({ $active }) => ($active ? "#93939A" : "transparent")} !important;
   &:hover {
-    color: #6161d0;
+    color:rgb(147, 147, 154);
   }
 `;
 
 function SideBarContentList() {
+  const { resetAll } = useFilterStore();
   const [selectedMenu, setSelectedMenu] = useState<string>("");
 
   function handleMenuClick(menu: string) {
     setSelectedMenu(menu);
+    resetAll(); // 모든 페이지 이동 시 초기화
   }
 
+  console.log("현재 선택된 메뉴:", selectedMenu);
   return (
     <>
       <SectionTitle

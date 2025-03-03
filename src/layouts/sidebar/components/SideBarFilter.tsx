@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useFilterStore } from "@/stores/useFilterStore"; 
 import { ClubCategoryKorean } from "@/components/utils/clubCategoryMapping";
 import { useNavigate, useLocation } from "react-router-dom";
+import { ClubCategory } from "@/types/clubType";
 
 const SearchFilter = styled.button`
   width: 90%;
@@ -58,6 +59,15 @@ function SideBarFilter() {
 
       {filterOpen && (
         <Dropdown>
+          <DropdownItem
+            key="ALL"
+            onClick={() => {
+            setSelectedCategory(ClubCategory.ALL); 
+            navigate("/clubs");
+            }}
+          >
+          전체
+          </DropdownItem>
           {categories.map((category) => (
             <DropdownItem
               key={category}

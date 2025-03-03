@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ClubType, ClubCategory } from "@/types/clubType";
 import { ClubCategoryKorean } from "@/components/utils/clubCategoryMapping";
 import FavoriteButton from "@/components/FavoriteButton";
+import { useLazyImg } from "@/hooks/useLazyImg";
 
 const Box = styled.div`
   position: relative;
@@ -89,9 +90,11 @@ interface ClubBoxProp {
 }
 
 function ClubBox({ club, onClick }: ClubBoxProp) {
+  const { imgSrc, imgRef } = useLazyImg({ src: club.imageURL || undefined });
+
   return (
     <Box onClick={onClick}>
-      <Image src={club.imageURL || undefined} alt={club.name} />
+      <Image ref={imgRef} src={imgSrc || undefined} alt={club.name} />
       <Content>
         <TitleSection>
           <Title>{club.name}</Title>

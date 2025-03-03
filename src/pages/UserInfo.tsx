@@ -59,6 +59,16 @@ const SaveButton = styled.button`
   color: white;
   border-radius: 5px;
   cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+
+  &:hover {
+    background-color:rgb(138, 137, 137); 
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 `;
 
 const CancelButton = styled.button`
@@ -69,6 +79,16 @@ const CancelButton = styled.button`
   color: black;
   border-radius: 5px;
   cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+
+  &:hover {
+    background-color: rgb(138, 137, 137); 
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 `;
 
 const LogoutButton = styled.button`
@@ -79,6 +99,17 @@ const LogoutButton = styled.button`
   color: black;
   border-radius: 5px;
   cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+
+  &:hover {
+    background-color:rgb(138, 137, 137); 
+    border-color: rgb(138, 137, 137);
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 `;
 
 function UserInfo() {

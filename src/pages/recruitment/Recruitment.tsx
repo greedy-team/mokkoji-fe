@@ -47,8 +47,8 @@ const ClubCardWrapper = styled.div`
 
 function Recruitment() {
   const navigate = useNavigate();
-  const [sortedClubs, setSortedClubs] = useState<ClubType[]>([]); // 정렬된 동아리 목록
-  const [buttonState] = useState<string>("마감일순"); // 정렬 옵션 상태
+  const [sortedClubs, setSortedClubs] = useState<ClubType[]>([]); 
+  const [buttonState] = useState<string>("마감일순"); 
   const { selectedCategory, searchText, currentPage, setCurrentPage } =
     useFilterStore();
 
@@ -60,10 +60,12 @@ function Recruitment() {
   );
   const { clubs, pagination } = data.data;
 
-  // 정렬 상태 반영
+
   useEffect(() => {
-    const sorted = sortClubs(clubs, buttonState);
-    setSortedClubs(sorted);
+    if (clubs.length > 0) {
+      const sorted = sortClubs(clubs, buttonState);
+      setSortedClubs(sorted);
+    }
   }, [buttonState, clubs]);
 
   useEffect(() => {
@@ -93,7 +95,7 @@ function Recruitment() {
       {/* 기능추가 전까지 주석처리 */}
       {/*<SortOption buttonState={buttonState} onSortChange={handleSortChange} />*/}
 
-      {sortedClubs.length === 0 ? (
+      {clubs.length === 0 ? (
         <NoResults />
       ) : (
         <>

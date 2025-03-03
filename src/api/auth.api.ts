@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { UserLoginType } from "@/types/userInfoType";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { getTokenExpiration } from "@/utils/getTokenExpiration";
+import { queryClient } from "@/services/TanstackQueryStore";
 
 interface AuthResponse {
   data: {
@@ -30,6 +31,7 @@ export const saveAuthTokens = async (
     useAuthStore
       .getState()
       .setToken(accessToken, refreshToken, expiredTime || 59); // ✅ 이렇게 직접 접근
+    queryClient.invalidateQueries({ queryKey: ["clubs"] });
   } catch (error) {
     if (axios.isAxiosError(error)) {
       alert("로그인 실패!");
@@ -57,8 +59,8 @@ export const expireAuthTokens = async (): Promise<void> => {
         },
       }
     );
-
     useAuthStore.getState().clearToken();
+    queryClient.invalidateQueries({ queryKey: ["clubs"] });
   } catch (error) {
     console.error("로그아웃 실패:", error);
     alert("로그아웃 실패!");

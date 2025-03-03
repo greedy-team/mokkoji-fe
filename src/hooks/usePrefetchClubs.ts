@@ -16,10 +16,22 @@ export const usePrefetchClubs = (
     const nextPage = currentPage + 1;
     const prevPage = currentPage - 1;
     if (nextPage <= pagination.totalPages) {
-      prefetchGetClubs(nextPage, ITEMS_PER_PAGE, searchText, selectedCategory, affiliation);
+      prefetchGetClubs(
+        nextPage,
+        ITEMS_PER_PAGE,
+        searchText,
+        selectedCategory,
+        affiliation
+      );
     }
     if (prevPage >= 1) {
-      prefetchGetClubs(prevPage, ITEMS_PER_PAGE, searchText, selectedCategory, affiliation);
+      prefetchGetClubs(
+        prevPage,
+        ITEMS_PER_PAGE,
+        searchText,
+        selectedCategory,
+        affiliation
+      );
     }
 
     if (selectedCategory) {
@@ -49,6 +61,7 @@ export const usePrefetchClubs = (
     }
   }, [
     ITEMS_PER_PAGE,
+    affiliation,
     currentPage,
     pagination.totalPages,
     searchText,
