@@ -11,13 +11,15 @@ import QueryErrorBoundary from "./services/QueryErrorBoundary";
 import Loading from "./pages/Loading";
 const Home = React.lazy(() => import("./pages/home/Home"));
 const ClubList = React.lazy(() => import("./pages/club/ClubList"));
-const ClubDetail = React.lazy(() => import("./pages/club/detail/ClubDetail"));
+const ClubDetail = React.lazy(
+  () => import("./pages/club/components/detail/ClubDetail")
+);
 const Recruitment = React.lazy(() => import("./pages/recruitment/Recruitment"));
 const Login = React.lazy(() => import("./pages/login/Login"));
 const Favorite = React.lazy(() => import("./pages/favorite/Favorite"));
 const NoResults = React.lazy(() => import("./pages/NoResults"));
 const SystemMaintenance = React.lazy(() => import("./pages/SystemMaintenance"));
-const UserInfo = React.lazy(() => import("./pages/UserInfo"));
+const UserInfo = React.lazy(() => import("./pages/user/UserInfo"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 
 const router = createBrowserRouter([

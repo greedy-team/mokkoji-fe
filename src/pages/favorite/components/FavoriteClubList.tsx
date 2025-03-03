@@ -1,0 +1,34 @@
+import styled from "styled-components";
+import { useGetFavorite } from "@/hooks/queries/favorites.query";
+import FavoriteItem from "./FavoriteItem";
+
+const Title = styled.h2`
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+`;
+
+const ClubGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(28%, 1fr));
+  gap: 1rem;
+  justify-content: center;
+`;
+
+function FavoriteClubList() {
+  const { data } = useGetFavorite();
+  console.log(data.data[0].imageURL);
+
+  return (
+    <>
+      <Title>즐겨찾기한 동아리</Title>
+      <ClubGrid>
+        {data.data.map((club) => (
+          <FavoriteItem club={club} />
+        ))}
+      </ClubGrid>
+    </>
+  );
+}
+
+export default FavoriteClubList;

@@ -49,10 +49,9 @@ function SideBarContentList() {
 
   function handleMenuClick(menu: string) {
     setSelectedMenu(menu);
-    resetAll(); // 모든 페이지 이동 시 초기화
+    resetAll();
   }
 
-  console.log("현재 선택된 메뉴:", selectedMenu);
   return (
     <>
       <SectionTitle

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ClubType } from "@/types/clubType";
 import FavoriteButton from "@/components/FavoriteButton";
 import { STATUS } from "../const/STATUS";
+import useDateUtil from "@/utils/useDateUtil";
 
 const Card = styled.div`
   width: 100%;
@@ -72,14 +73,18 @@ function ClubCard({ club }: ClubProp) {
   };
 
   const { text, backColor, fontColor } = getStatus();
-
+  const isEndOfYear = useDateUtil(club.recruitEndDate);
   return (
     <Card>
       <TopRow>
         <Status $backColor={backColor} $fontColor={fontColor}>
           {text}
         </Status>
-        <RecruitPeriod>마감일: {club.recruitEndDate}</RecruitPeriod>
+        {isEndOfYear ? (
+          <RecruitPeriod>상시모집</RecruitPeriod>
+        ) : (
+          <RecruitPeriod>마감일: {club.recruitEndDate}</RecruitPeriod>
+        )}
       </TopRow>
       <TitleSection>
         <ClubName>{club.name}</ClubName>

@@ -4,7 +4,7 @@ import { setupServer } from "msw/node";
 import { MemoryRouter } from "react-router-dom";
 import { http, HttpResponse } from "msw";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import ClubList from "./ClubList";
+import ClubList from "../ClubList";
 
 const server = setupServer(
   http.get("/clubs", () => {

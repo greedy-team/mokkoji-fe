@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { useGetClubsDetail } from "@/hooks/queries/clubs.query";
 import useCustomParams from "@/hooks/useCustomParams";
 import ClubDetailInfo from "./ClubDetailInfo";
-import { convertLinks } from "../utils/covertLinks";
+import { convertLinks } from "../../utils/covertLinks";
 
 const Container = styled.div`
   height: 100%;
-  margin: 0 auto;
+  margin: 0.3%;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);

@@ -53,8 +53,8 @@ function Header() {
   const accessToken = useAuthStore((state) => state.accessToken);
 
   function handleLogoClick() {
-    resetFilters(); // 필터 초기화
-    resetMenu(); // 메뉴 초기화
+    resetFilters(); 
+    resetMenu(); 
   }
 
   return (

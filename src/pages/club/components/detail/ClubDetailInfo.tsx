@@ -2,6 +2,7 @@ import FavoriteButton from "@/components/FavoriteButton";
 import styled from "styled-components";
 import DummyLogo from "@/assets/instagram.svg?react";
 import { ClubDetailType } from "@/types/clubType";
+import useDateUtil from "@/utils/useDateUtil";
 
 const ClubInfo = styled.div`
   margin-top: 30px;
@@ -85,6 +86,7 @@ interface ClubDetailProps {
 }
 
 function ClubDetailInfo({ clubDetail }: ClubDetailProps) {
+  const isEndOfYear = useDateUtil(clubDetail.recruitEndDate);
   return (
     <InfoContainer>
       <ClubInfo>
@@ -109,9 +111,13 @@ function ClubDetailInfo({ clubDetail }: ClubDetailProps) {
 
         <RecruitmentInfo>
           모집기간:{" "}
-          <RecruitmentDate>
-            {clubDetail.recruitStartDate}~{clubDetail.recruitEndDate}
-          </RecruitmentDate>
+          {isEndOfYear ? (
+            <RecruitmentDate>상시 모집</RecruitmentDate>
+          ) : (
+            <RecruitmentDate>
+              {clubDetail.recruitStartDate}~{clubDetail.recruitEndDate}
+            </RecruitmentDate>
+          )}
         </RecruitmentInfo>
       </ClubInfo>
 
