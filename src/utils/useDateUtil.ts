@@ -5,7 +5,6 @@ function useDateUtil(recruitEndDate: string | undefined) {
   const koreaYearEnd = new Date(
     Date.UTC(new Date().getFullYear(), 11, 31, 14, 59, 59)
   );
-  console.log(koreaYearEnd);
 
   const recruitEnd = new Date(recruitEndDate);
   const isEndOfYear =
