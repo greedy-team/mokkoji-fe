@@ -23,14 +23,14 @@ export const useGetUser = () => {
 //   );
 // };
 
-export const useUserInfoEdit = (email: string) => {
+export const useUserInfoEdit = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: () => updateUserEmail(email),
+    mutationFn: (email: string) => updateUserEmail(email),
 
     // ✅ 낙관적 업데이트
-    onMutate: async () => {
+    onMutate: async (email) => {
       await queryClient.cancelQueries({ queryKey: ["users"] }); // 기존 요청 중지
 
       const oldData = queryClient.getQueryData<UserInfoType>(["users"]); // 안전한 타입 적용

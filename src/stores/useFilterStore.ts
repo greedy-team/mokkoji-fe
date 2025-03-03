@@ -36,7 +36,7 @@ export const useFilterStore = create<FilterStore>()(
       selectedMenu: "", // 초기 메뉴 값
       setSelectedMenu: (menu) => set(() => ({ selectedMenu: menu })),
 
-      // 모든 필터 및 검색어, 메뉴 초기화
+   
       resetFilters: () =>
         set(() => ({
           selectedCategory: undefined,
@@ -44,7 +44,7 @@ export const useFilterStore = create<FilterStore>()(
           currentPage: 1,
         })),
         
-      // 메뉴만 초기화
+  
       resetMenu: () => set(() => ({ selectedMenu: "" })),
 
       resetAll: () => 

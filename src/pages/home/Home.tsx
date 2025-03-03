@@ -1,8 +1,7 @@
-import HomeSection from "./HomeSection";
-import CategorySection from "./CategorySection";
+import HomeSection from "./components/HomeSection";
+import CategorySection from "./components/CategorySection";
 
 function Home() {
-
   return (
     <>
       <HomeSection />

@@ -13,18 +13,17 @@ const Background = styled.div`
 `;
 
 const MainContents = styled.div`
-  padding: 1%;
   width: 100%;
 `;
 
 const MainContentsSection = styled.div`
   display: flex;
   flex-direction: row;
-  flex: 1; 
+  flex: 1;
   width: 100%;
   box-sizing: border-box;
-  background-color:rgb(255, 255, 255);
-  align-items: stretch; 
+  background-color: rgb(255, 255, 255);
+  align-items: stretch;
 `;
 
 function CommonLayout() {

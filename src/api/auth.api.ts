@@ -27,7 +27,6 @@ export const saveAuthTokens = async (
     const { accessToken, refreshToken } = response.data.data;
 
     const expiredTime = getTokenExpiration(accessToken);
-
     useAuthStore
       .getState()
       .setToken(accessToken, refreshToken, expiredTime || 59); // ✅ 이렇게 직접 접근
@@ -46,8 +45,7 @@ export const saveAuthTokens = async (
 export const expireAuthTokens = async (): Promise<void> => {
   const accessToken = useAuthStore.getState().accessToken;
   if (!accessToken) {
-    alert("토큰 미존재!");
-    return;
+    throw new Error("토큰 미존재!");
   }
   try {
     await apiUsers.post(
@@ -63,7 +61,6 @@ export const expireAuthTokens = async (): Promise<void> => {
     queryClient.invalidateQueries({ queryKey: ["clubs"] });
   } catch (error) {
     console.error("로그아웃 실패:", error);
-    alert("로그아웃 실패!");
     throw new Error("로그아웃 에러");
   }
 };

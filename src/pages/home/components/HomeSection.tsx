@@ -56,7 +56,7 @@ const HomeDescription = styled.p`
   color: white;
   margin-top: -40px;
   text-align: center;
-
+  line-height: 1.6;
   @media (max-width: 770px) {
     font-size: 0.9rem;
   }
@@ -82,7 +82,9 @@ function HomeSection() {
   const backgroundImages = [sejong1, sejong, sejong2];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const {imgSrc, imgRef} = useLazyImg({ src: backgroundImages[currentImageIndex] });
+  const { imgSrc, imgRef } = useLazyImg({
+    src: backgroundImages[currentImageIndex],
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -93,7 +95,7 @@ function HomeSection() {
 
     return () => clearInterval(interval);
   }, [backgroundImages.length]);
-  
+
   return (
     <HomeContainer>
       <BackgroundImage ref={imgRef} src={imgSrc} alt={`배경 이미지`} />
