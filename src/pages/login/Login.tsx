@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ModalSection from "@/components/ModalSection";
-import LoginContent from "./LoginContent";
+import LoginContent from "./components/LoginContent";
 
 const Title = styled.div`
   font-size: 25px;

@@ -3,7 +3,7 @@ import { ClubCategory } from "@/types/clubType";
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { categories } from "./const/categories";
+import { categories } from "../const/categories";
 
 const CategoryTitle = styled.p`
   font-size: 1.5rem;

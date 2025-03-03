@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useGetClubsDetail } from "@/hooks/queries/clubs.query";
 import useCustomParams from "@/hooks/useCustomParams";
 import ClubDetailInfo from "./ClubDetailInfo";
-import { convertLinks } from "../utils/covertLinks";
+import { convertLinks } from "../../utils/covertLinks";
 
 const Container = styled.div`
   height: 100%;

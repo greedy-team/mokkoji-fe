@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Calendar from "./calendar/Calendar";
-import FavoriteClubList from "./FavoriteClubList";
+import Calendar from "./components/calendar/Calendar";
+import FavoriteClubList from "./components/FavoriteClubList";
 import { isLoginChecking } from "@/stores/useAuthStore";
 import { Navigate } from "react-router-dom";
 import { ReactNode, useEffect } from "react";

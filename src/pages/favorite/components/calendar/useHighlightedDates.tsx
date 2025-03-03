@@ -1,6 +1,6 @@
 import { useGetFavorite } from "@/hooks/queries/favorites.query";
 import { useMemo } from "react";
-import { generateColor } from "../utils/generateColor";
+import { generateColor } from "../../utils/generateColor";
 
 function useHighlightedDates() {
   const { data } = useGetFavorite();

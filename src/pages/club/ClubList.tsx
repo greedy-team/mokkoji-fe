@@ -1,4 +1,4 @@
-import ClubBox from "@/pages/club/ClubBox";
+import ClubBox from "@/pages/club/components/ClubBox";
 import styled from "styled-components";
 import Pagination from "../../components/Pagination";
 import { ClubType } from "@/types/clubType";

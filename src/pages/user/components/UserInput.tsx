@@ -1,25 +1,7 @@
+import { useGetUser, useUserInfoEdit } from "@/hooks/queries/users.query";
+import { useModalStore } from "@/stores/useModalStore";
 import { useState } from "react";
 import styled from "styled-components";
-import ModalSection from "@/components/ModalSection";
-import { useModalStore } from "@/stores/useModalStore";
-import { expireAuthTokens } from "@/api/auth.api";
-import { useGetUser, useUserInfoEdit } from "@/hooks/queries/users.query";
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  border: none;
-  background: none;
-  font-size: 20px;
-  cursor: pointer;
-`;
-
-const Title = styled.div`
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
-`;
 
 const Section = styled.div`
   display: flex;
@@ -49,20 +31,23 @@ const ButtonContainer = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 20px;
+  align-items: center;
+  width: 100%;
 `;
 
 const SaveButton = styled.button`
   flex: 1;
   height: 40px;
+
   border: none;
   background-color: black;
   color: white;
   border-radius: 5px;
   cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
+  transition: background-color 0.2s, transform 0.1s;
 
   &:hover {
-    background-color:rgb(138, 137, 137); 
+    background-color: rgb(138, 137, 137);
     transform: scale(1.02);
   }
 
@@ -74,15 +59,16 @@ const SaveButton = styled.button`
 const CancelButton = styled.button`
   flex: 1;
   height: 40px;
+
   border: 1px solid #ccc;
   background-color: white;
   color: black;
   border-radius: 5px;
   cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
+  transition: background-color 0.2s, transform 0.1s;
 
   &:hover {
-    background-color: rgb(138, 137, 137); 
+    background-color: rgb(138, 137, 137);
     transform: scale(1.02);
   }
 
@@ -91,52 +77,22 @@ const CancelButton = styled.button`
   }
 `;
 
-const LogoutButton = styled.button`
-  flex: 1;
-  height: 40px;
-  border: 1px solid #ccc;
-  background-color: white;
-  color: black;
-  border-radius: 5px;
-  cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
-
-  &:hover {
-    background-color:rgb(138, 137, 137); 
-    border-color: rgb(138, 137, 137);
-    transform: scale(1.02);
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-`;
-
-function UserInfo() {
-  const { closeModal } = useModalStore();
+function UserInput() {
   const { data } = useGetUser();
   const userInfo = data.data.user;
-
   const [email, setEmail] = useState(userInfo.email);
-  const { mutate } = useUserInfoEdit(email);
-  const logOutClick = () => {
-    expireAuthTokens();
-    closeModal();
-  };
+  const { closeModal } = useModalStore();
+  const { mutate } = useUserInfoEdit();
 
   const handleSave = async () => {
     if (!email) {
       alert("이메일을 입력하세요.");
       return;
     }
-    mutate();
+    mutate(email);
   };
-
   return (
-    <ModalSection>
-      <CloseButton onClick={closeModal}>×</CloseButton>
-      <Title>학생 정보</Title>
-      <LogoutButton onClick={logOutClick}>로그아웃</LogoutButton>
+    <>
       <Section>
         <Label>학번</Label>
         <Input value={userInfo.studentId || ""} disabled />
@@ -164,14 +120,13 @@ function UserInfo() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <ButtonContainer>
+          <CancelButton onClick={closeModal}>취소</CancelButton>
+          <SaveButton onClick={handleSave}>저장</SaveButton>
+        </ButtonContainer>
       </Section>
-
-      <ButtonContainer>
-        <CancelButton onClick={closeModal}>취소</CancelButton>
-        <SaveButton onClick={handleSave}>저장</SaveButton>
-      </ButtonContainer>
-    </ModalSection>
+    </>
   );
 }
 
-export default UserInfo;
+export default UserInput;
