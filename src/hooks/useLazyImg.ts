@@ -1,15 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 
 interface UseLazyImgProps {
-    src: string;
+  src: string | undefined;
 }
 
 export function useLazyImg({ src }: UseLazyImgProps) {
+
     const [imgSrc, setImgSrc] = useState<string | undefined>(undefined);
     const imgRef = useRef<HTMLImageElement | null>(null);
 
-    useEffect(() => {
-        let observer: IntersectionObserver | null = null;
+  useEffect(() => {
+    let observer: IntersectionObserver | null = null;
+
 
         observer = new IntersectionObserver(
             async ([entry], observer) => {
@@ -30,5 +32,7 @@ export function useLazyImg({ src }: UseLazyImgProps) {
         };
     }, [src]);
 
-    return { imgSrc, imgRef };
+ 
+
+  return { imgSrc, imgRef };
 }
