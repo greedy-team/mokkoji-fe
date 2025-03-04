@@ -5,18 +5,27 @@ import ClubDetailInfo from "./ClubDetailInfo";
 import { convertLinks } from "../../utils/covertLinks";
 
 const Container = styled.div`
+  width: 100%;
   height: 100%;
   margin: 0.3%;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+
+  @media (max-width: 770px) {
+    margin-top: 60px;
+  }
 `;
 
 const Divider = styled.hr`
   margin: 20px 0;
   border: none;
   border-top: 1px solid #ddd;
+
+  @media (max-width: 770px) {
+    margin: 20px 20px 20px 0;
+  }
 `;
 
 const RecruitmentText = styled.p`
@@ -30,6 +39,10 @@ const RecruitmentText = styled.p`
   a {
     color: blue;
     text-decoration: underline;
+  }
+  
+  @media (max-width: 770px) {
+    width: 90%;
   }
 `;
 
