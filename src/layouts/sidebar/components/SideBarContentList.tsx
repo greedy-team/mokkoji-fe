@@ -42,14 +42,16 @@ const SectionLink = styled(Link)<{ $active: boolean }>`
   }
 `;
 
-function SideBarContentList() {
+function SideBarContentList({ setIsOpen }: { setIsOpen: (isOpen: boolean) => void }) {
   const { resetAll, selectedMenu, setSelectedMenu } = useFilterStore();
 
   function handleMenuClick(menu: string) {
-    console.log("선택한 메뉴:", menu); // 디버깅용
     setSelectedMenu(menu);
     resetAll();
-    console.log("업데이트된 메뉴:", selectedMenu); // 업데이트 확인
+
+    if(window.innerWidth <= 770){
+      setIsOpen(false);
+    }
   }
 
   return (
