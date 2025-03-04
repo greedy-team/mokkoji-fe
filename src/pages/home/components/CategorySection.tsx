@@ -40,6 +40,8 @@ const CategoryButton = styled.button`
   border: 1px solid #ccc;
   font-size: 1rem;
   font-weight: bold;
+  color: black;
+  text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
   transition: background-color 0.2s ease, border-color 0.2s ease;
@@ -60,6 +62,8 @@ const CategoryImage = styled.img`
 
 const ScrollButton = styled.button<{ hidden: boolean }>`
   font-size: 1.5rem;
+  color: black;
+  text-decoration: none;
   background: none;
   border: none;
   cursor: pointer;
