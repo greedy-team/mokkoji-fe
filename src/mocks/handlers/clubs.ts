@@ -11,7 +11,6 @@ const clubs = Array.from({ length: 20 }, (_, index) => {
       ClubCategory.CULTURAL_ART,
       ClubCategory.SPORTS,
       ClubCategory.RELIGIOUS,
-      ClubCategory.SOCIAL,
       ClubCategory.VOLUNTEER_SOCIAL,
       ClubCategory.OTHER,
     ][id % 7],
@@ -36,8 +35,6 @@ const clubDetailDummyDataList = Array.from({ length: 20 }, (_, index) => {
           ClubCategory.CULTURAL_ART,
           ClubCategory.SPORTS,
           ClubCategory.RELIGIOUS,
-          ClubCategory.SOCIAL,
-          ClubCategory.VOLUNTEER_SOCIAL,
           ClubCategory.OTHER,
         ][id % 7],
         affiliation: "중앙동아리",
@@ -61,17 +58,19 @@ export const clubsHandlers = [
     const selectedCategory = url.searchParams.get("category") ?? "";
     const keyword = url.searchParams.get("keyword")?.trim().toLowerCase() ?? "";
 
-  //빈 값일 경우 전체 데이터를 유지하도록 설정
-    const categoryFilteredClubs = selectedCategory !== ""
-    ? clubs.filter((club) => club.category === selectedCategory)
-    : clubs;
+    //빈 값일 경우 전체 데이터를 유지하도록 설정
+    const categoryFilteredClubs =
+      selectedCategory !== ""
+        ? clubs.filter((club) => club.category === selectedCategory)
+        : clubs;
 
-  //검색어가 없을 경우 전체 데이터를 유지
-    const finalFilteredClubs = keyword !== ""
-    ? categoryFilteredClubs.filter((club) =>
-      club.name.toLowerCase().includes(keyword)
-      )
-    : categoryFilteredClubs;
+    //검색어가 없을 경우 전체 데이터를 유지
+    const finalFilteredClubs =
+      keyword !== ""
+        ? categoryFilteredClubs.filter((club) =>
+            club.name.toLowerCase().includes(keyword)
+          )
+        : categoryFilteredClubs;
 
     const totalElements = finalFilteredClubs.length;
     const totalPages = Math.ceil(totalElements / size);
