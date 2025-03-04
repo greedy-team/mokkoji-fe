@@ -58,8 +58,8 @@ function Recruitment() {
     searchText,
     selectedCategory
   );
-  const { clubs, pagination } = data.data;
 
+  const { clubs, pagination } = data.data;
 
   useEffect(() => {
     if (clubs.length > 0) {
@@ -84,6 +84,7 @@ function Recruitment() {
   // 현재 페이지 번호 상태 변경
   function handlePageChange(page: number) {
     setCurrentPage(page);
+    window.scrollTo(0, 0);
   }
 
   function onClick(club: ClubType) {

@@ -66,6 +66,7 @@ function ClubList() {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+    window.scrollTo(0, 0);
   };
   function onClick(club: ClubType) {
     navigate(`/clubs/${club.id}`);
