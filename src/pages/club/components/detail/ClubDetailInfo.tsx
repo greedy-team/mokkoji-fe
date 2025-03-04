@@ -4,11 +4,26 @@ import DummyLogo from "@/assets/instagram.svg?react";
 import { ClubDetailType } from "@/types/clubType";
 import useDateUtil from "@/utils/useDateUtil";
 
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+`;
+
 const ClubInfo = styled.div`
   margin-top: 30px;
   margin-left: 50px;
   display: flex;
   flex-direction: column;
+  width: 50%;
+  
+  @media (max-width: 770px) {
+    margin: 10px 0 0 20px;
+    width: 90%;
+    padding: 1%;
+    box-sizing: border-box;
+  }
 `;
 
 const TitleWrap = styled.div`
@@ -44,18 +59,30 @@ const Description = styled.p`
   white-space: pre-wrap;
   width: 50%;
   line-height: 1.4;
+  width: 100%;
+  @media (max-width: 770px) {
+      width: 90%;
+  }
 `;
 
 const RecruitmentInfo = styled.p`
   font-size: 0.75rem;
   color: black;
   margin-top: 20px;
+  line-height: 1.5;
 `;
 
 const RecruitmentDate = styled.span`
   font-size: 0.75rem;
   color: black;
   text-decoration: underline;
+  display: inline;
+
+  @media (max-width: 770px) {
+    span {
+      display: block; /* 모바일에서 줄바꿈을 하게끔 설정 */
+    }
+  }
 `;
 
 const ClubImage = styled.div<{ $image?: string }>`
@@ -72,13 +99,11 @@ const ClubImage = styled.div<{ $image?: string }>`
   border-radius: 10px;
   margin-top: 15px;
   margin-right: 120px;
-`;
 
-const InfoContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
+  @media (max-width: 770px) {
+      margin: 0 3% 0 0;
+      width: 80%;
+  }
 `;
 
 interface ClubDetailProps {
@@ -110,12 +135,12 @@ function ClubDetailInfo({ clubDetail }: ClubDetailProps) {
         <Description>{clubDetail.description}</Description>
 
         <RecruitmentInfo>
-          모집기간:{" "}
           {isEndOfYear ? (
-            <RecruitmentDate>상시 모집</RecruitmentDate>
+            <RecruitmentDate>모집 기간: 상시 모집</RecruitmentDate>
           ) : (
             <RecruitmentDate>
-              {clubDetail.recruitStartDate}~{clubDetail.recruitEndDate}
+              모집 시작: {clubDetail.recruitStartDate} ~&nbsp;
+              <span>모집 마감: {clubDetail.recruitEndDate}</span>
             </RecruitmentDate>
           )}
         </RecruitmentInfo>
