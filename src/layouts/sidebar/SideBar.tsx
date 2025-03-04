@@ -55,7 +55,7 @@ function SideBar() {
       </ToggleButton>
       <SideBarContainer $isOpen={isOpen}>
         <SideBarSearch />
-        <SideBarContentList />
+        <SideBarContentList setIsOpen={setIsOpen} />
       </SideBarContainer>
     </>
   );
