@@ -60,7 +60,7 @@ const CategoryImage = styled.img`
   height: 40px;
 `;
 
-const ScrollButton = styled.button<{ hidden: boolean }>`
+const ScrollButton = styled.button<{ $hidden: boolean }>`
   font-size: 1.5rem;
   color: black;
   text-decoration: none;
@@ -69,7 +69,7 @@ const ScrollButton = styled.button<{ hidden: boolean }>`
   cursor: pointer;
   padding: 10px;
   user-select: none;
-  visibility: ${({ hidden }) => (hidden ? "hidden" : "visible")};
+  visibility: ${({ $hidden }) => ($hidden ? "hidden" : "visible")};
 `;
 
 function CategorySection() {
@@ -115,7 +115,7 @@ function CategorySection() {
     <>
       <CategoryTitle>동아리 카테고리</CategoryTitle>
       <CategoryWrapper>
-        <ScrollButton hidden={!showLeft} onClick={() => scroll("left")}>
+        <ScrollButton $hidden={!showLeft} onClick={() => scroll("left")}>
           {"<"}
         </ScrollButton>
         <CategoryContainer ref={scrollRef}>
@@ -129,7 +129,7 @@ function CategorySection() {
             </CategoryButton>
           ))}
         </CategoryContainer>
-        <ScrollButton hidden={!showRight} onClick={() => scroll("right")}>
+        <ScrollButton $hidden={!showRight} onClick={() => scroll("right")}>
           {">"}
         </ScrollButton>
       </CategoryWrapper>
