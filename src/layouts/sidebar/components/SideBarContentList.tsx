@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { clubItems } from "../const/pathLinks";
 import Spacing from "@/components/Spacing";
 import { useFilterStore } from "@/stores/useFilterStore";
-import { useState } from "react"
 
 const SectionTitle = styled(Link)<{ $active: boolean }>`
   width: 90%;
@@ -44,16 +43,24 @@ const SectionLink = styled(Link)<{ $active: boolean }>`
 `;
 
 function SideBarContentList() {
-  const { resetAll } = useFilterStore();
-  const [selectedMenu, setSelectedMenu] = useState<string>("");
+  const { resetAll, selectedMenu, setSelectedMenu } = useFilterStore();
 
   function handleMenuClick(menu: string) {
+    console.log("선택한 메뉴:", menu); // 디버깅용
     setSelectedMenu(menu);
     resetAll();
+    console.log("업데이트된 메뉴:", selectedMenu); // 업데이트 확인
   }
 
   return (
     <>
+      <SectionTitle
+        to="/"
+        onClick={() => handleMenuClick("HOME")}
+        $active={selectedMenu === "HOME"}
+      >
+        HOME
+      </SectionTitle>
       <SectionTitle
         to="/clubs"
         onClick={() => handleMenuClick("전체 동아리")}

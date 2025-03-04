@@ -33,7 +33,7 @@ export const useFilterStore = create<FilterStore>()(
 
       setCurrentPage: (page) => set(() => ({ currentPage: page })),
 
-      selectedMenu: "", // 초기 메뉴 값
+      selectedMenu: "HOME", // 초기 메뉴 값
       setSelectedMenu: (menu) => set(() => ({ selectedMenu: menu })),
 
    
@@ -45,14 +45,14 @@ export const useFilterStore = create<FilterStore>()(
         })),
         
   
-      resetMenu: () => set(() => ({ selectedMenu: "" })),
+      resetMenu: () => set(() => ({ selectedMenu: "HOME" })),
 
       resetAll: () => 
         set(() => ({
           selectedCategory: undefined,
           searchText: "",
           currentPage: 1,
-          selectedMenu: "",
+          selectedMenu: state.selectedMenu,
         })),
     }),
     {
