@@ -67,6 +67,7 @@ const ExploreButton = styled(Link)`
   font-size: 1rem;
   font-weight: regular;
   padding: 10px 20px;
+  background-color: #1a1a1a;
   border: none;
   border-radius: 5px;
   cursor: pointer;

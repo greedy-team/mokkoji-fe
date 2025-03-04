@@ -10,6 +10,7 @@ const SideBarContainer = styled.div<{ $isOpen: boolean }>`
   display: flex;
   align-items: center;
   flex-direction: column;
+  border: 0.5px solid #ccc;
 
   @media (max-width: 770px) {
     position: fixed;
