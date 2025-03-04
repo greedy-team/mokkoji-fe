@@ -52,7 +52,6 @@ export const useFilterStore = create<FilterStore>()(
           selectedCategory: undefined,
           searchText: "",
           currentPage: 1,
-          selectedMenu: state.selectedMenu,
         })),
     }),
     {
