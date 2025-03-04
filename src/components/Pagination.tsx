@@ -9,6 +9,7 @@ const PaginationContainer = styled.div`
 `;
 
 const PageButton = styled.button<{ $active: boolean }>`
+  text-align: center;
   width: 25px;
   height: 25px;
   border: 2px solid #e5e7eb;
