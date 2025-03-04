@@ -24,7 +24,7 @@ function FavoriteClubList() {
       <Title>즐겨찾기한 동아리</Title>
       <ClubGrid>
         {data.data.map((club) => (
-          <FavoriteItem club={club} />
+          <FavoriteItem key={club.id} club={club} />
         ))}
       </ClubGrid>
     </>
