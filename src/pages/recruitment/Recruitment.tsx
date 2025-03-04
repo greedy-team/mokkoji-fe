@@ -88,6 +88,7 @@ function Recruitment() {
 
   function onClick(club: ClubType) {
     navigate(`/clubs/${club.id}`);
+    window.scrollTo(0, 0);
   }
 
   return (

@@ -68,8 +68,10 @@ function ClubList() {
     setCurrentPage(page);
     window.scrollTo(0, 0);
   };
+
   function onClick(club: ClubType) {
     navigate(`/clubs/${club.id}`);
+    window.scrollTo(0, 0);
   }
 
   return (
