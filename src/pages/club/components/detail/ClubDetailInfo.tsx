@@ -2,7 +2,7 @@ import FavoriteButton from "@/components/FavoriteButton";
 import styled from "styled-components";
 import DummyLogo from "@/assets/instagram.svg?react";
 import { ClubDetailType } from "@/types/clubType";
-import useDateUtil from "@/utils/useDateUtil";
+import PeriodSection from "@/components/PeriodSection";
 
 const InfoContainer = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ const ClubInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
-  
+
   @media (max-width: 770px) {
     margin: 10px 0 0 20px;
     width: 90%;
@@ -61,12 +61,11 @@ const Description = styled.p`
   line-height: 1.4;
   width: 100%;
   @media (max-width: 770px) {
-      width: 90%;
+    width: 90%;
   }
 `;
 
 const RecruitmentInfo = styled.p`
-  font-size: 0.75rem;
   color: black;
   margin-top: 20px;
   line-height: 1.5;
@@ -101,8 +100,8 @@ const ClubImage = styled.div<{ $image?: string }>`
   margin-right: 120px;
 
   @media (max-width: 770px) {
-      margin: 0 3% 0 0;
-      width: 80%;
+    margin: 0 3% 0 0;
+    width: 80%;
   }
 `;
 
@@ -111,7 +110,6 @@ interface ClubDetailProps {
 }
 
 function ClubDetailInfo({ clubDetail }: ClubDetailProps) {
-  const isEndOfYear = useDateUtil(clubDetail.recruitEndDate);
   return (
     <InfoContainer>
       <ClubInfo>
@@ -135,14 +133,13 @@ function ClubDetailInfo({ clubDetail }: ClubDetailProps) {
         <Description>{clubDetail.description}</Description>
 
         <RecruitmentInfo>
-          {isEndOfYear ? (
-            <RecruitmentDate>모집 기간: 상시 모집</RecruitmentDate>
-          ) : (
-            <RecruitmentDate>
-              모집 시작: {clubDetail.recruitStartDate} ~&nbsp;
-              <span>모집 마감: {clubDetail.recruitEndDate}</span>
-            </RecruitmentDate>
-          )}
+          <RecruitmentDate>
+            <PeriodSection
+              startDate={clubDetail.recruitStartDate}
+              endDate={clubDetail.recruitEndDate}
+              size={0.8}
+            />
+          </RecruitmentDate>
         </RecruitmentInfo>
       </ClubInfo>
 

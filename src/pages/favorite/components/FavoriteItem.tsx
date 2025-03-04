@@ -1,5 +1,5 @@
+import PeriodSection from "@/components/PeriodSection";
 import { ClubType } from "@/types/clubType";
-import useDateUtil from "@/utils/useDateUtil";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -27,7 +27,9 @@ const ClubImage = styled.img`
   margin-right: 1rem;
 `;
 
-const ClubInfo = styled.div``;
+const ClubInfo = styled.div`
+  width: 80%;
+`;
 
 const ClubName = styled.p`
   font-size: 1rem;
@@ -45,7 +47,6 @@ interface FavoriteItemProps {
 }
 function FavoriteItem({ club }: FavoriteItemProps) {
   const navigate = useNavigate();
-  const isEndOfYear = useDateUtil(club.recruitEndDate);
   const onClick = (id: number) => {
     navigate(`/clubs/${id}`);
   };
@@ -54,13 +55,13 @@ function FavoriteItem({ club }: FavoriteItemProps) {
       <ClubImage src={club.imageURL || "/default-image.png"} alt={club.name} />
       <ClubInfo>
         <ClubName>{club.name}</ClubName>
-        {isEndOfYear ? (
-          <ClubRecruitPeriod>상시 모집</ClubRecruitPeriod>
-        ) : (
-          <ClubRecruitPeriod>
-            모집 기간: {club.recruitStartDate} ~ {club.recruitEndDate}
-          </ClubRecruitPeriod>
-        )}
+        <ClubRecruitPeriod>
+          <PeriodSection
+            startDate={club.recruitStartDate}
+            endDate={club.recruitEndDate}
+            simple={true}
+          />
+        </ClubRecruitPeriod>
       </ClubInfo>
     </ClubCard>
   );

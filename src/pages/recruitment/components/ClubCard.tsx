@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { ClubType } from "@/types/clubType";
 import FavoriteButton from "@/components/FavoriteButton";
 import { STATUS } from "../const/STATUS";
-import useDateUtil from "@/utils/useDateUtil";
 import { useLazyImg } from "@/hooks/useLazyImg";
+import PeriodSection from "@/components/PeriodSection";
 
 const Card = styled.div`
   display: flex;
@@ -92,7 +92,7 @@ function ClubCard({ club }: ClubProp) {
   };
 
   const { text, backColor, fontColor } = getStatus();
-  const isEndOfYear = useDateUtil(club.recruitEndDate);
+
   const { imgSrc, imgRef } = useLazyImg({ src: club.imageURL || undefined });
 
   return (
@@ -103,11 +103,14 @@ function ClubCard({ club }: ClubProp) {
           <Status $backColor={backColor} $fontColor={fontColor}>
             {text}
           </Status>
-          {isEndOfYear ? (
-            <RecruitPeriod>상시모집</RecruitPeriod>
-          ) : (
-            <RecruitPeriod>마감일: {club.recruitEndDate}</RecruitPeriod>
-          )}
+          <RecruitPeriod>
+            <PeriodSection
+              startDate={club.recruitEndDate}
+              endDate={club.recruitEndDate}
+              size={0.5}
+              simple={true}
+            />
+          </RecruitPeriod>
         </TopRow>
         <TitleSection>
           <ClubName>{club.name}</ClubName>
