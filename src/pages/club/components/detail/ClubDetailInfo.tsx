@@ -69,13 +69,20 @@ const RecruitmentInfo = styled.p`
   font-size: 0.75rem;
   color: black;
   margin-top: 20px;
-  line-height: 1.2;
+  line-height: 1.5;
 `;
 
 const RecruitmentDate = styled.span`
   font-size: 0.75rem;
   color: black;
   text-decoration: underline;
+  display: inline;
+
+  @media (max-width: 770px) {
+    span {
+      display: block; /* 모바일에서 줄바꿈을 하게끔 설정 */
+    }
+  }
 `;
 
 const ClubImage = styled.div<{ $image?: string }>`
@@ -128,12 +135,12 @@ function ClubDetailInfo({ clubDetail }: ClubDetailProps) {
         <Description>{clubDetail.description}</Description>
 
         <RecruitmentInfo>
-          모집기간:<br />{" "}
           {isEndOfYear ? (
-            <RecruitmentDate>상시 모집</RecruitmentDate>
+            <RecruitmentDate>모집 기간: 상시 모집</RecruitmentDate>
           ) : (
             <RecruitmentDate>
-              {clubDetail.recruitStartDate}~{clubDetail.recruitEndDate}
+              모집 시작: {clubDetail.recruitStartDate} ~&nbsp;
+              <span>모집 마감: {clubDetail.recruitEndDate}</span>
             </RecruitmentDate>
           )}
         </RecruitmentInfo>
