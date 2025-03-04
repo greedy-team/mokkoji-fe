@@ -38,7 +38,6 @@ const ClubList = styled.div`
 const ClubCardWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid rgba(107, 114, 128, 0.1);
   border-radius: 10px;
   background-color: white;
   cursor: pointer;
