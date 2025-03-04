@@ -4,7 +4,7 @@ export enum ClubCategory {
   VOLUNTEER_SOCIAL = "VOLUNTEER_SOCIAL",
   SPORTS = "SPORTS",
   RELIGIOUS = "RELIGIOUS",
-  OTHER = "OTHER",
+  SOCIAL = "SOCIAL",
   ALL = "ALL"
 }
 

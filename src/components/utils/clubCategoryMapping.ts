@@ -6,6 +6,6 @@ export const ClubCategoryKorean: Record<ClubCategory, string> = {
   [ClubCategory.VOLUNTEER_SOCIAL]: "봉사/사회",
   [ClubCategory.SPORTS]: "체육",
   [ClubCategory.RELIGIOUS]: "종교",
-  [ClubCategory.OTHER]: "기타",
+  [ClubCategory.SOCIAL]: " 친목",
   [ClubCategory.ALL]: "전체",
 };
