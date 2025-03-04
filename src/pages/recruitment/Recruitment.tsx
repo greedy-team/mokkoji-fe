@@ -31,7 +31,7 @@ const ClubList = styled.div`
   margin-bottom: 2%;
 
   @media (max-width: 770px) {
-    grid-template-columns: repeat(2, 48%);
+    grid-template-columns: repeat(1, 90%);
   }
 `;
 
