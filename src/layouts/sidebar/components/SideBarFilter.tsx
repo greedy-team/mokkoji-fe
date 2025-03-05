@@ -2,7 +2,7 @@ import styled from "styled-components";
 import FilterLogo from "@/assets/filterLogo.svg?react";
 import { useState } from "react";
 import { useFilterStore } from "@/stores/useFilterStore";
-import { ClubCategoryKorean } from "@/components/utils/clubCategoryMapping";
+import { ClubCategoryKorean } from "@/components/const/clubCategoryMapping";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const SearchFilter = styled.button<{ selected: boolean }>`
