@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { clubItems } from "../const/pathLinks";
 import Spacing from "@/components/Spacing";
 import { useFilterStore } from "@/stores/useFilterStore";
-import { useState } from "react"
+import { isLoginChecking } from "@/stores/useAuthStore";
 
 const SectionTitle = styled(Link)<{ $active: boolean }>`
   width: 90%;
@@ -20,9 +20,10 @@ const SectionTitle = styled(Link)<{ $active: boolean }>`
   text-align: left;
   text-decoration: none;
   color: ${({ $active }) => ($active ? "#93939A" : "black")};
-  border-left: 5px solid ${({ $active }) => ($active ? "#93939A" : "transparent")} !important;
+  border-left: 5px solid
+    ${({ $active }) => ($active ? "#93939A" : "transparent")} !important;
   &:hover {
-    color:rgb(147, 147, 154);
+    color: rgb(147, 147, 154);
   }
 `;
 
@@ -36,24 +37,39 @@ const SectionLink = styled(Link)<{ $active: boolean }>`
   width: 90%;
   text-decoration: none;
   margin-bottom: 10px;
-  color: ${({ $active }) => ($active ? "#93939A" : "black")}; 
-  border-left: 3px solid ${({ $active }) => ($active ? "#93939A" : "transparent")} !important;
+  color: ${({ $active }) => ($active ? "#93939A" : "black")};
+  border-left: 3px solid
+    ${({ $active }) => ($active ? "#93939A" : "transparent")} !important;
   &:hover {
-    color:rgb(147, 147, 154);
+    color: rgb(147, 147, 154);
   }
 `;
 
-function SideBarContentList() {
-  const { resetAll } = useFilterStore();
-  const [selectedMenu, setSelectedMenu] = useState<string>("");
+function SideBarContentList({
+  setIsOpen,
+}: {
+  setIsOpen: (isOpen: boolean) => void;
+}) {
+  const { resetAll, selectedMenu, setSelectedMenu } = useFilterStore();
 
   function handleMenuClick(menu: string) {
     setSelectedMenu(menu);
     resetAll();
+
+    if (window.innerWidth <= 770) {
+      setIsOpen(false);
+    }
   }
 
   return (
     <>
+      <SectionTitle
+        to="/"
+        onClick={() => handleMenuClick("HOME")}
+        $active={selectedMenu === "HOME"}
+      >
+        HOME
+      </SectionTitle>
       <SectionTitle
         to="/clubs"
         onClick={() => handleMenuClick("전체 동아리")}
@@ -83,7 +99,7 @@ function SideBarContentList() {
       <SectionTitle
         to="/favorites"
         onClick={() => handleMenuClick("즐겨찾기")}
-        $active={selectedMenu === "즐겨찾기"}
+        $active={selectedMenu === "즐겨찾기" && !isLoginChecking()}
       >
         즐겨찾기
       </SectionTitle>

@@ -10,6 +10,7 @@ const SideBarContainer = styled.div<{ $isOpen: boolean }>`
   display: flex;
   align-items: center;
   flex-direction: column;
+  border: 0.5px solid #ccc;
 
   @media (max-width: 770px) {
     position: fixed;
@@ -26,15 +27,17 @@ const SideBarContainer = styled.div<{ $isOpen: boolean }>`
 const ToggleButton = styled.button<{ $isOpen: boolean }>`
   position: fixed;
   top: 50%;
-  left: ${({ $isOpen }) => ($isOpen ? "40%" : "0%")};
+  left: ${({ $isOpen }) => ($isOpen ? "42%" : "0%")};
   z-index: 9999;
   background: none;
   border: none;
   font-size: 1rem;
   font-weight: 600;
+  color: black;
+  text-decoration: none;
   cursor: pointer;
   transform: translateY(-50%);
-  padding: 10px 5px 10px 10px;
+  padding: 15px 5px 15px 5px;
   box-sizing: border-box;
   background-color: #f9fafb;
   border-top-right-radius: 10px;
@@ -55,7 +58,7 @@ function SideBar() {
       </ToggleButton>
       <SideBarContainer $isOpen={isOpen}>
         <SideBarSearch />
-        <SideBarContentList />
+        <SideBarContentList setIsOpen={setIsOpen} />
       </SideBarContainer>
     </>
   );

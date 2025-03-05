@@ -2,6 +2,7 @@ import { useGetUser, useUserInfoEdit } from "@/hooks/queries/users.query";
 import { useModalStore } from "@/stores/useModalStore";
 import { useState } from "react";
 import styled from "styled-components";
+import { emailValidate } from "../utils/emailValidate";
 
 const Section = styled.div`
   display: flex;
@@ -85,8 +86,8 @@ function UserInput() {
   const { mutate } = useUserInfoEdit();
 
   const handleSave = async () => {
-    if (!email) {
-      alert("이메일을 입력하세요.");
+    if (!emailValidate(email)) {
+      setEmail(userInfo.email);
       return;
     }
     mutate(email);

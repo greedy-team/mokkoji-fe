@@ -2,24 +2,43 @@ import styled from "styled-components";
 import { ClubType } from "@/types/clubType";
 import FavoriteButton from "@/components/FavoriteButton";
 import { STATUS } from "../const/STATUS";
-import useDateUtil from "@/utils/useDateUtil";
+import { useLazyImg } from "@/hooks/useLazyImg";
+import PeriodSection from "@/components/PeriodSection";
 
 const Card = styled.div`
-  width: 100%;
-  height: 100%;
+  display: flex;
   box-sizing: border-box;
-  padding: 4%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 2%;
   margin-bottom: 20px;
+
   &:hover {
     background-color: #f9f9f9;
   }
+`;
+
+const Image = styled.img`
+  width: 33%;
+  height: 90%;
+  border-radius: 15px;
+  object-fit: contain;
+  margin-right: 5%;
+  flex-shrink: 0;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 60%;
 `;
 
 const TopRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin: 10px 0;
 `;
 
 const Status = styled.div<{ $backColor: string; $fontColor: string }>`
@@ -38,7 +57,7 @@ const RecruitPeriod = styled.div`
 `;
 
 const ClubName = styled.div`
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
 `;
 
@@ -50,7 +69,7 @@ const Category = styled.div`
 `;
 
 const TitleSection = styled.div`
-  margin-top: 5%;
+  margin: 5% 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -73,26 +92,34 @@ function ClubCard({ club }: ClubProp) {
   };
 
   const { text, backColor, fontColor } = getStatus();
-  const isEndOfYear = useDateUtil(club.recruitEndDate);
+
+  const { imgSrc, imgRef } = useLazyImg({ src: club.imageURL || undefined });
+
   return (
     <Card>
-      <TopRow>
-        <Status $backColor={backColor} $fontColor={fontColor}>
-          {text}
-        </Status>
-        {isEndOfYear ? (
-          <RecruitPeriod>상시모집</RecruitPeriod>
-        ) : (
-          <RecruitPeriod>마감일: {club.recruitEndDate}</RecruitPeriod>
-        )}
-      </TopRow>
-      <TitleSection>
-        <ClubName>{club.name}</ClubName>
-        <FavoriteButton club={club} />
-      </TitleSection>
-      <Category>
-        {club.category} | {club.affiliation}
-      </Category>
+      <Image ref={imgRef} src={imgSrc || undefined} alt={club.name} />
+      <Content>
+        <TopRow>
+          <Status $backColor={backColor} $fontColor={fontColor}>
+            {text}
+          </Status>
+          <RecruitPeriod>
+            <PeriodSection
+              startDate={club.recruitEndDate}
+              endDate={club.recruitEndDate}
+              size={0.5}
+              simple={true}
+            />
+          </RecruitPeriod>
+        </TopRow>
+        <TitleSection>
+          <ClubName>{club.name}</ClubName>
+          <FavoriteButton club={club} />
+        </TitleSection>
+        <Category>
+          {club.category} | {club.affiliation}
+        </Category>
+      </Content>
     </Card>
   );
 }

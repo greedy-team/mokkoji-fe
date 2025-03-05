@@ -8,6 +8,8 @@ import { useAuthStore } from "./stores/useAuthStore";
 import { ProtectedRoute } from "./pages/favorite/Favorite";
 import QueryErrorBoundary from "./services/QueryErrorBoundary";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import PrivacyPolicyPage from "@/pages/PrivacyPolicyPage";
+
 import Loading from "./pages/Loading";
 const Home = React.lazy(() => import("./pages/home/Home"));
 const ClubList = React.lazy(() => import("./pages/club/ClubList"));
@@ -63,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: "NoResults",
         element: <NoResults />,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicyPage />,
       },
     ],
   },

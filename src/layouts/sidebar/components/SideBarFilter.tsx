@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import FilterLogo from "@/assets/filterLogo.svg?react";
 import { useState } from "react";
-import { useFilterStore } from "@/stores/useFilterStore"; 
+import { useFilterStore } from "@/stores/useFilterStore";
 import { ClubCategoryKorean } from "@/components/utils/clubCategoryMapping";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ClubCategory } from "@/types/clubType";
 
-const SearchFilter = styled.button`
+const SearchFilter = styled.button<{ selected: boolean }>`
   width: 90%;
   height: 30px;
   border: 1px solid #9ca3af;
@@ -18,6 +17,13 @@ const SearchFilter = styled.button`
   margin-bottom: 20px;
   font-size: small;
   cursor: pointer;
+  background-color: ${({ selected }) => (selected ? "#818896" : "white")};
+  color: ${({ selected }) => (selected ? "white" : "#4b5563")};
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: ${({ selected }) => (selected ? "#374151" : "#f3f4f6")};
+  }
 `;
 
 const Dropdown = styled.div`
@@ -41,7 +47,8 @@ const DropdownItem = styled.div`
 `;
 
 function SideBarFilter() {
-  const { selectedCategory, setSelectedCategory, categories } = useFilterStore();
+  const { selectedCategory, setSelectedCategory, categories } =
+    useFilterStore();
   const [filterOpen, setFilterOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -52,22 +59,13 @@ function SideBarFilter() {
 
   return (
     <>
-      <SearchFilter onClick={toggleFilter}>
+      <SearchFilter onClick={toggleFilter} selected={!!selectedCategory}>
         <FilterLogo width={12} height={12} style={{ marginRight: 5 }} />
         {selectedCategory ? ClubCategoryKorean[selectedCategory] : "상세 필터"}
       </SearchFilter>
 
       {filterOpen && (
         <Dropdown>
-          <DropdownItem
-            key="ALL"
-            onClick={() => {
-            setSelectedCategory(ClubCategory.ALL); 
-            navigate("/clubs");
-            }}
-          >
-          전체
-          </DropdownItem>
           {categories.map((category) => (
             <DropdownItem
               key={category}

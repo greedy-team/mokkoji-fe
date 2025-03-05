@@ -33,31 +33,28 @@ export const useFilterStore = create<FilterStore>()(
 
       setCurrentPage: (page) => set(() => ({ currentPage: page })),
 
-      selectedMenu: "", // 초기 메뉴 값
+      selectedMenu: "HOME",
       setSelectedMenu: (menu) => set(() => ({ selectedMenu: menu })),
 
-   
       resetFilters: () =>
         set(() => ({
           selectedCategory: undefined,
           searchText: "",
           currentPage: 1,
         })),
-        
-  
-      resetMenu: () => set(() => ({ selectedMenu: "" })),
 
-      resetAll: () => 
+      resetMenu: () => set(() => ({ selectedMenu: "HOME" })),
+
+      resetAll: () =>
         set(() => ({
           selectedCategory: undefined,
           searchText: "",
           currentPage: 1,
-          selectedMenu: "",
         })),
     }),
     {
-      name: "filter-storage", //새로고침해도 카테고리 필터링 유지지
-      storage: createJSONStorage(() => localStorage),
+      name: "filter-storage",
+      storage: createJSONStorage(() => sessionStorage),
     }
   )
 );

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const FooterContainer = styled.div`
   width: 100%;
@@ -25,10 +26,17 @@ const FooterP = styled.p<{ size?: string }>`
   color: #6b7280;
 `;
 
+const PrivacyLink = styled(Link)`
+  font-size: small;
+  color: #6b7280;
+  cursor: pointer;
+`;
+
 function Footer() {
   return (
     <FooterContainer>
       <FooterContents>
+        <PrivacyLink to="/privacy-policy">개인정보 처리 방침</PrivacyLink>
         <FooterP size="x-small">© 2024 모꼬지. All rights reserved.</FooterP>
       </FooterContents>
     </FooterContainer>

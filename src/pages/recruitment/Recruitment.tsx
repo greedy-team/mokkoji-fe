@@ -31,14 +31,13 @@ const ClubList = styled.div`
   margin-bottom: 2%;
 
   @media (max-width: 770px) {
-    grid-template-columns: repeat(2, 48%);
+    grid-template-columns: repeat(1, 90%);
   }
 `;
 
 const ClubCardWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid rgba(107, 114, 128, 0.1);
   border-radius: 10px;
   background-color: white;
   cursor: pointer;
@@ -58,8 +57,8 @@ function Recruitment() {
     searchText,
     selectedCategory
   );
-  const { clubs, pagination } = data.data;
 
+  const { clubs, pagination } = data.data;
 
   useEffect(() => {
     if (clubs.length > 0) {
@@ -84,10 +83,12 @@ function Recruitment() {
   // 현재 페이지 번호 상태 변경
   function handlePageChange(page: number) {
     setCurrentPage(page);
+    window.scrollTo(0, 0);
   }
 
   function onClick(club: ClubType) {
     navigate(`/clubs/${club.id}`);
+    window.scrollTo(0, 0);
   }
 
   return (

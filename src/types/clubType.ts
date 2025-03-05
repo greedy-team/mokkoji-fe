@@ -1,11 +1,11 @@
 export enum ClubCategory {
+  ALL = "ALL",
   CULTURAL_ART = "CULTURAL_ART",
   ACADEMIC_CULTURAL = "ACADEMIC_CULTURAL",
   VOLUNTEER_SOCIAL = "VOLUNTEER_SOCIAL",
   SPORTS = "SPORTS",
   RELIGIOUS = "RELIGIOUS",
-  OTHER = "OTHER",
-  ALL = "ALL"
+  SOCIAL = "SOCIAL",
 }
 
 export enum ClubAffiliation {
