@@ -4,10 +4,17 @@ import useCustomParams from "@/hooks/useCustomParams";
 import ClubDetailInfo from "./ClubDetailInfo";
 import { convertLinks } from "../../utils/covertLinks";
 
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  margin: 0.3%;
+  width: 95%;
+  height: 95%;
+  margin-bottom: 20px;
+  margin-top: 20px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
@@ -40,7 +47,7 @@ const RecruitmentText = styled.p`
     color: blue;
     text-decoration: underline;
   }
-  
+
   @media (max-width: 770px) {
     width: 90%;
   }
@@ -55,13 +62,15 @@ function ClubDetail() {
   const formattedText = convertLinks(clubDetail.recruitPost);
 
   return (
-    <Container>
-      <ClubDetailInfo clubDetail={clubDetail} />
-      <Divider />
-      <RecruitmentText
-        dangerouslySetInnerHTML={{ __html: formattedText }}
-      ></RecruitmentText>
-    </Container>
+    <Wrapper>
+      <Container>
+        <ClubDetailInfo clubDetail={clubDetail} />
+        <Divider />
+        <RecruitmentText
+          dangerouslySetInnerHTML={{ __html: formattedText }}
+        ></RecruitmentText>
+      </Container>
+    </Wrapper>
   );
 }
 
