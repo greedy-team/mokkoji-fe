@@ -41,6 +41,11 @@ export const saveAuthTokens = async (
   }
 };
 
+const LogOutAction = () => {
+  useAuthStore.getState().clearToken();
+  queryClient.invalidateQueries({ queryKey: ["clubs"] });
+};
+
 export const expireAuthTokens = async (): Promise<void> => {
   const accessToken = useAuthStore.getState().accessToken;
   if (!accessToken) {
@@ -56,8 +61,7 @@ export const expireAuthTokens = async (): Promise<void> => {
         },
       }
     );
-    useAuthStore.getState().clearToken();
-    queryClient.invalidateQueries({ queryKey: ["clubs"] });
+    LogOutAction();
   } catch (error) {
     console.error("로그아웃 실패:", error);
     throw new Error("로그아웃 에러");
