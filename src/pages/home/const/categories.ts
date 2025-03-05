@@ -1,6 +1,5 @@
 import Academic from "@/assets/category/Academic.svg";
 import Cultural from "@/assets/category/Cultural.svg";
-import Other from "@/assets/category/Other.svg";
 import Religious from "@/assets/category/Religious.svg";
 import Sports from "@/assets/category/Sports.svg";
 import Volunteer from "@/assets/category/Volunteer.svg";

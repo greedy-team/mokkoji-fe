@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useAuthStore, isTokenExpired } from "@/stores/useAuthStore";
 import { getTokenExpiration } from "@/utils/getTokenExpiration";
+import { useModalStore } from "@/stores/useModalStore";
 
 const api = axios.create({
   baseURL: "/api",
@@ -44,6 +45,7 @@ api.interceptors.response.use(
         return api(error.config);
       } catch {
         clearToken();
+        useModalStore.getState().openModal();
         throw new Error("Refresh token expired, logging out...");
       }
     }
