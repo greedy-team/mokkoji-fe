@@ -15,7 +15,14 @@ export const GlobalStyle = createGlobalStyle`
     font-style: normal;
   }
 
+  @font-face {
+    font-family: "Pretendard-Regular";
+    src: url("/Pretendard-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
   * {
-    font-family: "NanumGothicRegular", sans-serif !important;
+    font-family: "Pretendard-Regular", sans-serif !important;
   }
 `;
