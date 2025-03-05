@@ -13,6 +13,11 @@ const ClubGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(28%, 1fr));
   gap: 1rem;
   justify-content: center;
+
+  @media (max-width: 770px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(47%, 1fr));
+  }
 `;
 
 function FavoriteClubList() {
