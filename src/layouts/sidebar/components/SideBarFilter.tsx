@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import FilterLogo from "@/assets/filterLogo.svg?react";
 import { useState } from "react";
-import { useFilterStore } from "@/stores/useFilterStore"; 
+import { useFilterStore } from "@/stores/useFilterStore";
 import { ClubCategoryKorean } from "@/components/utils/clubCategoryMapping";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ClubCategory } from "@/types/clubType";
 
 const SearchFilter = styled.button<{ selected: boolean }>`
   width: 90%;
@@ -18,7 +17,7 @@ const SearchFilter = styled.button<{ selected: boolean }>`
   margin-bottom: 20px;
   font-size: small;
   cursor: pointer;
-    background-color: ${({ selected }) => (selected ? "#818896" : "white")};
+  background-color: ${({ selected }) => (selected ? "#818896" : "white")};
   color: ${({ selected }) => (selected ? "white" : "#4b5563")};
   transition: background-color 0.3s, color 0.3s;
 
@@ -48,7 +47,8 @@ const DropdownItem = styled.div`
 `;
 
 function SideBarFilter() {
-  const { selectedCategory, setSelectedCategory, categories } = useFilterStore();
+  const { selectedCategory, setSelectedCategory, categories } =
+    useFilterStore();
   const [filterOpen, setFilterOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -66,15 +66,6 @@ function SideBarFilter() {
 
       {filterOpen && (
         <Dropdown>
-          <DropdownItem
-            key="ALL"
-            onClick={() => {
-            setSelectedCategory(ClubCategory.ALL); 
-            navigate("/clubs");
-            }}
-          >
-          전체
-          </DropdownItem>
           {categories.map((category) => (
             <DropdownItem
               key={category}
