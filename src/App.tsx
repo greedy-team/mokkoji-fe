@@ -7,9 +7,10 @@ import React, { Suspense } from "react";
 import { useAuthStore } from "./stores/useAuthStore";
 import { ProtectedRoute } from "./pages/favorite/Favorite";
 import QueryErrorBoundary from "./services/QueryErrorBoundary";
-import PrivacyPolicyPage from "@/pages/PrivacyPolicyPage";
+import PrivacyPolicyPage from "@/pages/PrivacyPolicy";
 
 import Loading from "./pages/Loading";
+import UserAgree from "./pages/user/UserAgree";
 const Home = React.lazy(() => import("./pages/home/Home"));
 const ClubList = React.lazy(() => import("./pages/club/ClubList"));
 const ClubDetail = React.lazy(
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "agree",
+        element: <UserAgree />,
       },
       {
         path: "clubs",

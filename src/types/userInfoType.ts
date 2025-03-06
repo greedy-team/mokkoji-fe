@@ -3,6 +3,11 @@ export interface UserLoginType {
   password: string;
 }
 
+export interface UserVerifyType {
+  studentIdVerify: string;
+  passwordVerify: string;
+}
+
 export interface UserInfoType extends Pick<UserLoginType, "studentId"> {
   department: string;
   name: string;
