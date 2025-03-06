@@ -87,7 +87,7 @@ function ClubCard({ club }: ClubProp) {
     const due = (endDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
 
     if (due <= 0) return STATUS.CLOSED;
-    else if (due <= 3) return STATUS.URGENT; // 현재 임박 기간 = 3일
+    else if (due < 3) return STATUS.URGENT; // 현재 임박 기간 = 3일
     else return STATUS.OPEN;
   };
 
