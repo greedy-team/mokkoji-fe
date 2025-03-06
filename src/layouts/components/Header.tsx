@@ -4,7 +4,7 @@ import Profile from "@/assets/userInfo.svg?react";
 import { useModalStore } from "@/stores/useModalStore";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { useAuthStore } from "@/stores/useAuthStore";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   height: 60px;
@@ -51,24 +51,26 @@ function Header() {
   const resetFilters = useFilterStore((state) => state.resetFilters);
   const resetMenu = useFilterStore((state) => state.resetMenu);
   const accessToken = useAuthStore((state) => state.accessToken);
-
+  const navigate = useNavigate();
   function handleLogoClick() {
-    resetFilters(); 
-    resetMenu(); 
+    resetFilters();
+    resetMenu();
   }
 
   return (
     <HeaderContainer>
       <HeaderContents>
         <Link to="/">
-        <div onClick={handleLogoClick} style={{ cursor: "pointer" }}>
-          <Logo width={100} height={100} />
-        </div>
+          <div onClick={handleLogoClick} style={{ cursor: "pointer" }}>
+            <Logo width={100} height={100} />
+          </div>
         </Link>
         {accessToken ? (
           <Profile width={35} height={35} onClick={openModal} />
         ) : (
-          <LoginButton onClick={openModal}>로그인</LoginButton>
+          <LoginButton onClick={() => navigate("/maintenance")}>
+            로그인
+          </LoginButton>
         )}
       </HeaderContents>
     </HeaderContainer>

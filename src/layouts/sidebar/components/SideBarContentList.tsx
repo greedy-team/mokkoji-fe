@@ -97,7 +97,7 @@ function SideBarContentList({
       </SectionTitle>
 
       <SectionTitle
-        to="/favorites"
+        to="/maintenance"
         onClick={() => handleMenuClick("즐겨찾기")}
         $active={selectedMenu === "즐겨찾기" && !isLoginChecking()}
       >
