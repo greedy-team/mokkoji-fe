@@ -9,13 +9,13 @@ import { ClubCategory } from "@/types/clubType";
 
 export const categories = [
   {
-    name: "학술/교양",
+    name: "학술",
     img: Academic,
     filter: ClubCategory.ACADEMIC_CULTURAL,
   },
-  { name: "문화/예술", img: Cultural, filter: ClubCategory.CULTURAL_ART },
+  { name: "공연", img: Cultural, filter: ClubCategory.CULTURAL_ART },
   {
-    name: "봉사/사회",
+    name: "봉사",
     img: Volunteer,
     filter: ClubCategory.VOLUNTEER_SOCIAL,
   },
