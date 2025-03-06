@@ -105,7 +105,7 @@ function ClubCard({ club }: ClubProp) {
           </Status>
           <RecruitPeriod>
             <PeriodSection
-              startDate={club.recruitEndDate}
+              startDate={club.recruitStartDate}
               endDate={club.recruitEndDate}
               size={0.5}
               simple={true}

@@ -16,12 +16,13 @@ const SubTitle = styled.div`
   text-align: center;
 `;
 
-const Description = styled.div`
-  font-size: 10px;
+const Description = styled.a`
+  font-size: 0.8rem;
   color: #6b7280;
   margin-top: 15px;
   line-height: 1.2;
   text-align: center;
+  text-decoration: underline;
 `;
 
 function Login() {
@@ -32,9 +33,7 @@ function Login() {
         모꼬지와 함께 세종대 동아리에서 학우들과 멋진 경험을 만나보세요.
       </SubTitle>
       <LoginContent />
-      <Description>
-        학번과 비밀번호는 세종대 학사정보시스템의 학생 로그인 정보와 동일합니다.
-      </Description>
+      <Description href="/agree">아직 계정이 없으신가요?</Description>
     </ModalSection>
   );
 }
