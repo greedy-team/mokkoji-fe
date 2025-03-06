@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 const FooterContainer = styled.div`
   width: 100%;
@@ -26,18 +25,26 @@ const FooterP = styled.p<{ size?: string }>`
   color: #6b7280;
 `;
 
-const PrivacyLink = styled(Link)`
+// const PrivacyLink = styled(Link)`
+//   font-size: small;
+//   color: #6b7280;
+//   cursor: pointer;
+// `;
+
+const BugLink = styled.a`
   font-size: small;
   color: #6b7280;
-  cursor: pointer;
 `;
 
 function Footer() {
   return (
     <FooterContainer>
       <FooterContents>
-        <PrivacyLink to="/privacy-policy">개인정보 처리 방침</PrivacyLink>
-        <FooterP size="x-small">© 2024 모꼬지. All rights reserved.</FooterP>
+        {/* <PrivacyLink to="/privacy-policy">개인정보 처리 방침</PrivacyLink> */}
+        <BugLink href="https://forms.gle/gd45BFjRng6AZmwU8" target="_blank">
+          버그 제보
+        </BugLink>
+        <FooterP size="x-small">© 2025 모꼬지. All rights reserved.</FooterP>
       </FooterContents>
     </FooterContainer>
   );
