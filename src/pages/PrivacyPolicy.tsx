@@ -87,17 +87,19 @@ const PrivacyPolicyPage = () => (
       </p>
       <Spacing size={2} />
       {privacyPolicies.map((policy, index) => (
-        <p key={index}>
-          <strong>{policy.title}</strong>
-          <br />
-          {policy.content.map((line, i) => (
-            <span key={i}>
-              {line}
-              <br />
-            </span>
-          ))}
+        <div key={index}>
+          <p>
+            <strong>{policy.title}</strong>
+            <br />
+            {policy.content.map((line, i) => (
+              <span key={i}>
+                {line}
+                <br />
+              </span>
+            ))}
+          </p>
           <Spacing size={2} />
-        </p>
+        </div>
       ))}
       <p>본 개인정보 처리방침은 해당 사이트에 적용됩니다.</p>
     </Content>
