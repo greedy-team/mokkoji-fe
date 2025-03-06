@@ -46,8 +46,8 @@ const ClubCardWrapper = styled.div`
 
 function Recruitment() {
   const navigate = useNavigate();
-  const [sortedClubs, setSortedClubs] = useState<ClubType[]>([]); 
-  const [buttonState] = useState<string>("마감일순"); 
+  const [sortedClubs, setSortedClubs] = useState<ClubType[]>([]);
+  const [buttonState] = useState<string>("마감일순");
   const { selectedCategory, searchText, currentPage, setCurrentPage } =
     useFilterStore();
 
