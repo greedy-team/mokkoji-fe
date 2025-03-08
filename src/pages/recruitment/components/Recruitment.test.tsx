@@ -139,7 +139,8 @@
 
 //     const nextPageButton = screen.getByText("2");
 //     fireEvent.click(nextPageButton);
-    
+
+
 //     //2 버튼 클릭 시, 페이지 2 호출
 //     await waitFor(() => {
 //       expect(setCurrentPage).toHaveBeenCalledWith(2);
@@ -202,4 +203,5 @@
 //     expect(clubCards[0].textContent).toBe("EN#");
 //     expect(clubCards[1].textContent).toBe("그리디");
 //   });
+
 // });

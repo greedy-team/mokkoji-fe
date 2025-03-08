@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { usePrefetchClubs } from "@/hooks/usePrefetchClubs";
 import NoResults from "@/pages/NoResults";
-import { ClubCategory } from "@/types/clubType";
+
 
 const ITEMS_PER_PAGE = 12;
 
@@ -49,7 +49,7 @@ function ClubList() {
     currentPage,
     ITEMS_PER_PAGE,
     searchText,
-    selectedCategory === ClubCategory.ALL ? undefined : selectedCategory,
+    selectedCategory,
     affiliation
   );
 
@@ -60,18 +60,16 @@ function ClubList() {
     pagination,
     ITEMS_PER_PAGE,
     searchText,
-    selectedCategory === ClubCategory.ALL ? undefined : selectedCategory,
+    selectedCategory,
     affiliation
   );
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    window.scrollTo(0, 0);
   };
 
   function onClick(club: ClubType) {
     navigate(`/clubs/${club.id}`);
-    window.scrollTo(0, 0);
   }
 
   return (

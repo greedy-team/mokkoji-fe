@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { ClubCategoryKorean } from "@/components/const/clubCategoryMapping";
 import { useNavigate, useLocation } from "react-router-dom";
+import { ClubCategory } from "@/types/clubType";
 
 const SearchFilter = styled.button<{ selected: boolean }>`
   width: 90%;
@@ -57,6 +58,17 @@ function SideBarFilter() {
     setFilterOpen(!filterOpen);
   }
 
+  const categoryClickEvent = (category: ClubCategory) => {
+    if (selectedCategory === category) {
+      setSelectedCategory(undefined);
+    } else {
+      setSelectedCategory(category);
+    }
+    if (location.pathname === "/") {
+      navigate("/clubs");
+    }
+  };
+
   return (
     <>
       <SearchFilter onClick={toggleFilter} selected={!!selectedCategory}>
@@ -66,22 +78,13 @@ function SideBarFilter() {
 
       {filterOpen && (
         <Dropdown>
+          <DropdownItem onClick={() => setSelectedCategory(undefined)}>
+            전체
+          </DropdownItem>
           {categories.map((category) => (
             <DropdownItem
               key={category}
-              onClick={() => {
-                setSelectedCategory(category);
-
-                if (selectedCategory === category) {
-                  setSelectedCategory(undefined);
-                } else {
-                  setSelectedCategory(category);
-                }
-
-                if (location.pathname === "/") {
-                  navigate("/clubs");
-                }
-              }}
+              onClick={() => categoryClickEvent(category)}
             >
               {ClubCategoryKorean[category]}
             </DropdownItem>
