@@ -22,7 +22,6 @@ const ClubGrid = styled.div`
 
 function FavoriteClubList() {
   const { data } = useGetFavorite();
-  console.log(data.data[0].imageURL);
 
   return (
     <>
