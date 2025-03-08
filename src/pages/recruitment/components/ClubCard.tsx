@@ -83,10 +83,15 @@ function ClubCard({ club }: ClubProp) {
   // 모집 상태 반환 함수
   const getStatus = () => {
     const endDate = new Date(club.recruitEndDate!);
-    const today = new Date();
-    const due = (endDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
+    const koreaTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Seoul" });
+    const today = new Date(koreaTime);
+    // 시간 단위 제거거
+    endDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
 
-    if (due < -1) return STATUS.CLOSED;
+    const due = Math.floor((endDate.getTime() - today.getTime()) / (1000 * 3600 * 24));
+
+    if (due < 0) return STATUS.CLOSED;
     else if (due <= 3) return STATUS.URGENT; // 현재 임박 기간 = 3일
     else return STATUS.OPEN;
   };
