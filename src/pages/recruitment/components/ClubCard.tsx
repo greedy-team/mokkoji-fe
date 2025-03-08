@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { ClubType } from "@/types/clubType";
 import FavoriteButton from "@/components/FavoriteButton";
-import { STATUS } from "../const/STATUS";
 import { useLazyImg } from "@/hooks/useLazyImg";
 import PeriodSection from "@/components/PeriodSection";
+import { useGetStatus } from "../hooks/useGetStatus";
 
 const Card = styled.div`
   display: flex;
@@ -81,23 +81,8 @@ interface ClubProp {
 
 function ClubCard({ club }: ClubProp) {
   // 모집 상태 반환 함수
-  const getStatus = () => {
-    const endDate = new Date(club.recruitEndDate!);
-    const koreaTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Seoul" });
-    const today = new Date(koreaTime);
-    // 시간 단위 제거거
-    endDate.setHours(0, 0, 0, 0);
-    today.setHours(0, 0, 0, 0);
 
-    const due = Math.floor((endDate.getTime() - today.getTime()) / (1000 * 3600 * 24));
-
-    if (due < 0) return STATUS.CLOSED;
-    else if (due <= 3) return STATUS.URGENT; // 현재 임박 기간 = 3일
-    else return STATUS.OPEN;
-  };
-
-  const { text, backColor, fontColor } = getStatus();
-
+  const { text, backColor, fontColor } = useGetStatus(club.recruitEndDate);
   const { imgSrc, imgRef } = useLazyImg({ src: club.imageURL || undefined });
 
   return (
