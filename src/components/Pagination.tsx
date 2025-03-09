@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { generatePageNumbers } from "./utils/paginationUtil";
+import { generatePageNumbers, getOtherPage } from "./utils/paginationUtil";
 
 const PaginationContainer = styled.div`
   display: flex;
@@ -8,8 +8,22 @@ const PaginationContainer = styled.div`
   gap: 5px;
 `;
 
+const PagingButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #e5e7eb;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+`;
+
 const PageButton = styled.button<{ $active: boolean }>`
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 25px;
   height: 25px;
   border: 2px solid #e5e7eb;
@@ -36,6 +50,7 @@ const Pagination = ({
 
   return (
     <PaginationContainer>
+      <PagingButton onClick={() => onPageChange(getOtherPage(currentPage, totalPages, "prev"))}>{"<"}</PagingButton>
       {pageNumbers.map((page) => (
         <PageButton
           key={page}
@@ -45,6 +60,7 @@ const Pagination = ({
           {page}
         </PageButton>
       ))}
+      <PagingButton onClick={() => onPageChange(getOtherPage(currentPage, totalPages, "next"))}>{">"}</PagingButton>
     </PaginationContainer>
   );
 };
