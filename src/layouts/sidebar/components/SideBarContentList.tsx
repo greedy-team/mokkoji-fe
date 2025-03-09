@@ -4,6 +4,7 @@ import { clubItems } from "../const/pathLinks";
 import Spacing from "@/components/Spacing";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { isLoginChecking } from "@/stores/useAuthStore";
+import useCurrentPath from "@/utils/useCurrentPath";
 
 const SectionTitle = styled(Link)<{ $active: boolean }>`
   width: 90%;
@@ -50,12 +51,10 @@ function SideBarContentList({
 }: {
   setIsOpen: (isOpen: boolean) => void;
 }) {
-  const { resetAll, selectedMenu, setSelectedMenu } = useFilterStore();
-
-  function handleMenuClick(menu: string) {
-    setSelectedMenu(menu);
+  const { resetAll, } = useFilterStore();
+  const path = useCurrentPath();
+  function handleMenuClick() {
     resetAll();
-
     if (window.innerWidth <= 770) {
       setIsOpen(false);
     }
@@ -65,15 +64,15 @@ function SideBarContentList({
     <>
       <SectionTitle
         to="/"
-        onClick={() => handleMenuClick("HOME")}
-        $active={selectedMenu === "HOME"}
+        onClick={handleMenuClick}
+        $active={path === "/"}
       >
         HOME
       </SectionTitle>
       <SectionTitle
         to="/clubs"
-        onClick={() => handleMenuClick("전체 동아리")}
-        $active={selectedMenu === "전체 동아리"}
+        onClick={handleMenuClick}
+        $active={path === "/clubs"}
       >
         전체 동아리
       </SectionTitle>
@@ -81,8 +80,8 @@ function SideBarContentList({
         <SectionLink
           key={item.name}
           to={item.path}
-          onClick={() => handleMenuClick(item.name)}
-          $active={selectedMenu === item.name}
+          onClick={handleMenuClick}
+          $active={path === item.path}
         >
           {item.name}
         </SectionLink>
@@ -90,16 +89,16 @@ function SideBarContentList({
       <Spacing direction="vertical" size={1.2} />
       <SectionTitle
         to="/recruit"
-        onClick={() => handleMenuClick("모집 공고")}
-        $active={selectedMenu === "모집 공고"}
+        onClick={handleMenuClick}
+        $active={path.startsWith("/recruit")}
       >
         모집 공고
       </SectionTitle>
 
       <SectionTitle
         to="/favorites"
-        onClick={() => handleMenuClick("즐겨찾기")}
-        $active={selectedMenu === "즐겨찾기" && !isLoginChecking()}
+        onClick={handleMenuClick}
+        $active={path.startsWith("/favorites") && !isLoginChecking()}
       >
         즐겨찾기
       </SectionTitle>

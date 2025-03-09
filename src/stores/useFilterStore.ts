@@ -10,10 +10,7 @@ type FilterStore = {
   setSearchText: (text: string) => void;
   currentPage: number; //현재 페이지
   setCurrentPage: (page: number) => void;
-  selectedMenu: string; // 선택된 메뉴
-  setSelectedMenu: (menu: string) => void;
   resetFilters: () => void; // 모든 필터 초기화
-  resetMenu: () => void; // 메뉴 초기화
   resetAll: () => void; // 페이지 이동 시 모든 상태 초기화
 };
 
@@ -34,7 +31,7 @@ export const useFilterStore = create<FilterStore>()(
       setCurrentPage: (page) => set(() => ({ currentPage: page })),
 
       selectedMenu: "HOME",
-      setSelectedMenu: (menu) => set(() => ({ selectedMenu: menu })),
+
 
       resetFilters: () =>
         set(() => ({
@@ -43,7 +40,6 @@ export const useFilterStore = create<FilterStore>()(
           currentPage: 1,
         })),
 
-      resetMenu: () => set(() => ({ selectedMenu: "HOME" })),
 
       resetAll: () =>
         set(() => ({
