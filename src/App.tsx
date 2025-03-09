@@ -3,13 +3,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { queryClient } from "./services/TanstackQueryStore";
 import CommonLayout from "./layouts/CommonLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import React, { Suspense } from "react";
+import React from "react";
 import { useAuthStore } from "./stores/useAuthStore";
 import { ProtectedRoute } from "./pages/favorite/Favorite";
 import QueryErrorBoundary from "./services/QueryErrorBoundary";
 import PrivacyPolicyPage from "@/pages/PrivacyPolicy";
-
-import Loading from "./pages/Loading";
 import UserAgree from "./pages/user/UserAgree";
 const Home = React.lazy(() => import("./pages/home/Home"));
 const ClubList = React.lazy(() => import("./pages/club/ClubList"));
@@ -83,13 +81,11 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Suspense fallback={<Loading />}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <QueryErrorBoundary>
-          {accessToken ? <UserInfo /> : <Login />}
-        </QueryErrorBoundary>
-        <RouterProvider router={router} />
-      </Suspense>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <QueryErrorBoundary>
+        {accessToken ? <UserInfo /> : <Login />}
+      </QueryErrorBoundary>
+      <RouterProvider router={router} />
     </QueryClientProvider>
   );
 }
