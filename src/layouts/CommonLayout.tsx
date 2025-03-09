@@ -4,6 +4,8 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import SideBar from "./sidebar/SideBar";
 import QueryErrorBoundary from "@/services/QueryErrorBoundary";
+import { Suspense } from "react";
+import Loading from "@/pages/Loading";
 
 const Background = styled.div`
   width: 100%;
@@ -34,7 +36,9 @@ function CommonLayout() {
         <SideBar />
         <MainContents>
           <QueryErrorBoundary>
-            <Outlet />
+            <Suspense fallback={<Loading />}>
+              <Outlet />
+            </Suspense>
           </QueryErrorBoundary>
         </MainContents>
       </MainContentsSection>
