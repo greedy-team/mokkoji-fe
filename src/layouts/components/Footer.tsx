@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const FooterContainer = styled.div`
   width: 100%;
+  height: 45px;
   background-color: white;
   display: flex;
   justify-content: center;

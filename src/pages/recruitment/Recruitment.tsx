@@ -13,8 +13,9 @@ const ITEMS_PER_PAGE = 12; // 페이지당 게시물 수
 
 const Container = styled.div`
   width: 100%;
-  height: fit-content;
+  height: calc(100vh - 105px);
   position: relative;
+  overflow: auto;
 
   @media (max-width: 770px) {
     margin-top: 60px;
@@ -25,29 +26,34 @@ const ClubList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 32%);
   width: 100%;
-  height: fit-content;
+  min-height: 90%;
   justify-content: space-evenly;
-  align-content: space-evenly;
+  align-content: flex-start;
   margin-bottom: 2%;
 
   @media (max-width: 770px) {
-    grid-template-columns: repeat(1, 90%);
+    grid-template-columns: repeat(2, 48%);
   }
 `;
 
 const ClubCardWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
+  border: 1px solid rgba(107, 114, 128, 0.1);
   border-radius: 10px;
   background-color: white;
   cursor: pointer;
   margin: 5px 0;
 `;
 
+const PaginationWrapper = styled.div`
+  margin-bottom: 15px;
+`;
+
 function Recruitment() {
   const navigate = useNavigate();
-  const [sortedClubs, setSortedClubs] = useState<ClubType[]>([]);
-  const [buttonState] = useState<string>("마감일순");
+  const [sortedClubs, setSortedClubs] = useState<ClubType[]>([]); 
+  const [buttonState] = useState<string>("마감일순"); 
   const { selectedCategory, searchText, currentPage, setCurrentPage } =
     useFilterStore();
 
@@ -83,12 +89,10 @@ function Recruitment() {
   // 현재 페이지 번호 상태 변경
   function handlePageChange(page: number) {
     setCurrentPage(page);
-    window.scrollTo(0, 0);
   }
 
   function onClick(club: ClubType) {
     navigate(`/clubs/${club.id}`);
-    window.scrollTo(0, 0);
   }
 
   return (
@@ -107,11 +111,13 @@ function Recruitment() {
               </ClubCardWrapper>
             ))}
           </ClubList>
-          <PaginationComponent
-            totalPages={pagination.totalPages}
-            currentPage={currentPage}
-            onPageChange={handlePageChange}
-          />
+          <PaginationWrapper>
+            <PaginationComponent
+              totalPages={pagination.totalPages}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+            />
+          </PaginationWrapper>
         </>
       )}
     </Container>
