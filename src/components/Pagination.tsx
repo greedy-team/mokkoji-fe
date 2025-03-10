@@ -8,16 +8,17 @@ const PaginationContainer = styled.div`
   gap: 5px;
 `;
 
-const PagingButton = styled.button`
+const PagingButton = styled.button<{ $disabled: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 25px;
   height: 25px;
-  border: 2px solid #e5e7eb;
+  border: 2px solid ${({ $disabled }) => ($disabled ? "#f6f6f6" : "#e5e7eb")};
   border-radius: 5px;
   background-color: transparent;
-  cursor: pointer;
+  color: ${({ $disabled }) => ($disabled ? "#dddddd" : "black")};
+  cursor: ${({ $disabled }) => ($disabled ? "default" : "pointer")};
 `;
 
 const PageButton = styled.button<{ $active: boolean }>`
@@ -47,10 +48,17 @@ const Pagination = ({
 }: PaginationProps) => {
   // 페이지 넘버 가져오기
   const pageNumbers = generatePageNumbers(totalPages, currentPage);
+  const isPrevDisabled = currentPage < 6;
+  const isNextDisabled = Math.floor((currentPage - 1) / 5) >= Math.floor((totalPages - 1) / 5);
 
   return (
     <PaginationContainer>
-      <PagingButton onClick={() => onPageChange(getOtherPage(currentPage, totalPages, "prev"))}>{"<"}</PagingButton>
+      <PagingButton
+        onClick={() => !isPrevDisabled && onPageChange(getOtherPage(currentPage, totalPages, "prev"))}
+        $disabled={isPrevDisabled}  
+      >
+        {"<"}
+      </PagingButton>
       {pageNumbers.map((page) => (
         <PageButton
           key={page}
@@ -60,7 +68,12 @@ const Pagination = ({
           {page}
         </PageButton>
       ))}
-      <PagingButton onClick={() => onPageChange(getOtherPage(currentPage, totalPages, "next"))}>{">"}</PagingButton>
+      <PagingButton 
+        onClick={() => !isNextDisabled && onPageChange(getOtherPage(currentPage, totalPages, "next"))}
+        $disabled={isNextDisabled}
+      >
+        {">"}
+      </PagingButton>
     </PaginationContainer>
   );
 };
