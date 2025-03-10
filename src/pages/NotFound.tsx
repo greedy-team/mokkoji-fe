@@ -68,7 +68,7 @@ const NotFound = () => {
         <Description>
           요청하신 페이지가 삭제되었거나 일시적으로 사용할 수 없습니다.
         </Description>
-        <LinkButton to="/">메인 페이지로 이동</LinkButton>
+        <LinkButton to="/">홈 화면으로 이동</LinkButton>
     </Container>
   );
 };
