@@ -17,7 +17,7 @@ export function generatePageNumbers(totalPages: number, currentPage: number): nu
 export function getOtherPage(currentPage: number, totalPages: number, direction: "prev" | "next"): number {
     if (direction === "prev" && currentPage > 5) {
       return Math.floor((currentPage - 1) / 5) * 5 - 4;
-    } else if (direction === "next" && currentPage < totalPages) {
+    } else if (direction === "next" && Math.floor((currentPage - 1) / 5) < Math.floor((totalPages - 1) / 5)) {
       return Math.floor((currentPage - 1) / 5) * 5 + 6;
     }
     return currentPage;
