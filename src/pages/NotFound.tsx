@@ -10,16 +10,21 @@ const Container = styled.div`
   padding: 40px 20px;
   background-color: #f9fafb;
   box-sizing: border-box;
+
+    @media (max-width: 770px) {
+    margin-top: 5px;
+  }
+
 `;
 
 const IconWrapper = styled.div`
 margin-top: 100px;
-  margin-bottom: 8px;
-  svg {
-    width: 64px;
-    height: 64px;
-    color: #000;
-  }
+margin-bottom: 8px;
+svg {
+  width: 64px;
+  height: 64px;
+  color: #000;
+}
 `;
 
 const Title = styled.h1`
@@ -34,12 +39,14 @@ const Subtitle = styled.p`
   font-weight: 600;
   margin: 16px 0 8px;
   color: #333;
+  text-align: center;
 `;
 
 const Description = styled.p`
   font-size: 16px;
   color: #6b7280;
   margin-bottom: 32px;
+  text-align: center;
 `;
 
 const LinkButton = styled(Link)`
@@ -51,6 +58,7 @@ const LinkButton = styled(Link)`
   font-weight: 600;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: background-color 0.2s;
+  text-align: center;
 
   &:hover {
     background-color: #333;
