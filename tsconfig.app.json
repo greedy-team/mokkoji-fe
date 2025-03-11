@@ -23,5 +23,5 @@
     "noUncheckedSideEffectImports": true
   },
   "extends": "./tsconfig.json",
-  "include": ["src", "vite.config.ts"]
+  "include": ["src", "vite.config.ts", "public/IBM_Plex_Sans_KR"]
 }
