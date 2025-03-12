@@ -11,14 +11,13 @@ const HomeContainer = styled.div`
   justify-content: center;
   display: flex;
   position: relative;
-  min-height: 55vh;
+  min-height: 66vh;
 `;
 
 const BackgroundImage = styled.img`
   position: absolute;
   width: 100%;
-  height: 55vh;
-  max-height: 500px;
+  height: 66vh;
   object-fit: fill;
   filter: brightness(70%);
 `;
@@ -28,12 +27,13 @@ const Overlay = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
   background: rgba(70, 69, 69, 0.4);
 `;
 
 const HomeLogoSection = styled.div`
-  position: absolute;
+  position: relative;
+  height: auto;
+  width: 100%;
   top: 15%;
   z-index: 100;
   display: flex;
@@ -41,6 +41,7 @@ const HomeLogoSection = styled.div`
   justify-content: center;
   align-items: center;
   gap: 15px;
+  margin-bottom: 10px;
 `;
 
 const HomeTitle = styled.p`
@@ -51,7 +52,6 @@ const HomeTitle = styled.p`
 `;
 
 const HomeDescription = styled.p`
-  line-height: 1.3;
   font-size: 1.3rem;
   color: white;
   margin-top: -40px;
@@ -67,6 +67,7 @@ const ExploreButton = styled(Link)`
   font-size: 1rem;
   font-weight: regular;
   padding: 10px 20px;
+  text-align: center;
   background-color: #1a1a1a;
   border: none;
   border-radius: 5px;

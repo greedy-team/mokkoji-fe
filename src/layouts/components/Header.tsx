@@ -49,12 +49,14 @@ const LoginButton = styled.button`
 function Header() {
   const openModal = useModalStore((state) => state.openModal);
   const resetFilters = useFilterStore((state) => state.resetFilters);
-  const resetMenu = useFilterStore((state) => state.resetMenu);
   const accessToken = useAuthStore((state) => state.accessToken);
   const navigate = useNavigate();
   function handleLogoClick() {
     resetFilters();
+<<<<<<< HEAD
     resetMenu();
+=======
+>>>>>>> develop
   }
 
   return (

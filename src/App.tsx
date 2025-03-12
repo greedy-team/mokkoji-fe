@@ -3,15 +3,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { queryClient } from "./services/TanstackQueryStore";
 import CommonLayout from "./layouts/CommonLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import React, { Suspense } from "react";
+import React from "react";
 import { useAuthStore } from "./stores/useAuthStore";
 import { ProtectedRoute } from "./pages/favorite/Favorite";
 import QueryErrorBoundary from "./services/QueryErrorBoundary";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import PrivacyPolicyPage from "@/pages/PrivacyPolicy";
-
-import Loading from "./pages/Loading";
 import UserAgree from "./pages/user/UserAgree";
+import * as amplitude from "@amplitude/analytics-browser";
 const Home = React.lazy(() => import("./pages/home/Home"));
 const ClubList = React.lazy(() => import("./pages/club/ClubList"));
 const ClubDetail = React.lazy(
@@ -81,16 +80,14 @@ const router = createBrowserRouter([
 
 function App() {
   const accessToken = useAuthStore((state) => state.accessToken);
-
+  amplitude.init("6024afbe3076c1a3880f0d9492ee65e6", { autocapture: true });
   return (
     <QueryClientProvider client={queryClient}>
-      <Suspense fallback={<Loading />}>
         <ReactQueryDevtools initialIsOpen={false} />
         <QueryErrorBoundary>
           {accessToken ? <UserInfo /> : <Login />}
         </QueryErrorBoundary>
         <RouterProvider router={router} />
-      </Suspense>
       <SpeedInsights />
     </QueryClientProvider>
   );

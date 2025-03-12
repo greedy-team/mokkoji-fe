@@ -7,5 +7,4 @@ export const ClubCategoryKorean: Record<ClubCategory, string> = {
   [ClubCategory.SPORTS]: "체육",
   [ClubCategory.RELIGIOUS]: "종교",
   [ClubCategory.SOCIAL]: "문화",
-  [ClubCategory.ALL]: "전체",
 };

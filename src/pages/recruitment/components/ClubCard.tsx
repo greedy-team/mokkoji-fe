@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { ClubType } from "@/types/clubType";
 import FavoriteButton from "@/components/FavoriteButton";
-import { STATUS } from "../const/STATUS";
 import { useLazyImg } from "@/hooks/useLazyImg";
 import PeriodSection from "@/components/PeriodSection";
+import { useGetStatus } from "../hooks/useGetStatus";
 
 const Card = styled.div`
   display: flex;
@@ -11,8 +11,9 @@ const Card = styled.div`
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 2%;
-  margin-bottom: 20px;
-
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
   &:hover {
     background-color: #f9f9f9;
   }
@@ -47,7 +48,7 @@ const Status = styled.div<{ $backColor: string; $fontColor: string }>`
   padding: 3px 7px;
   background-color: ${({ $backColor }) => $backColor};
   color: ${({ $fontColor }) => $fontColor};
-  font-size: 13px;
+  font-size: 0.6rem;
   font-weight: 550;
 `;
 
@@ -63,7 +64,7 @@ const ClubName = styled.div`
 
 const Category = styled.div`
   margin-top: 5%;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   color: gray;
   font-weight: 550;
 `;
@@ -77,8 +78,10 @@ const TitleSection = styled.div`
 
 interface ClubProp {
   club: ClubType;
+  onClick: () => void;
 }
 
+<<<<<<< HEAD
 function ClubCard({ club }: ClubProp) {
   // 모집 상태 반환 함수
   const getStatus = () => {
@@ -93,10 +96,14 @@ function ClubCard({ club }: ClubProp) {
 
   const { text, backColor, fontColor } = getStatus();
 
+=======
+function ClubCard({ club, onClick }: ClubProp) {
+  const { text, backColor, fontColor } = useGetStatus(club.recruitEndDate);
+>>>>>>> develop
   const { imgSrc, imgRef } = useLazyImg({ src: club.imageURL || undefined });
 
   return (
-    <Card>
+    <Card onClick={onClick}>
       <Image ref={imgRef} src={imgSrc || undefined} alt={club.name} />
       <Content>
         <TopRow>
@@ -107,7 +114,7 @@ function ClubCard({ club }: ClubProp) {
             <PeriodSection
               startDate={club.recruitStartDate}
               endDate={club.recruitEndDate}
-              size={0.5}
+              size={0.75}
               simple={true}
             />
           </RecruitPeriod>

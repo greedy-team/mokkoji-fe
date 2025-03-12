@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const LoadingContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,7 +48,11 @@ function Loading() {
     <LoadingContainer>
       <LoadingSpinner />
       <LoadingText>데이터를 불러오는 중</LoadingText>
-      <SubText><br/>잠시만 기다려주세요... <br/> <br/>열심히 불러오고 있습니다  🚀  </SubText>
+      <SubText>
+        <br />
+        잠시만 기다려주세요... <br /> <br />
+        열심히 불러오고 있습니다 🚀{" "}
+      </SubText>
     </LoadingContainer>
   );
 }

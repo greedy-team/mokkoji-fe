@@ -7,11 +7,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { usePrefetchClubs } from "@/hooks/usePrefetchClubs";
 import NoResults from "@/pages/NoResults";
-import { ClubCategory } from "@/types/clubType";
+
 
 const ITEMS_PER_PAGE = 12;
 
 const ClubWrapper = styled.div`
+  height: calc(100vh - 105px);
+  overflow: auto;
   @media (max-width: 770px) {
     margin-top: 60px;
   }
@@ -22,9 +24,9 @@ const ClubGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 30%);
   width: 100%;
-  height: 80%;
+  min-height: 90%;
   justify-content: space-evenly;
-  align-content: space-evenly;
+  align-content: flex-start;
 
   @media (max-width: 770px) {
     grid-template-columns: repeat(1, 90%);
@@ -49,7 +51,7 @@ function ClubList() {
     currentPage,
     ITEMS_PER_PAGE,
     searchText,
-    selectedCategory === ClubCategory.ALL ? undefined : selectedCategory,
+    selectedCategory,
     affiliation
   );
 
@@ -60,26 +62,24 @@ function ClubList() {
     pagination,
     ITEMS_PER_PAGE,
     searchText,
-    selectedCategory === ClubCategory.ALL ? undefined : selectedCategory,
+    selectedCategory,
     affiliation
   );
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    window.scrollTo(0, 0);
   };
 
   function onClick(club: ClubType) {
     navigate(`/clubs/${club.id}`);
-    window.scrollTo(0, 0);
   }
 
   return (
-    <>
+    <ClubWrapper>
       {clubs.length === 0 ? (
         <NoResults />
       ) : (
-        <ClubWrapper>
+        <>
           <ClubGrid>
             {clubs.map((club) => (
               <ClubBox
@@ -89,7 +89,6 @@ function ClubList() {
               />
             ))}
           </ClubGrid>
-
           <PaginateSection>
             {pagination && (
               <Pagination
@@ -99,9 +98,9 @@ function ClubList() {
               />
             )}
           </PaginateSection>
-        </ClubWrapper>
+        </>
       )}
-    </>
+    </ClubWrapper>
   );
 }
 

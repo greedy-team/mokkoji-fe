@@ -8,6 +8,10 @@ const MaintenanceContainer = styled.div`
   justify-content: center;
   text-align: center;
   padding: 20px;
+  
+  @media (max-width: 770px) {
+    margin-top: 60px;
+  }
 `;
 
 const MaintenanceText = styled.p`
