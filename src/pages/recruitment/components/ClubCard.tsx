@@ -81,25 +81,8 @@ interface ClubProp {
   onClick: () => void;
 }
 
-<<<<<<< HEAD
-function ClubCard({ club }: ClubProp) {
-  // 모집 상태 반환 함수
-  const getStatus = () => {
-    const endDate = new Date(club.recruitEndDate!);
-    const today = new Date();
-    const due = (endDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
-
-    if (due <= -1) return STATUS.CLOSED;
-    else if (due <= 3) return STATUS.URGENT; // 현재 임박 기간 = 3일
-    else return STATUS.OPEN;
-  };
-
-  const { text, backColor, fontColor } = getStatus();
-
-=======
 function ClubCard({ club, onClick }: ClubProp) {
   const { text, backColor, fontColor } = useGetStatus(club.recruitEndDate);
->>>>>>> develop
   const { imgSrc, imgRef } = useLazyImg({ src: club.imageURL || undefined });
 
   return (
