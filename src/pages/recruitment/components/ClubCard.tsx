@@ -11,8 +11,9 @@ const Card = styled.div`
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 2%;
-  margin-bottom: 20px;
-
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
   &:hover {
     background-color: #f9f9f9;
   }
@@ -47,7 +48,7 @@ const Status = styled.div<{ $backColor: string; $fontColor: string }>`
   padding: 3px 7px;
   background-color: ${({ $backColor }) => $backColor};
   color: ${({ $fontColor }) => $fontColor};
-  font-size: 13px;
+  font-size: 0.6rem;
   font-weight: 550;
 `;
 
@@ -63,7 +64,7 @@ const ClubName = styled.div`
 
 const Category = styled.div`
   margin-top: 5%;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   color: gray;
   font-weight: 550;
 `;
@@ -77,16 +78,15 @@ const TitleSection = styled.div`
 
 interface ClubProp {
   club: ClubType;
+  onClick: () => void;
 }
 
-function ClubCard({ club }: ClubProp) {
-  // 모집 상태 반환 함수
-
+function ClubCard({ club, onClick }: ClubProp) {
   const { text, backColor, fontColor } = useGetStatus(club.recruitEndDate);
   const { imgSrc, imgRef } = useLazyImg({ src: club.imageURL || undefined });
 
   return (
-    <Card>
+    <Card onClick={onClick}>
       <Image ref={imgRef} src={imgSrc || undefined} alt={club.name} />
       <Content>
         <TopRow>

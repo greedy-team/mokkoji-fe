@@ -1,7 +1,7 @@
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { ReactNode } from "react";
-import {ErrorBoundary} from "react-error-boundary";
-import ErrorIcon from "@/assets/Error2.svg?react"; 
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorIcon from "@/assets/Error2.svg?react";
 
 export default function QueryErrorBoundary({
   children,
@@ -14,18 +14,30 @@ export default function QueryErrorBoundary({
     <ErrorBoundary
       onReset={reset}
       fallbackRender={({ resetErrorBoundary }) => (
-        <div style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100%",
-          backgroundColor: "#f8f8f8",
-          textAlign: "center"
-        }}>
-          <ErrorIcon style={{ width: "80px", marginBottom: "20px" }} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+            backgroundColor: "#f8f8f8",
+            textAlign: "center",
+          }}
+        >
+          <ErrorIcon
+            style={{ width: "70px", height: "auto", marginBottom: "20px" }}
+          />
 
-          <h2 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "10px" }}>오류 발생!</h2>
+          <h2
+            style={{
+              fontSize: "1.2rem",
+              fontWeight: "bold",
+              marginBottom: "15px",
+            }}
+          >
+            오류 발생!
+          </h2>
           <button
             onClick={resetErrorBoundary}
             style={{
@@ -34,8 +46,8 @@ export default function QueryErrorBoundary({
               padding: "10px 20px",
               border: "none",
               borderRadius: "5px",
-              fontSize: "16px",
-              cursor: "pointer"
+              fontSize: "1rem",
+              cursor: "pointer",
             }}
           >
             ↻ 다시 시도

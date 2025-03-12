@@ -49,21 +49,19 @@ const LoginButton = styled.button`
 function Header() {
   const openModal = useModalStore((state) => state.openModal);
   const resetFilters = useFilterStore((state) => state.resetFilters);
-  const resetMenu = useFilterStore((state) => state.resetMenu);
   const accessToken = useAuthStore((state) => state.accessToken);
 
   function handleLogoClick() {
-    resetFilters(); 
-    resetMenu(); 
+    resetFilters();
   }
 
   return (
     <HeaderContainer>
       <HeaderContents>
         <Link to="/">
-        <div onClick={handleLogoClick} style={{ cursor: "pointer" }}>
-          <Logo width={100} height={100} />
-        </div>
+          <div onClick={handleLogoClick} style={{ cursor: "pointer" }}>
+            <Logo width={100} height={100} />
+          </div>
         </Link>
         {accessToken ? (
           <Profile width={35} height={35} onClick={openModal} />

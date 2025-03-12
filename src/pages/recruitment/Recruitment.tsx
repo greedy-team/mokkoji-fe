@@ -36,24 +36,14 @@ const ClubList = styled.div`
   }
 `;
 
-const ClubCardWrapper = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  border: 1px solid rgba(107, 114, 128, 0.1);
-  border-radius: 10px;
-  background-color: white;
-  cursor: pointer;
-  margin: 5px 0;
-`;
-
 const PaginationWrapper = styled.div`
   margin-bottom: 15px;
 `;
 
 function Recruitment() {
   const navigate = useNavigate();
-  const [sortedClubs, setSortedClubs] = useState<ClubType[]>([]); 
-  const [buttonState] = useState<string>("마감일순"); 
+  const [sortedClubs, setSortedClubs] = useState<ClubType[]>([]);
+  const [buttonState] = useState<string>("마감일순");
   const { selectedCategory, searchText, currentPage, setCurrentPage } =
     useFilterStore();
 
@@ -106,9 +96,7 @@ function Recruitment() {
         <>
           <ClubList>
             {sortedClubs.map((club) => (
-              <ClubCardWrapper key={club.id} onClick={() => onClick(club)}>
-                <ClubCard club={club} />
-              </ClubCardWrapper>
+              <ClubCard club={club} onClick={() => onClick(club) } />
             ))}
           </ClubList>
           <PaginationWrapper>
