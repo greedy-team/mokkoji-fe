@@ -11,6 +11,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import PrivacyPolicyPage from "@/pages/PrivacyPolicy";
 import UserAgree from "./pages/user/UserAgree";
 import * as amplitude from "@amplitude/analytics-browser";
+import { sessionReplayPlugin } from "@amplitude/plugin-session-replay-browser";
 const Home = React.lazy(() => import("./pages/home/Home"));
 const ClubList = React.lazy(() => import("./pages/club/ClubList"));
 const ClubDetail = React.lazy(
@@ -78,9 +79,16 @@ const router = createBrowserRouter([
   },
 ]);
 
+amplitude.init("6024afbe3076c1a3880f0d9492ee65e6", { autocapture: true });
+
+const sessionReplayTracking = sessionReplayPlugin({
+  sampleRate: 1,
+});
+amplitude.add(sessionReplayTracking);
+
 function App() {
   const accessToken = useAuthStore((state) => state.accessToken);
-  amplitude.init("6024afbe3076c1a3880f0d9492ee65e6", { autocapture: true });
+
   return (
     <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
