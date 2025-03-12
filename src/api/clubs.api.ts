@@ -1,39 +1,37 @@
-  import api from ".";
-  import {
-    ClubDetailResponseType,
-    ClubResponseType,
-    ClubCategory,
-  } from "@/types/clubType";
+import api from ".";
+import {
+  ClubDetailResponseType,
+  ClubResponseType,
+  ClubCategory,
+} from "@/types/clubType";
 
-  export const getClubItems = async (
-    page: number,
-    size: number,
-    keyword?: string,
-    category?: ClubCategory,
-    affiliation?: string,
-    recruitStatus?: string
-  ): Promise<ClubResponseType> => {
-    const params = Object.fromEntries(
-      Object.entries({
-        keyword,
-        category: category !== "ALL" ? category : undefined,
-        affiliation,
-        page,
-        size,
-        recruitStatus,
-      }).filter(([_, value]) => value !== "")
-    );
+export const getClubItems = async (
+  page: number,
+  size: number,
+  keyword?: string,
+  category?: ClubCategory,
+  affiliation?: string,
+  recruitStatus?: string
+): Promise<ClubResponseType> => {
+  const params = Object.fromEntries(
+    Object.entries({
+      keyword,
+      category,
+      affiliation,
+      page,
+      size,
+      recruitStatus,
+    })
+  );
+  const { data } = await api.get(`/clubs`, { params });
 
-    const { data } = await api.get(`/clubs`, { params });
+  return data;
+};
 
-    return data;
-  };
+export const getClubItemsDetail = async (
+  id: string
+): Promise<ClubDetailResponseType> => {
+  const { data } = await api.get(`/clubs/${id}`);
 
-  export const getClubItemsDetail = async (
-    id: string
-  ): Promise<ClubDetailResponseType> => {
-    const { data } = await api.get(`/clubs/${id}`);
-
-
-    return data;
-  };
+  return data;
+};
