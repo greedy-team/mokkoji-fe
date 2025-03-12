@@ -10,7 +10,7 @@ describe("sortClubs", () => {
       recruitEndDate: "2024-03-01",
       imageURL: "afsf",
       id: 0,
-      category: ClubCategory.ALL,
+      category: ClubCategory.RELIGIOUS,
       affiliation: ClubAffiliation.CENTRAL_CLUB,
       description: "",
     },
@@ -20,7 +20,7 @@ describe("sortClubs", () => {
       recruitEndDate: "2024-03-07",
       imageURL: "afsf",
       id: 1,
-      category: ClubCategory.ALL,
+      category: ClubCategory.ACADEMIC_CULTURAL,
       affiliation: ClubAffiliation.CENTRAL_CLUB,
       description: "",
     },
@@ -30,7 +30,7 @@ describe("sortClubs", () => {
       recruitEndDate: "2024-03-08",
       imageURL: "afsf",
       id: 2,
-      category: ClubCategory.ALL,
+      category: ClubCategory.ACADEMIC_CULTURAL,
       affiliation: ClubAffiliation.CENTRAL_CLUB,
       description: "",
     },
@@ -40,7 +40,7 @@ describe("sortClubs", () => {
       recruitEndDate: "2024-03-09",
       imageURL: "afsf",
       id: 3,
-      category: ClubCategory.ALL,
+      category: ClubCategory.RELIGIOUS,
       affiliation: ClubAffiliation.CENTRAL_CLUB,
       description: "",
     },
@@ -55,7 +55,6 @@ describe("sortClubs", () => {
     expect(sortedByEndDate[3].name).toBe("Club D"); // 마감일이 가장 먼 순
   });
 
-
   it("should move clubs with passed end date to the last", () => {
     //const today = new Date().getTime();
     const pastDateClubs = [
@@ -66,7 +65,7 @@ describe("sortClubs", () => {
         recruitEndDate: "2023-12-31", // 이미 지난 마감일
         imageURL: "afsf",
         id: 4,
-        category: ClubCategory.ALL,
+        category: ClubCategory.SOCIAL,
         affiliation: ClubAffiliation.CENTRAL_CLUB,
         description: "",
       },
