@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.11.13",
+    "@amplitude/plugin-session-replay-browser": "^1.13.5",
     "@tanstack/react-query": "^5.66.0",
     "@tanstack/react-query-devtools": "^5.66.8",
     "axios": "^1.7.9",
