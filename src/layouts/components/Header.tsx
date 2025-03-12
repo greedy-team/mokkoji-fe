@@ -53,10 +53,6 @@ function Header() {
   const navigate = useNavigate();
   function handleLogoClick() {
     resetFilters();
-<<<<<<< HEAD
-    resetMenu();
-=======
->>>>>>> develop
   }
 
   return (

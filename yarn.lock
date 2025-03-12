@@ -1197,6 +1197,11 @@
     "@typescript-eslint/types" "8.23.0"
     eslint-visitor-keys "^4.2.0"
 
+"@vercel/analytics@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@vercel/analytics/-/analytics-1.5.0.tgz#073f93694897414b21a8495e2619bbf64447dcaa"
+  integrity sha512-MYsBzfPki4gthY5HnYN7jgInhAZ7Ac1cYDoRWFomwGHWEX7odTEzbtg9kf/QSo7XEsEAqlQugA6gJ2WS2DEa3g==
+
 "@vercel/build-utils@10.3.0":
   version "10.3.0"
   resolved "https://registry.npmjs.org/@vercel/build-utils/-/build-utils-10.3.0.tgz"
@@ -1347,22 +1352,15 @@
   resolved "https://registry.npmjs.org/@vercel/ruby/-/ruby-2.2.0.tgz"
   integrity sha512-FJF9gKVNHAljGOgV6zS5ou2N7ZgjOqMMtcPA5lsJEUI5/AZzVDWCmtcowTP80wEtHuupkd7d7M399FA082kXYQ==
 
-<<<<<<< HEAD
 "@vercel/speed-insights@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@vercel/speed-insights/-/speed-insights-1.2.0.tgz#1656c3596d4ec02d93d301ca45944c1b9b245186"
   integrity sha512-y9GVzrUJ2xmgtQlzFP2KhVRoCglwfRQgjyfY607aU0hh0Un6d0OUyrJkjuAlsV18qR4zfoFPs/BiIj9YDS6Wzw==
 
-"@vercel/static-build@2.7.2":
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/@vercel/static-build/-/static-build-2.7.2.tgz#550ac70370934d4d42c08e1e9ed867ec24ca4b02"
-  integrity sha512-IV1Dg0cE8K+47WGwC9AlOcvOMcSM5fnqcPoJqX1bB+8YrY9tXDOCmCKoqXejYnutOfu19aor15ISeAj3oKh+9A==
-=======
 "@vercel/static-build@2.7.1":
   version "2.7.1"
   resolved "https://registry.npmjs.org/@vercel/static-build/-/static-build-2.7.1.tgz"
   integrity sha512-WHbrVIfME9LYGPZLm+udSPs6I5ZYePuTCmJ0tvlOwpLWa4yjCo1Y1beQJ8mSXn87yCila6ZpvhT9FoKySu6OCg==
->>>>>>> develop
   dependencies:
     "@vercel/gatsby-plugin-vercel-analytics" "1.0.11"
     "@vercel/gatsby-plugin-vercel-builder" "2.0.75"
