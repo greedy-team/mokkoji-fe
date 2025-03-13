@@ -32,7 +32,7 @@ const ClubList = styled.div`
   margin-bottom: 2%;
 
   @media (max-width: 770px) {
-    grid-template-columns: repeat(2, 48%);
+    grid-template-columns: repeat(1, 90%);
   }
 `;
 
@@ -79,6 +79,7 @@ function Recruitment() {
   // 현재 페이지 번호 상태 변경
   function handlePageChange(page: number) {
     setCurrentPage(page);
+    window.scrollTo(0, 0);
   }
 
   function onClick(club: ClubType) {
