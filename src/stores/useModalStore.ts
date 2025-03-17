@@ -9,10 +9,14 @@ interface ModalState {
 
 export const useModalStore = create<ModalState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       isOpen: false,
-      openModal: () => set({ isOpen: true }),
-      closeModal: () => set({ isOpen: false }),
+      openModal: () => {
+        if (!get().isOpen) set({ isOpen: true });
+      },
+      closeModal: () => {
+        if (get().isOpen) set({ isOpen: false });
+      },
     }),
     { name: "login-modal" }
   )
