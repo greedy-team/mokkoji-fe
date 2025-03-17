@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ClubCategory } from "@/types/clubType";
+import { ClubCategory } from "@/features/clubs/types/clubType";
 import { persist, createJSONStorage } from "zustand/middleware";
 
 type FilterStore = {
@@ -32,14 +32,12 @@ export const useFilterStore = create<FilterStore>()(
 
       selectedMenu: "HOME",
 
-
       resetFilters: () =>
         set(() => ({
           selectedCategory: undefined,
           searchText: "",
           currentPage: 1,
         })),
-
 
       resetAll: () =>
         set(() => ({

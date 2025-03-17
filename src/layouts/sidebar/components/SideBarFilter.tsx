@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { ClubCategoryKorean } from "@/components/const/clubCategoryMapping";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ClubCategory } from "@/types/clubType";
+import { ClubCategory } from "@/features/clubs/types/clubType";
 
 const SearchFilter = styled.button<{ selected: boolean }>`
   width: 90%;

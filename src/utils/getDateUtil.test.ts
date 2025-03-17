@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import useDateUtil from "./useDateUtil";
+import useDateUtil from "./getDateUtil";
 
 describe("useDateUtil", () => {
   it("should return false when recruitEndDate is undefined", () => {

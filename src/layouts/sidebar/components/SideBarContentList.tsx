@@ -4,7 +4,7 @@ import { clubItems } from "../const/pathLinks";
 import Spacing from "@/components/Spacing";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { isLoginChecking } from "@/features/login/store/useAuthStore";
-import useCurrentPath from "@/utils/useCurrentPath";
+import useCurrentPath from "@/hooks/useCurrentPath";
 
 const SectionTitle = styled(Link)<{ $active: boolean }>`
   width: 90%;

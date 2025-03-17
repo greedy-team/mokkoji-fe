@@ -1,7 +1,7 @@
 import { http, HttpResponse } from "msw";
-import { ClubType } from "@/types/clubType";
-import { ClubCategory } from "@/types/clubType";
-import { ClubAffiliation } from "@/types/clubType";
+import { ClubType } from "@/features/clubs/types/clubType";
+import { ClubCategory } from "@/features/clubs/types/clubType";
+import { ClubAffiliation } from "@/features/clubs/types/clubType";
 export const recruitDummyData: ClubType[] = [
   {
     id: 1,

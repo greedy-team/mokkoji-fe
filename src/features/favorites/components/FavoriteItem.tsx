@@ -1,5 +1,5 @@
 import PeriodSection from "@/components/PeriodSection";
-import { ClubType } from "@/types/clubType";
+import { ClubType } from "@/features/clubs/types/clubType";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
