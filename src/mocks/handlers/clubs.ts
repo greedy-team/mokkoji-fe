@@ -1,5 +1,5 @@
 import { http, HttpResponse } from "msw";
-import { ClubCategory } from "@/types/clubType";
+import { ClubCategory } from "@/features/clubs/types/clubType";
 
 const clubs = Array.from({ length: 20 }, (_, index) => {
   const id = index + 1;

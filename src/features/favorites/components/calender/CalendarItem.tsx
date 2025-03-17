@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useHighlightedDates from "./useHighlightedDates";
+import useHighlightedDates from "../../utils/useHighlightedDates";
 import styled from "styled-components";
 
 const ClickSection = styled.div`

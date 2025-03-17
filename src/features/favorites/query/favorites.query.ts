@@ -4,7 +4,7 @@ import {
   updateFavorite,
 } from "../api/favorites.api";
 import { useOptimisticMutation } from "../../../hooks/useOptimisticMutation";
-import { ClubDetailType } from "@/types/clubType";
+import { ClubDetailType } from "@/features/clubs/types/clubType";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { FavoriteResponseType } from "@/types/favoriteType";
 

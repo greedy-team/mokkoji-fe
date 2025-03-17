@@ -16,7 +16,7 @@ export interface UserInfoType extends Pick<UserLoginType, "studentId"> {
 }
 
 export interface EditableUserInfoType extends Omit<UserInfoType, "email"> {
-  email?: string;
+  email: string | undefined;
 }
 
 export interface UserResponseType {

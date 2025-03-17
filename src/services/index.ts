@@ -1,5 +1,8 @@
 import axios from "axios";
-import { useAuthStore, isTokenExpired } from "@/features/login/store/useAuthStore";
+import {
+  useAuthStore,
+  isTokenExpired,
+} from "@/features/login/store/useAuthStore";
 import { getTokenExpiration } from "@/utils/getTokenExpiration";
 import { useModalStore } from "@/stores/useModalStore";
 
@@ -52,5 +55,11 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+export interface ApiResponse<T> {
+  status: number;
+  message: string | undefined;
+  data: T;
+  error: string | undefined;
+}
 
 export default api;

@@ -2,7 +2,7 @@ import {
   useFavoriteDelete,
   useFavoriteUpdate,
 } from "@/features/favorites/query/favorites.query";
-import { ClubType } from "@/types/clubType";
+import { ClubType } from "@/features/clubs/types/clubType";
 import styled from "styled-components";
 import StarLogo from "@/assets/button/starLogo.svg?react";
 import StarEmptyLogo from "@/assets/button/starEmptyLogo.svg?react";

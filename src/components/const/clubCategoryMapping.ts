@@ -1,4 +1,4 @@
-import { ClubCategory } from "@/types/clubType";
+import { ClubCategory } from "@/features/clubs/types/clubType";
 
 export const ClubCategoryKorean: Record<ClubCategory, string> = {
   [ClubCategory.CULTURAL_ART]: "공연",
