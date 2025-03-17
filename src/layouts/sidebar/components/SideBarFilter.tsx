@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import FilterLogo from "@/assets/filterLogo.svg?react";
+import FilterLogo from "@/assets/button/filterLogo.svg?react";
 import { useState } from "react";
 import { useFilterStore } from "@/stores/useFilterStore";
 import { ClubCategoryKorean } from "@/components/const/clubCategoryMapping";

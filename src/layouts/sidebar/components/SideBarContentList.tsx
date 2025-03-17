@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { clubItems } from "../const/pathLinks";
 import Spacing from "@/components/Spacing";
 import { useFilterStore } from "@/stores/useFilterStore";
-import { isLoginChecking } from "@/stores/useAuthStore";
+import { isLoginChecking } from "@/features/login/store/useAuthStore";
 import useCurrentPath from "@/utils/useCurrentPath";
 
 const SectionTitle = styled(Link)<{ $active: boolean }>`

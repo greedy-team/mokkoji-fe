@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import SearchLogo from "@/assets/searchLogo.svg?react";
+import SearchLogo from "@/assets/button/searchLogo.svg?react";
 import { useState, useRef } from "react";
 import { useFilterStore } from "@/stores/useFilterStore";
 import SideBarFilter from "@/layouts/sidebar/components/SideBarFilter";

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import ErrorIcon from "@/assets/Error.svg?react"; 
+import ErrorIcon from "@/assets/error/Error.svg?react"; 
 
 const Container = styled.div`
   display: flex;

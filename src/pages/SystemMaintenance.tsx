@@ -1,6 +1,6 @@
 import ModalSection from "@/components/ModalSection";
 import styled from "styled-components";
-import Wrench from "@/assets/wrench.svg?react";
+import Wrench from "@/assets/error/wrench.svg?react";
 
 const MaintenanceContainer = styled.div`
   display: flex;

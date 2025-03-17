@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import Mokkoji from "@/assets/MokkojiW.svg?react";
+import Mokkoji from "@/assets/logo/MokkojiW.svg?react";
 import { Link } from "react-router-dom";
-import sejong from "@/assets/sejong.webp";
-import sejong1 from "@/assets/sejong1.webp";
-import sejong2 from "@/assets/sejong2.jpg";
+import sejong from "@/assets/home/sejong.webp";
+import sejong1 from "@/assets/home/sejong1.webp";
+import sejong2 from "@/assets/home/sejong2.jpg";
 import { useLazyImg } from "@/hooks/useLazyImg";
 import { useEffect, useState } from "react";
 
