@@ -1,6 +1,6 @@
 import { ClubCategory, PaginationType } from "@/types/clubType";
 import { useEffect } from "react";
-import { prefetchGetClubs } from "./queries/clubs.query";
+import { prefetchGetClubs } from "../features/clubPages/query/clubs.query";
 
 const categoryPreFetchingArr = Object.values(ClubCategory);
 

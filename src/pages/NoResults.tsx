@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import NoResult from "@/assets/NoResults.svg?react";
+import NoResult from "@/assets/error/NoResults.svg?react";
 
 const Container = styled.div`
   display: flex;
