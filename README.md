@@ -14,10 +14,16 @@
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" alt="React" width="50" height="50"/>
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="TypeScript" width="50" height="50"/>
   <img src="https://github.com/user-attachments/assets/a1260f1c-7f08-4236-8994-8b3f93fdc8bf" width="50" height="50"/>
+  <img src="https://github.com/user-attachments/assets/c42e1189-b47e-4121-88d6-e51ac6c8ecff" width="50" height="50"/>
 </p>
 
 ### 🔧 Backend  
-_(아직 작성되지 않음)_
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/f04fb377-ca6c-4078-be40-277d474fccc3" width="50" height="50"/>
+  <img src="https://github.com/user-attachments/assets/241ec7bc-9f52-4144-b36d-36f0224bba53" width="50" height="50"/>  
+  <img src="https://github.com/user-attachments/assets/87177a59-0d75-43a5-8239-77ece7cf9af9" width="50" height="50"/>
+  <img src="https://github.com/user-attachments/assets/106a82ed-f425-44a9-a2bd-ca9b06c7e9a0" width="50" height="50"/>
+</p>
 
 ### 🤝 Cooperation (협업 도구)  
 <p align="left">
@@ -27,28 +33,75 @@ _(아직 작성되지 않음)_
 </p>
 
 ---
-
 ## 👥 Team Members
 
 ### 🖥️ Front-End Team  
 <table>
   <tr>
-    <td align="center"><img src="https://github.com/user-attachments/assets/707a771f-56d1-4b33-80d7-8d76b6c94d64" width="120px" height="120px"/><br /><b>신혁수</b><br />컴퓨터공학과<br />FE Developer</td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/7400b9d8-ad5c-46cf-bf3e-f7319c1db3b6" width="120px" height="120px"/><br /><b>정창우</b><br />전자정보통신공학과<br />FE Developer</td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/57316d29-f270-49b4-a368-0b6e055e6096" width="120px" height="120px"/><br /><b>방재경</b><br />정보보호학과<br />FE Developer</td>
+    <th><a href="https://github.com/sins051301">신혁수</a></th>
+    <th><a href="https://github.com/ChangwooJ">정창우</a></th>
+    <th><a href="https://github.com/Jae-kyoung">방재경</a></th>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/707a771f-56d1-4b33-80d7-8d76b6c94d64" width="120px" height="120px"/>
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/7400b9d8-ad5c-46cf-bf3e-f7319c1db3b6" width="120px" height="120px"/>
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/57316d29-f270-49b4-a368-0b6e055e6096" width="120px" height="120px"/>
+    </td>
+  </tr>
+  <tr>
+    <td>FE Developer</td>
+    <td>FE Developer</td>
+    <td>FE Developer</td>
+  </tr>
+  <tr>
+    <td>컴퓨터공학과</td>
+    <td>전자정보통신공학과</td>
+    <td>정보보호학과</td>
   </tr>
 </table>
 
 ### 🖥️ Back-End Team  
 <table>
   <tr>
-    <td align="center"><img src="https://github.com/user-attachments/assets/30288ae1-f8f9-4409-a483-b9244a3df618" width="120px" height="120px"/><br /><b>신혜빈</b><br />컴퓨터공학과<br />BE Developer</td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/d37a0305-9402-4252-bc86-80a297edc4f8" width="120px" height="120px"/><br /><b>안금서</b><br />소프트웨어학과<br />BE Developer</td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/53ff6d2f-1cb6-47f4-87dd-e3a929c1add3" width="120px" height="120px"/><br /><b>황승준</b><br />컴퓨터공학과<br />BE Developer</td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/a9479c33-d451-48bd-9ac1-42448045175b" width="120px" height="120px"/><br /><b>김의진</b><br />컴퓨터공학과<br />BE Developer</td>
+    <th><a href="https://github.com/shin378378">신혜빈</a></th>
+    <th><a href="https://github.com/goldm0ng">안금서</a></th>
+    <th><a href="https://github.com/davidolleh">황승준</a></th>
+    <th><a href="https://github.com/sansan20535">김의진</a></th>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/30288ae1-f8f9-4409-a483-b9244a3df618" width="120px" height="120px"/>
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/d37a0305-9402-4252-bc86-80a297edc4f8" width="120px" height="120px"/>
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/53ff6d2f-1cb6-47f4-87dd-e3a929c1add3" width="120px" height="120px"/>
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/a9479c33-d451-48bd-9ac1-42448045175b" width="120px" height="120px"/>
+    </td>
+  </tr>
+  <tr>
+    <td>BE Developer</td>
+    <td>BE Developer</td>
+    <td>BE Developer</td>
+    <td>BE Developer</td>
+  </tr>
+  <tr>
+    <td>컴퓨터공학과</td>
+    <td>소프트웨어학과</td>
+    <td>컴퓨터공학과</td>
+    <td>컴퓨터공학과</td>
   </tr>
 </table>
 
+</div>
 ---
 
 ## 🚀 주요 기능
