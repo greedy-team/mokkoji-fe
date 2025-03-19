@@ -3,7 +3,7 @@ import Mokkoji from "@/assets/logo/MokkojiW.svg?react";
 import { Link } from "react-router-dom";
 import sejong from "@/assets/home/sejong.webp";
 import sejong1 from "@/assets/home/sejong1.webp";
-import sejong2 from "@/assets/home/sejong2.jpg";
+import sejong2 from "@/assets/home/sejong2.webp";
 import { useLazyImg } from "@/hooks/useLazyImg";
 import { useEffect, useState } from "react";
 
