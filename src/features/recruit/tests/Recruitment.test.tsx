@@ -2,9 +2,10 @@ import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Recruitment from "../Recruitment";
+
 import * as clubsQuery from "@/features/clubs/query/clubs.query";
 import { create } from "zustand";
+import Recruitment from "@/pages/Recruitment";
 
 const mockNavigate = vi.fn();
 

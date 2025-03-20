@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ClubType, ClubCategory } from "@/features/clubs/types/clubType";
-import { ClubCategoryKorean } from "@/components/const/clubCategoryMapping";
+import { ClubCategoryKorean } from "@/utils/clubCategoryMapping";
 import FavoriteButton from "@/components/FavoriteButton";
 import { useLazyImg } from "@/hooks/useLazyImg";
 

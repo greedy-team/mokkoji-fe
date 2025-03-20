@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Favorite from "../Favorite";
+import Favorite from "@/pages/Favorite";
 import * as favoriteQuery from "@/features/favorites/query/favorites.query";
 
 const mockNavigate = vi.fn();

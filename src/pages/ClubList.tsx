@@ -49,7 +49,8 @@ function ClubList() {
     ITEMS_PER_PAGE,
     searchText,
     selectedCategory,
-    affiliation
+    affiliation,
+    undefined
   );
 
   const { clubs, pagination } = data.data;

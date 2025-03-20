@@ -30,8 +30,6 @@ export const useFilterStore = create<FilterStore>()(
 
       setCurrentPage: (page) => set(() => ({ currentPage: page })),
 
-      selectedMenu: "HOME",
-
       resetFilters: () =>
         set(() => ({
           selectedCategory: undefined,

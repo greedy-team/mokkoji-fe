@@ -10,10 +10,10 @@ import { queryClient } from "@/services/TanstackQueryStore";
 export const useGetClubs = (
   page: number,
   size: number,
-  keyword?: string,
-  category?: ClubCategory,
-  affiliation?: string,
-  recruitStatus?: string
+  keyword: string | undefined,
+  category: ClubCategory | undefined,
+  affiliation: string | undefined,
+  recruitStatus: string | undefined
 ) => {
   return useSuspenseQuery<ClubResponseType>({
     queryKey: [

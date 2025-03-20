@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { generatePageNumbers, getOtherPage } from "./utils/paginationUtil";
+import { generatePageNumbers, getOtherPage } from "../utils/paginationUtil";
 
 const PaginationContainer = styled.div`
   display: flex;
