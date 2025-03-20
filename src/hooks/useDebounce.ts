@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 
 interface useDebounceProps {
-  value: string;
-  delay: number;
+  setSearchText: (text: string) => void;
 }
 
-export default function useDebounce({ value, delay }: useDebounceProps) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
+export default function useDebounce({ setSearchText }: useDebounceProps) {
+  const [debouncedValue, setDebouncedValue] = useState<string>("");
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
+      setSearchText(debouncedValue);
+    }, 1000);
     return () => clearTimeout(timer);
-  }, [delay, value]);
-  return debouncedValue;
+  }, [debouncedValue, setSearchText]);
+
+  return { debouncedValue, setDebouncedValue };
 }
