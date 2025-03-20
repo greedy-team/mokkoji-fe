@@ -52,7 +52,9 @@ function Recruitment() {
     currentPage,
     ITEMS_PER_PAGE,
     searchText,
-    selectedCategory
+    selectedCategory,
+    undefined,
+    undefined
   );
 
   const { clubs, pagination } = data.data;

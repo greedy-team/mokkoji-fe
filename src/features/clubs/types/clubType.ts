@@ -1,4 +1,4 @@
-import { ApiResponse } from "@/services";
+import { ApiResponse } from "@/types/ApiType";
 
 export enum ClubCategory {
   CULTURAL_ART = "CULTURAL_ART",

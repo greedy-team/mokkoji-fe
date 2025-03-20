@@ -51,7 +51,8 @@ function SideBarContentList({
 }: {
   setIsOpen: (isOpen: boolean) => void;
 }) {
-  const { resetAll, } = useFilterStore();
+  const resetAll = useFilterStore((state) => state.resetAll);
+
   const path = useCurrentPath();
   function handleMenuClick() {
     resetAll();
@@ -62,11 +63,7 @@ function SideBarContentList({
 
   return (
     <>
-      <SectionTitle
-        to="/"
-        onClick={handleMenuClick}
-        $active={path === "/"}
-      >
+      <SectionTitle to="/" onClick={handleMenuClick} $active={path === "/"}>
         HOME
       </SectionTitle>
       <SectionTitle

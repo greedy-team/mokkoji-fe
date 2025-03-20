@@ -17,6 +17,7 @@ describe("sortClubs", () => {
       category: ClubCategory.RELIGIOUS,
       affiliation: ClubAffiliation.CENTRAL_CLUB,
       description: "",
+      isFavorite: undefined,
     },
     {
       name: "Club B",
@@ -27,6 +28,7 @@ describe("sortClubs", () => {
       category: ClubCategory.ACADEMIC_CULTURAL,
       affiliation: ClubAffiliation.CENTRAL_CLUB,
       description: "",
+      isFavorite: undefined,
     },
     {
       name: "Club C",
@@ -37,6 +39,7 @@ describe("sortClubs", () => {
       category: ClubCategory.ACADEMIC_CULTURAL,
       affiliation: ClubAffiliation.CENTRAL_CLUB,
       description: "",
+      isFavorite: undefined,
     },
     {
       name: "Club D",
@@ -47,6 +50,7 @@ describe("sortClubs", () => {
       category: ClubCategory.RELIGIOUS,
       affiliation: ClubAffiliation.CENTRAL_CLUB,
       description: "",
+      isFavorite: undefined,
     },
   ];
 
@@ -72,6 +76,7 @@ describe("sortClubs", () => {
         category: ClubCategory.SOCIAL,
         affiliation: ClubAffiliation.CENTRAL_CLUB,
         description: "",
+        isFavorite: undefined,
       },
     ];
 

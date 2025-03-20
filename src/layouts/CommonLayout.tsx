@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import SideBar from "./sidebar/SideBar";
 import QueryErrorBoundary from "@/services/QueryErrorBoundary";
 import { Suspense } from "react";
-import Loading from "@/pages/Loading";
+import Loading from "@/components/Loading";
 
 const Background = styled.div`
   width: 100%;
