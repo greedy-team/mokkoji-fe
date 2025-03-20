@@ -1,4 +1,4 @@
-import useDateUtil from "@/utils/useDateUtil";
+import getDateUtil from "@/utils/getDateUtil";
 import styled from "styled-components";
 
 interface PeriodSectionProps {
@@ -19,7 +19,7 @@ function PeriodSection({
   size,
   simple = false,
 }: PeriodSectionProps) {
-  const isEndOfYear = useDateUtil(endDate);
+  const isEndOfYear = getDateUtil(endDate);
 
   return (
     <>

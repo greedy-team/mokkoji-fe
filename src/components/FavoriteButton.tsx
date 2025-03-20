@@ -1,12 +1,12 @@
 import {
   useFavoriteDelete,
   useFavoriteUpdate,
-} from "@/hooks/queries/favorites.query";
-import { ClubType } from "@/types/clubType";
+} from "@/features/favorites/query/favorites.query";
+import { ClubType } from "@/features/clubs/types/clubType";
 import styled from "styled-components";
-import StarLogo from "@/assets/starLogo.svg?react";
-import StarEmptyLogo from "@/assets/starEmptyLogo.svg?react";
-import { isLoginChecking } from "@/stores/useAuthStore";
+import StarLogo from "@/assets/button/starLogo.svg?react";
+import StarEmptyLogo from "@/assets/button/starEmptyLogo.svg?react";
+import { isLoginChecking } from "@/features/login/store/useAuthStore";
 
 const FavoriteButtonContainer = styled.button`
   background: transparent;

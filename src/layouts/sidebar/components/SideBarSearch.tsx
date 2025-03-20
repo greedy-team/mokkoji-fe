@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import SearchLogo from "@/assets/searchLogo.svg?react";
-import { useState, useRef } from "react";
+import SearchLogo from "@/assets/button/searchLogo.svg?react";
+import { useEffect, useRef, useState } from "react";
 import { useFilterStore } from "@/stores/useFilterStore";
 import SideBarFilter from "@/layouts/sidebar/components/SideBarFilter";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import useDebounce from "@/hooks/useDebounce";
 const SearchSection = styled.div`
   width: 90%;
   height: 30px;
@@ -40,20 +40,24 @@ const SearchButton = styled.button`
 `;
 
 function SideBarSearch() {
-  const { searchText, setSearchText } = useFilterStore();
-  const [localSearchText, setLocalSearchText] = useState<string>(searchText);
+  const setSearchText = useFilterStore((state) => state.setSearchText);
+  const [debouncedValue, setDebouncedValue] = useState<string>("");
+  const debouncedQuery = useDebounce({ value: debouncedValue, delay: 1000 });
+
+  useEffect(() => {
+    setSearchText(debouncedQuery);
+  }, [debouncedQuery, setSearchText]);
+
   const inputRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleSearchSubmit = () => {
-    setSearchText(localSearchText);
-
     if (location.pathname === "/") {
       navigate("/clubs");
     }
   };
-  
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleSearchSubmit();
@@ -66,9 +70,9 @@ function SideBarSearch() {
         <SearchContainer
           ref={inputRef}
           placeholder="동아리 검색"
-          value={localSearchText}
-          onChange={(e) => setLocalSearchText(e.target.value)}
-          onKeyDown={handleKeyDown} 
+          value={debouncedValue}
+          onChange={(e) => setDebouncedValue(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <SearchButton onClick={handleSearchSubmit}>
           <SearchLogo />

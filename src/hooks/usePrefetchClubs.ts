@@ -1,6 +1,6 @@
-import { ClubCategory, PaginationType } from "@/types/clubType";
+import { ClubCategory, PaginationType } from "@/features/clubs/types/clubType";
 import { useEffect } from "react";
-import { prefetchGetClubs } from "./queries/clubs.query";
+import { prefetchGetClubs } from "../features/clubs/query/clubs.query";
 
 const categoryPreFetchingArr = Object.values(ClubCategory);
 
@@ -8,9 +8,9 @@ export const usePrefetchClubs = (
   currentPage: number,
   pagination: PaginationType,
   ITEMS_PER_PAGE: number,
-  searchText?: string,
-  selectedCategory?: ClubCategory,
-  affiliation?: string
+  searchText: string | undefined,
+  selectedCategory: ClubCategory | undefined,
+  affiliation: string | undefined
 ) => {
   useEffect(() => {
     const nextPage = currentPage + 1;

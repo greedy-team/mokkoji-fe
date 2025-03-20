@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { clubItems } from "../const/pathLinks";
 import Spacing from "@/components/Spacing";
 import { useFilterStore } from "@/stores/useFilterStore";
-import { isLoginChecking } from "@/stores/useAuthStore";
-import useCurrentPath from "@/utils/useCurrentPath";
+import { isLoginChecking } from "@/features/login/store/useAuthStore";
+import useCurrentPath from "@/hooks/useCurrentPath";
 
 const SectionTitle = styled(Link)<{ $active: boolean }>`
   width: 90%;
@@ -51,7 +51,8 @@ function SideBarContentList({
 }: {
   setIsOpen: (isOpen: boolean) => void;
 }) {
-  const { resetAll, } = useFilterStore();
+  const resetAll = useFilterStore((state) => state.resetAll);
+
   const path = useCurrentPath();
   function handleMenuClick() {
     resetAll();
@@ -62,11 +63,7 @@ function SideBarContentList({
 
   return (
     <>
-      <SectionTitle
-        to="/"
-        onClick={handleMenuClick}
-        $active={path === "/"}
-      >
+      <SectionTitle to="/" onClick={handleMenuClick} $active={path === "/"}>
         HOME
       </SectionTitle>
       <SectionTitle

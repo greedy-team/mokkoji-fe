@@ -3,27 +3,25 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { queryClient } from "./services/TanstackQueryStore";
 import CommonLayout from "./layouts/CommonLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import React from "react";
-import { useAuthStore } from "./stores/useAuthStore";
-import { ProtectedRoute } from "./pages/favorite/Favorite";
+import { lazy } from "react";
+import { useAuthStore } from "./features/login/store/useAuthStore";
+import { ProtectedRoute } from "./pages/Favorite";
 import QueryErrorBoundary from "./services/QueryErrorBoundary";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import PrivacyPolicyPage from "@/pages/PrivacyPolicy";
-import UserAgree from "./pages/user/UserAgree";
+import UserAgree from "./pages/UserAgree";
 import * as amplitude from "@amplitude/analytics-browser";
 import { sessionReplayPlugin } from "@amplitude/plugin-session-replay-browser";
-const Home = React.lazy(() => import("./pages/home/Home"));
-const ClubList = React.lazy(() => import("./pages/club/ClubList"));
-const ClubDetail = React.lazy(
-  () => import("./pages/club/components/detail/ClubDetail")
-);
-const Recruitment = React.lazy(() => import("./pages/recruitment/Recruitment"));
-const Login = React.lazy(() => import("./pages/login/Login"));
-const Favorite = React.lazy(() => import("./pages/favorite/Favorite"));
-const NoResults = React.lazy(() => import("./pages/NoResults"));
-const SystemMaintenance = React.lazy(() => import("./pages/SystemMaintenance"));
-const UserInfo = React.lazy(() => import("./pages/user/UserInfo"));
-const NotFound = React.lazy(() => import("./pages/NotFound"));
+const Home = lazy(() => import("./pages/Home"));
+const ClubList = lazy(() => import("./pages/ClubList"));
+const ClubDetail = lazy(() => import("./pages/ClubDetail"));
+const Recruitment = lazy(() => import("./pages/Recruitment"));
+const Login = lazy(() => import("./features/login/Login"));
+const Favorite = lazy(() => import("./pages/Favorite"));
+const NoResults = lazy(() => import("./components/NoResults"));
+const SystemMaintenance = lazy(() => import("./pages/SystemMaintenance"));
+const UserInfo = lazy(() => import("./features/user/UserInfo"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const router = createBrowserRouter([
   {

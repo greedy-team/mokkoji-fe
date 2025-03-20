@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import Logo from "@/assets/Mokkoji.svg?react";
-import Profile from "@/assets/userInfo.svg?react";
+import Logo from "@/assets/logo/Mokkoji.svg?react";
+import Profile from "@/assets/button/userInfo.svg?react";
 import { useModalStore } from "@/stores/useModalStore";
 import { useFilterStore } from "@/stores/useFilterStore";
-import { useAuthStore } from "@/stores/useAuthStore";
-import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/features/login/store/useAuthStore";
+import { Link } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   height: 60px;

@@ -1,7 +1,7 @@
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { ReactNode } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import ErrorIcon from "@/assets/Error2.svg?react";
+import ErrorIcon from "@/assets/error/Error2.svg?react";
 
 export default function QueryErrorBoundary({
   children,

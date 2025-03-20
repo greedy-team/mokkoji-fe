@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import FilterLogo from "@/assets/filterLogo.svg?react";
+import FilterLogo from "@/assets/button/filterLogo.svg?react";
 import { useState } from "react";
 import { useFilterStore } from "@/stores/useFilterStore";
-import { ClubCategoryKorean } from "@/components/const/clubCategoryMapping";
+import { ClubCategoryKorean } from "@/utils/clubCategoryMapping";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ClubCategory } from "@/types/clubType";
+import { ClubCategory } from "@/features/clubs/types/clubType";
+import { useShallow } from "zustand/react/shallow";
 
 const SearchFilter = styled.button<{ selected: boolean }>`
   width: 90%;
@@ -48,8 +49,15 @@ const DropdownItem = styled.div`
 `;
 
 function SideBarFilter() {
-  const { selectedCategory, setSelectedCategory, categories } =
-    useFilterStore();
+
+  const [selectedCategory, setSelectedCategory, categories] = useFilterStore(
+    useShallow((state) => [
+      state.selectedCategory,
+      state.setSelectedCategory,
+      state.categories,
+    ])
+  );
+
   const [filterOpen, setFilterOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();

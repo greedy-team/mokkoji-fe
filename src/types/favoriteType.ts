@@ -1,5 +1,5 @@
-import { ClubType } from "./clubType";
 
-export interface FavoriteResponseType {
-  data: ClubType[];
-}
+import { ClubType } from "../features/clubs/types/clubType";
+import { ApiResponse } from "./ApiType";
+
+export type FavoriteResponseType = ApiResponse<ClubType[]>
