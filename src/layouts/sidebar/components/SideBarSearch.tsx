@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import SearchLogo from "@/assets/button/searchLogo.svg?react";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useFilterStore } from "@/stores/useFilterStore";
 import SideBarFilter from "@/layouts/sidebar/components/SideBarFilter";
 import { useNavigate, useLocation } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
+
 const SearchSection = styled.div`
   width: 90%;
   height: 30px;
@@ -41,12 +42,7 @@ const SearchButton = styled.button`
 
 function SideBarSearch() {
   const setSearchText = useFilterStore((state) => state.setSearchText);
-  const [debouncedValue, setDebouncedValue] = useState<string>("");
-  const debouncedQuery = useDebounce({ value: debouncedValue, delay: 1000 });
-
-  useEffect(() => {
-    setSearchText(debouncedQuery);
-  }, [debouncedQuery, setSearchText]);
+  const { debouncedValue, setDebouncedValue } = useDebounce({ setSearchText });
 
   const inputRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
