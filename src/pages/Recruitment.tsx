@@ -9,6 +9,7 @@ import { useFilterStore } from "@/stores/useFilterStore";
 import NoResults from "@/components/NoResults";
 import { ClubCard, ClubType, sortClubs } from "@/features/recruit";
 import Pagination from "@/components/Pagination";
+import { Helmet } from 'react-helmet-async';
 
 const ITEMS_PER_PAGE = 12; // 페이지당 게시물 수
 
@@ -90,33 +91,42 @@ function Recruitment() {
   }
 
   return (
-    <Container>
-      {/* 기능추가 전까지 주석처리 */}
-      {/*<SortOption buttonState={buttonState} onSortChange={handleSortChange} />*/}
+    <>
+      <Helmet>
+        <title>{`동아리 모집 공고 ${currentPage}페이지`}</title>
+        <meta name="title" content="세종대학교 동아리 모집 공고 페이지" />
+        <meta name="description" content="세종대학교 동아리 모집 공고 페이지입니다." />
+        <meta name="keywords" content="세종대학교, 세종대, 동아리" />
+        <meta name="robots" content="index, follow" />
+      </Helmet>
+      <Container>
+        {/* 기능추가 전까지 주석처리 */}
+        {/*<SortOption buttonState={buttonState} onSortChange={handleSortChange} />*/}
 
-      {clubs.length === 0 ? (
-        <NoResults />
-      ) : (
-        <>
-          <ClubList>
-            {sortedClubs.map((club) => (
-              <ClubCard
-                key={club.id}
-                club={club}
-                onClick={() => onClick(club)}
+        {clubs.length === 0 ? (
+          <NoResults />
+        ) : (
+          <>
+            <ClubList>
+              {sortedClubs.map((club) => (
+                <ClubCard
+                  key={club.id}
+                  club={club}
+                  onClick={() => onClick(club)}
+                />
+              ))}
+            </ClubList>
+            <PaginationWrapper>
+              <Pagination
+                totalPages={pagination.totalPages}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
               />
-            ))}
-          </ClubList>
-          <PaginationWrapper>
-            <Pagination
-              totalPages={pagination.totalPages}
-              currentPage={currentPage}
-              onPageChange={handlePageChange}
-            />
-          </PaginationWrapper>
-        </>
-      )}
-    </Container>
+            </PaginationWrapper>
+          </>
+        )}
+      </Container>
+    </>
   );
 }
 

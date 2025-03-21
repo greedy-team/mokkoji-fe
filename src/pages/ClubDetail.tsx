@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Helmet } from 'react-helmet-async';
 
 import {
   ClubDetailInfo,
@@ -65,6 +66,14 @@ function ClubDetail() {
   const formattedText = convertLinks(clubDetail.recruitPost);
 
   return (
+    <>
+    <Helmet>
+      <title>{clubDetail.name}</title>
+      <meta name="title" content={clubDetail.name} />
+      <meta name="description" content="세종대학교 동아리 상세정보 페이지입니다." />
+      <meta name="keywords" content="세종대학교, 세종대, 동아리" />
+      <meta name="robots" content="index, follow" />
+    </Helmet>
     <Wrapper>
       <Container>
         <ClubDetailInfo clubDetail={clubDetail} />
@@ -74,6 +83,7 @@ function ClubDetail() {
         ></RecruitmentText>
       </Container>
     </Wrapper>
+    </>
   );
 }
 

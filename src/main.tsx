@@ -2,11 +2,16 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import { GlobalStyle } from "./global.ts";
+import { HelmetProvider } from "react-helmet-async";
 
+const container = document.getElementById("root")!;
+const root = createRoot(container);
 
-createRoot(document.getElementById("root")!).render(
+root.render(
   <StrictMode>
     <GlobalStyle />
-    <App />
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
   </StrictMode>
-);
+)
