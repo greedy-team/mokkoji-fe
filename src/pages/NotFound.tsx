@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import ErrorIcon from "@/assets/error/Error.svg?react"; 
+import ErrorIcon from "@/assets/error/Error.svg?react";
 
 const Container = styled.div`
   display: flex;
@@ -11,20 +11,19 @@ const Container = styled.div`
   background-color: #f9fafb;
   box-sizing: border-box;
 
-    @media (max-width: 770px) {
+  @media (max-width: 770px) {
     margin-top: 5px;
   }
-
 `;
 
 const IconWrapper = styled.div`
-margin-top: 100px;
-margin-bottom: 8px;
-svg {
-  width: 64px;
-  height: 64px;
-  color: #000;
-}
+  margin-top: 100px;
+  margin-bottom: 8px;
+  svg {
+    width: 64px;
+    height: 64px;
+    color: #000;
+  }
 `;
 
 const Title = styled.h1`
@@ -67,7 +66,13 @@ const LinkButton = styled(Link)`
 
 const NotFound = () => {
   return (
-    <Container>
+    <>
+      <title>Not Found</title>
+      <meta name="title" content="Not Found" />
+      <meta name="description" content="모꼬지 notFoundPage" />
+      <meta name="keywords" content="notfound" />
+      <meta name="robots" content="index, notfound" />
+      <Container>
         <IconWrapper>
           <ErrorIcon />
         </IconWrapper>
@@ -77,7 +82,8 @@ const NotFound = () => {
           요청하신 페이지가 삭제되었거나 일시적으로 사용할 수 없습니다.
         </Description>
         <LinkButton to="/">홈 화면으로 이동</LinkButton>
-    </Container>
+      </Container>
+    </>
   );
 };
 
