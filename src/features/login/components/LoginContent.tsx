@@ -1,5 +1,5 @@
 import { saveAuthTokens } from "@/features/login/api/auth.api";
-import { useModalStore } from "@/stores/useModalStore";
+import { useModalStore } from "@/store/useModalStore";
 import { UserLoginType } from "@/types/userInfoType";
 import { useState } from "react";
 import styled from "styled-components";

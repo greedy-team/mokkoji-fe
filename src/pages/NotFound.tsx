@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ErrorIcon from "@/assets/error/Error.svg?react";
+import SEO from "@/components/SEO";
 
 const Container = styled.div`
   display: flex;
@@ -67,11 +68,11 @@ const LinkButton = styled(Link)`
 const NotFound = () => {
   return (
     <>
-      <title>Not Found</title>
-      <meta name="title" content="Not Found" />
-      <meta name="description" content="모꼬지 notFoundPage" />
-      <meta name="keywords" content="notfound" />
-      <meta name="robots" content="index, notfound" />
+      <SEO
+        title="Not Found"
+        description="모꼬지 notFoundPage"
+        keywords="index, notfound"
+      />
       <Container>
         <IconWrapper>
           <ErrorIcon />

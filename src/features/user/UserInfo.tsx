@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import ModalSection from "@/components/ModalSection";
-import { useModalStore } from "@/stores/useModalStore";
+import { useModalStore } from "@/store/useModalStore";
 import { expireAuthTokens } from "@/features/login/api/auth.api";
 import UserInput from "./components/UserInput";
-
 
 const CloseButton = styled.button`
   position: absolute;

@@ -4,7 +4,7 @@ import {
   isTokenExpired,
 } from "@/features/login/store/useAuthStore";
 import { getTokenExpiration } from "@/utils/getTokenExpiration";
-import { useModalStore } from "@/stores/useModalStore";
+import { useModalStore } from "@/store/useModalStore";
 
 const api = axios.create({
   baseURL: "/api",

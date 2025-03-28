@@ -8,7 +8,6 @@
       "@/*": ["src/*"],
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
-      "@constant/*": ["src/constant/*"],
       "@hooks/*": ["src/hooks/*"],
       "@pages/*": ["src/pages/*"],
       "@services/*": ["src/services/*"],
@@ -16,12 +15,13 @@
       "@utils/*": ["src/utils/*"],
       "@types/*": ["src/types/*"],
       "@api/*": ["src/api/*"],
-      "@const/*": ["src/const*"]
+      "@layout/*": ["src/layout/*"],
+      "@routes/*": ["src/routes/*"]
     }
   },
 
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ], 
+  ]
 }

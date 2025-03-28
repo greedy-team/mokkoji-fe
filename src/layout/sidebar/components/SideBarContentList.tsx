@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { clubItems } from "../const/pathLinks";
 import Spacing from "@/components/Spacing";
-import { useFilterStore } from "@/stores/useFilterStore";
+import { useFilterStore } from "@/store/useFilterStore";
 import { isLoginChecking } from "@/features/login/store/useAuthStore";
 import useCurrentPath from "@/hooks/useCurrentPath";
 
