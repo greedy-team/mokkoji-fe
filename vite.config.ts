@@ -13,7 +13,11 @@ export default ({ mode }: { mode: string }) => {
         "/api": {
           target: process.env.VITE_API_URL,
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ""),
+          rewrite: (path) => {
+            const apiPath = path.replace(/^\/api/, "");
+            console.log(apiPath);
+            return apiPath;
+          },
           secure: false,
           ws: true,
         },

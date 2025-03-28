@@ -1,26 +1,25 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { queryClient } from "./services/TanstackQueryStore";
-import CommonLayout from "./layouts/CommonLayout";
+import CommonLayout from "./layout/CommonLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { lazy } from "react";
 import { useAuthStore } from "./features/login/store/useAuthStore";
-import { ProtectedRoute } from "./pages/Favorite";
+import Favorite from "./pages/Favorite";
 import QueryErrorBoundary from "./services/QueryErrorBoundary";
 import PrivacyPolicyPage from "@/pages/PrivacyPolicy";
-import UserAgree from "./pages/UserAgree";
 import * as amplitude from "@amplitude/analytics-browser";
 import { sessionReplayPlugin } from "@amplitude/plugin-session-replay-browser";
-const Home = lazy(() => import("./pages/Home"));
-const ClubList = lazy(() => import("./pages/ClubList"));
-const ClubDetail = lazy(() => import("./pages/ClubDetail"));
-const Recruitment = lazy(() => import("./pages/Recruitment"));
-const Login = lazy(() => import("./features/login/Login"));
-const Favorite = lazy(() => import("./pages/Favorite"));
-const NoResults = lazy(() => import("./components/NoResults"));
-const SystemMaintenance = lazy(() => import("./pages/SystemMaintenance"));
-const UserInfo = lazy(() => import("./features/user/UserInfo"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+import CheckAuthLoader from "./utils/CheckAuthLoader";
+import clubRoutes from "./routes/clubRoutes";
+import {
+  Home,
+  Login,
+  NoResults,
+  NotFound,
+  Recruitment,
+  SystemMaintenance,
+  UserInfo,
+} from "./routes/lazyLoad";
 
 const router = createBrowserRouter([
   {
@@ -32,33 +31,15 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
-      {
-        path: "agree",
-        element: <UserAgree />,
-      },
-      {
-        path: "clubs",
-        element: <ClubList />,
-      },
-      {
-        path: "clubs/group/:affiliation",
-        element: <ClubList />,
-      },
-      {
-        path: "clubs/:id",
-        element: <ClubDetail />,
-      },
+      ...clubRoutes,
       {
         path: "recruit",
         element: <Recruitment />,
       },
       {
         path: "favorites",
-        element: (
-          <ProtectedRoute>
-            <Favorite />
-          </ProtectedRoute>
-        ),
+        loader: CheckAuthLoader,
+        element: <Favorite />,
       },
       {
         path: "maintenance",

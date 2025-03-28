@@ -1,9 +1,6 @@
 import styled from "styled-components";
-import { isLoginChecking } from "@/features/login/store/useAuthStore";
-import { Navigate } from "react-router-dom";
-import { ReactNode, useEffect } from "react";
-import { useModalStore } from "@/stores/useModalStore";
 import { Calendar, FavoriteClubList } from "@/features/favorites";
+import SEO from "@/components/SEO";
 
 const FavoritePageWrapper = styled.div`
   display: flex;
@@ -29,38 +26,14 @@ const SectionWrapper = styled.div`
   justify-content: space-between;
 `;
 
-interface ProtectedProps {
-  children: ReactNode;
-}
-
-export const ProtectedRoute = ({ children }: ProtectedProps) => {
-  const { openModal } = useModalStore();
-  const loginChecking = isLoginChecking();
-
-  useEffect(() => {
-    if (loginChecking) {
-      openModal();
-    }
-  }, [loginChecking, openModal]);
-
-  if (loginChecking) {
-    return <Navigate to="/" replace />;
-  }
-
-  return children;
-};
-
 function Favorite() {
   return (
     <>
-      <title>동아리 즐겨찾기 페이지</title>
-      <meta name="title" content="세종대학교 동아리 즐겨찾기 페이지" />
-      <meta
-        name="description"
-        content="세종대학교 동아리 동아리 즐겨찾기 페이지입니다."
+      <SEO
+        title="동아리 즐겨찾기 페이지"
+        description="세종대학교 동아리 동아리 즐겨찾기 페이지입니다."
+        keywords="세종대학교, 세종대, 동아리, 즐겨찾기"
       />
-      <meta name="keywords" content="세종대학교, 세종대, 동아리, 즐겨찾기" />
-      <meta name="robots" content="index, follow" />
       <FavoritePageWrapper>
         <SectionWrapper>
           <FavoriteClubList />

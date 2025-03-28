@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Logo from "@/assets/logo/Mokkoji.svg?react";
 import Profile from "@/assets/button/userInfo.svg?react";
-import { useModalStore } from "@/stores/useModalStore";
-import { useFilterStore } from "@/stores/useFilterStore";
+import { useModalStore } from "@/store/useModalStore";
+import { useFilterStore } from "@/store/useFilterStore";
 import { useAuthStore } from "@/features/login/store/useAuthStore";
 import { Link } from "react-router-dom";
 
