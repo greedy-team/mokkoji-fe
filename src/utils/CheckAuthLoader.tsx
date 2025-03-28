@@ -6,7 +6,7 @@ function CheckAuthLoader() {
 
   if (loginChecking) {
     alert("로그인을 해야 이용하실 수 있습니다");
-    throw redirect("/");
+    return redirect("/");
   }
 
   return null;
