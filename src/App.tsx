@@ -7,8 +7,6 @@ import { useAuthStore } from "./features/login/store/useAuthStore";
 import Favorite from "./pages/Favorite";
 import QueryErrorBoundary from "./services/QueryErrorBoundary";
 import PrivacyPolicyPage from "@/pages/PrivacyPolicy";
-import * as amplitude from "@amplitude/analytics-browser";
-import { sessionReplayPlugin } from "@amplitude/plugin-session-replay-browser";
 import CheckAuthLoader from "./utils/CheckAuthLoader";
 import clubRoutes from "./routes/clubRoutes";
 import {
@@ -20,6 +18,7 @@ import {
   SystemMaintenance,
   UserInfo,
 } from "./routes/lazyLoad";
+import amplitudeSetting from "./utils/amplitudeSetting";
 
 const router = createBrowserRouter([
   {
@@ -57,12 +56,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-amplitude.init("6024afbe3076c1a3880f0d9492ee65e6", { autocapture: true });
-
-const sessionReplayTracking = sessionReplayPlugin({
-  sampleRate: 1,
-});
-amplitude.add(sessionReplayTracking);
+amplitudeSetting();
 
 function App() {
   const accessToken = useAuthStore((state) => state.accessToken);
