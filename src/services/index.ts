@@ -5,6 +5,7 @@ import {
 } from "@/features/login/store/useAuthStore";
 import { getTokenExpiration } from "@/utils/getTokenExpiration";
 import { useModalStore } from "@/store/useModalStore";
+import apiLogging from "@/utils/apiLogging";
 
 const api = axios.create({
   baseURL: "/api",
@@ -22,7 +23,10 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    apiLogging(response);
+    return response;
+  },
   async (error) => {
     const originalRequest = error.config;
     const { setAccessToken, refreshToken, clearToken } =
@@ -49,7 +53,7 @@ api.interceptors.response.use(
       } catch {
         clearToken();
         useModalStore.getState().openModal();
-        throw new Error("Refresh token expired, logging out...");
+        console.error("Refresh token expired, logging out...", error);
       }
     }
     return Promise.reject(error);
