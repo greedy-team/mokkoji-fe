@@ -1,15 +1,16 @@
-import { getUserInfo, updateUserEmail } from "../api/users.api";
+import getData from "@/api/getData";
 import { UserInfoType, UserResponseType } from "@/types/userInfoType";
 import {
   useMutation,
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
+import { updateData } from "@/api/updateData";
 
 export const useGetUser = () => {
   return useSuspenseQuery<UserResponseType>({
     queryKey: ["users"],
-    queryFn: getUserInfo,
+    queryFn: () => getData("/users"),
   });
 };
 
@@ -27,7 +28,7 @@ export const useUserInfoEdit = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (email: string) => updateUserEmail(email),
+    mutationFn: (email: string) => updateData("put", "/users", { email }),
 
     // ✅ 낙관적 업데이트
     onMutate: async (email) => {
@@ -57,8 +58,10 @@ export const useUserInfoEdit = () => {
 
     // ✅ 성공/실패 후 쿼리 무효화
     onSettled: () => {
-      alert("이메일 업데이트 성공!");
       queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
+    onSuccess: () => {
+      alert("이메일 업데이트 성공!");
     },
   });
 };

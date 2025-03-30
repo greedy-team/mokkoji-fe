@@ -1,43 +1,50 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { UserLoginType } from "@/types/userInfoType";
 import { useAuthStore } from "@/features/login/store/useAuthStore";
 import { getTokenExpiration } from "@/utils/getTokenExpiration";
 import { queryClient } from "@/services/TanstackQueryStore";
+import { updateData } from "@/api/updateData";
+import { ApiResponse } from "@/types/ApiResponse";
 
 interface AuthResponse {
-  data: {
-    accessToken: string;
-    refreshToken: string;
-  };
+  accessToken: string;
+  refreshToken: string;
 }
-
-const apiUsers = axios.create({
-  baseURL: "/api/users",
-});
 
 export const saveAuthTokens = async (
   credentials: UserLoginType
 ): Promise<void> => {
   try {
-    const response: AxiosResponse<AuthResponse> = await apiUsers.post(
-      `/auth/login`,
+    const response: ApiResponse<AuthResponse> = await updateData(
+      "post",
+      "/users/auth/login",
       credentials
     );
-    const { accessToken, refreshToken } = response.data.data;
 
-    const expiredTime = getTokenExpiration(accessToken);
-    useAuthStore
-      .getState()
-      .setToken(accessToken, refreshToken, expiredTime || 59); // ✅ 이렇게 직접 접근
-    queryClient.invalidateQueries({ queryKey: ["clubs"] });
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      alert("로그인 실패!");
-      throw new Error("로그인 실패");
+    if (!response?.data) {
+      throw new Error("인증 데이터가 없습니다.");
     }
 
-    alert("unknown Error!");
-    throw new Error("알 수 없는 오류 발생");
+    const { accessToken, refreshToken } = response.data;
+    const expiredTime = getTokenExpiration(accessToken);
+
+    useAuthStore
+      .getState()
+      .setToken(accessToken, refreshToken, expiredTime || 59);
+
+    queryClient.invalidateQueries({ queryKey: ["clubs"] });
+  } catch (error) {
+    console.error("로그인 오류:", error);
+
+    if (axios.isAxiosError(error)) {
+      alert(`로그인 실패! (${error.response?.data?.message || error.message})`);
+      throw new Error(error.response?.data?.message || "로그인 실패");
+    }
+
+    alert("알 수 없는 오류 발생!");
+    throw new Error(
+      error instanceof Error ? error.message : "알 수 없는 오류 발생"
+    );
   }
 };
 
@@ -52,8 +59,9 @@ export const expireAuthTokens = async (): Promise<void> => {
     throw new Error("토큰 미존재!");
   }
   try {
-    await apiUsers.post(
-      `/auth/logout`,
+    await updateData(
+      "post",
+      "/users/auth/logout",
       {},
       {
         headers: {
