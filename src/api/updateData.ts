@@ -2,11 +2,20 @@ import { ApiResponse } from "@/types/ApiResponse";
 import { AxiosError, AxiosRequestConfig } from "axios";
 import api from ".";
 
+
+/**
+ * 
+ * @param method 
+ * @param url 
+ * @param data 
+ * @param config 
+ * @returns 
+ */
 export const updateData = async <T>(
   method: "post" | "put" | "patch" | "delete",
   url: string,
-  data?: unknown, 
-  config?: AxiosRequestConfig 
+  data?: unknown,
+  config?: AxiosRequestConfig
 ): Promise<ApiResponse<T>> => {
   try {
     let response;
@@ -28,12 +37,12 @@ export const updateData = async <T>(
     }
     return response.data;
   } catch (error) {
-    console.error(error);
+    console.error(method, error);
 
     if (error instanceof AxiosError) {
-      throw new Error(error.response?.data?.message || "API 요청 실패");
+      throw new Error(error.response?.data?.message || `${method} 요청 실패`);
     }
 
-    throw new Error("Unknown error occurred");
+    throw new Error(`${method}: Unknown error occurred`);
   }
 };

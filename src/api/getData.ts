@@ -2,6 +2,13 @@ import { ApiResponse } from "@/types/ApiResponse";
 import { AxiosError, AxiosRequestConfig } from "axios";
 import api from ".";
 
+/**
+ *
+ * @param url
+ * @param config
+ * @returns
+ */
+
 const getData = async <T>(
   url: string,
   config?: AxiosRequestConfig // config를 추가하여 params 등 설정 가능
