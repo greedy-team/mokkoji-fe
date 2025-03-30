@@ -1,11 +1,11 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { getClubItems, getClubItemsDetail } from "../api/clubs.api";
 import {
   ClubDetailResponseType,
   ClubResponseType,
   ClubCategory,
 } from "@/features/clubs/types/clubType";
 import { queryClient } from "@/services/TanstackQueryStore";
+import  getData  from "@/api/getData";
 
 export const useGetClubs = (
   page: number,
@@ -25,8 +25,19 @@ export const useGetClubs = (
       affiliation || "",
       recruitStatus || "",
     ],
-    queryFn: () =>
-      getClubItems(page, size, keyword, category, affiliation, recruitStatus),
+    queryFn: () => {
+      const params = Object.fromEntries(
+        Object.entries({
+          keyword,
+          category,
+          affiliation,
+          page,
+          size,
+          recruitStatus,
+        })
+      );
+      return getData("/clubs", { params });
+    },
   });
 };
 
@@ -48,14 +59,25 @@ export const prefetchGetClubs = async (
       affiliation || "",
       recruitStatus || "",
     ],
-    queryFn: () =>
-      getClubItems(page, size, keyword, category, affiliation, recruitStatus),
+    queryFn: () => {
+      const params = Object.fromEntries(
+        Object.entries({
+          keyword,
+          category,
+          affiliation,
+          page,
+          size,
+          recruitStatus,
+        })
+      );
+      return getData("/clubs", { params });
+    },
   });
 };
 
 export const useGetClubsDetail = (id: string) => {
   return useSuspenseQuery<ClubDetailResponseType>({
     queryKey: ["clubs", id],
-    queryFn: () => getClubItemsDetail(id),
+    queryFn: () => getData(`/clubs/${id}`),
   });
 };
