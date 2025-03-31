@@ -2,21 +2,20 @@ import { ApiResponse } from "@/types/ApiResponse";
 import { AxiosError, AxiosRequestConfig } from "axios";
 import api from ".";
 
-
 /**
- * 
- * @param method 
- * @param url 
- * @param data 
- * @param config 
- * @returns 
+ *
+ * @param method
+ * @param url
+ * @param data
+ * @param config
+ * @returns
  */
-export const updateData = async <T>(
-  method: "post" | "put" | "patch" | "delete",
+async function sendData<T>(
+  method: "post" | "put" | "patch",
   url: string,
   data?: unknown,
   config?: AxiosRequestConfig
-): Promise<ApiResponse<T>> => {
+): Promise<ApiResponse<T>> {
   try {
     let response;
     switch (method) {
@@ -29,9 +28,6 @@ export const updateData = async <T>(
       case "patch":
         response = await api.patch<ApiResponse<T>>(url, data, config);
         break;
-      case "delete":
-        response = await api.delete<ApiResponse<T>>(url, { ...config, data });
-        break;
       default:
         throw new Error(`Unsupported method: ${method}`);
     }
@@ -40,9 +36,11 @@ export const updateData = async <T>(
     console.error(method, error);
 
     if (error instanceof AxiosError) {
-      throw new Error(error.response?.data?.message || `${method} 요청 실패`);
+      throw new Error(error.message || `${method} 요청 실패`);
     }
 
     throw new Error(`${method}: Unknown error occurred`);
   }
-};
+}
+
+export default sendData;
