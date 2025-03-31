@@ -5,7 +5,7 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { updateData } from "@/api/updateData";
+import sendData from "@/api/sendData";
 
 export const useGetUser = () => {
   return useSuspenseQuery<UserResponseType>({
@@ -28,7 +28,7 @@ export const useUserInfoEdit = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (email: string) => updateData("put", "/users", { email }),
+    mutationFn: (email: string) => sendData("put", "/users", { email }),
 
     // ✅ 낙관적 업데이트
     onMutate: async (email) => {

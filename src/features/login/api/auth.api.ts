@@ -3,7 +3,7 @@ import { UserLoginType } from "@/types/userInfoType";
 import { useAuthStore } from "@/features/login/store/useAuthStore";
 import { getTokenExpiration } from "@/utils/getTokenExpiration";
 import { queryClient } from "@/services/TanstackQueryStore";
-import { updateData } from "@/api/updateData";
+import  sendData  from "@/api/sendData";
 import { ApiResponse } from "@/types/ApiResponse";
 
 interface AuthResponse {
@@ -15,7 +15,7 @@ export const saveAuthTokens = async (
   credentials: UserLoginType
 ): Promise<void> => {
   try {
-    const response: ApiResponse<AuthResponse> = await updateData(
+    const response: ApiResponse<AuthResponse> = await sendData(
       "post",
       "/users/auth/login",
       credentials
@@ -59,7 +59,7 @@ export const expireAuthTokens = async (): Promise<void> => {
     throw new Error("토큰 미존재!");
   }
   try {
-    await updateData(
+    await sendData(
       "post",
       "/users/auth/logout",
       {},

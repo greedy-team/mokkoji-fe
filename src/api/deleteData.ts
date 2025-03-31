@@ -9,12 +9,12 @@ import api from ".";
  * @returns
  */
 
-const getData = async <T>(
+const deleteData = async <T>(
   url: string,
-  config?: AxiosRequestConfig 
+  config?: AxiosRequestConfig
 ): Promise<ApiResponse<T>> => {
   try {
-    const { data } = await api.get<ApiResponse<T>>(url, config);
+    const { data } = await api.delete<ApiResponse<T>>(url, config);
     return data;
   } catch (error) {
     console.error(error);
@@ -26,4 +26,4 @@ const getData = async <T>(
     throw new Error("Unknown error occurred");
   }
 };
-export default getData;
+export default deleteData;
