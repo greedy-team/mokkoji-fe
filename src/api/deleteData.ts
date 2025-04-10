@@ -1,5 +1,5 @@
 import { ApiResponse } from "@/types/ApiResponse";
-import { AxiosError, AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import api from ".";
 
 /**
@@ -19,8 +19,8 @@ const deleteData = async <T>(
   } catch (error) {
     console.error(error);
 
-    if (error instanceof AxiosError) {
-      throw new Error(error.message || "API 요청 실패");
+    if (axios.isAxiosError(error)) {
+      throw error;
     }
 
     throw new Error("Unknown error occurred");

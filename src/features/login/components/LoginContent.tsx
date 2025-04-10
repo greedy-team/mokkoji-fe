@@ -2,6 +2,7 @@ import { saveAuthTokens } from "@/features/login/api/auth.api";
 import { useModalStore } from "@/store/useModalStore";
 import { UserLoginType } from "@/types/userInfoType";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 
 const Section = styled.div`
@@ -69,11 +70,11 @@ function LoginContent() {
 
   const onSubmit = async () => {
     if (!loginData.studentId) {
-      alert("아이디를 입력해주세요!");
+      toast.warn("아이디를 입력해주세요!");
       return;
     }
     if (!loginData.password) {
-      alert("비밀번호를 입력해주세요!");
+      toast.warn("비밀번호를 입력해주세요!");
       return;
     }
 

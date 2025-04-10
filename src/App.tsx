@@ -19,6 +19,7 @@ import {
   UserInfo,
 } from "./routes/lazyLoad";
 import amplitudeSetting from "./utils/amplitudeSetting";
+import { ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,7 @@ function App() {
         {accessToken ? <UserInfo /> : <Login />}
       </QueryErrorBoundary>
       <RouterProvider router={router} />
+      <ToastContainer />
     </QueryClientProvider>
   );
 }

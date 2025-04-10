@@ -1,5 +1,5 @@
 import { ApiResponse } from "@/types/ApiResponse";
-import { AxiosError, AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import api from ".";
 
 /**
@@ -11,7 +11,7 @@ import api from ".";
 
 const getData = async <T>(
   url: string,
-  config?: AxiosRequestConfig 
+  config?: AxiosRequestConfig // config를 추가하여 params 등 설정 가능
 ): Promise<ApiResponse<T>> => {
   try {
     const { data } = await api.get<ApiResponse<T>>(url, config);
@@ -19,8 +19,8 @@ const getData = async <T>(
   } catch (error) {
     console.error(error);
 
-    if (error instanceof AxiosError) {
-      throw new Error(error.message || "API 요청 실패");
+    if (axios.isAxiosError(error)) {
+      throw error;
     }
 
     throw new Error("Unknown error occurred");

@@ -3,8 +3,9 @@ import { UserLoginType } from "@/types/userInfoType";
 import { useAuthStore } from "@/features/login/store/useAuthStore";
 import { getTokenExpiration } from "@/utils/getTokenExpiration";
 import { queryClient } from "@/services/TanstackQueryStore";
-import  sendData  from "@/api/sendData";
+import sendData from "@/api/sendData";
 import { ApiResponse } from "@/types/ApiResponse";
+import { toast } from "react-toastify";
 
 interface AuthResponse {
   accessToken: string;
@@ -37,11 +38,13 @@ export const saveAuthTokens = async (
     console.error("로그인 오류:", error);
 
     if (axios.isAxiosError(error)) {
-      alert(`로그인 실패! (${error.response?.data?.message || error.message})`);
+      toast.error(
+        `로그인 실패! (${error.response?.data?.message || error.message})`
+      );
       throw new Error(error.response?.data?.message || "로그인 실패");
     }
 
-    alert("알 수 없는 오류 발생!");
+    toast.error("알 수 없는 오류 발생!");
     throw new Error(
       error instanceof Error ? error.message : "알 수 없는 오류 발생"
     );

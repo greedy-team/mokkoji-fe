@@ -1,5 +1,5 @@
 import { ApiResponse } from "@/types/ApiResponse";
-import { AxiosError, AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import api from ".";
 
 /**
@@ -35,8 +35,8 @@ async function sendData<T>(
   } catch (error) {
     console.error(method, error);
 
-    if (error instanceof AxiosError) {
-      throw new Error(error.message || `${method} 요청 실패`);
+    if (axios.isAxiosError(error)) {
+      throw error;
     }
 
     throw new Error(`${method}: Unknown error occurred`);
