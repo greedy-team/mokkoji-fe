@@ -6,6 +6,7 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import sendData from "@/api/sendData";
+import { toast } from "react-toastify";
 
 export const useGetUser = () => {
   return useSuspenseQuery<UserResponseType>({
@@ -47,21 +48,12 @@ export const useUserInfoEdit = () => {
       return { oldData }; // context로 전달
     },
 
-    // ❌ 요청 실패 시 이전 데이터 복원
-    onError: (err: Error, _, context) => {
-      console.error("Error Email put:", err.message);
-      alert(`이메일 업데이트 실패: ${err.message}`);
-      if (context?.oldData) {
-        queryClient.setQueryData(["users"], context.oldData); // 안전하게 복원
-      }
-    },
-
     // ✅ 성공/실패 후 쿼리 무효화
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
     },
     onSuccess: () => {
-      alert("이메일 업데이트 성공!");
+      toast("이메일 업데이트 성공!");
     },
   });
 };

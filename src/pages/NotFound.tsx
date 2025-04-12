@@ -65,7 +65,7 @@ const LinkButton = styled(Link)`
   }
 `;
 
-const NotFound = () => {
+function NotFound() {
   return (
     <>
       <SEO
@@ -86,6 +86,6 @@ const NotFound = () => {
       </Container>
     </>
   );
-};
+}
 
 export default NotFound;
