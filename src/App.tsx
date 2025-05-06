@@ -11,6 +11,7 @@ import PrivacyPolicyPage from "@/pages/PrivacyPolicy";
 import UserAgree from "./pages/UserAgree";
 import * as amplitude from "@amplitude/analytics-browser";
 import { sessionReplayPlugin } from "@amplitude/plugin-session-replay-browser";
+import ClubRegistration from "./pages/ClubRegistration";
 const Home = lazy(() => import("./pages/Home"));
 const ClubList = lazy(() => import("./pages/ClubList"));
 const ClubDetail = lazy(() => import("./pages/ClubDetail"));
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             <Favorite />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "management/registration",
+        element: <ClubRegistration />,
       },
       {
         path: "maintenance",
