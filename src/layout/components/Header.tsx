@@ -31,6 +31,12 @@ const HeaderContents = styled.div`
   align-items: center;
 `;
 
+const RightSide = styled.div`
+  display: flex;
+  gap: 20px;
+  width: fit-content;
+`;
+
 const LoginButton = styled.button`
   padding: 5px 10px;
   border: 1px solid #9ca3af;
@@ -43,6 +49,22 @@ const LoginButton = styled.button`
 
   &:hover {
     background-color: #e5e7eb;
+  }
+`;
+
+const RegisterButton = styled.button`
+  text-decoration: none;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  background-color: black;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.6);
   }
 `;
 
@@ -63,11 +85,16 @@ function Header() {
             <Logo width={100} height={100} />
           </div>
         </Link>
-        {accessToken ? (
-          <Profile width={35} height={35} onClick={openModal} />
-        ) : (
-          <LoginButton onClick={openModal}>로그인</LoginButton>
-        )}
+        <RightSide>
+          <RegisterButton as={Link} to="/management/registration">
+            동아리 등록
+          </RegisterButton>
+          {accessToken ? (
+            <Profile width={35} height={35} onClick={openModal} />
+          ) : (
+            <LoginButton onClick={openModal}>로그인</LoginButton>
+          )}
+        </RightSide>
       </HeaderContents>
     </HeaderContainer>
   );

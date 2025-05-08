@@ -20,6 +20,7 @@ import {
 } from "./routes/lazyLoad";
 import amplitudeSetting from "./utils/amplitudeSetting";
 import { ToastContainer } from "react-toastify";
+import ClubRegistration from "./pages/ClubRegistration";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
         path: "favorites",
         loader: CheckAuthLoader,
         element: <Favorite />,
+      },
+      {
+        path: "management/registration",
+        element: <ClubRegistration />,
       },
       {
         path: "maintenance",
