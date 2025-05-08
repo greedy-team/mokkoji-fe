@@ -9,7 +9,6 @@ const root = createRoot(container);
 root.render(
   <StrictMode>
     <GlobalStyle />
-
     <App />
   </StrictMode>
 );

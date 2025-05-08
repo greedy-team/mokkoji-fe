@@ -1,4 +1,4 @@
-import { useModalStore } from "@/stores/useModalStore";
+import { useModalStore } from "@/store/useModalStore";
 import { ReactNode } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
@@ -27,7 +27,7 @@ const ModalContainer = styled.div`
   border-radius: 10px;
   align-items: center;
   justify-content: center;
-  
+
   @media (max-width: 770px) {
     width: 70%;
   }

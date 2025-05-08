@@ -6,6 +6,8 @@ import PrivacyPolicyPage from "@/pages/PrivacyPolicy";
 
 import Spacing from "@/components/Spacing";
 import CheckboxWithLabel from "@/features/user/CheckboxWithLabel";
+import SEO from "@/components/SEO";
+import { toast } from "react-toastify";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -82,15 +84,15 @@ function UserAgree() {
 
   const onSubmit = async () => {
     if (!isChecked) {
-      alert("동의하지 않으셨습니다.");
+      toast("동의하지 않으셨습니다.");
       return;
     }
     if (!loginData.studentIdVerify) {
-      alert("아이디를 입력해주세요!");
+      toast("아이디를 입력해주세요!");
       return;
     }
     if (!loginData.passwordVerify) {
-      alert("비밀번호를 입력해주세요!");
+      toast("비밀번호를 입력해주세요!");
       return;
     }
     //TODO: 추후 추가 예정
@@ -102,6 +104,11 @@ function UserAgree() {
 
   return (
     <Wrapper>
+      <SEO
+        title="이용약관 동의"
+        description="세종대학교 모꼬지 이용약관"
+        keywords="약관, 세종대학교, 모꼬지"
+      />
       <MainTitle>이용약관 동의</MainTitle>
       <PrivacyPolicyPage />
       <CheckboxWithLabel

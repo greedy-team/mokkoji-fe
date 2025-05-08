@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import SearchLogo from "@/assets/button/searchLogo.svg?react";
 import { useRef } from "react";
-import { useFilterStore } from "@/stores/useFilterStore";
-import SideBarFilter from "@/layouts/sidebar/components/SideBarFilter";
+import { useFilterStore } from "@/store/useFilterStore";
+import SideBarFilter from "@/layout/sidebar/components/SideBarFilter";
 import { useNavigate, useLocation } from "react-router-dom";
 import useDebounce from "@/hooks/useDebounce";
 

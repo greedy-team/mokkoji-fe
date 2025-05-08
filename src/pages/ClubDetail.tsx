@@ -6,6 +6,7 @@ import {
   useGetClubsDetail,
 } from "@/features/clubs";
 import useCustomParams from "@/hooks/useCustomParams";
+import SEO from "@/components/SEO";
 
 const Wrapper = styled.div`
   display: flex;
@@ -66,15 +67,11 @@ function ClubDetail() {
 
   return (
     <>
-   
-        <title>{clubDetail.name}</title>
-        <meta name="title" content={clubDetail.name} />
-        <meta
-          name="description"
-          content="세종대학교 동아리 상세정보 페이지입니다."
-        />
-        <meta name="keywords" content="세종대학교, 세종대, 동아리" />
-        <meta name="robots" content="index, follow" />
+      <SEO
+        title={clubDetail.name}
+        description="세종대학교 동아리 상세정보 페이지입니다."
+        keywords="세종대학교, 세종대, 동아리"
+      />
 
       <Wrapper>
         <Container>

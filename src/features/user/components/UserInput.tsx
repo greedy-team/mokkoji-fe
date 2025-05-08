@@ -1,5 +1,5 @@
 import { useGetUser, useUserInfoEdit } from "@/features/user/query/users.query";
-import { useModalStore } from "@/stores/useModalStore";
+import { useModalStore } from "@/store/useModalStore";
 import { useState } from "react";
 import styled from "styled-components";
 import { emailValidate } from "../utils/emailValidate";

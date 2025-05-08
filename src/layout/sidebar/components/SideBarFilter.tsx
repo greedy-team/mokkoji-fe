@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import FilterLogo from "@/assets/button/filterLogo.svg?react";
 import { useState } from "react";
-import { useFilterStore } from "@/stores/useFilterStore";
+import { useFilterStore } from "@/store/useFilterStore";
 import { ClubCategoryKorean } from "@/utils/clubCategoryMapping";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ClubCategory } from "@/features/clubs/types/clubType";
@@ -49,7 +49,6 @@ const DropdownItem = styled.div`
 `;
 
 function SideBarFilter() {
-
   const [selectedCategory, setSelectedCategory, categories] = useFilterStore(
     useShallow((state) => [
       state.selectedCategory,

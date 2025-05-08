@@ -1,4 +1,4 @@
-import { useFilterStore } from "@/stores/useFilterStore";
+import { useFilterStore } from "@/store/useFilterStore";
 import { ClubCategory } from "@/features/clubs/types/clubType";
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";

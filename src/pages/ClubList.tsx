@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import Pagination from "../components/Pagination";
 import { useNavigate, useParams } from "react-router-dom";
-import { useFilterStore } from "@/stores/useFilterStore";
+import { useFilterStore } from "@/store/useFilterStore";
 import { usePrefetchClubs } from "@/hooks/usePrefetchClubs";
 import NoResults from "@/components/NoResults";
 import { ClubBox, ClubType, useGetClubs } from "@/features/clubs";
-
+import SEO from "@/components/SEO";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -76,15 +76,11 @@ function ClubList() {
 
   return (
     <>
-      <title>{`동아리 목록 ${currentPage}페이지`}</title>
-      <meta name="title" content="세종대학교 동아리 목록 페이지" />
-      <meta
-        name="description"
-        content="세종대학교 동아리 동아리 목록 페이지입니다."
+      <SEO
+        title={`동아리 목록 ${currentPage}페이지`}
+        description="세종대학교 동아리 동아리 목록 페이지입니다."
+        keywords="세종대학교, 세종대, 동아리"
       />
-      <meta name="keywords" content="세종대학교, 세종대, 동아리" />
-      <meta name="robots" content="index, follow" />
-
       <ClubWrapper>
         {clubs.length === 0 ? (
           <NoResults />
