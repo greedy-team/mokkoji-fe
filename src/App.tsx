@@ -20,6 +20,7 @@ import {
 } from "./routes/lazyLoad";
 import amplitudeSetting from "./utils/amplitudeSetting";
 import { ToastContainer } from "react-toastify";
+import ClubRegistration from "./pages/ClubRegistration";
 
 const router = createBrowserRouter([
   {
