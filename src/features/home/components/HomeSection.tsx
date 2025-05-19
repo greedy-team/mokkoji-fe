@@ -7,13 +7,6 @@ import sejong2 from "@/assets/home/sejong2.jpg";
 import { useLazyImg } from "@/hooks/useLazyImg";
 import { useEffect, useState } from "react";
 
-const HomeContainer = styled.div`
-  justify-content: center;
-  display: flex;
-  position: relative;
-  min-height: 66vh;
-`;
-
 const BackgroundImage = styled.img`
   position: absolute;
   width: 100%;
@@ -99,7 +92,7 @@ function HomeSection() {
   }, [backgroundImages.length]);
 
   return (
-    <HomeContainer>
+    <div className="relative flex justify-center min-h-[66vh]">
       <BackgroundImage ref={imgRef} src={imgSrc} alt={`배경 이미지`} />
       <Overlay />
       <HomeLogoSection>
@@ -113,7 +106,7 @@ function HomeSection() {
         </HomeDescription>
         <ExploreButton to="/clubs"> 동아리 찾아보기</ExploreButton>
       </HomeLogoSection>
-    </HomeContainer>
+    </div>
   );
 }
 export default HomeSection;
